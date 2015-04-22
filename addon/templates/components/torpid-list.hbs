@@ -1,0 +1,20 @@
+
+<ul>
+	{{#each row in view.content}}
+		<li class="torpid-list-row" {{action 'rowClick' row bubles=false }}>
+			<span class="torpid-list-select">
+				{{check-box index=row onClick="rowChecked" targetObject=this}}
+			</span>
+	
+			{{#if view.hasImage}}
+				<span class="torpid-list-thumbnail">
+					<img {{bind-attr src="row.imageName"}} />
+				</span>
+			{{/if}}
+	
+			<span class="torpid-list-content">
+				{{yield row}}
+			</span>
+		</li>
+	{{/each}}
+</ul>

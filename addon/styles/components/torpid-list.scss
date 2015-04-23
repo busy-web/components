@@ -21,6 +21,7 @@ $imageSize: 40px;
 			width: 100%;
 			padding: 0;
 			cursor: pointer;
+			list-style-type: none;
 			@include box-sizing();
 
 			& > .torpid-list-select {

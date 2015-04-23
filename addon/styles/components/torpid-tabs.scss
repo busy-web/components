@@ -1,4 +1,6 @@
+
 @import '../mixins';
+
 /* topdoc
   name: torpid-tabs
   description: Viewing tabs.
@@ -11,7 +13,7 @@
 .tabs{
 	position: relative;
 	display: block;
-	border-bottom: 1px solid $busy-color-5;
+	border-bottom: 1px solid #ccc;
 	float: none;
 	width: 100%;
 	height: 48px;
@@ -22,7 +24,7 @@
 	background: transparent;
 	outline: none;
 	line-height: 1;
-	font: 13px/19px $ft-norm; 
+	font: 13px/19px Verdana; 
 }
 .tabs > span{
 	display: inline-block;
@@ -32,8 +34,8 @@
 	padding: 15px 16px 0px 16px;
 	cursor: pointer;
 	height: 48px;
-	font: 16px/31px $ft-thin;
-	color: $busy-color-2;
+	font: 16px/31px Verdana;
+	color: #111;
 	border-bottom: 2px solid  rgba(48, 174, 239, .0);
 	@include transition(all .5s ease-in-out);
 	@include box-sizing();
@@ -47,7 +49,7 @@
 	@include box-sizing();
 }
 .tab-content > div {
-display: none;
+	display: none;
 }
 .tab-content > div.active {
 	display: block;
@@ -69,8 +71,8 @@ display: none;
 	cursor: pointer;
 	padding-left: 44px;
 	padding-top: 5px;
-	font: 16px/35px $ft-norm;
-	color: $busy-color-17;
+	font: 16px/35px Verdana;
+	color: #555;
 	border-top: 1px solid rgba(210,210,210,1);
 	box-sizing: border-box;
 }
@@ -84,11 +86,11 @@ display: none;
 	height: 20px;
 	float: left;
 	margin: -30px 8px 0;
-	font: 21px/21px $ft-norm;
+	font: 21px/21px Verdana;
 	color: #fff;
 	cursor: pointer;
 	text-align: center;
-	background-color: $busy-color-11;
+	background-color: #999;
 	border-radius: 20px;
 }
 @media screen and (max-width: 600px) {
@@ -102,20 +104,20 @@ display: none;
 		border-bottom: 1px solid rgba(210,210,210,1);
 	}
 	.tab-content > div.open > .accordian-tab {
-		background-color: $busy-color-8;
-		color: $busy-color-7;
+		background-color: #68a3b5;
+		color: #fff;
 		margin-right: 10px;
 	}
 	.tab-content > div.open > div.open-content {
-		background-color: $busy-color-7;
-		color: $busy-color-8;
+		background-color: #fff;
+		color: #68a3b5;
 	}
 	.tab-content > div.open > div.content {
 		display: block;
 	}
 	.tab-content > div.open > div.open-content {
 		display: block;
-		font: 21px/19px $ft-norm;
+		font: 21px/19px Verdana;
 	}
 	.tabs{
 		display: none;

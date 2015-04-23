@@ -1,15 +1,14 @@
 import Ember from 'ember';
 import layout from '../templates/components/torpid-tab';
 
-export default Ember.Component.extend(
-{
+export default Ember.Component.extend({
 	layout: layout,
 
 	classNames: ['torpid-tab'],
 	classNameBindings: ['active', 'open'],
-	
 	active: false,
 	open: false,
+	highlight: false,
 	
 	tabName: null,
 
@@ -27,10 +26,10 @@ export default Ember.Component.extend(
 	 * @method showView
 	 * @returns {boolean} acitve or open, variables
 	 */
-//	showView: function()
-//	{
-//		return this.get('active') || this.get('open');
-//	}.property('active', 'open'),
+	showView: function()
+	{
+		return this.get('active') || this.get('open');
+	}.property('active', 'open'),
 
 	/**
 	 * @public
@@ -41,17 +40,15 @@ export default Ember.Component.extend(
 	{
 		if(!Ember.isNone(this.get('tabName')))
 		{
-			var tabs = this.get('parentView.content');
-
-			if(Ember.isEmpty(tabs))
+			if(Ember.isEmpty(this.get('parentView.tabNames')))
 			{
 				this.set('active', true);
-				tabs.pushObject(this);
+				this.get('parentView.tabNames').pushObject(this);
 				this.triggerShowTab();
 			}
 			else
 			{
-				tabs.pushObject(this);
+				this.get('parentView.tabNames').pushObject(this);
 			}
 		}
 		else
@@ -92,7 +89,7 @@ export default Ember.Component.extend(
 		{
 			var onShowTab = this.get('onShowTab');
 			var children = this.get('childViews');
-			Ember.$.each(children, function(k, v)
+			$.each(children, function(k, v)
 			{
 				if(children.hasOwnProperty(k) && v._actions[onShowTab])
 				{
@@ -106,6 +103,11 @@ export default Ember.Component.extend(
 		openAccordian: function()
 		{
 			this.set('open', !this.get('open'));
+			if(this.get('active'))
+			{
+				this.set('highlight', !this.get('highlight'));
+				console.log("Check");
+			}
 		}
 	},
 

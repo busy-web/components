@@ -1,10 +1,8 @@
-
 <div class="tabs">
-	{{#each tab in view.content}}
-		<span class="{{tab.active:active}}" {{action 'changeTab' tab bubbles=false target='view'}}>{{tab.tabName}}</span>
+	{{#each tab in view.tabNames}}
+	<span {{bind-attr class="tab.active:active"}} {{action 'changeTab' tab bubbles=false target='view'}}>{{tab.tabName}}</span>
 	{{/each}}
 </div>
-
 <div class="tab-content">
 	{{yield}}
 </div>

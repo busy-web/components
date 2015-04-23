@@ -1,11 +1,13 @@
 import Ember from 'ember';
 import layout from '../templates/components/torpid-tab';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(
+{
 	layout: layout,
 
 	classNames: ['torpid-tab'],
 	classNameBindings: ['active', 'open'],
+	
 	active: false,
 	open: false,
 	
@@ -39,15 +41,17 @@ export default Ember.Component.extend({
 	{
 		if(!Ember.isNone(this.get('tabName')))
 		{
-			if(Ember.isEmpty(this.get('parentView.tabNames')))
+			var tabs = this.get('parentView.content');
+
+			if(Ember.isEmpty(tabs))
 			{
 				this.set('active', true);
-				this.get('parentView.tabNames').pushObject(this);
+				tabs.pushObject(this);
 				this.triggerShowTab();
 			}
 			else
 			{
-				this.get('parentView.tabNames').pushObject(this);
+				tabs.pushObject(this);
 			}
 		}
 		else
@@ -88,7 +92,7 @@ export default Ember.Component.extend({
 		{
 			var onShowTab = this.get('onShowTab');
 			var children = this.get('childViews');
-			$.each(children, function(k, v)
+			Ember.$.each(children, function(k, v)
 			{
 				if(children.hasOwnProperty(k) && v._actions[onShowTab])
 				{

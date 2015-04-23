@@ -3,6 +3,7 @@
  *
  */
 import Ember from 'ember';
+import layout from '../templates/components/torpid-list';
 
 /**
  * `Torpid/List`
@@ -37,6 +38,8 @@ import Ember from 'ember';
 export default Ember.Component.extend(
 	/** @lends Torpid.List.prototype */
 {
+	layout: layout,
+
 	tagName: 'section',
 
 	classNames: ['torpid-list'],

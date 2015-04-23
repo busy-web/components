@@ -33,19 +33,19 @@ export default Ember.Component.extend(
 	 * @property tabNames
 	 * @type boolean
 	 */
-	tabNames: null,
+	content: null,
 
 	init: function()
 	{
 		this._super();
 
-		this.set('tabNames', []);
+		this.set('content', Ember.A());
 	},
 	
 	actions: {
 		changeTab: function (tab)
 		{
-			var tabs = this.get('tabNames');
+			var tabs = this.get('content');
 			Ember.$.each(tabs, function(key,value)
 			{
 				if(tabs.hasOwnProperty(key))

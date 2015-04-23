@@ -3,7 +3,7 @@
 	{{#each row in view.content}}
 		<li class="torpid-list-row" {{action 'rowClick' row bubles=false }}>
 			<span class="torpid-list-select">
-				{{check-box index=row onClick="rowChecked" targetObject=this}}
+				{{!check-box index=row onClick="rowChecked" targetObject=this}}
 			</span>
 	
 			{{#if view.hasImage}}

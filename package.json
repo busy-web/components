@@ -1,6 +1,6 @@
 {
-  "name": "ember-cli-torpid-js",
-  "version": "0.1.5",
+  "name": "torpid-js",
+  "version": "0.1.6",
   "description": "The default blueprint for ember-cli addons.",
   "directories": {
     "doc": "doc",
@@ -11,7 +11,7 @@
     "build": "ember build",
     "test": "ember try:testall"
   },
-  "repository": "ssh://git@dev.busybusy.com:43700/diffusion/WAPTORPIDJSADDON/ember-cli-torpid-js.git",
+  "repository": "ssh://git@dev.busybusy.com:43700/diffusion/WAPTORPIDJS/torpid-js.git",
   "engines": {
     "node": ">= 0.10.0"
   },

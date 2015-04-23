@@ -1,3 +1,3 @@
-import torpidList from 'ember-cli-torpid-js/components/torpid-list';
+import torpidList from 'torpid-js/components/torpid-list';
 
 export default torpidList;

@@ -27,10 +27,10 @@ export default Ember.Component.extend(
 	 * @method showView
 	 * @returns {boolean} acitve or open, variables
 	 */
-	showView: function()
-	{
-		return this.get('active') || this.get('open');
-	}.property('active', 'open'),
+//	showView: function()
+//	{
+//		return this.get('active') || this.get('open');
+//	}.property('active', 'open'),
 
 	/**
 	 * @public

@@ -1,3 +1,3 @@
-import torpidTabs from 'ember-cli-torpid-js/components/torpid-tabs';
+import torpidTabs from 'torpid-js/components/torpid-tabs';
 
 export default torpidTabs;

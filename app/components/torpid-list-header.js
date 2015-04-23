@@ -1,3 +1,3 @@
-import torpidListHeader from 'ember-cli-torpid-js/components/torpid-list-header';
+import torpidListHeader from 'torpid-js/components/torpid-list-header';
 
 export default torpidListHeader;

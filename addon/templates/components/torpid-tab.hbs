@@ -1,0 +1,14 @@
+<div class="accordian-tab" {{action 'openAccordian' bubbles=false target='view'}}>{{view.tabName}}
+</div>
+{{#if view.open}}
+	<div class="open-content" {{action 'openAccordian' bubbles=false target='view'}}>
+		-
+	</div>
+{{else}}
+	<div class="open-content" {{action 'openAccordian' bubbles=false target='view'}}>
+		+
+	</div>
+{{/if}}
+<div class="content">
+	{{yield}}
+</div>

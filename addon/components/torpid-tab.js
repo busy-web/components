@@ -46,6 +46,7 @@ export default Ember.Component.extend(
 			if(Ember.isEmpty(tabs))
 			{
 				this.set('active', true);
+				this.set('open', true);
 				tabs.pushObject(this);
 				this.triggerShowTab();
 			}

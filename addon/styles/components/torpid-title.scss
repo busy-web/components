@@ -1,0 +1,46 @@
+
+.torpid-title {
+	width: 100%;
+	height: auto;
+	padding: 48px 0 0 0;
+	@include box-sizing();
+
+	& > header {
+		width: 100%;
+		height: 48px;
+		margin: -48px 0 0;
+		border-bottom: 2px solid $busy-color-8;
+		font: 21px/48px $ft-bold;
+
+		& > span {
+			float: left;
+			height: 100%;
+			color: $busy-color-8;
+			font: 21px/48px $ft-bold;
+		}
+
+		& > a {
+			float: right;
+			height: 36px;
+			font: 13px/36px $ft-norm;
+			color: $busy-color-1;
+			margin: 12px 0 0 0;
+		}
+		
+	}
+
+	section {
+		width: 100%;
+		height: auto;
+		padding: 20px 0 0;
+	}
+
+	&.red {
+		border-color: $busy-color-9;
+		& > header {
+			& > span {
+				color: $busy-color-9;
+			}
+		}
+	}
+}

@@ -1,7 +1,17 @@
-
+/**
+ * @module components
+ *
+ */
 import Ember from 'ember';
 import layout from '../templates/components/torpid-title';
 
+/**
+ * `Component/TorpidTitle`
+ *
+ * @class TorpidTitle Component
+ *
+ * @extends Ember.Component
+ */
 export default Ember.Component.extend({
 	
 	layout: layout,

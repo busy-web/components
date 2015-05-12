@@ -1,0 +1,16 @@
+<div class="box">
+  {{#if view.disabled}}
+    <input type="{{view.type}}" id="{{view.value}}" value="{{view.value}}" checked={{view.checked}} disabled>
+  {{else}}
+  <input type="{{view.type}}" id="{{view.value}}" value="{{view.value}}" checked={{view.checked}}>
+  {{/if}}
+  <label for="{{view.value}}">
+  </label>
+</div>
+<span>
+  {{#if view.title}}
+    {{view.title}}
+  {{else}}
+    {{view.value}}
+  {{/if}}
+</span>

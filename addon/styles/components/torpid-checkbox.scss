@@ -13,7 +13,7 @@
     & span{
       padding-left: 26px;
       font-size: 16px;
-      color: $color-2;
+      color: #333;
       box-sizing: border-box;
       line-height: 48px;
     }
@@ -25,8 +25,8 @@
     	height: 20px;
     	top: 0;
     	border-radius: 1px;
-      background: $color-14;
-      border: 1px solid $color-5;
+      background: #FFF;
+      border: 1px solid #CCC;
     }
 
     & label:after {
@@ -40,7 +40,7 @@
     	background: transparent;
     	top: 4px;
     	left: 4px;
-    	border: 2px solid $color-7;
+    	border: 2px solid #CCC;
     	border-top: none;
     	border-right: none;
     	-webkit-transform: rotate(-45deg);
@@ -58,8 +58,8 @@
     }
 
     & input[type=checkbox]:checked + label {
-      background: $color-1;
-      border: 1px solid $color-1;
+      background: #FFF;
+      border: 1px solid #FFF;
     }
 
     & input[type=checkbox]:disabled + label {

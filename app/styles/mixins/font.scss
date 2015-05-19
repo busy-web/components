@@ -1,0 +1,11 @@
+
+$ft-thin: proximathin;
+$ft-norm: proxima;
+$ft-bold: proximabold;
+
+@mixin font-regular() {
+	font: {
+		family: Proxima;
+		size: 14px;
+	}
+}

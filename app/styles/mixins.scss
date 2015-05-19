@@ -1,4 +1,11 @@
 
+// import colors and fonts
+@import 'mixins/color';
+@import 'mixins/font';
+@import 'mixins/hidpi';
+@import 'mixins/screen';
+
+
 // vendorize mixin
 @mixin vendorize($property, $value) {
 	-webkit-#{$property}: $value;
@@ -16,3 +23,4 @@
 
 //transform
 @mixin transform($value) {@include vendorize(transform, $value)}
+

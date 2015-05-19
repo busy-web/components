@@ -1,6 +1,4 @@
 
-@import '../mixins';
-
 /* topdoc
   name: torpid-tabs
   description: Viewing tabs.
@@ -33,7 +31,7 @@
 			cursor: pointer;
 		
 			&.active{
-				border-bottom-color: rgba(48, 174, 239, 1);
+				border-bottom-color: $torpid-color-1;
 			}
 		}
 	}

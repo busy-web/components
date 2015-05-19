@@ -1,10 +1,8 @@
-@import '../mixins';
-
 
 .torpid-email-label {
 	height: 40px;
 	line-height: 40px;
-	color: $busy-color-2;
+	color: $torpid-color-2;
 	font-size: 16px;
 	float: left;
 }
@@ -15,7 +13,7 @@
 }
 
 .torpid-email-hint {
-	color: $busy-color-3;
+	color: $torpid-color-3;
 	text-align: right;
 	float: right;
 	line-height: 40px;
@@ -26,8 +24,8 @@
 	width: 100%;
     border-radius: 3px;
     height: 40px;
-    color: $busy-color-2;
-    border-color: $busy-color-5;
+    color: $torpid-color-2;
+    border-color: $torpid-color-5;
     margin-bottom: 3px;
 }
 
@@ -41,11 +39,11 @@ div .invalid > .torpid-base-validate > .torpid-email-input {
 	width: 100%;
     border-radius: 3px;
     height: 40px;
-    color: $busy-color-2;
-    border-color: $busy-color-9;
+    color: $torpid-color-2;
+    border-color: $torpid-color-9;
     margin-bottom: 3px;
 }
 
 div .invalid > .torpid-email-error {
-	color: $busy-color-9;
+	color: $torpid-color-9;
 }

@@ -14,6 +14,8 @@ export default Ember.Component.extend({
 
   title: null,
 
+  name: null,
+
   disabled: false,
 
   checked: false

@@ -1,0 +1,49 @@
+
+.torpid-email-label {
+	height: 40px;
+	line-height: 40px;
+	color: $torpid-color-2;
+	font-size: 16px;
+	float: left;
+}
+
+.label-container {
+	display: inline-block;
+	width: 100%;
+}
+
+.torpid-email-hint {
+	color: $torpid-color-3;
+	text-align: right;
+	float: right;
+	line-height: 40px;
+}
+
+
+.torpid-email-input {
+	width: 100%;
+    border-radius: 3px;
+    height: 40px;
+    color: $torpid-color-2;
+    border-color: $torpid-color-5;
+    margin-bottom: 3px;
+}
+
+.torpid-email-error {
+	font-size: 12px;
+	margin-bottom: 3px;
+	color: white;
+}
+
+div .invalid > .torpid-base-validate > .torpid-email-input {
+	width: 100%;
+    border-radius: 3px;
+    height: 40px;
+    color: $torpid-color-2;
+    border-color: $torpid-color-9;
+    margin-bottom: 3px;
+}
+
+div .invalid > .torpid-email-error {
+	color: $torpid-color-9;
+}

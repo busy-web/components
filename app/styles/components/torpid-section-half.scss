@@ -1,8 +1,6 @@
 
-@import '../mixins';
-
 .torpid-section-half {
-	background: #fff;
+	background: $torpid-color-7;
 	float: left;
 	width: 46%;
 	height: 100%;
@@ -18,7 +16,7 @@
 @media screen and (max-width: $mobile-width) {
 
 	.torpid-section-half {
-		background: #fff;
+		background: $torpid-color-7;
 		float: left;
 		width: 100%;
 		height: auto;

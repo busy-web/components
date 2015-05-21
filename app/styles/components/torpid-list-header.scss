@@ -1,6 +1,4 @@
 
-@import '../mixins';
-
 $imageSize: 40px;
 
 .torpid-list-header {
@@ -14,14 +12,14 @@ $imageSize: 40px;
 	& > div {
 		width: 100%;
 		height: 100%;
-		border-bottom: 1px solid $busy-color-12;
+		border-bottom: 1px solid $torpid-color-12;
 		padding: 10px 0;
 		@include box-sizing();
 
 		span {
 			float: left;
 			font: 16px/36px $ft-bold;
-			color: $busy-color-3;
+			color: $torpid-color-3;
 			height: 100%;
 			padding: 0 10px;
 			text-align: center;

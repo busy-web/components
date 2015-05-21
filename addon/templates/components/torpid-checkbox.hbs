@@ -1,10 +1,10 @@
 <div class="box">
   {{#if view.disabled}}
-    <input type="{{view.type}}" id="{{view.value}}" value="{{view.value}}" checked={{view.checked}} disabled>
+    <input type="{{view.type}}" id="{{view.name}}-{{view.value}}" name="{{view.name}}" value="{{view.value}}"  checked={{view.checked}} disabled>
   {{else}}
-  <input type="{{view.type}}" id="{{view.value}}" value="{{view.value}}" checked={{view.checked}}>
+    <input type="{{view.type}}" id="{{view.name}}-{{view.value}}" name="{{view.name}}" value="{{view.value}}"  checked={{view.checked}}>
   {{/if}}
-  <label for="{{view.value}}">
+  <label for="{{view.name}}-{{view.value}}">
   </label>
 </div>
 <span>

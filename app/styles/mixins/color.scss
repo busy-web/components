@@ -1,0 +1,124 @@
+
+/**
+ * color codes
+ */
+$C1: green; // bright blue
+$C2: black; // dark blue
+$C3: #8E8E8E; // grey
+$C4: #F0F4F7; // glacier blue
+$C5: #CCCCCC; // grey lighter than C3
+$C6: #FCFCFC; // off white
+$C7: #FFFFFF; // white
+$C8: #68A3B5; // teal
+$C9: #D65151; // red
+$C10: #384D60; // dark blue lighter than C2
+$C11: #A9B5BF; // blue grey
+$C12: #C9CFD3; // grey lighter than C5
+$C13: #243442; // black
+$C14: #0277BD; // bright blue darker than C1
+$C15: #D32F2F; // dark red
+$C16: #F3F3F3; // grey white
+$C17: #5E5E5E; // dark grey
+$C18: #AAAAAA; // grey lighter than C3 darker than C5 / neutral gray
+$C19: #58BD7F; // green
+$C20: #EEEEEE; // another grey
+
+// color re-naming
+$torpid-color-1: $C1;
+$torpid-color-2: $C2;
+$torpid-color-3: $C3;
+$torpid-color-4: $C4;
+$torpid-color-5: $C5;
+$torpid-color-6: $C6;
+$torpid-color-7: $C7;
+$torpid-color-8: $C8;
+$torpid-color-9: $C9;
+$torpid-color-10: $C10;
+$torpid-color-11: $C11;
+$torpid-color-12: $C12;
+$torpid-color-13: $C13;
+$torpid-color-14: $C14;
+$torpid-color-15: $C15;
+$torpid-color-16: $C16;
+$torpid-color-17: $C17;
+$torpid-color-18: $C18;
+$torpid-color-19: $C19;
+$torpid-color-20: $C20;
+
+
+// gradient color backgrounds
+@mixin gradient($deg, $color1, $color2) {
+	background-image: -webkit-linear-gradient($deg, $color1, $color2);
+	background-image: -moz-linear-gradient($deg, $color1, $color2);
+	background-image: -ms-linear-gradient($deg, $color1, $color2);
+	background-image: -o-linear-gradient($deg, $color1, $color2);
+}
+
+
+// linear-gradient
+@mixin linear-gradient($deg, $color1, $color2) {
+	background-image: -webkit-linear-gradient($deg, $color1, $color2);
+	background-image: -moz-linear-gradient($deg, $color1, $color2);
+	background-image: -ms-linear-gradient($deg, $color1, $color2);
+	background-image: -o-linear-gradient($deg, $color1, $color2);
+}
+
+// linear-gradient
+@mixin tri-linear-gradient($deg, $color1, $color2, $color3) {
+	background-image: -webkit-linear-gradient($deg, $color1, $color2, $color3);
+	background-image: -moz-linear-gradient($deg, $color1, $color2, $color3);
+	background-image: -ms-linear-gradient($deg, $color1, $color2, $color3);
+	background-image: -o-linear-gradient($deg, $color1, $color2, $color3);
+}
+
+// linear-gradient
+@mixin quad-linear-gradient($deg, $color1, $color2, $color3, $color4) {
+	background-image: -webkit-linear-gradient($deg, $color1, $color2, $color3, $color4);
+	background-image: -moz-linear-gradient($deg, $color1, $color2, $color3, $color4);
+	background-image: -ms-linear-gradient($deg, $color1, $color2, $color3, $color4);
+	background-image: -o-linear-gradient($deg, $color1, $color2, $color3, $color4);
+}
+
+// linear-gradient
+@mixin five-linear-gradient($deg, $color1, $color2, $color3, $color4, $color5) {
+	background-image: -webkit-linear-gradient($deg, $color1, $color2, $color3, $color4, $color5);
+	background-image: -moz-linear-gradient($deg, $color1, $color2, $color3, $color4, $color5);
+	background-image: -ms-linear-gradient($deg, $color1, $color2, $color3, $color4, $color5);
+	background-image: -o-linear-gradient($deg, $color1, $color2, $color3, $color4, $color5);
+}
+
+@mixin background-image($value) {
+	background-image: -webkit-#{$value};
+	background-image: -moz-#{$value};
+	background-image: -ms-#{$value};
+	background-image: -o-#{$value};
+}
+
+@mixin background-gradient($value) {
+	background: -webkit-#{$value};
+	background: -moz-#{$value};
+	background: -ms-#{$value};
+	background: -o-#{$value};
+}
+
+// linear-gradients
+$Degrees: 90deg;
+
+$G11: #ffffff;
+$G12: #eeeeee;
+
+$G21: #f44336;
+$G22: #e03b36;
+
+$G31: #30aeef;
+$G32: #2aa7db;
+
+$G41: #ffffff;
+$G42: #fafafa;
+
+// gradient names
+@mixin grey-gradient() { @include linear-gradient($Degrees, $G11, $G12) }
+@mixin red-gradient() { @include linear-gradient($Degrees, $G21, $G22) }
+@mixin blue-gradient() { @include linear-gradient($Degrees, $G31, $G32) }
+@mixin light-grey-gradient() { @include linear-gradient($Degrees, $G41, $G42) }
+

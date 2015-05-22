@@ -10,7 +10,7 @@ export default Ember.Component.extend({
 
   type: 'checkbox',
 
-  value: null,
+  value: false,
 
   title: null,
 
@@ -18,19 +18,20 @@ export default Ember.Component.extend({
 
   disabled: false,
 
-  checked: false,
+  checked: function()
+  {
+    return this.get('value');
+  }.property('value'),
 
   _updateElementValue: function()
   {
-    this.set('checked', !this.get('checked'));
+    this.set('value', !this.get('value'));
   },
 
-  change: function(event)
+  change: function()
   {
     this._updateElementValue();
-    this.sendAction('action', this.get('value'), this.get('checked'));
-    var checked = this.get('checked');
-    console.log(checked);
+    this.sendAction('action', this.get('value'));
   },
 
 });

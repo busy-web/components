@@ -31,7 +31,7 @@ export default Ember.Component.extend({
       this.sendChange();
       console.log(this.get('checked'));
       this.sendAction();
-    }
+    }.observes('checked')
   }
 
 });

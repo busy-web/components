@@ -2,7 +2,7 @@
   {{#if view.disabled}}
     <input type="{{view.type}}" id="{{view.name}}-{{view.value}}" name="{{view.name}}" value="{{view.value}}"  checked={{view.checked}} disabled>
   {{else}}
-    <input type="{{view.type}}" id="{{view.name}}-{{view.value}}" name="{{view.name}}" value="{{view.value}}"  checked={{view.checked}}>
+    <input type="{{view.type}}" id="{{view.name}}-{{view.value}}" name="{{view.name}}" value="{{view.value}}" checked={{view.checked}}>
   {{/if}}
   <label for="{{view.name}}-{{view.value}}">
   </label>
@@ -13,4 +13,5 @@
   {{else}}
     {{view.value}}
   {{/if}}
+  {{log view.checked}}
 </span>

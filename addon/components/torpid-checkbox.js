@@ -18,6 +18,19 @@ export default Ember.Component.extend({
 
   disabled: false,
 
-  checked: false
+  checked: false,
+
+  _updateElementValue: function()
+  {
+    this.set('checked', !this.get('checked'));
+  },
+
+  change: function(event)
+  {
+    this._updateElementValue();
+    this.sendAction('action', this.get('value'), this.get('checked'));
+    var checked = this.get('checked');
+    console.log(checked);
+  },
 
 });

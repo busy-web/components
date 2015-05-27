@@ -14,6 +14,8 @@ export default Ember.Component.extend({
 
   title: null,
 
+  group: '',
+
   name: null,
 
   disabled: false,

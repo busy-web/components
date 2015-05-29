@@ -1,0 +1,67 @@
+
+.torpid-radio-button {
+
+    display: inline-block;
+
+    & input[type=radio] {
+      visibility: hidden;
+    }
+
+    & .box {
+    	width: 20px;
+    	position: relative;
+      display: inline-block;
+    }
+
+    & span{
+      padding-left: 26px;
+      font-size: 16px;
+      color: $torpid-color-2;
+      box-sizing: border-box;
+      line-height: 48px;
+    }
+
+    & label {
+    	cursor: pointer;
+    	position: absolute;
+    	width: 20px;
+    	height: 20px;
+    	top: -6px;
+    	border-radius: 12px;
+      background: $torpid-color-7;
+      border: 1px solid $torpid-color-5;
+    }
+
+    & label:after {
+    	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    	filter: alpha(opacity=0);
+        opacity: 0;
+        content: '';
+        position: absolute;
+        /* width: 3px; */
+        /* height: 6px; */
+        background: transparent;
+        top: 2px;
+        left: 2px;
+        border: 8px solid $torpid-color-1;
+        border-radius: 12px;
+
+    }
+
+    & input[type=radio]:checked + label:after {
+    	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    	filter: alpha(opacity=100);
+    	opacity: 1;
+
+    }
+
+    & input[type=radio]:checked + label {
+      background: $torpid-color-7;
+      border: 1px solid $torpid-color-1;
+    }
+
+    & input[type=radio]:disabled + label {
+      opacity: 0.4;
+      cursor: default;
+    }
+}

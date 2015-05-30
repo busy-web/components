@@ -2,7 +2,7 @@
 .torpid-section-half {
 	background: $torpid-color-7;
 	float: left;
-	width: 46%;
+	width: 46% !important;
 	margin: 0 4% 0 0;
 	@include box-sizing();
 
@@ -19,7 +19,7 @@
 		float: left;
 		width: 100%;
 		margin: 0 0 30px 0;
-	
+
 		&:nth-of-type(even) {
 			margin: 0 0 30px 0;
 		}

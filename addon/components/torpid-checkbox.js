@@ -1,39 +1,90 @@
+/**
+ * @module components
+ *
+ */
 import Ember from 'ember';
 import layout from '../templates/components/torpid-checkbox';
 
-export default Ember.Component.extend({
-  layout: layout,
+/**
+ * `Component/TorpidCheckbox`
+ *
+ */
+export default Ember.Component.extend(
+{
+	layout: layout,
 
-  classNames: ['torpid-checkbox'],
+	classNames: ['torpid-checkbox'],
+	classNameBindings: ['value:checked'],
 
-  tagName: null,
+	title: null,
+	value: null,
 
-  type: 'checkbox',
+	group: null,
+	name: null,
+	disabled: false,
 
-  value: false,
+	inputId: function()
+	{
+		return this.get('group') + '-' + this.get('name') + '-checkbox';
+	}.property('group', 'name'),
 
-  title: null,
+	init: function()
+	{
+		this._super();
 
-  group: '',
+		if(Ember.isNone(this.get('name')))
+		{
+			this.set('name', this.random());
+		}
 
-  name: null,
+		if(Ember.isNone(this.get('group')))
+		{
+			this.set('group', this.random());
+		}
+	},
 
-  disabled: false,
+	random: function()
+	{
+		return Math.floor(((Math.random() * 1000000000) + 100000));
+	},
 
-  checked: function()
-  {
-    return this.get('value');
-  }.property('value'),
+	checkBoxInput: Ember.TextField.extend(
+	{
+		classNameBindings: ['checked:checked'],
+		attributeBindings: ['checked:checked', 'group', 'disabled'],
 
-  _updateElementValue: function()
-  {
-    this.set('value', !this.get('value'));
-  },
+		type: 'checkbox',
 
-  change: function()
-  {
-    this._updateElementValue();
-    this.sendAction('action', this.get('value'));
-  },
+		group: null,
+		name: null,
+		groupBinding: 'parentView.group',
+		nameBinding: 'parentView.name',
 
+		disabled: false,
+		disabledBinding: 'parentView.disabled',
+
+		valueBinding: 'parentView.value',
+
+		checked: function()
+		{
+			return this.get('value');
+		}.property('value'),
+
+		change: function()
+		{
+			var value = !this.get('value');
+
+			this.set('value', value);
+			this.get('parentView').sendAction('action', value);
+
+			return false;
+		},
+	}),
+
+	click: function(e)
+	{
+		e.stopPropagation();
+
+		return false;
+	}
 });

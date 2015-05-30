@@ -1,16 +1,12 @@
+
 <div class="box">
-  {{#if view.disabled}}
-    <input type="{{view.type}}" id="{{view.group}}-{{view.name}}" group="{{view.group}}" name="{{view.name}}" value="{{view.value}}"  checked={{view.checked}} disabled>
-  {{else}}
-    <input type="{{view.type}}" id="{{view.group}}-{{view.name}}" group="{{view.group}}" name="{{view.name}}" value="{{view.value}}" checked={{view.checked}}>
-  {{/if}}
-  <label for="{{view.group}}-{{view.name}}">
-  </label>
+ 
+	{{view checkBoxInput id=inputId}}
+
+	<label for="{{inputId}}"></label>
+
 </div>
-<span>
-  {{#if view.title}}
-    {{view.title}}
-  {{else}}
-    {{view.value}}
-  {{/if}}
-</span>
+
+{{#if view.title}}
+	<span>{{view.title}}</span>
+{{/if}}

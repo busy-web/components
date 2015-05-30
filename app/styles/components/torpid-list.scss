@@ -24,7 +24,7 @@ $imageSize: 40px;
 				display: none;
 				width: $imageSize;
 				height: $imageSize;
-				padding: 7px;
+				padding: 9px;
 				@include box-sizing();
 			}
 			& > .torpid-list-thumbnail {
@@ -119,6 +119,17 @@ $imageSize: 40px;
 					left: 0;
 					top: 8px;
 					z-index: 1;
+
+					& > div {
+						margin: 0;
+						height: 22px;
+						width: 22px;
+						padding: 0;
+
+						& > div.box {
+							margin: 0;
+						}
+					}
 				}
 				& > .torpid-list-thumbnail {
 					position: relative;

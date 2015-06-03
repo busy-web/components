@@ -1,12 +1,25 @@
 
-<div class="label-container">
-	<span class="label">{{labelString}}</span>
-	<span class="hint">{{hint}}</span>
-</div>
+{{#if onClick}}
+	<div class="label-container">
+		<span class="label">{{labelString}}</span>
+		<span class="hint"><a class="blueHint" {{action 'hintAction'}}>{{hint}}</a></span>
+	</div>
+{{else}}
+	<div class="label-container">
+		<span class="label">{{labelString}}</span>
+		<span class="hint">{{hint}}</span>
+	</div>
+{{/if}}
 
-<div class="validate-container">
-	{{view torpidInput}}
-</div>
+{{#if disabled}}
+	<div class="validate-container disabled">
+		{{view torpidInput disabled=true}}
+	</div>
+{{else}}
+	<div class="validate-container">
+		{{view torpidInput}}
+	</div>
+{{/if}}
 
 <div class="error-container">
 	{{error}}

@@ -28,6 +28,8 @@ export default Ember.Component.extend(
 
 	required: false,
 
+	disabled: false,
+
 	isInvalid: false,
 	isValid: false,
 	isRequired: false,
@@ -110,12 +112,20 @@ export default Ember.Component.extend(
 		this.set('isRequired', false);
 	},
 
+	actions: {
+		hintAction: function()
+		{
+			this.sendAction('onClick');
+		}
+
+	},
+
 	torpidInput: TorpidInput.extend(
 	{
 		placeholderBinding: 'parentView.placeholder',
-		
+
 		typeBinding: 'parentView.type',
-		
+
 		valueBinding: 'parentView.value',
 
 		focusOut: function()

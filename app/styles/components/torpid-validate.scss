@@ -4,14 +4,15 @@
 	width: 100%;
 	margin: 0;
 	padding: 0;
-	
+
 	& > .label-container {
-			
+
 		& > .label {
 			float: left;
 			height: 40px;
 			color: $torpid-color-2;
 			font: 16px/40px $ft-norm;
+			margin-bottom: 0px;
 		}
 
 		& > .hint {
@@ -19,11 +20,24 @@
 			color: $torpid-color-3;
 			text-align: right;
 			font: 13px/40px $ft-norm;
+			margin-bottom: 0px;
+
+			& > .blueHint {
+				color: $torpid-color-1;
+			}
 		}
 	}
 
 	& > .validate-container {
 		margin: 0 0 3px 0;
+
+		&.disabled {
+
+			& > input {
+				background-color: $torpid-color-20;
+				color: $torpid-color-3;
+			}
+		}
 	}
 
 	& > .error-container {

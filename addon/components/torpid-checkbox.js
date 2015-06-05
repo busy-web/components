@@ -14,13 +14,14 @@ export default Ember.Component.extend(
 	layout: layout,
 
 	classNames: ['torpid-checkbox'],
-	classNameBindings: ['value:checked'],
+	classNameBindings: ['checked:checked'],
+
+	value: false,
 
 	title: null,
-	value: null,
-
 	group: null,
 	name: null,
+	
 	disabled: false,
 
 	inputId: function()
@@ -48,36 +49,42 @@ export default Ember.Component.extend(
 		return Math.floor(((Math.random() * 1000000000) + 100000));
 	},
 
+	checked: function()
+	{
+		return this.get('value') ? true : false;
+	}.property('value'),
+
+	handleChange: function(value)
+	{
+		this.set('value', value);
+		this.sendAction('action', value);
+	},
+
 	checkBoxInput: Ember.TextField.extend(
 	{
-		classNameBindings: ['checked:checked'],
-		attributeBindings: ['checked:checked', 'group', 'disabled'],
+		classNameBindings: ['checked'],
+		attributeBindings: ['checked', 'group', 'disabled'],
 
 		type: 'checkbox',
 
 		group: null,
-		name: null,
 		groupBinding: 'parentView.group',
+		
+		name: null,
 		nameBinding: 'parentView.name',
 
 		disabled: false,
 		disabledBinding: 'parentView.disabled',
 
-		valueBinding: 'parentView.value',
+		checked: false,
+		checkedBinding: 'parentView.checked',
 
-		checked: function()
-		{
-			return this.get('value');
-		}.property('value'),
+		_value: false,
+		_valueBinding: 'parentView.value',
 
 		change: function()
 		{
-			var value = !this.get('value');
-
-			this.set('value', value);
-			this.get('parentView').sendAction('action', value);
-
-			return false;
+			this.get('parentView').handleChange(!this.get('_value'));
 		},
 	}),
 

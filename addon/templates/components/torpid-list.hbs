@@ -5,13 +5,13 @@
 			<span class="torpid-list-select">
 				{{torpid-checkbox value=row.isSelected}}
 			</span>
-	
+
 			{{#if view.hasImage}}
 				<span class="torpid-list-thumbnail">
-					<img {{bind-attr src="row.imageName"}} />
+					<img src="{{if row.imageUrl row.imageUrl row.imageName}}" />
 				</span>
 			{{/if}}
-	
+
 			<span class="torpid-list-content">
 				{{yield row}}
 			</span>

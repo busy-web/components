@@ -44,10 +44,13 @@ $imageSize: 40px;
 			}
 			& > .torpid-list-content {
 				display: inline-block;
+				background: $torpid-color-7;
 				width: 100%;
 				height: 100%;
 				padding: 10px 0;
 				border-bottom: 1px solid $torpid-color-5;
+				position: relative;
+				z-index: 1;
 				@include box-sizing();
 
 				span {

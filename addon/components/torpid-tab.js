@@ -21,25 +21,12 @@ export default Ember.Component.extend(
 	},
 
 	/**
-	 *Ember Property function
-	 *
-	 * @public
-	 * @method showView
-	 * @returns {boolean} acitve or open, variables
-	 */
-//	showView: function()
-//	{
-//		return this.get('active') || this.get('open');
-//	}.property('active', 'open'),
-
-	/**
 	 * @public
 	 * @method registerTab
-	 *  
 	 */
 	registerTab: function()
 	{
-		if(!Ember.isNone(this.get('tabName')))
+		if(!Ember.isNone(this.get('tabName')) && !Ember.isNone(this.get('parentView')))
 		{
 			var tabs = this.get('parentView.content');
 
@@ -47,6 +34,7 @@ export default Ember.Component.extend(
 			{
 				this.set('active', true);
 				this.set('open', true);
+				this.set('parentView.defaultTab', this.get('tabName').trim().dasherize());
 				tabs.pushObject(this);
 				this.triggerShowTab();
 			}
@@ -108,6 +96,5 @@ export default Ember.Component.extend(
 		{
 			this.set('open', !this.get('open'));
 		}
-	},
-
+	}
 });

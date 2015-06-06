@@ -35,30 +35,84 @@ export default Ember.Component.extend(
 	 */
 	content: null,
 
+	defaultTab: '',
+
 	init: function()
 	{
 		this._super();
 
 		this.set('content', Ember.A());
+
+		var _this = this;
+		window.onhashchange = function()
+		{
+			_this.handleHash();
+		};
+
+		this.handleHash();
+	},
+
+	handleHash: function()
+	{
+		var hash = window.location.hash;
+		if(!Ember.isEmpty(hash) && hash.match(/^#tab-/))
+		{
+			this.checkHash(hash.replace(/^#tab-/, '').trim());
+		}
+		else if(!Ember.isEmpty(this.get('defaultTab')))
+		{
+			this.checkHash(this.get('defaultTab'));
+		}
+	},
+
+	checkHash: function(hash)
+	{
+		if(this.get('content.length') > 0)
+		{
+			this.openTab(hash);
+		}
+		else
+		{
+			Ember.run.next(this, function()
+			{
+				this.checkHash(hash);
+			});
+		}
+	},
+
+	openTab: function(tabName)
+	{
+		var _this = this;
+		var tabs = this.get('content');
+		Ember.$.each(tabs, function(key,value)
+		{
+			if(tabs.hasOwnProperty(key))
+			{
+				value.set('active', false);
+
+				if(tabName === value.get('tabName').trim().dasherize())
+				{
+					if(tabName !== _this.get('defaultTab'))
+					{
+						window.location.hash = 'tab-' + tabName;
+					}
+					else
+					{
+						window.history.pushState('', document.title, window.location.pathname);
+					}
+
+					value.set('active', true);
+					value.showTab();
+				}
+			}
+		});
 	},
 	
 	actions: {
 		changeTab: function (tab)
 		{
-			var tabs = this.get('content');
-			Ember.$.each(tabs, function(key,value)
-			{
-				if(tabs.hasOwnProperty(key))
-				{
-					value.set('active', false);
-
-					if(tab.get('tabName') === value.get('tabName'))
-					{
-						value.showTab();
-					}
-				}
-			});
-			tab.set('active', true);
+			var tabName = tab.get('tabName').trim().dasherize();
+			this.openTab(tabName);
 		}
 	}
 });

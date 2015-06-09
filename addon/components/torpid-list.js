@@ -73,7 +73,10 @@ export default Ember.Component.extend(
 	 */
 	edit: false,
 
-	clickable: false,
+	clickable: function()
+	{
+		return !Ember.isNone(this.get('onClick')) && !Ember.isEmpty(this.get('onClick')) ? true : false;
+	}.property('onClick'),
 
 	/**
 	 * The content array to render in the list

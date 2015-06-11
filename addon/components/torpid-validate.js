@@ -34,6 +34,8 @@ export default Ember.Component.extend(
 	isValid: false,
 	isRequired: false,
 
+	showLabel: true,
+
 	validateExpression: /.*/,
 
 	labelString: function()

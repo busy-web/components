@@ -1,13 +1,14 @@
 
-{{#if onClick}}
+{{#if showLabel}}
 	<div class="label-container">
 		<span class="label">{{labelString}}</span>
-		<span class="hint"><a class="blueHint" {{action 'hintAction'}}>{{hint}}</a></span>
-	</div>
-{{else}}
-	<div class="label-container">
-		<span class="label">{{labelString}}</span>
-		<span class="hint">{{hint}}</span>
+		<span class="hint">
+			{{#if onClick}}
+				<a class="blueHint" {{action 'hintAction'}}>{{hint}}</a>
+			{{else}}
+				{{hint}}
+			{{/if}}
+		</span>
 	</div>
 {{/if}}
 

@@ -109,6 +109,11 @@ export default Ember.Component.extend(
 			this.sendAction('onClick', model);
 		},
 
+		itemSelected: function(isChecked, row)
+		{
+			this.sendAction('onSelect', isChecked, row);
+		},
+
 		/**
 		 * Row Checked action handler
 		 *

@@ -47,11 +47,9 @@ $imageSize: 40px;
 				height: 100%;
 				padding: 10px 0;
 				border-bottom: 1px solid $torpid-color-5;
-				position: relative;
-				z-index: 1;
 				@include box-sizing();
 
-				span {
+				& > span {
 					float: left;
 					height: 100%;
 					font: 16px/36px $ft-norm;
@@ -68,6 +66,7 @@ $imageSize: 40px;
 					&:last-of-type {
 						text-align: right;
 						float: right;
+						padding: 0 0 0 10px;
 					}
 				}
 			}
@@ -117,10 +116,13 @@ $imageSize: 40px;
 				
 				& > .torpid-list-select {
 					display: block;
+					visibility: hidden;
+					opacity: 0;
 					position: absolute;
 					left: 0;
 					top: 8px;
 					z-index: 1;
+					@include transition(opacity .5s ease-in);
 
 					& > div {
 						margin: 0;
@@ -145,6 +147,12 @@ $imageSize: 40px;
 			& > ul {
 				& > .torpid-list-row {
 					padding: 0 0 0 8+$imageSize;
+
+					& > .torpid-list-select {
+						display: block;
+						visibility: visible;
+						opacity: 1;
+					}
 				}
 			}
 

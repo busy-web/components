@@ -24,6 +24,8 @@ export default Ember.Component.extend(
 	
 	disabled: false,
 
+	selectItem: null,
+
 	inputId: function()
 	{
 		return this.get('group') + '-' + this.get('name') + '-checkbox';
@@ -57,7 +59,7 @@ export default Ember.Component.extend(
 	handleChange: function(value)
 	{
 		this.set('value', value);
-		this.sendAction('action', value);
+		this.sendAction('action', value, this.get('selectItem'));
 	},
 
 	checkBoxInput: Ember.TextField.extend(

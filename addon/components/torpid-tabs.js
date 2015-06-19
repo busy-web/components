@@ -80,7 +80,7 @@ export default Ember.Component.extend(
 		}
 	},
 
-	openTab: function(tabName)
+	openTab: function(tabName, isClick)
 	{
 		var _this = this;
 		var tabs = this.get('content');
@@ -96,7 +96,7 @@ export default Ember.Component.extend(
 					{
 						window.location.hash = 'tab-' + tabName;
 					}
-					else
+					else if(isClick)
 					{
 						window.history.pushState('', document.title, window.location.pathname);
 					}
@@ -112,7 +112,7 @@ export default Ember.Component.extend(
 		changeTab: function (tab)
 		{
 			var tabName = tab.get('tabName').trim().dasherize();
-			this.openTab(tabName);
+			this.openTab(tabName, true);
 		}
 	}
 });

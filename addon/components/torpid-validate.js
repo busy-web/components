@@ -26,6 +26,8 @@ export default Ember.Component.extend(
 	invalidError: 'The input is invalid',
 	requiredError: 'This is a required field',
 
+	tabindex: 0,
+
 	required: false,
 
 	disabled: false,
@@ -130,9 +132,23 @@ export default Ember.Component.extend(
 
 		valueBinding: 'parentView.value',
 
+		tabindexBinding: 'parentView.tabindex',
+
 		focusOut: function()
 		{
 			this.get('parentView').checkIfValid(this.get('value'));
-		}
+
+			this.get('parentView').sendAction('onBlur', this.get('value'));
+		},
+
+		keyUp: function(evt)
+		{
+			if(evt.which === 13)
+			{
+				this.get('parentView').sendAction('onSubmit', this.get('value'));
+			}
+
+			return true;
+		},
 	})
 });

@@ -15,7 +15,6 @@ $imageSize: 40px;
 			height: 56px;
 			width: 100%;
 			padding: 0;
-			cursor: pointer;
 			@include box-sizing();
 
 			& > .torpid-list-select {
@@ -78,6 +77,7 @@ $imageSize: 40px;
 		& > ul {
 
 			& > .torpid-list-row {
+				cursor: pointer;
 
 				& > .torpid-list-content {
 					

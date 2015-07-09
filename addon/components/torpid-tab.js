@@ -94,7 +94,13 @@ export default Ember.Component.extend(
 	actions: {
 		openAccordian: function()
 		{
-			this.set('open', !this.get('open'));
+			var isOpen = !this.get('open');
+			this.set('open', isOpen);
+
+			if(isOpen)
+			{
+				this.showTab();
+			}
 		}
 	}
 });

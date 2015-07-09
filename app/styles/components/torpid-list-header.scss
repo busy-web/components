@@ -24,6 +24,8 @@ $imageSize: 40px;
 			padding: 0 10px;
 			text-align: center;
 			@include box-sizing();
+			overflow: hidden;
+			white-space: nowrap;
 
 			&:first-of-type {
 				padding: 0 10px 0 0;

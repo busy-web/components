@@ -10,7 +10,7 @@ $imageSize: 40px;
 		margin: 0 auto;
 		padding: 0;
 		@include box-sizing();
-		
+
 		& > .torpid-list-row {
 			height: 56px;
 			width: 100%;
@@ -80,7 +80,7 @@ $imageSize: 40px;
 				cursor: pointer;
 
 				& > .torpid-list-content {
-					
+
 					span {
 
 						&:first-of-type {
@@ -93,7 +93,7 @@ $imageSize: 40px;
 	}
 
 	&.image {
-		
+
 		& > ul {
 
 			& > .torpid-list-row {
@@ -109,11 +109,11 @@ $imageSize: 40px;
 	&.selector {
 
 		& > ul {
-			
+
 			& > .torpid-list-row {
 				position: relative;
 				@include transition(padding .3s ease-in-out);
-				
+
 				& > .torpid-list-select {
 					display: block;
 					visibility: hidden;
@@ -143,7 +143,7 @@ $imageSize: 40px;
 		}
 
 		&.edit {
-			
+
 			& > ul {
 				& > .torpid-list-row {
 					padding: 0 0 0 8+$imageSize;
@@ -157,13 +157,47 @@ $imageSize: 40px;
 			}
 
 			&.image {
-				
+
 				& > ul {
 					& > .torpid-list-row {
 						padding: 0 0 0 32+$imageSize+$imageSize;
 					}
 				}
 			}
+		}
+	}
+}
+
+@media screen and (max-width:$tablet-width) {
+
+	.torpid-list-container {
+		overflow-x: scroll;
+		overflow-y: hidden;
+
+		.torpid-list-header {
+			& > div {
+				width: $tablet-width !important;
+			}
+		}
+		& .torpid-list-row {
+			width: $tablet-width !important;;
+		}
+	}
+}
+
+@media screen and (max-width:$mobile-width) {
+
+	.torpid-list-container {
+		overflow-x: scroll;
+		overflow-y: hidden;
+
+		.torpid-list-header {
+			& > div {
+				width: $mobile-width;
+			}
+		}
+		& .torpid-list-row {
+			width: $mobile-width;
 		}
 	}
 }

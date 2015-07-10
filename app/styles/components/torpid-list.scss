@@ -171,16 +171,18 @@ $imageSize: 40px;
 @media screen and (max-width:$tablet-width) {
 
 	.torpid-list-container {
-		overflow-x: scroll;
-		overflow-y: hidden;
+		&.mobile-scroll {
+			overflow-x: scroll;
+			overflow-y: hidden;
 
-		.torpid-list-header {
-			& > div {
-				width: $tablet-width !important;
+			& .torpid-list-header {
+				& > div {
+					width: $tablet-width;
+				}
 			}
-		}
-		& .torpid-list-row {
-			width: $tablet-width !important;;
+			& .torpid-list-row {
+				width: $tablet-width;
+			}
 		}
 	}
 }
@@ -188,16 +190,18 @@ $imageSize: 40px;
 @media screen and (max-width:$mobile-width) {
 
 	.torpid-list-container {
-		overflow-x: scroll;
-		overflow-y: hidden;
+		&.mobile-scroll {
+			overflow-x: scroll;
+			overflow-y: hidden;
 
-		.torpid-list-header {
-			& > div {
+			& .torpid-list-header {
+				& > div {
+					width: $mobile-width;
+				}
+			}
+			& .torpid-list-row {
 				width: $mobile-width;
 			}
-		}
-		& .torpid-list-row {
-			width: $mobile-width;
 		}
 	}
 }

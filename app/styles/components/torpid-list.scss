@@ -181,7 +181,7 @@ $imageSize: 40px;
 				}
 			}
 			& .torpid-list-row {
-				width: $tablet-width;
+				width: $tablet-width !important;
 			}
 		}
 	}
@@ -200,7 +200,7 @@ $imageSize: 40px;
 				}
 			}
 			& .torpid-list-row {
-				width: $mobile-width;
+				width: $mobile-width !important;
 			}
 		}
 	}

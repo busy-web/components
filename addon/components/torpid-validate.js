@@ -141,6 +141,11 @@ export default Ember.Component.extend(
 			this.get('parentView').sendAction('onBlur', this.get('value'));
 		},
 
+		click: function()
+		{
+			return false;
+		},
+
 		keyUp: function(evt)
 		{
 			if(evt.which === 13)

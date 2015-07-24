@@ -27,6 +27,7 @@ export default Ember.Component.extend(
 	requiredError: 'This is a required field',
 
 	tabindex: 0,
+	maxlength: "", 
 
 	required: false,
 
@@ -127,12 +128,19 @@ export default Ember.Component.extend(
 	torpidInput: TorpidInput.extend(
 	{
 		placeholderBinding: 'parentView.placeholder',
-
 		typeBinding: 'parentView.type',
-
 		valueBinding: 'parentView.value',
-
 		tabindexBinding: 'parentView.tabindex',
+
+		init: function()
+		{
+			this._super();
+
+			if(!Ember.isEmpty(this.get('parentView.maxlength')))
+			{
+				this.set('maxlength', this.get('parentView.maxlength'));
+			}
+		},
 
 		focusOut: function()
 		{

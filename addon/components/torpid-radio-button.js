@@ -22,7 +22,6 @@ export default Ember.Component.extend({
 
   change: function()
   {
-    this.sendAction('onSelect', this.get('value'));
-    console.log(this.get('value'));
+	this.sendAction('onSelect', this.get('value'));
   }
 });

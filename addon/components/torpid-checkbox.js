@@ -84,7 +84,7 @@ export default Ember.Component.extend(
 		_value: false,
 		_valueBinding: 'parentView.value',
 
-		change: function()
+		click: function()
 		{
 			this.get('parentView').handleChange(!this.get('_value'));
 		},

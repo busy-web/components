@@ -1,9 +1,11 @@
 
 .torpid-list-container {
 	display: inline-block;
+	position: relative;
 	width: 100%;
 	height: auto;
-	padding: 56px 0 0 0;
+	min-height: 400px;
+	padding: 0;
 	overflow: visible;
 	overflow-x: auto;
 	@include box-sizing();
@@ -11,6 +13,13 @@
 	& > div {
 		display: table;
 		min-width: 100%;
+	}
+}
+
+@media print {
+
+	.torpid-list-container {
+		overflow: hidden;
 	}
 }
 

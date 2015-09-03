@@ -3,37 +3,36 @@ $imageSize: 40px;
 
 .torpid-list-header {
 	display: table-header-group;
-	height: 56px;
 	margin: 0;
 	padding: 0;
 
 	& > span {
 		display: table-cell;
-		font: 16px/36px $ft-bold;
+		font: 16px/1 $ft-bold;
 		color: $torpid-color-3;
 		text-align: center;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		padding: 0 10px;
+		padding: 16px 10px 15px;
 		margin: 0;
 		border-spacing: 0px;
 		border-bottom: 1px solid $torpid-color-12;
 
 		&:nth-child(2) {
 			text-align: left;
-			padding: 0 10px 0 0;
+			padding: 16px 10px 15px 0;
 		}
 		&:last-of-type {
 			text-align: right;
-			padding: 0 0 0 10px;
+			padding: 16px 0 15px 10px;
 		}
 
 		&.torpid-list-extra {
-			width: 50px;
 			display: none;
+			width: 1px;
+			padding: 0px;
 			border-bottom: none;
-			padding: 0 0 0 10px;
 		}
 	}
 	
@@ -41,7 +40,6 @@ $imageSize: 40px;
 		& > span {
 			&.torpid-list-extra {
 				display: table-cell;
-				width: 50px;
 			}
 		}
 	}
@@ -50,32 +48,6 @@ $imageSize: 40px;
 		& > span {
 			&.torpid-list-extra {
 				display: table-cell;
-				width: 0px;
-				@include transition(width .5s ease-in);
-			}
-		}
-
-		&.image {
-			& > span {
-				&.torpid-list-extra {
-					width: 50px;
-				}
-			}
-		}
-
-		&.edit {
-			& > span {
-				&.torpid-list-extra {
-					width: 50px;
-				}
-			}
-
-			&.image {
-				& > span {
-					&.torpid-list-extra {
-						width: 100px;
-					}
-				}
 			}
 		}
 	}

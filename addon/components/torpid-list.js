@@ -43,7 +43,7 @@ export default Ember.Component.extend(
 	tagName: 'section',
 
 	classNames: ['torpid-list'],
-	classNameBindings: ['selector', 'edit', 'hasImage:image', 'clickable'],
+	classNameBindings: ['selector', 'large', 'edit', 'hasImage:image', 'clickable'],
 
 	/**
 	 * Bool for setting the type of list
@@ -72,6 +72,8 @@ export default Ember.Component.extend(
 	 * @type boolean
 	 */
 	edit: false,
+
+	large: false,
 
 	clickable: function()
 	{

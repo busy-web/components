@@ -99,6 +99,63 @@
 			}
 		}
 	}
+
+	&.accordian {
+		padding: 0;
+
+		.tabs {
+			display: none;
+		}
+		.tab-content {
+			padding: 24px 0 0;
+
+			.torpid-tab {
+				display: inline-block;
+				height: 42px;
+
+				& > .accordian-tab {
+					display: block;
+				}
+				& > .content {
+					display: none;
+				}
+				& > .open-content {
+					display: block;
+				}
+				&:last-of-type {
+
+					& > .accordian-tab {
+						border-bottom: 1px solid rgba(210,210,210,1);
+					}
+				}
+				&.open {
+					height: auto;
+
+					& > .accordian-tab {
+						background-color: $torpid-color-8;
+						color: $torpid-color-7;
+						margin-right: 10px;
+					}
+
+					& > .open-content {
+						background-color: $torpid-color-7;
+						color: $torpid-color-8;
+					}
+
+					& > .content {
+						display: block;
+						padding: 30px 0;
+						@include box-sizing();
+					}
+
+					& > .open-content {
+						display: block;
+						font: 21px/19px $ft-norm;
+					}
+				}
+			}
+		}
+	}
 }
 
 @media screen and (max-width: $mobile-width) {

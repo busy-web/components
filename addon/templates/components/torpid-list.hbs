@@ -1,24 +1,22 @@
 
-<ul>
-	{{#each row in view.content}}
-		<li class="torpid-list-row" {{action 'rowClick' row bubles=false }}>
-			<span class="torpid-list-select">
-				{{torpid-checkbox value=row.isSelected action="itemSelected" selectItem=row}}
-			</span>
+{{#each row in view.content}}
+	<div class="torpid-list-row" {{action 'rowClick' row bubles=false }}>
 
-			{{#if view.hasImage}}
-				<span class="torpid-list-thumbnail">
-					<img src="{{if row.imageThumbUrl row.imageThumbUrl row.imagePlaceholder}}" />
-				</span>
-			{{/if}}
+		<span class="torpid-list-extra">
+			<div class="select">
+				<div>
+					{{torpid-checkbox value=row.isSelected action="itemSelected" selectItem=row}}
+				</div>
+			</div>
+			<div class="image">
+				<img src="{{if row.imageThumbUrl row.imageThumbUrl row.imagePlaceholder}}" />
+			</div>
+		</span>
 
-			<span class="torpid-list-content">
-				{{yield row}}
-			</span>
-		</li>
-	{{else}}
+		{{yield row}}
+	</div>
+{{else}}
 
-		<li class="torpid-list-no-results">No Entries Found</li>
+	<div class="torpid-list-no-results">No Entries Found</div>
 
-	{{/each}}
-</ul>
+{{/each}}

@@ -2,78 +2,79 @@
 $imageSize: 40px;
 
 .torpid-list {
-	display: inline-block;
-	width: 100%;
+	display: table-row-group;
 
-	& > ul {
+	& > .torpid-list-no-results {
 		width: 100%;
-		margin: 0 auto;
+		height: 100px;
+		font: 22px/100px $ft-norm;
+		color: $busy-color-11;
+		text-align: center;
+	}
+
+	& > .torpid-list-row {
+		display: table-row;
 		padding: 0;
-		@include box-sizing();
 
-		& > .torpid-list-no-results {
-			width: 100%;
-			height: 100px;
-			font: 22px/100px $ft-norm;
-			color: $busy-color-11;
+		& > span {
+			display: table-cell;
+			font: 16px/36px $ft-norm;
+			color: $torpid-color-3;
 			text-align: center;
-		}
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			padding: 8px 10px 0 0;
+			margin: 0;
+			border-spacing: 0px;
+			border-bottom: 1px solid $torpid-color-5;
+			vertical-align: middle;
 
-		& > .torpid-list-row {
-			height: 56px;
-			width: 100%;
-			padding: 0;
-			@include box-sizing();
-
-			& > .torpid-list-select {
+			&:nth-child(2) {
+				text-align: left;
+				padding: 0 10px 0 0;
+			}
+			&:last-of-type {
+				text-align: right;
+				padding: 0 0 0 10px;
+			}
+	
+			&.torpid-list-extra {
 				display: none;
-				width: $imageSize;
-				height: $imageSize;
-				padding: 9px;
-				@include box-sizing();
-			}
-			& > .torpid-list-thumbnail {
-				float: left;
-				width: $imageSize;
-				height: $imageSize;
-				margin: 8px 10px 0 0;
-				border-radius: $imageSize;
-				border: 1px solid $torpid-color-5;
-				overflow: hidden;
-				@include box-sizing();
+				position: relative;
+				width: 10+$imageSize;
+				border-bottom: none;
+				padding: 0 0 0 10px;
 
-				& > img {
-					width: 100%;
-					height: 100%;
-				}
-			}
-			& > .torpid-list-content {
-				display: inline-block;
-				background: $torpid-color-7;
-				width: 100%;
-				height: 100%;
-				padding: 10px 0;
-				border-bottom: 1px solid $torpid-color-5;
-				@include box-sizing();
-
-				& > span {
+				& > .image {
+					display: none;
 					float: left;
-					height: 100%;
-					font: 16px/36px $ft-norm;
-					color: $torpid-color-3;
-					padding: 0 10px;
-					text-align: center;
+					width: $imageSize;
+					height: $imageSize;
+					margin: 8px 10px 8px 0;
+					border-radius: $imageSize;
+					border: 1px solid $torpid-color-5;
+					overflow: hidden;
 					@include box-sizing();
 
-					&:first-of-type {
-						padding: 0 10px 0 0;
-						color: $torpid-color-2;
-						text-align: left;
+					& > img {
+						width: 100%;
+						height: 100%;
 					}
-					&:last-of-type {
-						text-align: right;
-						float: right;
-						padding: 0 10px 0 0;
+				}
+
+				& > .select {
+					display: none;
+					float: left;
+					margin: 8px 0 8px 10px;
+					width: $imageSize;
+					height: $imageSize;
+
+					& > div {
+						max-width: 100%;
+						height: 100%;
+						padding: 0 0 0 8px;
+						@include box-sizing();
 					}
 				}
 			}
@@ -81,94 +82,84 @@ $imageSize: 40px;
 	}
 
 	&.clickable {
-
-		& > ul {
-
-			& > .torpid-list-row {
-				cursor: pointer;
-
-				& > .torpid-list-content {
-
-					span {
-
-						&:first-of-type {
-							color: $torpid-color-1;
-						}
-					}
+		& > .torpid-list-row {
+			cursor: pointer;
+				
+			& > span {
+				&:nth-child(2) {
+					color: $torpid-color-1;
 				}
 			}
 		}
 	}
 
 	&.image {
+		& > .torpid-list-row {
+			& > span {
+				&.torpid-list-extra {
+					display: table-cell;
 
-		& > ul {
-
-			& > .torpid-list-row {
-				padding: 0 0 0 $imageSize+24;
-
-				& > .torpid-list-thumbnail {
-					margin: 8px 0 0 0-24-$imageSize;
+					& > .image {
+						display: block;
+					}
 				}
 			}
 		}
 	}
 
 	&.selector {
-
-		& > ul {
-
-			& > .torpid-list-row {
-				position: relative;
-				@include transition(padding .3s ease-in-out);
-
-				& > .torpid-list-select {
-					display: block;
-					visibility: hidden;
-					opacity: 0;
-					position: absolute;
+		& > .torpid-list-row {
+			& > .torpid-list-extra {
+				display: table-cell;
+				width: 0px;
+				@include transition(width .5s ease-in);
+				
+				& > .image {
+					position: relative;
+					z-index: 2;
 					left: 0;
-					top: 8px;
+					top: 0;
+					@include transition(left .5s ease-in);
+				}
+				& > .select {
+					display: block;
+					width: 40px;
+					position: absolute;
 					z-index: 1;
-					@include transition(opacity .5s ease-in);
+					left: 0;
+					top: 0;
 
 					& > div {
-						margin: 0;
-						height: 22px;
-						width: 22px;
-						padding: 0;
-
 						& > div.box {
 							margin: 0;
 						}
 					}
 				}
-				& > .torpid-list-thumbnail {
-					position: relative;
-					z-index: 2;
+			}
+		}
+		&.image {
+			& > .torpid-list-row {
+				& > .torpid-list-extra {
+					width: 10+$imageSize;
 				}
 			}
 		}
 
 		&.edit {
-
-			& > ul {
-				& > .torpid-list-row {
-					padding: 0 0 0 8+$imageSize;
-
-					& > .torpid-list-select {
-						display: block;
-						visibility: visible;
-						opacity: 1;
-					}
+			& > .torpid-list-row {
+				& > .torpid-list-extra {
+					width: 10+$imageSize;
 				}
 			}
 
 			&.image {
+				& > .torpid-list-row {
+					& > .torpid-list-extra {
+						width: 20+$imageSize+$imageSize;
 
-				& > ul {
-					& > .torpid-list-row {
-						padding: 0 0 0 32+$imageSize+$imageSize;
+						& > .image {
+							left: 50px;
+						}
 					}
 				}
 			}

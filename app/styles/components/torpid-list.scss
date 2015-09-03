@@ -113,6 +113,10 @@ $imageSize: 40px;
 				&:last-of-type {
 					padding: 20px 0 20px 10px;
 				}
+				
+				&.torpid-list-extra {
+					padding: 0;
+				}
 			}
 		}
 	}

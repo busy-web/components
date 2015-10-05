@@ -2,7 +2,7 @@
 .torpid-title {
 	width: 100%;
 	height: auto;
-	padding: 48px 0 0 0;
+	padding: 48px 0 56px 0;
 	@include box-sizing();
 
 	& > header {
@@ -27,14 +27,14 @@
 			margin: 12px 0 0 0;
 		}
 
-		
+
 	}
 
 	section {
 		width: 100%;
 		height: auto;
 		padding: 20px 0 0;
-		
+
 		& > textarea {
 			width: 100%;
 		}

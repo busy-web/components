@@ -14,7 +14,7 @@ export default TorpidValidate.extend(
 
 	type: 'password',
 
-	invalidError: 'Password must contain at least one number and one letter and be at least 6 characters long',
+	invalidError: 'Password must contain at a number, a letter, and be more than 6 characters long.',
 
 	placeholder: 'Password',
 });

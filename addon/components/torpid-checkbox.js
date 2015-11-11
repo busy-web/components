@@ -16,6 +16,7 @@ export default Ember.Component.extend(
 	classNames: ['torpid-checkbox'],
 	classNameBindings: ['checked:checked'],
 
+	defaultValue: false,
 	value: false,
 
 	title: null,
@@ -31,9 +32,12 @@ export default Ember.Component.extend(
 		return this.get('group') + '-' + this.get('name') + '-checkbox';
 	}.property('group', 'name'),
 
-	init: function()
+	setup: function()
 	{
-		this._super();
+		if(this.get('defaultValue'))
+		{
+			this.set('value', true);
+		}
 
 		if(Ember.isNone(this.get('name')))
 		{
@@ -44,7 +48,7 @@ export default Ember.Component.extend(
 		{
 			this.set('group', this.random());
 		}
-	},
+	}.observes('defaultValue', 'name', 'group').on('init'),
 
 	random: function()
 	{

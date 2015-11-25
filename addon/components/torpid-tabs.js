@@ -94,7 +94,7 @@ export default Ember.Component.extend(
 				{
 					if(tabName !== _this.get('defaultTab'))
 					{
-						window.location.hash = 'tab-' + tabName;
+						window.history.replaceState('', document.title, window.location.pathname + '#tab-' + tabName);
 					}
 					else if(isClick)
 					{

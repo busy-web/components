@@ -98,7 +98,8 @@ export default Ember.Component.extend(
 					}
 					else if(isClick)
 					{
-						window.history.pushState('', document.title, window.location.pathname);
+						console.log('clicked');
+						window.history.replaceState('', document.title, window.location.pathname);
 					}
 
 					value.set('active', true);
@@ -107,7 +108,7 @@ export default Ember.Component.extend(
 			}
 		});
 	},
-	
+
 	actions: {
 		changeTab: function (tab)
 		{

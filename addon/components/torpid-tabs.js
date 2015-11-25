@@ -98,7 +98,6 @@ export default Ember.Component.extend(
 					}
 					else if(isClick)
 					{
-						console.log('clicked');
 						window.history.replaceState('', document.title, window.location.pathname);
 					}
 

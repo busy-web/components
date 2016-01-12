@@ -2,26 +2,33 @@ import Ember from 'ember';
 import layout from '../templates/components/torpid-radio-button';
 
 export default Ember.Component.extend({
-  layout: layout,
+	layout: layout,
 
-  classNames: ['torpid-radio-button'],
+	classNames: ['torpid-radio-button'],
 
-  tagName: null,
+	tagName: null,
 
-  type: 'radio',
+	type: 'radio',
 
-  value: null,
+	value: null,
 
-  label: null,
+	label: null,
 
-  name: null,
+	name: null,
 
-  disabled: false,
+	disabled: false,
 
-  checked: false,
+	checked: false,
 
-  change: function()
-  {
-	this.sendAction('onSelect', this.get('value'));
-  }
+	change: function()
+	{
+		this.sendAction('onSelect', this.get('value'));
+	},
+
+	click: function(evt)
+	{
+		evt.stopPropagation();
+		return true;
+	}
+
 });

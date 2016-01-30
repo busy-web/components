@@ -1,14 +1,10 @@
 
-<div class="accordian-tab" {{action 'openAccordian' bubbles=false target='view'}}>{{view.tabName}}</div>
+<div class="accordian-tab" {{action 'openAccordian' bubbles=false}}>{{tabName}}</div>
 
-{{#if view.open}}
-	<div class="open-content" {{action 'openAccordian' bubbles=false target='view'}}>
-		-
-	</div>
+{{#if open}}
+	<div class="open-content" {{action 'openAccordian' bubbles=false}}>-</div>
 {{else}}
-	<div class="open-content" {{action 'openAccordian' bubbles=false target='view'}}>
-		+
-	</div>
+	<div class="open-content" {{action 'openAccordian' bubbles=false}}>+</div>
 {{/if}}
 
 <div class="content">

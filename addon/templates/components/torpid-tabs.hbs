@@ -1,7 +1,7 @@
 
 <div class="tabs">
-	{{#each tab in view.content}}
-		<span class={{if tab.active 'active'}} {{action 'changeTab' tab bubbles=false target='view'}}>{{tab.tabName}}</span>
+	{{#each tab in content}}
+		<span class="{{if tab.active 'active'}}" {{action 'changeTab' tab bubbles=false}}>{{tab.tabName}}</span>
 	{{/each}}
 </div>
 

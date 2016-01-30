@@ -14,11 +14,11 @@
 
 {{#if disabled}}
 	<div class="validate-container disabled">
-		{{view torpidInput disabled=true}}
+		{{torpid-input placeholder=placeholder type=type value=value tabindex=tabindex disabled=true onBlur="blurAction" onSubmit="submitAction"}}
 	</div>
 {{else}}
 	<div class="validate-container">
-		{{view torpidInput}}
+		{{torpid-input placeholder=placeholder type=type value=value tabindex=tabindex onBlur="blurAction" onSubmit="submitAction"}}
 	</div>
 {{/if}}
 

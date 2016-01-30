@@ -3,7 +3,6 @@
  *
  */
 import Ember from 'ember';
-import TorpidInput from './torpid-input';
 import layout from '../templates/components/torpid-validate';
 
 /**
@@ -27,7 +26,7 @@ export default Ember.Component.extend(
 	requiredError: 'This is a required field',
 
 	tabindex: 0,
-	maxlength: "", 
+	maxlength: "",
 
 	required: false,
 
@@ -121,47 +120,17 @@ export default Ember.Component.extend(
 		hintAction: function()
 		{
 			this.sendAction('onClick');
-		}
-
-	},
-
-	torpidInput: TorpidInput.extend(
-	{
-		placeholderBinding: 'parentView.placeholder',
-		typeBinding: 'parentView.type',
-		valueBinding: 'parentView.value',
-		tabindexBinding: 'parentView.tabindex',
-
-		init: function()
-		{
-			this._super();
-
-			if(!Ember.isEmpty(this.get('parentView.maxlength')))
-			{
-				this.set('maxlength', this.get('parentView.maxlength'));
-			}
 		},
 
-		focusOut: function()
+		blurAction: function(value)
 		{
-			this.get('parentView').checkIfValid(this.get('value'));
-
-			this.get('parentView').sendAction('onBlur', this.get('value'));
+			this.checkIfValid(value);
+			this.sendAction('onBlur', value);
 		},
 
-		click: function()
+		submitAction: function(value)
 		{
-			return false;
+			this.sendAction('onSubmit', value);
 		},
-
-		keyUp: function(evt)
-		{
-			if(evt.which === 13)
-			{
-				this.get('parentView').sendAction('onSubmit', this.get('value'));
-			}
-
-			return true;
-		},
-	})
+	}
 });

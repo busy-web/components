@@ -22,7 +22,7 @@ export default Ember.Component.extend(
 	title: null,
 	group: null,
 	name: null,
-	
+
 	disabled: false,
 
 	selectItem: null,
@@ -75,7 +75,7 @@ export default Ember.Component.extend(
 
 		group: null,
 		groupBinding: 'parentView.group',
-		
+
 		name: null,
 		nameBinding: 'parentView.name',
 

@@ -16,7 +16,6 @@ export default Ember.Component.extend(
 
 	classNames: ['torpid-validate'],
 	classNameBindings: ['invalid:invalid', 'isValid:valid'],
-	attributeBindings: ['autofocus'],
 
 	type: 'text',
 	placeholder: '',

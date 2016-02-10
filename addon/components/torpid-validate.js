@@ -16,6 +16,7 @@ export default Ember.Component.extend(
 
 	classNames: ['torpid-validate'],
 	classNameBindings: ['invalid:invalid', 'isValid:valid'],
+	attributeBindings: ['autofocus'],
 
 	type: 'text',
 	placeholder: '',
@@ -27,7 +28,7 @@ export default Ember.Component.extend(
 	requiredError: 'This is a required field',
 
 	tabindex: 0,
-	maxlength: "", 
+	maxlength: "",
 
 	required: false,
 

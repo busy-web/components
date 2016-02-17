@@ -34,6 +34,7 @@ export default Ember.Component.extend(
 	 * @type boolean
 	 */
 	content: null,
+	_tabs: null,
 
 	defaultTab: '',
 
@@ -41,7 +42,8 @@ export default Ember.Component.extend(
 	{
 		this._super();
 
-		this.set('content', Ember.A());
+		this.set('_tabs', Ember.A());
+		//this.set('content', Ember.A());
 
 		var _this = this;
 		window.onhashchange = function()
@@ -106,6 +108,37 @@ export default Ember.Component.extend(
 				}
 			}
 		});
+	},
+
+	addTab: function(tab)
+	{
+		this.get('_tabs').pushObject(tab);
+	},
+
+	renderTabs: function()
+	{
+		var tabArray = this.get('_tabs').sortBy('tabIndex');
+		tabArray.forEach(function(item)
+		{
+			item.set('active', false);
+			item.set('open', false);
+		});
+
+		var defaultTab = tabArray.objectAt(0);
+		this.showDefault(defaultTab);
+
+		this.set('content', tabArray);
+	}.observes('_tabs.[]'),
+
+	showDefault: function(tab)
+	{
+		tab.set('active', true);
+		tab.set('open', true);
+
+		var tabName = tab.get('tabName').trim().dasherize();
+		this.set('defaultTab', tabName);
+
+		tab.triggerShowTab();
 	},
 
 	actions: {

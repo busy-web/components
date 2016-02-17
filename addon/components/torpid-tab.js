@@ -7,11 +7,12 @@ export default Ember.Component.extend(
 
 	classNames: ['torpid-tab'],
 	classNameBindings: ['active', 'open'],
-	
+
 	active: false,
 	open: false,
-	
+
 	tabName: null,
+	tabIndex: 0,
 
 	init: function()
 	{
@@ -28,20 +29,7 @@ export default Ember.Component.extend(
 	{
 		if(!Ember.isNone(this.get('tabName')) && !Ember.isNone(this.get('parentView')))
 		{
-			var tabs = this.get('parentView.content');
-
-			if(Ember.isEmpty(tabs))
-			{
-				this.set('active', true);
-				this.set('open', true);
-				this.set('parentView.defaultTab', this.get('tabName').trim().dasherize());
-				tabs.pushObject(this);
-				this.triggerShowTab();
-			}
-			else
-			{
-				tabs.pushObject(this);
-			}
+			this.get('parentView').addTab(this);
 		}
 		else
 		{

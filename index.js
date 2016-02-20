@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-	name: 'torpid-js'
+  name: 'torpid-js'
 };

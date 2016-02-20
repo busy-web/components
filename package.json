@@ -1,7 +1,7 @@
 {
   "name": "torpid-js",
-  "version": "2.3.1",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "2.3.2",
+  "description": "ember-cli component library.",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,12 +11,12 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": "git@dev.busybusy.com:43700/diffusion/WAPTORPIDJS/torpid-js.git",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
-  "license": "MIT",
+  "author": "busy inc.",
+  "license": "Unlicense",
   "devDependencies": {
     "broccoli-asset-rev": "^2.2.0",
     "ember-ajax": "0.7.1",

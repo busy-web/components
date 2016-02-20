@@ -1,16 +1,12 @@
+
 <div class="box">
-  {{#if view.disabled}}
-    <input type="{{view.type}}" id="{{view.name}}-{{view.value}}-radio" name="{{view.name}}" value="{{view.value}}"  checked={{view.checked}} disabled>
-  {{else}}
-    <input type="{{view.type}}" id="{{view.name}}-{{view.value}}-radio" name="{{view.name}}" value="{{view.value}}" checked={{view.checked}}>
-  {{/if}}
-  <label for="{{view.name}}-{{view.value}}-radio">
-  </label>
+	{{#if disabled}}
+		<input type="{{type}}" id="{{name}}-{{value}}-radio" name="{{name}}" value="{{value}}" checked={{checked}} disabled>
+	{{else}}
+		<input type="{{type}}" id="{{name}}-{{value}}-radio" name="{{name}}" value="{{value}}" checked={{checked}}>
+	{{/if}}
+
+	<label for="{{name}}-{{value}}-radio"></label>
 </div>
-<span>
-  {{#if view.label}}
-    {{view.label}}
-  {{else}}
-    {{view.label}}
-  {{/if}}
-</span>
+
+<span>{{label}}</span>

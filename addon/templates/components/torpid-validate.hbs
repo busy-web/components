@@ -12,15 +12,9 @@
 	</div>
 {{/if}}
 
-{{#if disabled}}
-	<div class="validate-container disabled">
-		{{view torpidInput disabled=true}}
-	</div>
-{{else}}
-	<div class="validate-container">
-		{{view torpidInput}}
-	</div>
-{{/if}}
+<div class="validate-container{{if disabled ' disabled'}}">
+	{{torpid-input onSubmit="enterAction" onBlur="focusOutAction" disabled=disabled}}
+</div>
 
 <div class="error-container">
 	{{error}}

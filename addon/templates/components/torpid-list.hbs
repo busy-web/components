@@ -1,7 +1,6 @@
 
-{{#each row in view.content}}
+{{#each row in content}}
 	<div class="torpid-list-row" {{action 'rowClick' row bubles=false }}>
-
 		<span class="torpid-list-extra">
 			<div class="select">
 				<div>
@@ -16,9 +15,7 @@
 		{{yield row}}
 	</div>
 {{else}}
-
 	<div class="torpid-list-no-results">
 		<span>No Entries Found</span>
 	</div>
-
 {{/each}}

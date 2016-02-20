@@ -1,12 +1,9 @@
 
 <div class="box">
- 
-	{{view checkBoxInput id=inputId}}
-
+	{{checkbox-input id=inputId name=name group=group checked=checked _value=value disabled=disabled onChange="inputChanged"}}
 	<label for="{{inputId}}"></label>
-
 </div>
 
-{{#if view.title}}
-	<span>{{{view.title}}}</span>
+{{#if title}}
+	<span>{{{title}}}</span>
 {{/if}}

@@ -8,7 +8,7 @@ import layout from '../templates/components/torpid-list';
 /**
  * `Torpid/List`
  *
- * @class 
+ * @class
  * Renders a list view of model objects
  *
  * torpid-list has two event callbacks `onClick` and `onSelect`.
@@ -19,10 +19,10 @@ import layout from '../templates/components/torpid-list';
  * {{#torpid-list content=controller.content as |item|}}
  *	<!-- image container - left most container for images -->
  *	<div class="torpid-list-thumbnail"><img src={{item.imageName}} /></div>
- *	
+ *
  *	<!-- info container - left aligned container -->
  *	<div class="torpid-list-info><h1>{{item.fullName}}</h1></div>
- *	
+ *
  *	<!-- image container - right aligned container -->
  *	<div class="torpid-list-status></div>
  * {{/torpid-list}}
@@ -88,6 +88,18 @@ export default Ember.Component.extend(
 	 * @type array
 	 */
 	content: null,
+
+	model: null,
+
+	setModel: function()
+	{
+		if(Ember.isNone(this.get('model')) && !Ember.isNone(this.get('content')))
+		{
+			Ember.deprecate('torpid-list: content is deprecated please use model');
+
+			this.set('model', this.get('content'));
+		}
+	}.observes('content').on('init'),
 
 	/**
 	 * Storage array for all selected rows that get passed to onSelect event callback

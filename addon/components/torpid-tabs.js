@@ -17,7 +17,7 @@ export default Ember.Component.extend(
 	layout: layout,
 
 	classNames: ['torpid-tabs'],
-	classNameBindings: ['active'],
+	classNameBindings: ['active:active'],
 
 	/**
 	 * variable to follow which tab is active
@@ -33,7 +33,7 @@ export default Ember.Component.extend(
 	 * @property tabNames
 	 * @type boolean
 	 */
-	content: null,
+	model: null,
 	_tabs: null,
 
 	defaultTab: '',
@@ -43,15 +43,12 @@ export default Ember.Component.extend(
 		this._super();
 
 		this.set('_tabs', Ember.A());
-		//this.set('content', Ember.A());
 
 		var _this = this;
 		window.onhashchange = function()
 		{
 			_this.handleHash();
 		};
-
-		this.handleHash();
 	},
 
 	handleHash: function()
@@ -69,7 +66,7 @@ export default Ember.Component.extend(
 
 	checkHash: function(hash)
 	{
-		if(this.get('content.length') > 0)
+		if(this.get('model.length') > 0)
 		{
 			this.openTab(hash);
 		}
@@ -85,12 +82,14 @@ export default Ember.Component.extend(
 	openTab: function(tabName, isClick)
 	{
 		var _this = this;
-		var tabs = this.get('content');
+		var tabs = this.get('model');
+		var didShowTab = false;
 		Ember.$.each(tabs, function(key,value)
 		{
 			if(tabs.hasOwnProperty(key))
 			{
 				value.set('active', false);
+				value.set('open', false);
 
 				if(tabName === value.get('tabName').trim().dasherize())
 				{
@@ -104,10 +103,17 @@ export default Ember.Component.extend(
 					}
 
 					value.set('active', true);
-					value.showTab();
+					value.set('open', true);
+					value.triggerShowTab();
+					didShowTab = true;
 				}
 			}
 		});
+
+		if(!didShowTab)
+		{
+			this.showDefault();
+		}
 	},
 
 	addTab: function(tab)
@@ -125,15 +131,21 @@ export default Ember.Component.extend(
 		});
 
 		var defaultTab = tabArray.objectAt(0);
-		this.showDefault(defaultTab);
+		if(!Ember.isNone(defaultTab))
+		{
+			this.set('defaultTab', defaultTab.get('tabName').trim().dasherize());
+		}
 
-		this.set('content', tabArray);
+		this.set('model', tabArray);
+
+		this.handleHash();
 	}.observes('_tabs.[]'),
 
-	showDefault: function(tab)
+	showDefault: function()
 	{
-		tab.set('active', true);
-		tab.set('open', true);
+		var tab = this.get('model').objectAt(0);
+			tab.set('active', true);
+			tab.set('open', true);
 
 		var tabName = tab.get('tabName').trim().dasherize();
 		this.set('defaultTab', tabName);

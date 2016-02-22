@@ -1,6 +1,6 @@
 
 <div class="tabs">
-	{{#each tab in content}}
+	{{#each model as |tab|}}
 		<span class={{if tab.active 'active'}} {{action 'changeTab' tab bubbles=false}}>{{tab.tabName}}</span>
 	{{/each}}
 </div>

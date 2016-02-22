@@ -1,5 +1,5 @@
 
-{{#each row in content}}
+{{#each model as |row|}}
 	<div class="torpid-list-row" {{action 'rowClick' row bubles=false }}>
 		<span class="torpid-list-extra">
 			<div class="select">

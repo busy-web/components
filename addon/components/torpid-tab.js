@@ -6,7 +6,7 @@ export default Ember.Component.extend(
 	layout: layout,
 
 	classNames: ['torpid-tab'],
-	classNameBindings: ['active', 'open'],
+	classNameBindings: ['active:active', 'open:open'],
 
 	active: false,
 	open: false,
@@ -71,7 +71,8 @@ export default Ember.Component.extend(
 			var children = this.get('childViews');
 			Ember.$.each(children, function(k, v)
 			{
-				if(children.hasOwnProperty(k) && v._actions[onShowTab])
+				var actions = v.get('actions');
+				if(children.hasOwnProperty(k) && actions[onShowTab])
 				{
 					v.send(onShowTab);
 				}

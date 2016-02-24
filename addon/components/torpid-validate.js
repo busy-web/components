@@ -25,6 +25,7 @@ export default Ember.Component.extend(
 	invalidError: 'The input is invalid',
 	requiredError: 'This is a required field',
 
+	autocomplete: null,
 	tabindex: 0,
 	maxlength: "",
 

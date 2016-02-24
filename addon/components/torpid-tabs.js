@@ -88,8 +88,11 @@ export default Ember.Component.extend(
 		{
 			if(tabs.hasOwnProperty(key))
 			{
-				value.set('active', false);
-				value.set('open', false);
+				if(value.get('active') || value.get('open'))
+				{
+					value.set('active', false);
+					value.set('open', false);
+				}
 
 				if(tabName === value.get('tabName').trim().dasherize())
 				{
@@ -102,9 +105,13 @@ export default Ember.Component.extend(
 						window.history.replaceState('', document.title, window.location.pathname);
 					}
 
-					value.set('active', true);
-					value.set('open', true);
-					value.triggerShowTab();
+					if(!value.get('active') || !value.get('open'))
+					{
+						value.set('active', true);
+						value.set('open', true);
+						value.triggerShowTab();
+					}
+
 					didShowTab = true;
 				}
 			}
@@ -126,10 +133,14 @@ export default Ember.Component.extend(
 		var tabArray = this.get('_tabs').sortBy('tabIndex');
 		tabArray.forEach(function(item)
 		{
-			item.set('active', false);
-			item.set('open', false);
+			if(item.get('active') || item.get('open'))
+			{
+				item.set('active', false);
+				item.set('open', false);
+			}
 		});
 
+		// set a default tab
 		var defaultTab = tabArray.objectAt(0);
 		if(!Ember.isNone(defaultTab))
 		{
@@ -137,8 +148,51 @@ export default Ember.Component.extend(
 		}
 
 		this.set('model', tabArray);
-
 		this.handleHash();
+	},
+
+	/**
+	 * Holds the current timeout for renderTabs
+	 *
+	 * @property renderTimeout
+	 * @type {object}
+	 */
+	renderTimeout: null,
+
+	/**
+	 * Observer for calling render every time a new tab is added to
+	 * the _tabs list.
+	 *
+	 * This is set on a timeout to keep ember from trying to rerender
+	 * itself more than once per render try. If the timeout gets called more then
+	 * one it will throw awway the other tries and only try once.
+	 *
+	 * @private
+	 * @method shouldRenderTabs
+	 * @return {void}
+	 */
+	shouldRenderTabs: function()
+	{
+		if(!Ember.isNone(this.get('_tabs')) && this.get('_tabs.length') > 0)
+		{
+			// remove the current timeout before setting a new timeout
+			if(!Ember.isNone(this.get('renderTimeout')))
+			{
+				window.clearTimeout(this.get('renderTimeout'));
+			}
+
+			// create a timeout to call the renderTabs method
+			// if the shouldRenderTabs observer doesnt fire again before
+			// it gets the chance
+			var _this = this;
+			var timeout = window.setTimeout(function()
+			{
+				_this.renderTabs();
+			}, 10);
+
+			// save the timeout
+			this.set('renderTimeout', timeout);
+		}
 	}.observes('_tabs.[]'),
 
 	showDefault: function()

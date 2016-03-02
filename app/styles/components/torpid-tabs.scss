@@ -23,7 +23,7 @@
 		& > span{
 			float: left;
 			padding: 15px 16px;
-			font: 16px/1 $ft-thin;
+			font: 16px/1 $ft-norm;
 			color: $torpid-color-2;
 			border-bottom: 2px solid  rgba(48, 174, 239, .0);
 			@include transition(all .5s ease-in-out);

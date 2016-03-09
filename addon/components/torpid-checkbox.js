@@ -22,6 +22,7 @@ export default Ember.Component.extend(
 	title: null,
 	group: null,
 	name: null,
+	tabindex: 0,
 
 	disabled: false,
 

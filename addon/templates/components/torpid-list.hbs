@@ -1,4 +1,13 @@
 
+<div class="torpid-list-row">
+	<span class="torpid-list-extra select-all" style="top: -50px; display: inline;">
+		<div class="select">
+			<div>
+				{{torpid-checkbox value=selectAllObject.isSelected action="selectAll" selectItem=selectAllObject}}
+			</div>
+		</div>
+	</span>
+</div>
 {{#each model as |row|}}
 	<div class="torpid-list-row" {{action 'rowClick' row bubles=false }}>
 		<span class="torpid-list-extra">

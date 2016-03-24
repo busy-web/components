@@ -101,6 +101,15 @@ export default Ember.Component.extend(
 		}
 	}.observes('content').on('init'),
 
+	selectAllObject: function()
+	{
+		return Ember.Object.create({
+			title: 'select all object',
+			isSelected: false,
+		});
+
+	}.property(),
+
 	/**
 	 * Storage array for all selected rows that get passed to onSelect event callback
 	 *
@@ -153,6 +162,61 @@ export default Ember.Component.extend(
 			}
 
 			this.sendAction('onSelect', this.get('selectedRows'));
-		}
+		},
+
+		selectAll: function(isChecked, item)
+		{
+			var model = this.get('model');
+			var _this = this;
+
+			if(Ember.isNone(this.get('selectedRows')))
+			{
+				this.set('selectedRows', []);
+			}
+			if (isChecked)
+			{
+				item.set('isSelected', true);
+			}
+			else
+			{
+				item.set('isSelected', false);
+			}
+
+			if (item.get('isSelected'))
+			{
+				this.get('selectedRows').pushObject(item);
+			}
+			else
+			{
+				this.get('selectedRows').removeObject(item);
+			}
+
+			model.forEach(function(item)
+			{
+				if (isChecked)
+				{
+					item.set('isSelected', true);
+				}
+				else
+				{
+					item.set('isSelected', false);
+				}
+
+				if (item.get('isSelected'))
+				{
+					_this.get('selectedRows').pushObject(item);
+				}
+				else
+				{
+					_this.get('selectedRows').removeObject(item);
+				}
+			});
+
+			Ember.run.later(this, function()
+			{
+				// console.log(this.get('selectedRows'));
+				this.sendAction('selectAll', isChecked, this.get('selectedRows'));
+			}, 300);
+		},
 	}
 });

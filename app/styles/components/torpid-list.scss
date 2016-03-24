@@ -4,6 +4,40 @@ $imageSize: 40px;
 .torpid-list {
 	display: table-row-group;
 
+	& > span {
+		&.torpid-list-extra {
+			display: none;
+			position: relative;
+			width: 1px;
+			border-bottom: none;
+			padding: 0;
+
+			& > .select {
+				display: none;
+				float: left;
+				margin: 8px 0px 8px 0px;
+				width: $imageSize;
+				height: $imageSize;
+				opacity: 0;
+				position: absolute;
+				z-index: 1;
+				left: 0;
+				top: 0;
+
+				& > div {
+					width: 40px;
+					height: 40px;
+					padding: 0 0 0 0;
+					@include box-sizing();
+
+					& > div.box {
+						margin: 0;
+					}
+				}
+			}
+		}
+	}
+
 	& > .torpid-list-no-results {
 		display: block;
 		padding: 0;
@@ -48,7 +82,7 @@ $imageSize: 40px;
 				text-align: right;
 				padding: 16px 0 15px 10px;
 			}
-	
+
 			&.torpid-list-extra {
 				display: none;
 				position: relative;
@@ -92,7 +126,7 @@ $imageSize: 40px;
 						height: 40px;
 						padding: 0 0 0 0;
 						@include box-sizing();
-						
+
 						& > div.box {
 							margin: 0;
 						}
@@ -106,14 +140,14 @@ $imageSize: 40px;
 		& > .torpid-list-row {
 			& > span {
 				padding: 20px 10px;
-	
+
 				&:nth-child(2) {
 					padding: 20px 10px 20px 0;
 				}
 				&:last-of-type {
 					padding: 20px 0 20px 10px;
 				}
-				
+
 				&.torpid-list-extra {
 					padding: 0;
 				}
@@ -124,7 +158,7 @@ $imageSize: 40px;
 	&.clickable {
 		& > .torpid-list-row {
 			cursor: pointer;
-				
+
 			& > span {
 				&:nth-child(2) {
 					color: $torpid-color-1;
@@ -153,7 +187,7 @@ $imageSize: 40px;
 			& > .torpid-list-extra {
 				display: table-cell;
 				@include transition(width .5s ease-in);
-				
+
 				& > .select {
 					display: block;
 					@include transition(opacity .5s ease-in);
@@ -170,7 +204,7 @@ $imageSize: 40px;
 						opacity: 1;
 					}
 				}
-			}		
+			}
 		}
 
 		&.image {
@@ -195,6 +229,6 @@ $imageSize: 40px;
 @media screen and (max-width:$mobile-width) {
 
 	.torpid-list {
-		
+
 	}
 }

@@ -110,6 +110,14 @@ export default Ember.Component.extend(
 
 	}.property(),
 
+	hasModel: function()
+	{
+		if (this.get('model.length') > 0)
+		{
+			return true;
+		}
+	}.property('model'),
+
 	/**
 	 * Storage array for all selected rows that get passed to onSelect event callback
 	 *

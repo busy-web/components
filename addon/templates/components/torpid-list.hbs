@@ -3,7 +3,9 @@
 	<span class="torpid-list-extra select-all" style="top: -50px; display: inline;">
 		<div class="select">
 			<div>
-				{{torpid-checkbox value=selectAllObject.isSelected action="selectAll" selectItem=selectAllObject}}
+				{{#if hasModel}}
+					{{torpid-checkbox value=selectAllObject.isSelected action="selectAll" selectItem=selectAllObject}}
+				{{/if}}
 			</div>
 		</div>
 	</span>

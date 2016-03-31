@@ -37,6 +37,7 @@ export default Ember.Component.extend(
 	isValid: false,
 	isRequired: false,
 
+	autofocus : false,
 	showLabel: true,
 
 	validateExpression: /.*/,

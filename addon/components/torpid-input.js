@@ -11,6 +11,7 @@ import Ember from 'ember';
 export default Ember.TextField.extend(
 {
 	classNames: ['torpid-input'],
+	attributeBindings: ['autofocus'],
 
 	placeholderBinding: 'parentView.placeholder',
 	typeBinding: 'parentView.type',

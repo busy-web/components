@@ -101,14 +101,13 @@ export default Ember.Component.extend(
 		}
 	}.observes('content').on('init'),
 
-	selectAllObject: function()
-	{
-		return Ember.Object.create({
-			title: 'select all object',
-			isSelected: false,
-		});
+	isSelectAll: false,
 
-	}.property(),
+	modelChange: function()
+	{
+		this.set('selectedRows', []);
+		this.set('isSelectAll', false);
+	}.observes('model.@each.id'),
 
 	hasModel: function()
 	{
@@ -142,19 +141,6 @@ export default Ember.Component.extend(
 
 		itemSelected: function(isChecked, row)
 		{
-			this.sendAction('onSelect', isChecked, row);
-		},
-
-		/**
-		 * Row Checked action handler
-		 *
-		 * @private
-		 * @method rowChecked
-		 * @param isChecked {boolean}
-		 * @param row {object}
-		 */
-		rowChecked: function(isChecked, row)
-		{
 			if(Ember.isNone(this.get('selectedRows')))
 			{
 				this.set('selectedRows', []);
@@ -169,62 +155,56 @@ export default Ember.Component.extend(
 				this.get('selectedRows').removeObject(row);
 			}
 
-			this.sendAction('onSelect', this.get('selectedRows'));
+			if(this.get('selectedRows.length') === this.get('model.length'))
+			{
+				this.set('isSelectAll', true);
+			}
+			else if(this.get('selectedRows.length') === 0)
+			{
+				this.set('isSelectAll', false);
+			}
+
+			this.sendAction('onSelect', isChecked, row);
 		},
 
-		selectAll: function(isChecked, item)
+		selectAll: function(isChecked)
 		{
 			var model = this.get('model');
-			var _this = this;
+			var selectedRows = [];
 
-			if(Ember.isNone(this.get('selectedRows')))
+			if(isChecked)
 			{
-				this.set('selectedRows', []);
-			}
-			if (isChecked)
-			{
-				item.set('isSelected', true);
+				this.set('isSelectAll', true);
 			}
 			else
 			{
-				item.set('isSelected', false);
+				this.set('isSelectAll', false);
 			}
 
-			if (item.get('isSelected'))
+			model.forEach(function(row)
 			{
-				this.get('selectedRows').pushObject(item);
-			}
-			else
-			{
-				this.get('selectedRows').removeObject(item);
-			}
-
-			model.forEach(function(item)
-			{
-				if (isChecked)
+				if(isChecked)
 				{
-					item.set('isSelected', true);
+					row.set('isSelected', true);
 				}
 				else
 				{
-					item.set('isSelected', false);
+					row.set('isSelected', false);
 				}
 
-				if (item.get('isSelected'))
+				if(row.get('isSelected'))
 				{
-					_this.get('selectedRows').pushObject(item);
+					selectedRows.pushObject(row);
 				}
 				else
 				{
-					_this.get('selectedRows').removeObject(item);
+					selectedRows.removeObject(row);
 				}
 			});
 
-			Ember.run.later(this, function()
-			{
-				// console.log(this.get('selectedRows'));
-				this.sendAction('selectAll', isChecked, this.get('selectedRows'));
-			}, 300);
+			this.set('selectedRows', selectedRows);
+
+			this.sendAction('selectAll', isChecked, selectedRows.copy());
 		},
 	}
 });

@@ -16,7 +16,7 @@
     "node": ">= 0.10.0"
   },
   "author": "busy inc.",
-  "license": "Unlicense",
+  "license": "UNLICENSED",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.2",
     "ember-ajax": "0.7.1",

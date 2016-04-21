@@ -23,9 +23,9 @@ This README outlines the details of collaborating on this Ember addon.
 
 * `ember build`
 
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+For more information on using ember-cli, visit [http://ember-cli.com/](http://ember-cli.com/).
 
 ## Installing Addon
 
-* `Ember install torpid-js@git+ssh://git@dev.busybusy.com:43700/diffusion/WAPTORPIDJS/torpid-js.git`
+* `Ember install torpid-js@git@github.com:busybusy/webapp-busy-components.git`
 

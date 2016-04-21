@@ -1,7 +1,7 @@
 {
   "name": "torpid-js",
   "version": "2.4.3",
-  "description": "ember-cli component library.",
+  "description": "busybusy component addon library for ember-cli.",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,7 +11,7 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "git@dev.busybusy.com:43700/diffusion/WAPTORPIDJS/torpid-js.git",
+  "repository": "git@github.com:busybusy/webapp-busy-components.git",
   "engines": {
     "node": ">= 0.10.0"
   },
@@ -39,7 +39,7 @@
     "loader.js": "^4.0.0"
   },
   "keywords": [
-    "ember-addon"
+    "busybusy"
   ],
   "dependencies": {
     "ember-cli-htmlbars": "^1.0.1",

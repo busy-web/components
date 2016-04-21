@@ -39,6 +39,7 @@
     "loader.js": "^4.0.0"
   },
   "keywords": [
+	"ember-addon",
     "busybusy"
   ],
   "dependencies": {

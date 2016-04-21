@@ -27,5 +27,8 @@ For more information on using ember-cli, visit [http://ember-cli.com/](http://em
 
 ## Installing Addon
 
-* `Ember install torpid-js@git@github.com:busybusy/webapp-busy-components.git`
+* `ember install torpid-js`
 
+## Usage
+
+* `{{torpid-validate placeholder="Name"}}`

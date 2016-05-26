@@ -84,7 +84,7 @@ export default Ember.Component.extend(
 		}
 
 		return invalid;
-	}.property('isInvalid', 'isRequired'),
+	}.property('isInvalid', 'isRequired', 'invalidError', 'requiredError'),
 
 	validate: function(value) //jshint ignore:line
 	{

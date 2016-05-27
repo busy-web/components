@@ -1,7 +1,7 @@
 {
-  "name": "torpid-js",
+  "name": "busy-components",
   "version": "2.5.2",
-  "description": "busybusy component addon library for ember-cli.",
+  "description": "Component addon library for ember-cli.",
   "directories": {
     "doc": "doc",
     "test": "tests"

@@ -1,0 +1,289 @@
+
+.bc-select {
+	display: inline-block;
+	position: relative;
+	height: 36px;
+	margin: 0;
+	border: 0;
+	outline: 0;
+	line-height: 1;
+	font-weight: inherit;
+	font-size: inherit;
+	padding: 0;
+
+	& > a {
+
+		&.d-button {
+			padding: 9px 28px 9px 16px;
+			color: $bc-color-3;
+			@include background-image(linear-gradient(top, #FFF, #EEE));
+			border-radius: 3px;
+			font: 16px/1 proxima;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+
+			&:after {
+				content: "\00a0";
+				position: absolute;
+				right: 16px;
+				top: 16px;
+				width: 0;
+				height: 0;
+				border-top: 4px solid $bc-color-3;
+				border-left: 4px solid transparent;
+				border-right: 4px solid transparent;
+				border-bottom: 4px solid transparent;
+			}
+		}
+	}
+
+	& > .dots {
+		display: none;
+	}
+
+	& > .download {
+		display: none;
+	}
+
+	& > ul {
+
+		&.select-container {
+			display: none;
+			position: absolute;
+			z-index: 10;
+			right: 0;
+			top: 42px;
+			//width: 200%;
+			min-width: 200%;
+			max-width: 400%;
+			padding: 8px 16px;
+			height: auto;
+			max-height: 400px;
+			overflow: hidden;
+			overflow-y: auto;
+			background: $bc-color-7;
+			border: 1px solid $bc-color-5;
+			border-radius: 3px;
+			box-shadow: 0px 2px 7px -2px $bc-color-13;
+			@include box-sizing();
+
+			& > li {
+				width: 100%;
+				height: 36px;
+				color: $bc-color-17;
+				font: 15px/36px $ft-norm;
+				text-align: left;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				cursor: pointer;
+
+				& > div {
+					width: 100%;
+					display: inline-block;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+
+				&:hover {
+					color: $bc-color-1;
+				}
+
+				&.unselectable {
+					color: $bc-color-8;
+					font: 15px/36px $ft-bold;
+					cursor: default;
+				}
+
+			//	&.selected {
+			//		color: $bc-color-1;
+			//	}
+			}
+		}
+	}
+
+	&.top {
+
+		& > ul {
+
+			&.select-container {
+				top: auto;
+				bottom: 42px;
+			}
+		}
+	}
+
+	&.left {
+		float: left;
+
+		& > ul {
+
+			&.select-container {
+				left: 0;
+				right: initial;
+			}
+		}
+	}
+
+	&.full {
+		width: 100%;
+
+		& > a {
+
+			&.d-button {
+				width: 100%;
+				text-align: left;
+			}
+
+		}
+
+		& > ul {
+			width: 100%;
+			min-width: initial;
+			max-width: initial;
+
+			&.select-container {
+				width: 100%;
+				z-index: 2;
+			}
+		}
+	}
+
+	&.active {
+
+		& > a {
+
+			&.d-button {
+				background: $bc-color-16;
+			}
+		}
+
+		& > ul {
+
+			&.select-container {
+				display: block;
+			}
+		}
+	}
+
+	&.small {
+		width: 36px;
+		height: 32px;
+		margin: 0;
+		cursor: pointer;
+
+		& > .dots {
+			display: block;
+			width: 36px;
+			height: 32px;
+			cursor: pointer;
+
+			& > span {
+				display: block;
+				clear: both;
+				width: 5px;
+				height: 5px;
+				border-radius: 5px;
+				background: $bc-color-12;
+				padding: 0;
+				margin: 5px auto;
+			}
+
+			&:hover {
+
+				& > span {
+					background: $bc-color-11;
+				}
+			}
+		}
+
+		ul {
+			&.select-container {
+				right: 10px;
+				top: 33px;
+				width: 300px;
+				max-width: none;
+			}
+		}
+
+		a {
+
+			&.d-button {
+				display: none;
+			}
+		}
+
+		&.top {
+
+			& > ul {
+
+				&.select-container {
+					top: auto;
+					bottom: 33px;
+				}
+			}
+		}
+	}
+
+	&.download {
+		width: 32px;
+		height: 32px;
+		margin: 0;
+		cursor: pointer;
+
+		& > .download {
+			display: block;
+			width: 32px;
+			height: 32px;
+			cursor: pointer;
+
+
+			&:hover {
+
+				& > span {
+				}
+			}
+		}
+
+		ul {
+			&.select-container {
+				right: 10px;
+				top: 33px;
+				width: 300px;
+			}
+		}
+
+		a {
+
+			&.d-button {
+				display: none;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $mobile-width) {
+	.bc-select {
+		width: 100%;
+
+		& > a {
+
+			&.d-button {
+				width: 100%;
+				text-align: left;
+			}
+
+		}
+
+		& > ul {
+
+			&.select-container {
+				width: 100%;
+				min-width: initial;
+				max-width: initial;
+			}
+		}
+	}
+}

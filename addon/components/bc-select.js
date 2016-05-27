@@ -48,7 +48,7 @@ export default Ember.Component.extend(
 	 * @property selectedItem
 	 * @type object
 	 */
-	selectedItem: function()
+	selectedItem: Ember.computed('model.@each._selected', 'model.[]', function()
 	{
 		var selected = null;
 		if(!Ember.isNone(this.get('model')))
@@ -56,7 +56,7 @@ export default Ember.Component.extend(
 			selected = this.getSelected();
 		}
 		return selected;
-	}.property('model.@each._selected', 'model.[]'),
+	}),
 
 	getSelected: function()
 	{
@@ -88,11 +88,11 @@ export default Ember.Component.extend(
 	},
 
 	itemLabel: '',
-	defaultLabel: Ember.AppUtils.loc('Select'),
+	defaultLabel: 'Select',
 
 	defaultFirstOption: false,
 
-	menuTitle: function()
+	menuTitle: Ember.computed('selectedItem', function()
 	{
 		var label = this.get('defaultLabel');
 		var selectedItem = this.get('selectedItem');
@@ -110,7 +110,7 @@ export default Ember.Component.extend(
 		}
 
 		return label;
-	}.property('selectedItem'),
+	}),
 
 	/**
 	 * click event handler

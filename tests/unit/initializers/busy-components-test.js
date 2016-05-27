@@ -1,14 +1,13 @@
 import Ember from 'ember';
-import { initialize } from '../../../initializers/torpid-js';
+import BusyComponentsInitializer from 'dummy/initializers/busy-components';
 import { module, test } from 'qunit';
 
-var container, application;
+let application;
 
-module('TorpidJsInitializer', {
-  beforeEach: function() {
+module('Unit | Initializer | busy components', {
+  beforeEach() {
     Ember.run(function() {
       application = Ember.Application.create();
-      container = application.__container__;
       application.deferReadiness();
     });
   }
@@ -16,7 +15,7 @@ module('TorpidJsInitializer', {
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  initialize(container, application);
+  BusyComponentsInitializer.initialize(application);
 
   // you would normally confirm the results of the initializer here
   assert.ok(true);

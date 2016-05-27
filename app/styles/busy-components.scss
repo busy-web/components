@@ -4,9 +4,9 @@
  *
  * includes go here
  */
-//@import 'mixins';
+@import './mixins';
 
-@import 'components/bc-validate';
-@import 'components/bc-checkbox';
-@import 'components/bc-radio-button';
-@import 'components/bc-select';
+@import './components/bc-validate';
+@import './components/bc-checkbox';
+@import './components/bc-radio-button';
+@import './components/bc-select';

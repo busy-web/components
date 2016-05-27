@@ -45,8 +45,8 @@
 		height: 0px;
 		font: 12px/15px $ft-norm;
 		color: $bc-color-2;
-		@include box-sizing();
-		@include transition(height .3s ease);
+		@include bc-box-sizing();
+		@include bc-transition(height .3s ease);
 	}
 
 	&.invalid {

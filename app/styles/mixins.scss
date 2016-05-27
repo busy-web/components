@@ -7,7 +7,7 @@
 
 
 // vendorize mixin
-@mixin vendorize($property, $value) {
+@mixin bc-vendorize($property, $value) {
 	-webkit-#{$property}: $value;
 	-moz-#{$property}: $value;
 	-ms-#{$property}: $value;
@@ -16,11 +16,11 @@
 }
 
 // box-sizing
-@mixin box-sizing() {@include vendorize(box-sizing, border-box)}
+@mixin bc-box-sizing() {@include bc-vendorize(box-sizing, border-box)}
 
 // transition
-@mixin transition($value) {@include vendorize(transition, $value)}
+@mixin bc-transition($value) {@include bc-vendorize(transition, $value)}
 
 //transform
-@mixin transform($value) {@include vendorize(transform, $value)}
+@mixin bc-transform($value) {@include bc-vendorize(transform, $value)}
 

@@ -16,7 +16,7 @@
 		&.d-button {
 			padding: 9px 28px 9px 16px;
 			color: $bc-color-3;
-			@include background-image(linear-gradient(top, #FFF, #EEE));
+			@include bc-background-image(linear-gradient(top, #FFF, #EEE));
 			border-radius: 3px;
 			font: 16px/1 proxima;
 			overflow: hidden;
@@ -66,7 +66,7 @@
 			border: 1px solid $bc-color-5;
 			border-radius: 3px;
 			box-shadow: 0px 2px 7px -2px $bc-color-13;
-			@include box-sizing();
+			@include bc-box-sizing();
 
 			& > li {
 				width: 100%;

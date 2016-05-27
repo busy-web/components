@@ -1,25 +1,9 @@
 
-{{#torpid-tabs}}
-	
-	{{#torpid-tab tabName="Torpid List"}}
 
-		{{#torpid-list-container hasHeader=true}}
-			{{#torpid-list-header}}
-				<span>Name</span>
-			{{/torpid-list-header}}
+<div class="component">
+	<header>select</header>
 
-			{{log 'index' controller.content}}
-			
-			{{#torpid-list content=controller.content as |item|}}
-				<span>{{item.name}}</span>
-			{{/torpid-list}}
-	
-		{{/torpid-list-container}}
-	
-	{{/torpid-tab}}
-
-	{{#torpid-tab tabName="Torpid Tabs"}}
-
-	{{/torpid-tab}}
-
-{{/torpid-tabs}}
+	<section>
+		{{bc-select model=model.select itemLabel='label'}}
+	</section>
+</div>

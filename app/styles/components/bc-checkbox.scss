@@ -5,7 +5,7 @@
 	width: 100%;
 	padding: 9px 0 9px 36px;
 	line-height: 40px;
-	@include box-sizing();
+	@include bc-box-sizing();
 
     & > .box {
 		display: inline-block;
@@ -27,7 +27,7 @@
 			background: $bc-color-7;
 			border: 2px solid $bc-color-5;
 			border-radius: 3px;
-			@include box-sizing();
+			@include bc-box-sizing();
 
 			&:after {
 				content: '\00a0';
@@ -43,7 +43,7 @@
 				border: 3px solid $bc-color-7;
 				border-top: none;
 				border-right: none;
-				@include transform(rotate(-45deg));
+				@include bc-transform(rotate(-45deg));
 			}
 		}
 
@@ -85,6 +85,6 @@
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
-		@include box-sizing();
+		@include bc-box-sizing();
     }
 }

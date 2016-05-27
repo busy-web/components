@@ -66,79 +66,9 @@ $bc-color-18: $C18;
 $bc-color-19: $C19;
 $bc-color-20: $C20;
 
-// gradient color backgrounds
-@mixin gradient($deg, $color1, $color2) {
-	background-image: -webkit-linear-gradient($deg, $color1, $color2);
-	background-image: -moz-linear-gradient($deg, $color1, $color2);
-	background-image: -ms-linear-gradient($deg, $color1, $color2);
-	background-image: -o-linear-gradient($deg, $color1, $color2);
-}
-
-
-// linear-gradient
-@mixin linear-gradient($deg, $color1, $color2) {
-	background-image: -webkit-linear-gradient($deg, $color1, $color2);
-	background-image: -moz-linear-gradient($deg, $color1, $color2);
-	background-image: -ms-linear-gradient($deg, $color1, $color2);
-	background-image: -o-linear-gradient($deg, $color1, $color2);
-}
-
-// linear-gradient
-@mixin tri-linear-gradient($deg, $color1, $color2, $color3) {
-	background-image: -webkit-linear-gradient($deg, $color1, $color2, $color3);
-	background-image: -moz-linear-gradient($deg, $color1, $color2, $color3);
-	background-image: -ms-linear-gradient($deg, $color1, $color2, $color3);
-	background-image: -o-linear-gradient($deg, $color1, $color2, $color3);
-}
-
-// linear-gradient
-@mixin quad-linear-gradient($deg, $color1, $color2, $color3, $color4) {
-	background-image: -webkit-linear-gradient($deg, $color1, $color2, $color3, $color4);
-	background-image: -moz-linear-gradient($deg, $color1, $color2, $color3, $color4);
-	background-image: -ms-linear-gradient($deg, $color1, $color2, $color3, $color4);
-	background-image: -o-linear-gradient($deg, $color1, $color2, $color3, $color4);
-}
-
-// linear-gradient
-@mixin five-linear-gradient($deg, $color1, $color2, $color3, $color4, $color5) {
-	background-image: -webkit-linear-gradient($deg, $color1, $color2, $color3, $color4, $color5);
-	background-image: -moz-linear-gradient($deg, $color1, $color2, $color3, $color4, $color5);
-	background-image: -ms-linear-gradient($deg, $color1, $color2, $color3, $color4, $color5);
-	background-image: -o-linear-gradient($deg, $color1, $color2, $color3, $color4, $color5);
-}
-
-@mixin background-image($value) {
+@mixin bc-background-image($value) {
 	background-image: -webkit-#{$value};
 	background-image: -moz-#{$value};
 	background-image: -ms-#{$value};
 	background-image: -o-#{$value};
 }
-
-@mixin background-gradient($value) {
-	background: -webkit-#{$value};
-	background: -moz-#{$value};
-	background: -ms-#{$value};
-	background: -o-#{$value};
-}
-
-// linear-gradients
-$Degrees: 90deg;
-
-$G11: #ffffff;
-$G12: #eeeeee;
-
-$G21: #f44336;
-$G22: #e03b36;
-
-$G31: #30aeef;
-$G32: #2aa7db;
-
-$G41: #ffffff;
-$G42: #fafafa;
-
-// gradient names
-@mixin grey-gradient() { @include linear-gradient($Degrees, $G11, $G12) }
-@mixin red-gradient() { @include linear-gradient($Degrees, $G21, $G22) }
-@mixin blue-gradient() { @include linear-gradient($Degrees, $G31, $G32) }
-@mixin light-grey-gradient() { @include linear-gradient($Degrees, $G41, $G42) }
-

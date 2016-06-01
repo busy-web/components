@@ -8,7 +8,7 @@
 	padding: 0;
 	overflow: visible;
 	overflow-x: auto;
-	@include box-sizing();
+	@include bc-box-sizing();
 
 	& > div {
 		display: table;

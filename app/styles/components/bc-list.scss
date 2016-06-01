@@ -28,7 +28,7 @@ $imageSize: 40px;
 					width: 40px;
 					height: 40px;
 					padding: 0 0 0 0;
-					@include box-sizing();
+					@include bc-box-sizing();
 
 					& > div.box {
 						margin: 0;
@@ -43,13 +43,13 @@ $imageSize: 40px;
 		padding: 0;
 		width: 100%;
 		position: absolute;
-		@include box-sizing();
+		@include bc-box-sizing();
 
 		& > span {
 			float: left;
 			width: 100%;
 			font: 22px/1 $ft-norm;
-			color: $busy-color-11;
+			color: $bc-color-11;
 			text-align: center;
 			vertical-align: middle;
 			padding: 50px 0 0;
@@ -101,7 +101,7 @@ $imageSize: 40px;
 					overflow: hidden;
 					position: relative;
 					z-index: 2;
-					@include box-sizing();
+					@include bc-box-sizing();
 
 					& > img {
 						width: 100%;
@@ -125,7 +125,7 @@ $imageSize: 40px;
 						width: 40px;
 						height: 40px;
 						padding: 0 0 0 0;
-						@include box-sizing();
+						@include bc-box-sizing();
 
 						& > div.box {
 							margin: 0;
@@ -186,11 +186,11 @@ $imageSize: 40px;
 		& > .bc-list-row {
 			& > .bc-list-extra {
 				display: table-cell;
-				@include transition(width .5s ease-in);
+				@include bc-transition(width .5s ease-in);
 
 				& > .select {
 					display: block;
-					@include transition(opacity .5s ease-in);
+					@include bc-transition(opacity .5s ease-in);
 				}
 			}
 		}

@@ -1,0 +1,219 @@
+
+/* topdoc
+  name: bc-tabs
+  description: Viewing tabs.
+  useage: Use when displaying multiple tabs on a single page/view.
+  html:
+   <div class="bc-tabs"><span></span></div>
+  dependencies: [_components/bc-tabs]
+ */
+
+.bc-tabs {
+	width: 100%;
+	height: 100%;
+	padding: 89px 0 0;
+	@include bc-box-sizing();
+
+	.tabs{
+		width: 100%;
+		height: 48px;
+		margin: -49px 0 0 0;
+		border-bottom: 1px solid $bc-color-5;
+
+		& > span{
+			float: left;
+			padding: 15px 16px;
+			font: 16px/1 $ft-norm;
+			color: $bc-color-2;
+			border-bottom: 2px solid  rgba(48, 174, 239, .0);
+			@include bc-transition(all .5s ease-in-out);
+			@include bc-box-sizing();
+			cursor: pointer;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+
+			&.active{
+				border-bottom-color: $bc-color-1;
+			}
+		}
+	}
+	.accordian-tab {
+		width: 45%;
+		height: 48px;
+		overflow: hidden;
+		text-align: left;
+		background: white;
+	}
+	.open-content {
+		display: none;
+	}
+	.tab-content {
+		width: 100%;
+		height: 100%;
+		padding: 30px 0 0;
+		@include bc-box-sizing();
+
+		.bc-tab {
+			display: none;
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+
+			& > .accordian-tab {
+				display: none;
+				width: 100%;
+				height: 42px;
+				cursor: pointer;
+				padding-left: 44px;
+				padding-top: 5px;
+				font: 16px/35px $ft-norm;
+				color: $bc-color-17;
+				border-top: 1px solid rgba(210,210,210,1);
+				@include bc-box-sizing();
+			}
+			& > .open-content {
+				display: none;
+				width: 20px;
+				height: 20px;
+				float: left;
+				margin: -30px 8px 0;
+				font: 21px/21px $ft-norm;
+				color: #fff;
+				cursor: pointer;
+				text-align: center;
+				background-color: $bc-color-11;
+				border-radius: 20px;
+			}
+			& > .content {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+			}
+
+
+			&.active {
+				display: inline-block;
+			}
+		}
+	}
+
+	&.accordian {
+		padding: 0;
+
+		.tabs {
+			display: none;
+		}
+		.tab-content {
+			padding: 24px 0 0;
+
+			.bc-tab {
+				display: inline-block;
+				height: 42px;
+
+				& > .accordian-tab {
+					display: block;
+				}
+				& > .content {
+					display: none;
+				}
+				& > .open-content {
+					display: block;
+				}
+				&:last-of-type {
+
+					& > .accordian-tab {
+						border-bottom: 1px solid rgba(210,210,210,1);
+					}
+				}
+				&.open {
+					height: auto;
+
+					& > .accordian-tab {
+						background-color: $bc-color-8;
+						color: $bc-color-7;
+						margin-right: 10px;
+					}
+
+					& > .open-content {
+						background-color: $bc-color-7;
+						color: $bc-color-8;
+					}
+
+					& > .content {
+						display: block;
+						padding: 30px 0;
+						@include bc-box-sizing();
+					}
+
+					& > .open-content {
+						display: block;
+						font: 21px/19px $ft-norm;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $mobile-width) {
+
+	.bc-tabs {
+		padding: 0;
+
+		.tabs {
+			display: none;
+		}
+		.tab-content {
+			padding: 24px 0 0;
+
+			.bc-tab {
+				display: inline-block;
+				height: 42px;
+
+				& > .accordian-tab {
+					display: block;
+				}
+				& > .content {
+					display: none;
+				}
+				& > .open-content {
+					display: block;
+				}
+				&:last-of-type {
+
+					& > .accordian-tab {
+						border-bottom: 1px solid rgba(210,210,210,1);
+					}
+				}
+				&.open {
+					height: auto;
+
+					& > .accordian-tab {
+						background-color: $bc-color-8;
+						color: $bc-color-7;
+						margin-right: 10px;
+					}
+
+					& > .open-content {
+						background-color: $bc-color-7;
+						color: $bc-color-8;
+					}
+
+					& > .content {
+						display: block;
+						padding: 30px 0;
+						@include bc-box-sizing();
+					}
+
+					& > .open-content {
+						display: block;
+						font: 21px/19px $ft-norm;
+					}
+				}
+			}
+		}
+	}
+}

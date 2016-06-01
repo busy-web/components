@@ -7,7 +7,7 @@
 	line-height: 40px;
 	@include bc-box-sizing();
 
-    & > .box {
+	& > .box {
 		display: inline-block;
 		float: left;
 		width: 22px;
@@ -74,9 +74,9 @@
 				cursor: default;
 			}
 		}
-    }
+	}
 
-    & > span {
+	& > span {
 		float: left;
 		width: 100%;
 		height: 100%;
@@ -86,5 +86,5 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		@include bc-box-sizing();
-    }
+	}
 }

@@ -1,0 +1,8 @@
+
+<div class="tabs">
+	{{#each model as |tab|}}
+		<span class={{if tab.active 'active'}} {{action 'changeTab' tab bubbles=false}}>{{tab.tabName}}</span>
+	{{/each}}
+</div>
+
+<div class="tab-content">{{yield}}</div>

@@ -1,0 +1,12 @@
+<header>
+	{{#if titleName}}
+		<span>{{titleName}} </span>
+	{{/if}}
+
+	{{#if buttonName}}
+		<a {{action 'titleClick' bubbles=false}} class="page-hide">{{buttonName}}</a>
+	{{/if}}
+</header>
+<section>
+	{{yield}}
+</section>

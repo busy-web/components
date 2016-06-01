@@ -13,7 +13,7 @@ export default Ember.Component.extend(
 {
 	layout: layout,
 
-	classNames: ['torpid-checkbox', 'bc-checkbox'],
+	classNames: ['bc-checkbox', 'bc-checkbox'],
 	classNameBindings: ['checked:checked'],
 
 	defaultValue: false,
@@ -28,12 +28,12 @@ export default Ember.Component.extend(
 
 	selectItem: null,
 
-	inputId: function()
+	inputId: Ember.computed('group', 'name', function()
 	{
 		return this.get('group') + '-' + this.get('name') + '-checkbox';
-	}.property('group', 'name'),
+	}),
 
-	setup: function()
+	setup: Ember.observer('defaultValue', 'name', 'group', function()
 	{
 		if(this.get('defaultValue'))
 		{
@@ -49,17 +49,17 @@ export default Ember.Component.extend(
 		{
 			this.set('group', this.random());
 		}
-	}.observes('defaultValue', 'name', 'group').on('init'),
+	}),
 
 	random: function()
 	{
 		return Math.floor(((Math.random() * 1000000000) + 100000));
 	},
 
-	checked: function()
+	checked: Ember.computed('value', function()
 	{
 		return this.get('value') ? true : false;
-	}.property('value'),
+	}),
 
 	handleChange: function(value)
 	{

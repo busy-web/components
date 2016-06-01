@@ -13,7 +13,7 @@ export default Ember.Component.extend(
 {
 	layout: layout,
 
-	classNames: ['torpid-radio-button', 'bc-radio-button'],
+	classNames: ['bc-radio-button', 'bc-radio-button'],
 
 	tagName: null,
 	type: 'radio',

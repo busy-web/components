@@ -42,7 +42,7 @@ export default Ember.Component.extend(
 
 	validateExpression: /.*/,
 
-	labelString: function()
+	labelString: Ember.computed('placeholder', 'label', 'required', function()
 	{
 		var label = this.get('label');
 		if(Ember.isNone(label) || Ember.isEmpty(label))
@@ -56,7 +56,7 @@ export default Ember.Component.extend(
 		}
 
 		return label;
-	}.property('placeholder', 'label', 'required'),
+	}),
 
 	init: function()
 	{
@@ -65,7 +65,7 @@ export default Ember.Component.extend(
 		Ember.assert('error is a private variable use invalidError or requiredError for error messages - ' + this.get('error'), Ember.isEmpty(this.get('error')));
 	},
 
-	invalid: function()
+	invalid: Ember.computed('isInvalid', 'isRequired', 'invalidError', 'requiredError', function()
 	{
 		var invalid = false;
 		if(this.get('isInvalid'))
@@ -84,7 +84,7 @@ export default Ember.Component.extend(
 		}
 
 		return invalid;
-	}.property('isInvalid', 'isRequired', 'invalidError', 'requiredError'),
+	}),
 
 	validate: function(value) //jshint ignore:line
 	{

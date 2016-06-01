@@ -75,10 +75,10 @@ export default Ember.Component.extend(
 
 	large: false,
 
-	clickable: function()
+	clickable: Ember.computed('onClick', function()
 	{
 		return !Ember.isNone(this.get('onClick')) && !Ember.isEmpty(this.get('onClick')) ? true : false;
-	}.property('onClick'),
+	}),
 
 	/**
 	 * The content array to render in the list
@@ -109,13 +109,13 @@ export default Ember.Component.extend(
 		this.set('isSelectAll', false);
 	}.observes('model.@each.id'),
 
-	hasModel: function()
+	hasModel: Ember.computed('model', function()
 	{
 		if (this.get('model.length') > 0)
 		{
 			return true;
 		}
-	}.property('model'),
+	}),
 
 	/**
 	 * Storage array for all selected rows that get passed to onSelect event callback

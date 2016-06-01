@@ -1,9 +1,93 @@
 
 
 <div class="component">
-	<header>select</header>
+	<header>Select Menu</header>
 
 	<section>
-		{{bc-select model=model.select itemLabel='label'}}
+		<h3>BC-Select</h3>
+		<p>
+			select menu.
+		</p>
+		Properties:
+		<ul>
+			<li>model - array of objects with key:value pair. required.</li>
+			<li>itemLabel - the key or value to use as the item label. required.</li>
+			<li>onSelect - the action to run when an object is selected. the selected object can be passed to action.</li>
+		</ul>
+		Code:
+		<code>\{{bc-select model=model onSelect="runAction" itemLabel='label'}}</code>
+		Result:
+		<span class="code-result">
+			{{bc-select class="left" model=model.select itemLabel='label'}}
+		</span>
+	</section>
+</div>
+
+
+<div class="component">
+	<header>Inputs</header>
+
+	<section>
+		<h3>BC-Checkbox</h3>
+		<p>
+			checkbox input.
+		</p>
+		Properties:
+		<ul>
+			<li>title - label to display next to checkbox.</li>
+			<li>value - the boolean value to toggle with the checkbox.</li>
+		</ul>
+		Code:
+		<code>
+			\{{bc-checkbox title="check me" value=isChecked}} <br />
+			\{{if isChecked 'checked!' 'not checked!'}}
+		</code>
+		Result:
+		<span class="code-result">
+			{{bc-checkbox title="check me" value=isChecked}}
+			{{if isChecked 'checked!' 'not checked!'}}
+		</span>
+		<h3>BC-Radio-Button</h3>
+		<p>
+			radio button input.
+		</p>
+		Properties:
+		<ul>
+			<li>label - label to display next to radio button.</li>
+			<li>name - the name of the group that the radio button belongs to.</li>
+			<li>value - the value of the radio button. must be unique from all others with same name.</li>
+			<li>onSelect - action to run when button selected.</li>
+		</ul>
+		Code:
+		<code>
+			\{{bc-radio-button value="option1" label="option 1" onSelect="runAction" name="options"}}<br/>
+			\{{bc-radio-button value="option2" label="option 2" onSelect="runAction" name="options"}}
+		</code>
+		Result:
+		<span class="code-result">
+			{{bc-radio-button value="option1" label="option 1" onSelect="runAction" name="options"}}<br/>
+			{{bc-radio-button value="option2" label="option 2" onSelect="runAction" name="options"}}
+			<p>{{result}}</p>
+		</span>
+		<h3>BC-Validate</h3>
+
+		<p>textfield with built-in validation error display.</p>
+		Properties:
+		<ul>
+			<li>label - label to display next above text field.</li>
+			<li>value - the value to set with the input.</li>
+			<li>placeholder - text to display if no value is present. defaults to label.</li>
+			<li>required - set whether or not the field is required. boolean. defauls to false.</li>
+			<li>showLabel - set whether or not to display the label. boolean. defaults to true.</li>
+			<li>maxlength - maximum allowed character input.</li>
+		</ul>
+		Code:
+		<code>
+			\{{bc-validate label="Coupon Code" value=coupon required=true maxlength="256"}} <br />
+		</code>
+		Result:
+		<span class="code-result">
+			{{bc-validate label="Coupon Code" value=coupon required=true maxlength="256"}}
+		</span>
 	</section>
 </div>

@@ -16,7 +16,7 @@ export default Ember.Route.extend(
 
 			select: Ember.A([
 				Ember.Object.create({label: "test 1", key: 0}),
-				Ember.Object.create({label: "test 2", key: 0}),
+				Ember.Object.create({label: "test 2", key: 1}),
 				Ember.Object.create({label: "test 3", key: 0}),
 			])
 		});

@@ -28,10 +28,10 @@ export default Ember.Component.extend(
 
 	selectItem: null,
 
-	inputId: function()
+	inputId: Ember.computed('group', 'name', function()
 	{
 		return this.get('group') + '-' + this.get('name') + '-checkbox';
-	}.property('group', 'name'),
+	}),
 
 	setup: function()
 	{
@@ -56,10 +56,10 @@ export default Ember.Component.extend(
 		return Math.floor(((Math.random() * 1000000000) + 100000));
 	},
 
-	checked: function()
+	checked: Ember.computed('value', function()
 	{
 		return this.get('value') ? true : false;
-	}.property('value'),
+	}),
 
 	handleChange: function(value)
 	{

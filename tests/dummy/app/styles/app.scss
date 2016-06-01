@@ -3,3 +3,36 @@
 //@import '../../../../app/styles/mixins';
 @import '../../../app/styles/busy-components';
 
+body {
+	font-family: Arial;
+	margin: 0 100px;
+
+	div{
+		& > .component{
+			width: 1000px;
+			padding: 30px;
+			margin-bottom: 10px;
+			border-bottom: 1px solid $bc-color-2;
+
+			& > header {
+				font-size: 25px;
+				margin: 10px 5px;
+			}
+
+			& code {
+				background: $bc-color-11;
+				padding: 10px;
+				border: 1px solid $bc-color-2;
+				display: block;
+				margin: 10px 10%;
+			}
+
+			& span {
+				&.code-result {
+					display: block;
+					margin: 10px 10%;
+				}
+			}
+		}
+	}
+}

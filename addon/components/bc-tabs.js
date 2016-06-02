@@ -171,7 +171,7 @@ export default Ember.Component.extend(
 	 * @method shouldRenderTabs
 	 * @return {void}
 	 */
-	shouldRenderTabs: function()
+	shouldRenderTabs: Ember.observer('_tabs.[]', function()
 	{
 		if(!Ember.isNone(this.get('_tabs')) && this.get('_tabs.length') > 0)
 		{
@@ -193,7 +193,7 @@ export default Ember.Component.extend(
 			// save the timeout
 			this.set('renderTimeout', timeout);
 		}
-	}.observes('_tabs.[]'),
+	}),
 
 	showDefault: function()
 	{

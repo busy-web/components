@@ -74,20 +74,55 @@
 		<p>textfield with built-in validation error display.</p>
 		Properties:
 		<ul>
-			<li>label - label to display next above text field.</li>
+			<li>label - label to display above text field.</li>
 			<li>value - the value to set with the input.</li>
 			<li>placeholder - text to display if no value is present. defaults to label.</li>
 			<li>required - set whether or not the field is required. boolean. defauls to false.</li>
+			<li>requiredError - error message to show when input is required and not set. Defaults to <em>This is a required field</em>.</li>
+			<li>validateExpression - regular expression to validate input against.</li>
+			<li>invalidError - error message to show when input is invalid. Defaults to <em>The input is invalid</em>.</li>
 			<li>showLabel - set whether or not to display the label. boolean. defaults to true.</li>
 			<li>maxlength - maximum allowed character input.</li>
 		</ul>
 		Code:
 		<code>
-			\{{bc-validate label="Coupon Code" value=coupon required=true maxlength="256"}} <br />
+			\{{bc-validate label="Coupon Code" value=coupon required=true requiredError="you must fill out this field." maxlength="256"}} <br />
 		</code>
 		Result:
 		<span class="code-result">
-			{{bc-validate label="Coupon Code" value=coupon required=true maxlength="256"}}
+			{{bc-validate label="Coupon Code" value=coupon required=true requiredError="you must fill out this field." maxlength="256"}}
 		</span>
 	</section>
 </div>
+
+<div class="component">
+	<header>
+		BC-List
+	</header>
+	<section>
+		<p>list view of an array of objects.</p>
+		Properties:
+		<ul>
+			<li>selector - set whether or not the rows are selectable. boolean. defaults to false.</li>
+			<li>headerItems - array of strings to set as column headers.</li>
+		</ul>
+		Code:
+		<code>
+			\{{#bc-list headerItems=headerItems hasImage=true selector=true onClick="runClickAction" model=model.people as |item|}}<br />
+				<span class="indent">&lt;span&gt;\{{item.name}}&lt;/span&gt;<br />
+				&lt;span&gt;\{{item.occupation}}&lt;/span&gt;<br />
+				&lt;span&gt;\{{item.age}}&lt;/span&gt;</span><br />
+			\{{/bc-list}}
+		</code>
+		Result:
+		<span class="code-result">
+			{{#bc-list headerItems=headerItems hasImage=true selector=true onClick="runClickAction" model=model.people as |item|}}
+				<span>{{item.name}}</span>
+				<span>{{item.occupation}}</span>
+				<span>{{item.age}}</span>
+			{{/bc-list}}
+		</span>
+	</section>
+</div>
+
+

@@ -9,7 +9,7 @@ body {
 
 	div{
 		& > .component{
-			width: 1000px;
+			width: 90%;
 			padding: 30px;
 			margin-bottom: 10px;
 			border-bottom: 1px solid $bc-color-2;
@@ -25,12 +25,18 @@ body {
 				border: 1px solid $bc-color-2;
 				display: block;
 				margin: 10px 10%;
+				white-space: nowrap;
+				overflow: auto;
 			}
 
 			& span {
 				&.code-result {
 					display: block;
 					margin: 10px 10%;
+				}
+				&.indent {
+					padding-left: 30px;
+					display: inline-block;
 				}
 			}
 		}

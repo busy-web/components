@@ -12,6 +12,17 @@ export default Ember.Controller.extend(
 {
 	isChecked: false,
 	result: null,
+	headerItems: null,
+
+	init()
+	{
+		this._super();
+		this.set('headerItems',[
+			'Name',
+			'Occupation',
+			'Age'
+		]);
+	},
 
 	actions: {
 		runAction(value)

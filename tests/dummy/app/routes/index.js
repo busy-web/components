@@ -8,10 +8,10 @@ export default Ember.Route.extend(
 		return Ember.RSVP.hash(
 		{
 			people: Ember.A([
-				Ember.Object.create({name: 'Bob Thomas'}),
-				Ember.Object.create({name: 'John Smith'}),
-				Ember.Object.create({name: 'Bill Billstien'}),
-				Ember.Object.create({name: 'Jerry Gary'}),
+				Ember.Object.create({name: 'Bob Thomas', occupation: 'bullfighter', age: 32}),
+				Ember.Object.create({name: 'John Smith', occupation: 'astronaut', age: 39}),
+				Ember.Object.create({name: 'Bill Billstien', occupation: 'cowboy', age: 47}),
+				Ember.Object.create({name: 'Jerry Gary', occupation: 'ember developer', age: 28}),
 			]),
 
 			select: Ember.A([

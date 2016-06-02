@@ -1,32 +1,42 @@
-
-<div class="bc-list-row">
-	<span class="bc-list-extra select-all" style="top: -50px; display: inline;">
-		<div class="select">
-			<div>
-				{{#if hasModel}}
-					{{bc-checkbox value=isSelectAll action="selectAll"}}
-				{{/if}}
-			</div>
-		</div>
-	</span>
-</div>
-{{#each model as |row|}}
-	<div class="bc-list-row" {{action 'rowClick' row bubles=false }}>
-		<span class="bc-list-extra">
-			<div class="select">
-				<div>
-					{{bc-checkbox value=row.isSelected action="itemSelected" selectItem=row}}
+<div class="bc-list-container">
+	<header class="bc-list-header{{if selector ' selector'}}{{if edit ' edit'}}{{if hasImage ' image'}}">
+		<span class="bc-list-extra"></span>
+		{{#each headerItems as |header|}}
+			<span>{{header}}</span>
+		{{/each}}
+	</header>
+	<section class="bc-list{{if selector ' selector'}}{{if large ' large'}}{{if edit ' edit'}}{{if hasImage ' image'}}{{if clickable ' clickable'}}">
+		<div class="bc-list-row">
+			<span class="bc-list-extra select-all" style="top: -50px; display: inline;">
+				<div class="select">
+					<div>
+						{{#if hasModel}}
+							{{bc-checkbox value=isSelectAll action="selectAll"}}
+						{{/if}}
+					</div>
 				</div>
-			</div>
-			<div class="image">
-				<img src="{{if row.imageThumbUrl row.imageThumbUrl row.imagePlaceholder}}" />
-			</div>
-		</span>
+			</span>
+		</div>
+		{{#each model as |row|}}
+			<div class="bc-list-row" {{action 'rowClick' row bubles=false }}>
+				<span class="bc-list-extra">
+					<div class="select">
+						<div>
+							{{bc-checkbox value=row.isSelected action="itemSelected" selectItem=row}}
+						</div>
+					</div>
+					<div class="image">
+						<img src="{{if row.imageThumbUrl row.imageThumbUrl row.imagePlaceholder}}" />
+					</div>
+				</span>
 
-		{{yield row}}
-	</div>
-{{else}}
-	<div class="bc-list-no-results">
-		<span>No Entries Found</span>
-	</div>
-{{/each}}
+				{{yield row}}
+			</div>
+		{{else}}
+			<div class="bc-list-no-results">
+				<span>No Entries Found</span>
+			</div>
+		{{/each}}
+	</section>
+
+</div>

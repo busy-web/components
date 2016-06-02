@@ -40,10 +40,10 @@ export default Ember.Component.extend(
 {
 	layout: layout,
 
-	tagName: 'section',
+	// tagName: 'section',
 
 	classNames: ['bc-list'],
-	classNameBindings: ['selector', 'large', 'edit', 'hasImage:image', 'clickable'],
+	// classNameBindings: ['selector', 'large', 'edit', 'hasImage:image', 'clickable'],
 
 	/**
 	 * Bool for setting the type of list
@@ -75,6 +75,10 @@ export default Ember.Component.extend(
 
 	large: false,
 
+	hasHeader: true,
+
+	headerItems: null,
+
 	clickable: Ember.computed('onClick', function()
 	{
 		return !Ember.isNone(this.get('onClick')) && !Ember.isEmpty(this.get('onClick')) ? true : false;
@@ -91,7 +95,13 @@ export default Ember.Component.extend(
 
 	model: null,
 
-	setModel: function()
+	init()
+	{
+		this._super();
+		this.setModel();
+	},
+
+	setModel: Ember.observer('content', function()
 	{
 		if(Ember.isNone(this.get('model')) && !Ember.isNone(this.get('content')))
 		{
@@ -99,15 +109,15 @@ export default Ember.Component.extend(
 
 			this.set('model', this.get('content'));
 		}
-	}.observes('content').on('init'),
+	}),
 
 	isSelectAll: false,
 
-	modelChange: function()
+	modelChange: Ember.observer('model.@each.id', function()
 	{
 		this.set('selectedRows', []);
 		this.set('isSelectAll', false);
-	}.observes('model.@each.id'),
+	}),
 
 	hasModel: Ember.computed('model', function()
 	{

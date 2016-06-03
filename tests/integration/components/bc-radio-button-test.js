@@ -15,10 +15,10 @@ test('it renders', function(assert) {
 
   // Template block usage:
   this.render(hbs`
-    {{#bc-radio-button}}
-      template block text
-    {{/bc-radio-button}}
+	{{#bc-radio-button}}
+	  template block text
+	{{/bc-radio-button}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), '');
 });

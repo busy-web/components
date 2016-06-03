@@ -11,14 +11,14 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{bc-list}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  // assert.equal(this.$().text().trim(), 'No Entries Found');
 
   // Template block usage:
   this.render(hbs`
-    {{#bc-list}}
-      template block text
-    {{/bc-list}}
+	{{#bc-list}}
+	  template block text
+	{{/bc-list}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), 'No Entries Found');
 });

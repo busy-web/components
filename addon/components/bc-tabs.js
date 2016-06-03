@@ -94,7 +94,7 @@ export default Ember.Component.extend(
 					value.set('open', false);
 				}
 
-				if(tabName === value.get('tabName').trim().dasherize())
+				if(tabName === Ember.String.dasherize(value.get('tabName').trim()))
 				{
 					if(tabName !== _this.get('defaultTab'))
 					{
@@ -144,7 +144,7 @@ export default Ember.Component.extend(
 		var defaultTab = tabArray.objectAt(0);
 		if(!Ember.isNone(defaultTab))
 		{
-			this.set('defaultTab', defaultTab.get('tabName').trim().dasherize());
+			this.set('defaultTab', Ember.String.dasherize(defaultTab.get('tabName').trim()));
 		}
 
 		this.set('model', tabArray);
@@ -201,7 +201,7 @@ export default Ember.Component.extend(
 			tab.set('active', true);
 			tab.set('open', true);
 
-		var tabName = tab.get('tabName').trim().dasherize();
+		var tabName = Ember.String.dasherize(tab.get('tabName').trim());
 		this.set('defaultTab', tabName);
 
 		tab.triggerShowTab();
@@ -210,7 +210,7 @@ export default Ember.Component.extend(
 	actions: {
 		changeTab: function (tab)
 		{
-			var tabName = tab.get('tabName').trim().dasherize();
+			var tabName = Ember.String.dasherize(tab.get('tabName').trim());
 			this.openTab(tabName, true);
 		}
 	}

@@ -1,10 +1,9 @@
 
 
 <div class="component">
-	<header>Select Menu</header>
+	<header>BC-Select</header>
 
 	<section>
-		<h3>BC-Select</h3>
 		<p>
 			select menu.
 		</p>
@@ -25,10 +24,9 @@
 
 
 <div class="component">
-	<header>Inputs</header>
+	<header>BC-Checkbox</header>
 
 	<section>
-		<h3>BC-Checkbox</h3>
 		<p>
 			checkbox input.
 		</p>
@@ -47,7 +45,13 @@
 			{{bc-checkbox title="check me" value=isChecked}}
 			{{if isChecked 'checked!' 'not checked!'}}
 		</span>
-		<h3>BC-Radio-Button</h3>
+	</section>
+</div>
+<div class="component">
+	<header>
+		BC-Radio-Button
+	</header>
+	<section>
 		<p>
 			radio button input.
 		</p>
@@ -59,9 +63,18 @@
 			<li>onSelect - action to run when button selected.</li>
 		</ul>
 		Code:
+		<span class="code-result">template code</span>
 		<code>
 			\{{bc-radio-button value="option1" label="option 1" onSelect="runAction" name="options"}}<br/>
-			\{{bc-radio-button value="option2" label="option 2" onSelect="runAction" name="options"}}
+			\{{bc-radio-button value="option2" label="option 2" onSelect="runAction" name="options"}}<br/>
+			&lt;p&gt;\{{result}}&lt;/p&gt;
+		</code>
+		<span class="code-result">onSelect action</span>
+		<code>
+			runAction(value)<br />
+			{<br />
+				<span class='indent'>this.set('result', 'You selected ' + value +'!');</span><br />
+			}
 		</code>
 		Result:
 		<span class="code-result">
@@ -69,8 +82,14 @@
 			{{bc-radio-button value="option2" label="option 2" onSelect="runAction" name="options"}}
 			<p>{{result}}</p>
 		</span>
-		<h3>BC-Validate</h3>
+	</section>
+</div>
 
+<div class="component">
+	<header>
+		BC-Validate
+	</header>
+	<section>
 		<p>textfield with built-in validation error display.</p>
 		Properties:
 		<ul>
@@ -105,8 +124,19 @@
 		<ul>
 			<li>selector - set whether or not the rows are selectable. boolean. defaults to false.</li>
 			<li>headerItems - array of strings to set as column headers.</li>
+			<li>hasImage - set whether or not to display an image. boolean. defaults to false.</li>
+			<li>selector - set whether or not the list is selectable. boolean. defaults to false.</li>
+			<li>onClick - action to run when a row is clicked. object in row can be passed to action.</li>
+			<li>model - array of objects to include in the list.</li>
 		</ul>
 		Code:
+		<span class="code-result">headerItems array</span>
+		<code>let headerItems = [<br />
+			<span class="indent">'Name',<br />
+			'Occupation',<br />
+			'Age'</span><br />
+		]</code>
+		<span class="code-result">bc-list template code</span>
 		<code>
 			\{{#bc-list headerItems=headerItems hasImage=true selector=true onClick="runClickAction" model=model.people as |item|}}<br />
 				<span class="indent">&lt;span&gt;\{{item.name}}&lt;/span&gt;<br />
@@ -123,6 +153,100 @@
 			{{/bc-list}}
 		</span>
 	</section>
+</div>
+<div class="component">
+	<header>
+		BC-Title
+	</header>
+	<section>
+		<p>content section with header.</p>
+		Properties:
+		<ul>
+			<li>titleName - the heading to display.</li>
+		</ul>
+		Code:
+		<code>
+			\{{#bc-title titleName="Main Section"}}<br />
+				<span class="indent">Content goes under this heading</span><br />
+			\{{/bc-title}}
+		</code>
+		Result:
+		<span class="code-result">
+			{{#bc-title titleName="Main Section"}}
+				Content goes under the heading
+			{{/bc-title}}
+		</span>
+	</section>
+</div>
+<div class="component">
+	<header>
+		BC-Tabs
+	</header>
+	<section>
+		<p>
+			multiple tabbed content sections.
+		</p>
+		Properties:
+		<ul>
+			<li>tabName - title of tab.</li>
+			<li>tabIndex - position of the tab. will default to order of tabs as written.</li>
+		</ul>
+		Code:
+		<code>
+			\{{#bc-tabs}}<br />
+				<span class="indent">
+					\{{#bc-tab tabName="tab 1" tabIndex=1}}<br />
+						<span class="indent">tab 1 content</span><br />
+					\{{/bc-tab}}<br />
+					\{{#bc-tab tabName="tab 2" tabIndex=2}}<br />
+						<span class="indent">tab 2 content</span><br />
+					\{{/bc-tab}}
+				</span><br />
+			\{{/bc-tabs}}
+		</code>
+		Result:
+		<span class="code-result">
+			{{#bc-tabs}}
+				{{#bc-tab tabName="tab 1" tabIndex=1}}
+					tab 1 content
+				{{/bc-tab}}
+				{{#bc-tab tabName="tab 2" tabIndex=2}}
+					tab 2 content
+				{{/bc-tab}}
+			{{/bc-tabs}}
+		</span>
+	</section>
+</div>
+<div class="component">
+	<header>
+		BC-Section-Half
+	</header>
+	<section>
+		<p>
+			50% width content section.
+		</p>
+		Code:
+		<code>
+			\{{#bc-section-half}}<br />
+				<span class="indent">content section 1</span><br />
+			\{{/bc-section-half}}<br />
+			\{{#bc-section-half}}<br />
+				<span class="indent">content section 2</span><br />
+			\{{/bc-section-half}}
+		</code>
+		Result:
+		<span class="code-result">
+			{{#bc-section-half}}
+				content section 1
+			{{/bc-section-half}}
+			{{#bc-section-half}}
+				content section 2
+			{{/bc-section-half}}
+		</span>
+	</section>
+</div>
+<div class="component">
+
 </div>
 
 

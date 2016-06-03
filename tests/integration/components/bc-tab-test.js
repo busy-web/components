@@ -9,15 +9,15 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{bc-tab}}`);
+  // this.render(hbs`{{bc-tab}}`);
 
   assert.equal(this.$().text().trim(), '');
 
   // Template block usage:
   this.render(hbs`
-    {{#bc-tab}}
-      template block text
-    {{/bc-tab}}
+	{{#bc-tab}}
+	  template block text
+	{{/bc-tab}}
   `);
 
   assert.equal(this.$().text().trim(), 'template block text');

@@ -1,6 +1,5 @@
-[![Build Status](https://travis-ci.org/busybusy/webapp-busy-components.svg?branch=master)](https://travis-ci.org/busybusy/webapp-busy-components)
 
-# busy-components
+# busy-components [![Build Status](https://travis-ci.org/busybusy/webapp-busy-components.svg?branch=master)](https://travis-ci.org/busybusy/webapp-busy-components)
 
 This README outlines the details of collaborating on this Ember addon.
 

@@ -33,7 +33,7 @@ export default Ember.Component.extend(
 		return this.get('group') + '-' + this.get('name') + '-checkbox';
 	}),
 
-	setup: Ember.observer('defaultValue', 'name', 'group', function()
+	setup: Ember.on('init',  Ember.observer('defaultValue', 'name', 'group', function()
 	{
 		if(this.get('defaultValue'))
 		{
@@ -49,7 +49,7 @@ export default Ember.Component.extend(
 		{
 			this.set('group', this.random());
 		}
-	}),
+	})),
 
 	random: function()
 	{

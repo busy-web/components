@@ -56,6 +56,10 @@ $imageSize: 40px;
 		}
 	}
 
+	& > .torpid-list-select-all {
+		display: none;
+	}
+
 	& > .torpid-list-row {
 		display: table-row;
 		padding: 0;
@@ -183,19 +187,41 @@ $imageSize: 40px;
 	}
 
 	&.selector {
+		& > .torpid-list-select-all {
+			display: block;
+			position: absolute;
+			width: 0px;
+			height: 43px;
+			top: 0px;
+			overflow: hidden;
+			@include transition(width .5s ease-in);
+
+			& > .select {
+				display: inline-block;
+				@include transition(opacity .5s ease-in);
+			}
+		}
 		& > .torpid-list-row {
 			& > .torpid-list-extra {
-				display: table-cell;
+				display: inline-block;
+				height: 100%;
 				@include transition(width .5s ease-in);
 
 				& > .select {
-					display: block;
+					display: inline-block;
 					@include transition(opacity .5s ease-in);
 				}
 			}
 		}
 
 		&.edit {
+			& > .torpid-list-select-all {
+				width: $imageSize;
+
+				& > .select {
+					opacity: 1;
+				}
+			}
 			& > .torpid-list-row {
 				& > .torpid-list-extra {
 					width: $imageSize;

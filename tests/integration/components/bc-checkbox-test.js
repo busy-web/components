@@ -27,7 +27,7 @@ test('label should render', function(assert)
 {
 
 	this.render(hbs`
-		{{bc-checkbox title="check me" value=isChecked}}
+		{{bc-checkbox title="check me" defaultValue=true}}
 	`);
 	assert.equal(this.$('span').text(), 'check me');
 });

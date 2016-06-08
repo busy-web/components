@@ -22,3 +22,14 @@ test('it renders', function(assert) {
 
   assert.equal(this.$().text().trim(), '');
 });
+
+test('click returns true', function(assert)
+{
+	this.render(hbs`
+		{{bc-radio-button }}
+	`);
+
+	this.$('input').click();
+
+	assert.throws('true');
+});

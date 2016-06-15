@@ -74,14 +74,30 @@ export default Ember.Component.extend(
 	edit: false,
 
 	large: false,
-
 	hasHeader: true,
-
 	headerItems: null,
+	minimal: false,
 
 	clickable: Ember.computed('onClick', function()
 	{
 		return !Ember.isNone(this.get('onClick')) && !Ember.isEmpty(this.get('onClick')) ? true : false;
+	}),
+
+	isLoading: Ember.computed('model', 'model.isLoaded', 'model.[]', 'model.length', function()
+	{
+		console.log(this.get('model.isLoaded'), this.get('model.length'), this.get('model.get'));
+		if(!Ember.isNone(this.get('model')))
+		{
+			if(this.get('model.get') && this.get('model.isLoaded'))
+			{
+				return false;
+			}
+			else if(this.get('model.length'))
+			{
+				return false;
+			}
+		}
+		return true;
 	}),
 
 	/**
@@ -127,7 +143,17 @@ export default Ember.Component.extend(
 		}
 	}),
 
-	renderTemplates: Ember.observer('model', function()
+	modelSetObserver: Ember.observer('model', 'model.[]', 'model.length', function()
+	{
+		this.renderTemplates();
+	}).on('init'),
+
+	hasLoadedDOM: Ember.on('didInsertElement', function()
+	{
+		this.renderTemplates();
+	}),
+
+	renderTemplates: function()
 	{
 		const list = this.$();
 		if(list && list.find)
@@ -146,13 +172,13 @@ export default Ember.Component.extend(
 					}
 				});
 
-				if(headerList.length > 0)
+				if(Ember.get(headerList, "length") > 0)
 				{
 					this.set('headerItems', headerList);
 				}
 			}
 		}
-	}).on('init'),
+	},
 
 	/**
 	 * Storage array for all selected rows that get passed to onSelect event callback

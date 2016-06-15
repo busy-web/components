@@ -5,8 +5,10 @@
 			<span class="header-extra"></span>
 
 			{{#each headerItems as |header|}}
-				{{#if header.title}}
+				{{#if header.class}}
 					<span class="{{header.class}}">{{header.title}}</span>
+				{{else if header.title}}
+					<span>{{header.title}}</span>
 				{{else}}
 					<span>{{header}}</span>
 				{{/if}}
@@ -26,26 +28,30 @@
 				</span>
 			</div>
 
-			{{#each model as |row|}}
-				<div class="list-row" {{action 'rowClick' row bubles=false }}>
-					<span class="list-extra">
-						<div class="select">
-							<div>
-								{{bc-checkbox value=row.isSelected action="itemSelected" selectItem=row}}
-							</div>
-						</div>
-						<div class="image">
-							<img src="{{if row.imageThumbUrl row.imageThumbUrl row.imagePlaceholder}}" />
-						</div>
-					</span>
-
-					{{yield row}}
-				</div>
+			{{#if isLoading}}
+				{{bc-loading isLoading=isLoading minimal=minimal}}
 			{{else}}
-				<div class="list-no-results">
-					<span>No Entries Found</span>
-				</div>
-			{{/each}}
+				{{#each model as |row|}}
+					<div class="list-row" {{action 'rowClick' row bubles=false }}>
+						<span class="list-extra">
+							<div class="select">
+								<div>
+									{{bc-checkbox value=row.isSelected action="itemSelected" selectItem=row}}
+								</div>
+							</div>
+							<div class="image">
+								<img src="{{if row.imageThumbUrl row.imageThumbUrl row.imagePlaceholder}}" />
+							</div>
+						</span>
+
+						{{yield row}}
+					</div>
+				{{else}}
+					<div class="list-no-results">
+						<span>No Entries Found</span>
+					</div>
+				{{/each}}
+			{{/if}}
 		</section>
 	</div>
 </div>

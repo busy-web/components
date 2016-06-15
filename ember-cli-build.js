@@ -6,7 +6,7 @@ module.exports = function(defaults) {
 
 	var app = new EmberAddon(defaults, {
 		sassOptions: {
-			includePaths: ['./addon/styles/']
+			includePaths: ['./app/styles/']
 		}
 	});
 

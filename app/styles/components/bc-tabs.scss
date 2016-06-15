@@ -8,11 +8,6 @@
   dependencies: [_components/bc-tabs]
  */
 
-$white: #fff;
-$light-blue: rgba(48, 174, 239, 1);
-$light-blue-transparent: rgba(48, 174, 239, 0);
-$light-grey: rgba(210, 210, 210, 1);
-
 .bc-tabs {
 	@include bc-box-sizing;
 	width: 100%;
@@ -30,7 +25,7 @@ $light-grey: rgba(210, 210, 210, 1);
 			@include bc-box-sizing;
 			padding: 15px 16px;
 			float: left;
-			border-bottom: 2px solid $light-blue-transparent;
+			border-bottom: 2px solid transparent;
 			color: $bc-color-2;
 			font: 16px/1 $ft-norm;
 			text-overflow: ellipsis;
@@ -47,7 +42,7 @@ $light-grey: rgba(210, 210, 210, 1);
 	.accordian-tab {
 		width: 45%;
 		height: 48px;
-		background: $white;
+		background: $bc-color-7;
 		text-align: left;
 		overflow: hidden;
 	}
@@ -89,7 +84,7 @@ $light-grey: rgba(210, 210, 210, 1);
 				float: left;
 				border-radius: 20px;
 				background-color: $bc-color-11;
-				color: $white;
+				color: $bc-color-7;
 				font: 21px/21px $ft-norm;
 				text-align: center;
 				cursor: pointer;
@@ -138,7 +133,7 @@ $light-grey: rgba(210, 210, 210, 1);
 				&:last-of-type {
 
 					& > .accordian-tab {
-						border-bottom: 1px solid $light-grey;
+						border-bottom: 1px solid $bc-color-5;
 					}
 				}
 
@@ -200,7 +195,7 @@ $light-grey: rgba(210, 210, 210, 1);
 				&:last-of-type {
 
 					& > .accordian-tab {
-						border-bottom: 1px solid $light-grey;
+						border-bottom: 1px solid $bc-color-5;
 					}
 				}
 

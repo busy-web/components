@@ -127,6 +127,33 @@ export default Ember.Component.extend(
 		}
 	}),
 
+	renderTemplates: Ember.observer('model', function()
+	{
+		const list = this.$();
+		if(list && list.find)
+		{
+			const row = Ember.$(list.find('section').children().get(1));
+			if(row.children && row.children().length > 0)
+			{
+				const cols = row.children();
+				const headerList = [];
+
+				Ember.$.each(cols, (key, item) => {
+					let el = Ember.$(item);
+					if(el.attr('title') !== undefined)
+					{
+						headerList.pushObject(Ember.Object.create({title: el.attr('title'), class: el.attr('class')}));
+					}
+				});
+
+				if(headerList.length > 0)
+				{
+					this.set('headerItems', headerList);
+				}
+			}
+		}
+	}).on('init'),
+
 	/**
 	 * Storage array for all selected rows that get passed to onSelect event callback
 	 *

@@ -17,8 +17,27 @@
 //transform
 @mixin bc-transform($value) {@include bc-vendorize(transform, $value)}
 
-// import colors and fonts
-@import 'mixins/color';
-@import 'mixins/font';
-@import 'mixins/hidpi';
-@import 'mixins/screen';
+/*!
+ * main scss app file
+ *
+ * includes go here
+ */
+@import './components/bc-tabs';
+@import './components/bc-tab';
+
+@import './components/bc-list';
+
+@import './components/bc-checkbox';
+@import './components/bc-radio-button';
+
+@import './components/bc-input';
+
+@import './components/bc-validate';
+
+@import './components/bc-section-half';
+
+@import './components/bc-title';
+
+//@import './torpid-js';
+
+// @import 'components/bc-tree-selector';

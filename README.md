@@ -5,7 +5,9 @@ This README outlines the details of collaborating on this Ember addon.
 
 ## Installation
 
-This is an ember addon and requires ember-cli
+This is an ember addon and requires ember-cli.
+
+Note: This component does not support Ember 1.13
 
 ```
 ember install busy-components

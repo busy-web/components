@@ -1,47 +1,106 @@
 
 @import 'addon';
 
+$header-color: #2d3e50;
+$header-font-color: #a9b5bf;
+
+$code-highlight-color: #f0f4f7;
+$code-font-color: #666;
+
+$title-font-color: #243442;
+
+$border-color: #ccc;
+
+$section-title-color: #4e4e4e;
+$page-font-color: #8e8e8e;
+
 body {
 	width: 100%;
 	height: 100%;
 	margin: 0;
 	padding: 0;
 
-	& > .busy-components-main {
-		margin: 0 100px;
-		font-family: Arial;
+	& > div {
 
-		div {
-			& > .component {
-				width: 90%;
-				margin-bottom: 10px;
-				padding: 30px;
-				border-bottom: 1px solid $bc-color-2;
+		& > h2 {
+			display: block;
+			width: 100%;
+			height: 56px;
+			margin: 0;
+			background-color: $header-color;
+			color: $header-font-color;
+			font: 24px/55px Verdana;
+			text-align: center;
+		}
 
-				& > header {
-					margin: 10px 0;
-					font-size: 25px;
-				}
+		& > .busy-components-main {
+			@include bc-box-sizing;
+			width: 100%;
+			max-width: 1400px;
+			margin: 0 auto;
+			padding: 0 100px 100px;
+			font-family: Arial;
 
-				& code {
-					display: block;
-					margin: 10px 10%;
-					padding: 10px;
-					border: 1px solid $bc-color-2;
-					background: $bc-color-11;
-					white-space: nowrap;
-					overflow: auto;
-				}
+			& > div {
 
-				& span {
-					&.code-result {
-						display: block;
-						margin: 10px 10%;
+				&.component {
+					@include bc-box-sizing;
+					width: 100%;
+					margin: 0;
+					padding: 30px 0;
+					border-bottom: 1px solid $border-color;
+
+					& > header {
+						margin: 10px 0;
+						color: $title-font-color;
+						font-size: 25px;
+						text-transform: lowercase;
 					}
 
-					&.indent {
-						display: inline-block;
-						padding-left: 30px;
+					& > section {
+						color: $section-title-color;
+
+						& > p {
+							@include bc-box-sizing;
+							padding: 0 0 0 20px;
+							color: $page-font-color;
+						}
+
+						& > ul {
+							color: $page-font-color;
+						}
+
+						& > code {
+							display: inline-block;
+							position: relative;
+							width: 100%;
+							margin: 10px 0 10px 20px;
+							padding: 20px;
+							border: 1px solid $border-color;
+							background: $code-highlight-color;
+							color: $code-font-color;
+							white-space: nowrap;
+							overflow: visible;
+
+							.indent {
+								display: inline-block;
+								margin: 0 0 0 20px;
+							}
+						}
+
+						& > span {
+							color: $page-font-color;
+
+							&.code-result {
+								display: block;
+								margin: 10px 0 10px 20px;
+							}
+
+							&.indent {
+								display: inline-block;
+								padding-left: 30px;
+							}
+						}
 					}
 				}
 			}

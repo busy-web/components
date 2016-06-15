@@ -1,0 +1,27 @@
+
+.torpid-section-half {
+	background: $torpid-color-7;
+	float: left;
+	width: 46% !important;
+	margin: 0 4% 0 0;
+	@include box-sizing();
+
+	&:nth-of-type(even) {
+		margin: 0 0 0 4%;
+	}
+
+}
+
+@media screen and (max-width: $mobile-width) {
+
+	.torpid-section-half {
+		background: $torpid-color-7;
+		float: left;
+		width: 100% !important;
+		margin: 0;
+
+		&:nth-of-type(even) {
+			margin: 0;
+		}
+	}
+}

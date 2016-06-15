@@ -1,0 +1,24 @@
+
+.bc-list-container {
+	@include bc-box-sizing;
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	height: auto;
+	min-height: 400px;
+	padding: 0;
+	overflow: visible;
+	overflow-x: auto;
+
+	& > div {
+		display: table;
+		min-width: 100%;
+	}
+}
+
+@media print {
+
+	.bc-list-container {
+		overflow: hidden;
+	}
+}

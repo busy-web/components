@@ -1,0 +1,27 @@
+
+.bc-section-half {
+	@include bc-box-sizing;
+	width: 46% !important;
+	margin: 0 4% 0 0;
+	float: left;
+	background: $bc-color-7;
+
+	&:nth-of-type(even) {
+		margin: 0 0 0 4%;
+	}
+
+}
+
+@media screen and (max-width: $mobile-width) {
+
+	.bc-section-half {
+		width: 100% !important;
+		margin: 0;
+		float: left;
+		background: $bc-color-7;
+
+		&:nth-of-type(even) {
+			margin: 0;
+		}
+	}
+}

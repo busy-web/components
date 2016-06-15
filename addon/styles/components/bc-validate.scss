@@ -1,0 +1,66 @@
+
+
+.bc-validate {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+
+	& > .label-container {
+
+		& > .label {
+			float: left;
+			height: 40px;
+			color: $bc-color-2;
+			font: 16px/40px $ft-norm;
+			margin-bottom: 0px;
+		}
+
+		& > .hint {
+			float: right;
+			color: $bc-color-3;
+			text-align: right;
+			font: 13px/40px $ft-norm;
+			margin-bottom: 0px;
+
+			& > .blueHint {
+				color: $bc-color-1;
+			}
+		}
+	}
+
+	& > .validate-container {
+		margin: 0 0 3px 0;
+
+		&.disabled {
+
+			& > input {
+				background-color: $bc-color-20;
+				color: $bc-color-3;
+			}
+		}
+	}
+
+	& > .error-container {
+		width: 100%;
+		height: 0px;
+		font: 12px/15px $ft-norm;
+		color: $bc-color-2;
+		@include bc-box-sizing();
+		@include bc-transition(height .3s ease);
+	}
+
+	&.invalid {
+
+		& > .validate-container {
+
+			& > input {
+				border-color: $bc-color-9;
+			}
+		}
+
+		& > .error-container {
+			height: 15px;
+			color: $bc-color-9;
+		}
+	}
+}

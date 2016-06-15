@@ -1,0 +1,20 @@
+
+
+$bc-font: verdana sans-serif;
+
+$bc-font-sizeXS: 10px;
+$bc-font-sizeS: 12px;
+$bc-font-sizeM: 14px;
+$bc-font-sizeL: 16px;
+$bc-font-sizeXL: 18px;
+
+$bc-font-thin: lighter;
+$bc-font-norm: normal;
+$bc-font-bold: bold;
+
+$ft-norm: $bc-font;
+$ft-bold: $bc-font;
+
+@mixin font-regular($line-height, $size) {
+	font: $bc-font-norm $line-height/$size $bc-font;
+}

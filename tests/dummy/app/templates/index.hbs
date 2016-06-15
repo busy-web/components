@@ -1,252 +1,253 @@
 
+<div class="busy-components-main">
 
-<div class="component">
-	<header>BC-Select</header>
+	<div class="component">
+		<header>BC-Select</header>
 
-	<section>
-		<p>
-			select menu.
-		</p>
-		Properties:
-		<ul>
-			<li>model - array of objects with key:value pair. required.</li>
-			<li>itemLabel - the key or value to use as the item label. required.</li>
-			<li>onSelect - the action to run when an object is selected. the selected object can be passed to action.</li>
-		</ul>
-		Code:
-		<code>\{{bc-select model=model onSelect="runAction" itemLabel='label'}}</code>
-		Result:
-		<span class="code-result">
-			{{bc-select class="left" model=model.select itemLabel='label'}}
-		</span>
-	</section>
+		<section>
+			<p>
+				select menu.
+			</p>
+			Properties:
+			<ul>
+				<li>model - array of objects with key:value pair. required.</li>
+				<li>itemLabel - the key or value to use as the item label. required.</li>
+				<li>onSelect - the action to run when an object is selected. the selected object can be passed to action.</li>
+			</ul>
+			Code:
+			<code>\{{bc-select model=model onSelect="runAction" itemLabel='label'}}</code>
+			Result:
+			<span class="code-result">
+				{{bc-select class="left" model=model.select itemLabel='label'}}
+			</span>
+		</section>
+	</div>
+
+
+	<div class="component">
+		<header>BC-Checkbox</header>
+
+		<section>
+			<p>
+				checkbox input.
+			</p>
+			Properties:
+			<ul>
+				<li>title - label to display next to checkbox.</li>
+				<li>value - the boolean value to toggle with the checkbox.</li>
+			</ul>
+			Code:
+			<code>
+				\{{bc-checkbox title="check me" value=isChecked}} <br />
+				\{{if isChecked 'checked!' 'not checked!'}}
+			</code>
+			Result:
+			<span class="code-result">
+				{{bc-checkbox title="check me" value=isChecked}}
+				{{if isChecked 'checked!' 'not checked!'}}
+			</span>
+		</section>
+	</div>
+	<div class="component">
+		<header>
+			BC-Radio-Button
+		</header>
+		<section>
+			<p>
+				radio button input.
+			</p>
+			Properties:
+			<ul>
+				<li>label - label to display next to radio button.</li>
+				<li>name - the name of the group that the radio button belongs to.</li>
+				<li>value - the value of the radio button. must be unique from all others with same name.</li>
+				<li>onSelect - action to run when button selected.</li>
+			</ul>
+			Code:
+			<span class="code-result">template code</span>
+			<code>
+				\{{bc-radio-button value="option1" label="option 1" onSelect="runAction" name="options"}}<br/>
+				\{{bc-radio-button value="option2" label="option 2" onSelect="runAction" name="options"}}<br/>
+				&lt;p&gt;\{{result}}&lt;/p&gt;
+			</code>
+			<span class="code-result">onSelect action</span>
+			<code>
+				runAction(value)<br />
+				{<br />
+					<span class='indent'>this.set('result', 'You selected ' + value +'!');</span><br />
+				}
+			</code>
+			Result:
+			<span class="code-result">
+				{{bc-radio-button value="option1" label="option 1" onSelect="runAction" name="options"}}<br/>
+				{{bc-radio-button value="option2" label="option 2" onSelect="runAction" name="options"}}
+				<p>{{result}}</p>
+			</span>
+		</section>
+	</div>
+
+	<div class="component">
+		<header>
+			BC-Validate
+		</header>
+		<section>
+			<p>textfield with built-in validation error display.</p>
+			Properties:
+			<ul>
+				<li>label - label to display above text field.</li>
+				<li>value - the value to set with the input.</li>
+				<li>placeholder - text to display if no value is present. defaults to label.</li>
+				<li>required - set whether or not the field is required. boolean. defauls to false.</li>
+				<li>requiredError - error message to show when input is required and not set. Defaults to <em>This is a required field</em>.</li>
+				<li>validateExpression - regular expression to validate input against.</li>
+				<li>invalidError - error message to show when input is invalid. Defaults to <em>The input is invalid</em>.</li>
+				<li>showLabel - set whether or not to display the label. boolean. defaults to true.</li>
+				<li>maxlength - maximum allowed character input.</li>
+			</ul>
+			Code:
+			<code>
+				\{{bc-validate label="Coupon Code" value=coupon required=true requiredError="you must fill out this field." maxlength="256"}} <br />
+			</code>
+			Result:
+			<span class="code-result">
+				{{bc-validate label="Coupon Code" value=coupon required=true requiredError="you must fill out this field." maxlength="256"}}
+			</span>
+		</section>
+	</div>
+
+	<div class="component">
+		<header>
+			BC-List
+		</header>
+		<section>
+			<p>list view of an array of objects.</p>
+			Properties:
+			<ul>
+				<li>selector - set whether or not the rows are selectable. boolean. defaults to false.</li>
+				<li>headerItems - array of strings to set as column headers.</li>
+				<li>hasImage - set whether or not to display an image. boolean. defaults to false.</li>
+				<li>selector - set whether or not the list is selectable. boolean. defaults to false.</li>
+				<li>onClick - action to run when a row is clicked. object in row can be passed to action.</li>
+				<li>model - array of objects to include in the list.</li>
+			</ul>
+			Code:
+			<span class="code-result">headerItems array</span>
+			<code>let headerItems = [<br />
+				<span class="indent">'Name',<br />
+				'Occupation',<br />
+				'Age'</span><br />
+			]</code>
+			<span class="code-result">bc-list template code</span>
+			<code>
+				\{{#bc-list headerItems=headerItems hasImage=true selector=true onClick="runClickAction" model=model.people as |item|}}<br />
+					<span class="indent">&lt;span&gt;\{{item.name}}&lt;/span&gt;<br />
+					&lt;span&gt;\{{item.occupation}}&lt;/span&gt;<br />
+					&lt;span&gt;\{{item.age}}&lt;/span&gt;</span><br />
+				\{{/bc-list}}
+			</code>
+			Result:
+			<span class="code-result">
+				{{#bc-list headerItems=headerItems hasImage=true selector=true onClick="runClickAction" model=model.people as |item|}}
+					<span>{{item.name}}</span>
+					<span>{{item.occupation}}</span>
+					<span>{{item.age}}</span>
+				{{/bc-list}}
+			</span>
+		</section>
+	</div>
+	<div class="component">
+		<header>
+			BC-Title
+		</header>
+		<section>
+			<p>content section with header.</p>
+			Properties:
+			<ul>
+				<li>titleName - the heading to display.</li>
+			</ul>
+			Code:
+			<code>
+				\{{#bc-title titleName="Main Section"}}<br />
+					<span class="indent">Content goes under this heading</span><br />
+				\{{/bc-title}}
+			</code>
+			Result:
+			<span class="code-result">
+				{{#bc-title titleName="Main Section"}}
+					Content goes under the heading
+				{{/bc-title}}
+			</span>
+		</section>
+	</div>
+	<div class="component">
+		<header>
+			BC-Tabs
+		</header>
+		<section>
+			<p>
+				multiple tabbed content sections.
+			</p>
+			Properties:
+			<ul>
+				<li>tabName - title of tab.</li>
+				<li>tabIndex - position of the tab. will default to order of tabs as written.</li>
+			</ul>
+			Code:
+			<code>
+				\{{#bc-tabs}}<br />
+					<span class="indent">
+						\{{#bc-tab tabName="tab 1" tabIndex=1}}<br />
+							<span class="indent">tab 1 content</span><br />
+						\{{/bc-tab}}<br />
+						\{{#bc-tab tabName="tab 2" tabIndex=2}}<br />
+							<span class="indent">tab 2 content</span><br />
+						\{{/bc-tab}}
+					</span><br />
+				\{{/bc-tabs}}
+			</code>
+			Result:
+			<span class="code-result">
+				{{#bc-tabs}}
+					{{#bc-tab tabName="tab 1" tabIndex=1}}
+						tab 1 content
+					{{/bc-tab}}
+					{{#bc-tab tabName="tab 2" tabIndex=2}}
+						tab 2 content
+					{{/bc-tab}}
+				{{/bc-tabs}}
+			</span>
+		</section>
+	</div>
+	<div class="component">
+		<header>
+			BC-Section-Half
+		</header>
+		<section>
+			<p>
+				50% width content section.
+			</p>
+			Code:
+			<code>
+				\{{#bc-section-half}}<br />
+					<span class="indent">content section 1</span><br />
+				\{{/bc-section-half}}<br />
+				\{{#bc-section-half}}<br />
+					<span class="indent">content section 2</span><br />
+				\{{/bc-section-half}}
+			</code>
+			Result:
+			<span class="code-result">
+				{{#bc-section-half}}
+					content section 1
+				{{/bc-section-half}}
+				{{#bc-section-half}}
+					content section 2
+				{{/bc-section-half}}
+			</span>
+		</section>
+	</div>
+	<div class="component">
+
+	</div>
+
 </div>
-
-
-<div class="component">
-	<header>BC-Checkbox</header>
-
-	<section>
-		<p>
-			checkbox input.
-		</p>
-		Properties:
-		<ul>
-			<li>title - label to display next to checkbox.</li>
-			<li>value - the boolean value to toggle with the checkbox.</li>
-		</ul>
-		Code:
-		<code>
-			\{{bc-checkbox title="check me" value=isChecked}} <br />
-			\{{if isChecked 'checked!' 'not checked!'}}
-		</code>
-		Result:
-		<span class="code-result">
-			{{bc-checkbox title="check me" value=isChecked}}
-			{{if isChecked 'checked!' 'not checked!'}}
-		</span>
-	</section>
-</div>
-<div class="component">
-	<header>
-		BC-Radio-Button
-	</header>
-	<section>
-		<p>
-			radio button input.
-		</p>
-		Properties:
-		<ul>
-			<li>label - label to display next to radio button.</li>
-			<li>name - the name of the group that the radio button belongs to.</li>
-			<li>value - the value of the radio button. must be unique from all others with same name.</li>
-			<li>onSelect - action to run when button selected.</li>
-		</ul>
-		Code:
-		<span class="code-result">template code</span>
-		<code>
-			\{{bc-radio-button value="option1" label="option 1" onSelect="runAction" name="options"}}<br/>
-			\{{bc-radio-button value="option2" label="option 2" onSelect="runAction" name="options"}}<br/>
-			&lt;p&gt;\{{result}}&lt;/p&gt;
-		</code>
-		<span class="code-result">onSelect action</span>
-		<code>
-			runAction(value)<br />
-			{<br />
-				<span class='indent'>this.set('result', 'You selected ' + value +'!');</span><br />
-			}
-		</code>
-		Result:
-		<span class="code-result">
-			{{bc-radio-button value="option1" label="option 1" onSelect="runAction" name="options"}}<br/>
-			{{bc-radio-button value="option2" label="option 2" onSelect="runAction" name="options"}}
-			<p>{{result}}</p>
-		</span>
-	</section>
-</div>
-
-<div class="component">
-	<header>
-		BC-Validate
-	</header>
-	<section>
-		<p>textfield with built-in validation error display.</p>
-		Properties:
-		<ul>
-			<li>label - label to display above text field.</li>
-			<li>value - the value to set with the input.</li>
-			<li>placeholder - text to display if no value is present. defaults to label.</li>
-			<li>required - set whether or not the field is required. boolean. defauls to false.</li>
-			<li>requiredError - error message to show when input is required and not set. Defaults to <em>This is a required field</em>.</li>
-			<li>validateExpression - regular expression to validate input against.</li>
-			<li>invalidError - error message to show when input is invalid. Defaults to <em>The input is invalid</em>.</li>
-			<li>showLabel - set whether or not to display the label. boolean. defaults to true.</li>
-			<li>maxlength - maximum allowed character input.</li>
-		</ul>
-		Code:
-		<code>
-			\{{bc-validate label="Coupon Code" value=coupon required=true requiredError="you must fill out this field." maxlength="256"}} <br />
-		</code>
-		Result:
-		<span class="code-result">
-			{{bc-validate label="Coupon Code" value=coupon required=true requiredError="you must fill out this field." maxlength="256"}}
-		</span>
-	</section>
-</div>
-
-<div class="component">
-	<header>
-		BC-List
-	</header>
-	<section>
-		<p>list view of an array of objects.</p>
-		Properties:
-		<ul>
-			<li>selector - set whether or not the rows are selectable. boolean. defaults to false.</li>
-			<li>headerItems - array of strings to set as column headers.</li>
-			<li>hasImage - set whether or not to display an image. boolean. defaults to false.</li>
-			<li>selector - set whether or not the list is selectable. boolean. defaults to false.</li>
-			<li>onClick - action to run when a row is clicked. object in row can be passed to action.</li>
-			<li>model - array of objects to include in the list.</li>
-		</ul>
-		Code:
-		<span class="code-result">headerItems array</span>
-		<code>let headerItems = [<br />
-			<span class="indent">'Name',<br />
-			'Occupation',<br />
-			'Age'</span><br />
-		]</code>
-		<span class="code-result">bc-list template code</span>
-		<code>
-			\{{#bc-list headerItems=headerItems hasImage=true selector=true onClick="runClickAction" model=model.people as |item|}}<br />
-				<span class="indent">&lt;span&gt;\{{item.name}}&lt;/span&gt;<br />
-				&lt;span&gt;\{{item.occupation}}&lt;/span&gt;<br />
-				&lt;span&gt;\{{item.age}}&lt;/span&gt;</span><br />
-			\{{/bc-list}}
-		</code>
-		Result:
-		<span class="code-result">
-			{{#bc-list headerItems=headerItems hasImage=true selector=true onClick="runClickAction" model=model.people as |item|}}
-				<span>{{item.name}}</span>
-				<span>{{item.occupation}}</span>
-				<span>{{item.age}}</span>
-			{{/bc-list}}
-		</span>
-	</section>
-</div>
-<div class="component">
-	<header>
-		BC-Title
-	</header>
-	<section>
-		<p>content section with header.</p>
-		Properties:
-		<ul>
-			<li>titleName - the heading to display.</li>
-		</ul>
-		Code:
-		<code>
-			\{{#bc-title titleName="Main Section"}}<br />
-				<span class="indent">Content goes under this heading</span><br />
-			\{{/bc-title}}
-		</code>
-		Result:
-		<span class="code-result">
-			{{#bc-title titleName="Main Section"}}
-				Content goes under the heading
-			{{/bc-title}}
-		</span>
-	</section>
-</div>
-<div class="component">
-	<header>
-		BC-Tabs
-	</header>
-	<section>
-		<p>
-			multiple tabbed content sections.
-		</p>
-		Properties:
-		<ul>
-			<li>tabName - title of tab.</li>
-			<li>tabIndex - position of the tab. will default to order of tabs as written.</li>
-		</ul>
-		Code:
-		<code>
-			\{{#bc-tabs}}<br />
-				<span class="indent">
-					\{{#bc-tab tabName="tab 1" tabIndex=1}}<br />
-						<span class="indent">tab 1 content</span><br />
-					\{{/bc-tab}}<br />
-					\{{#bc-tab tabName="tab 2" tabIndex=2}}<br />
-						<span class="indent">tab 2 content</span><br />
-					\{{/bc-tab}}
-				</span><br />
-			\{{/bc-tabs}}
-		</code>
-		Result:
-		<span class="code-result">
-			{{#bc-tabs}}
-				{{#bc-tab tabName="tab 1" tabIndex=1}}
-					tab 1 content
-				{{/bc-tab}}
-				{{#bc-tab tabName="tab 2" tabIndex=2}}
-					tab 2 content
-				{{/bc-tab}}
-			{{/bc-tabs}}
-		</span>
-	</section>
-</div>
-<div class="component">
-	<header>
-		BC-Section-Half
-	</header>
-	<section>
-		<p>
-			50% width content section.
-		</p>
-		Code:
-		<code>
-			\{{#bc-section-half}}<br />
-				<span class="indent">content section 1</span><br />
-			\{{/bc-section-half}}<br />
-			\{{#bc-section-half}}<br />
-				<span class="indent">content section 2</span><br />
-			\{{/bc-section-half}}
-		</code>
-		Result:
-		<span class="code-result">
-			{{#bc-section-half}}
-				content section 1
-			{{/bc-section-half}}
-			{{#bc-section-half}}
-				content section 2
-			{{/bc-section-half}}
-		</span>
-	</section>
-</div>
-<div class="component">
-
-</div>
-
-

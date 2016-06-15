@@ -97,7 +97,7 @@ rules:
 
   # enforce that ID selectors are not allowed to be used
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/no-ids.md
-  no-ids: 2
+  no-ids: 0
 
   # enforce that important declarations are not allowed to be used
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/no-important.md

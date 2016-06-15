@@ -2,42 +2,55 @@
 @import 'addon';
 
 body {
-	margin: 0 100px;
-	font-family: Arial;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
 
-	div {
-		& > .component {
-			width: 90%;
-			margin-bottom: 10px;
-			padding: 30px;
-			border-bottom: 1px solid $bc-color-2;
+	& > .busy-components-main {
+		margin: 0 100px;
+		font-family: Arial;
 
-			& > header {
-				margin: 10px 0;
-				font-size: 25px;
-			}
+		div {
+			& > .component {
+				width: 90%;
+				margin-bottom: 10px;
+				padding: 30px;
+				border-bottom: 1px solid $bc-color-2;
 
-			& code {
-				display: block;
-				margin: 10px 10%;
-				padding: 10px;
-				border: 1px solid $bc-color-2;
-				background: $bc-color-11;
-				white-space: nowrap;
-				overflow: auto;
-			}
-
-			& span {
-				&.code-result {
-					display: block;
-					margin: 10px 10%;
+				& > header {
+					margin: 10px 0;
+					font-size: 25px;
 				}
 
-				&.indent {
-					display: inline-block;
-					padding-left: 30px;
+				& code {
+					display: block;
+					margin: 10px 10%;
+					padding: 10px;
+					border: 1px solid $bc-color-2;
+					background: $bc-color-11;
+					white-space: nowrap;
+					overflow: auto;
+				}
+
+				& span {
+					&.code-result {
+						display: block;
+						margin: 10px 10%;
+					}
+
+					&.indent {
+						display: inline-block;
+						padding-left: 30px;
+					}
 				}
 			}
 		}
+	}
+
+	& > #ember-testing-container {
+		position: fixed !important;
+		right: 20px;
+		bottom: 20px;
 	}
 }

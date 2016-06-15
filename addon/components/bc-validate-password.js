@@ -2,13 +2,13 @@
  * @module components
  *
  */
-import TorpidValidate from './torpid-validate';
+import BCValidate from './bc-validate';
 
 /**
- * `Torpid/Component/TorpidValidatePassword`
+ * `BusyComponents/Component/BCValidatePassword`
  *
  */
-export default TorpidValidate.extend(
+export default BCValidate.extend(
 {
 	validateExpression: /^(?=.*[0-9])(?=.*[a-zA-Z])(\w|[!@#$%^&*?_~-]).{5,}$/,
 

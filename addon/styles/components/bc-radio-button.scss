@@ -57,7 +57,7 @@
   }
 
 	span {
-		@include box-sizing;
+		@include bc-box-sizing;
 		padding-left: 26px;
 		color: $bc-color-2;
 		font-size: 16px;

@@ -1,9 +1,9 @@
 
 .bc-title {
+	@include bc-box-sizing;
 	width: 100%;
 	height: auto;
-	padding: 48px 0 56px 0;
-	@include bc-box-sizing();
+	padding: 48px 0 56px;
 
 	& > header {
 		width: 100%;
@@ -13,18 +13,18 @@
 		font: 21px/48px $ft-bold;
 
 		& > span {
-			float: left;
 			height: 100%;
+			float: left;
 			color: $bc-color-8;
 			font: 21px/48px $ft-bold;
 		}
 
 		& > a {
-			float: right;
 			height: 36px;
-			font: 13px/36px $ft-norm;
+			margin: 12px 0 0;
+			float: right;
 			color: $bc-color-1;
-			margin: 12px 0 0 0;
+			font: 13px/36px $ft-norm;
 		}
 
 
@@ -42,6 +42,7 @@
 
 	&.red {
 		border-color: $bc-color-9;
+
 		& > header {
 			& > span {
 				color: $bc-color-9;

@@ -1,5 +1,5 @@
 
-/**
+/*!
  * main scss app file
  *
  * includes go here
@@ -7,8 +7,6 @@
 @import './mixins';
 
 @import 'components/bc-tabs';
-@import 'components/bc-tab';
-
 @import 'components/bc-list-container';
 @import 'components/bc-list-header';
 @import 'components/bc-list';

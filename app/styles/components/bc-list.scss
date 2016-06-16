@@ -4,7 +4,7 @@ $image-size: 40px;
 .bc-list {
 	width: 100%;
 
-	& > .container {
+	& > .bc-list-container {
 		@include bc-box-sizing;
 		display: inline-block;
 		position: relative;
@@ -15,11 +15,11 @@ $image-size: 40px;
 		overflow: visible;
 		overflow-x: auto;
 
-		& > .table-list {
+		& > .bc-list-table {
 			display: table;
 			min-width: 100%;
 
-			& > .header {
+			& > .bc-list-header {
 				display: table-header-group;
 				margin: 0;
 				padding: 0;
@@ -80,7 +80,7 @@ $image-size: 40px;
 				}
 			}
 
-			& > .list {
+			& > .bc-list-body {
 				display: table-row-group;
 
 				&.hide {

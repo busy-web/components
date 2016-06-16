@@ -1,7 +1,7 @@
 
-<div class="container">
-	<div class="table-list">
-		<header class="header{{if selector ' selector'}}{{if edit ' edit'}}{{if hasImage ' image'}}">
+<div class="bc-list-container">
+	<div class="bc-list-table">
+		<header class="bc-list-header{{if selector ' selector'}}{{if edit ' edit'}}{{if hasImage ' image'}}">
 			<span class="header-extra"></span>
 
 			{{#each headerItems as |header|}}
@@ -17,7 +17,7 @@
 
 		{{bc-loading class=(if isLoading "show" "") fixed=false isLoading=isLoading minimal=minimal}}
 
-		<section class="list{{if isLoading ' hide'}}{{if selector ' selector'}}{{if large ' large'}}{{if edit ' edit'}}{{if hasImage ' image'}}{{if clickable ' clickable'}}">
+		<section class="bc-list-body{{if isLoading ' hide'}}{{if selector ' selector'}}{{if large ' large'}}{{if edit ' edit'}}{{if hasImage ' image'}}{{if clickable ' clickable'}}">
 			<div class="list-row select-row">
 				<span class="list-extra select-all" style="top: -50px; display: inline;">
 					<div class="select">

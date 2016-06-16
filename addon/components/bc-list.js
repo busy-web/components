@@ -85,7 +85,6 @@ export default Ember.Component.extend(
 
 	isLoading: Ember.computed('model', 'model.isLoaded', 'model.[]', 'model.length', function()
 	{
-		console.log(this.get('model.isLoaded'), this.get('model.length'), this.get('model.get'));
 		if(!Ember.isNone(this.get('model')))
 		{
 			if(this.get('model.get') && this.get('model.isLoaded'))
@@ -143,7 +142,7 @@ export default Ember.Component.extend(
 		}
 	}),
 
-	modelSetObserver: Ember.observer('model', 'model.[]', 'model.length', function()
+	modelSetObserver: Ember.observer('model', 'model.length', 'isLoading', function()
 	{
 		this.renderTemplates();
 	}).on('init'),
@@ -158,8 +157,8 @@ export default Ember.Component.extend(
 		const list = this.$();
 		if(list && list.find)
 		{
-			const row = Ember.$(list.find('section').children().get(1));
-			if(row.children && row.children().length > 0)
+			const row = list.find('section').children('.content-row').first();
+			if(row.length > 0)
 			{
 				const cols = row.children();
 				const headerList = [];

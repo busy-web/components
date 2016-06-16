@@ -14,10 +14,11 @@ export default Ember.Component.extend(
 	layout: layout,
 	classNames: ['bc-loading'],
 
-	classNameBindings: ['isLoading:active', 'minimal'],
+	classNameBindings: ['isLoading:active', 'minimal', 'fixed'],
 
 	isLoading: false,
 	minimal: false,
+	fixed: true,
 
 	loadingMessage: '',
 });

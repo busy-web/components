@@ -72,8 +72,20 @@ $image-size: 40px;
 				}
 			}
 
+			& > .bc-loading {
+				display: none;
+
+				&.show {
+					display: block;
+				}
+			}
+
 			& > .list {
 				display: table-row-group;
+
+				&.hide {
+					display: none;
+				}
 
 				& > span {
 					&.list-extra {
@@ -130,6 +142,10 @@ $image-size: 40px;
 				& > .list-row {
 					display: table-row;
 					padding: 0;
+
+					&.hide {
+						display: none;
+					}
 
 					& > span {
 						display: table-cell;

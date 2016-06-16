@@ -15,8 +15,10 @@
 			{{/each}}
 		</header>
 
-		<section class="list{{if selector ' selector'}}{{if large ' large'}}{{if edit ' edit'}}{{if hasImage ' image'}}{{if clickable ' clickable'}}">
-			<div class="list-row">
+		{{bc-loading class=(if isLoading "show" "") fixed=false isLoading=isLoading minimal=minimal}}
+
+		<section class="list{{if isLoading ' hide'}}{{if selector ' selector'}}{{if large ' large'}}{{if edit ' edit'}}{{if hasImage ' image'}}{{if clickable ' clickable'}}">
+			<div class="list-row select-row">
 				<span class="list-extra select-all" style="top: -50px; display: inline;">
 					<div class="select">
 						<div>
@@ -28,30 +30,30 @@
 				</span>
 			</div>
 
-			{{#if isLoading}}
-				{{bc-loading isLoading=isLoading minimal=minimal}}
-			{{else}}
-				{{#each model as |row|}}
-					<div class="list-row" {{action 'rowClick' row bubles=false }}>
-						<span class="list-extra">
-							<div class="select">
-								<div>
-									{{bc-checkbox value=row.isSelected action="itemSelected" selectItem=row}}
-								</div>
+			{{#each model as |row|}}
+				<div class="list-row content-row" {{action 'rowClick' row bubles=false }}>
+					<span class="list-extra">
+						<div class="select">
+							<div>
+								{{bc-checkbox value=row.isSelected action="itemSelected" selectItem=row}}
 							</div>
-							<div class="image">
-								<img src="{{if row.imageThumbUrl row.imageThumbUrl row.imagePlaceholder}}" />
-							</div>
-						</span>
+						</div>
+						<div class="image">
+							<img src="{{if row.imageThumbUrl row.imageThumbUrl row.imagePlaceholder}}" />
+						</div>
+					</span>
 
-						{{yield row}}
-					</div>
-				{{else}}
-					<div class="list-no-results">
-						<span>No Entries Found</span>
-					</div>
-				{{/each}}
-			{{/if}}
+					{{yield row}}
+				</div>
+			{{else}}
+				<div class="list-row content-row hide">
+					<span class="list-extra"></span>
+					{{yield row}}
+				</div>
+				<div class="list-no-results">
+					<span>No Entries Found</span>
+				</div>
+			{{/each}}
 		</section>
 	</div>
 </div>

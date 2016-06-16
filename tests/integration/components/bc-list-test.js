@@ -6,8 +6,8 @@ moduleForComponent('bc-list', 'Integration | Component | bc list', {
 });
 
 const stubModel = [
-		{name: 'Bob Thomas', occupation: 'bullfighter', age: 32},
-	];
+	{name: 'Bob Thomas', occupation: 'bullfighter', age: 32},
+];
 
 test('it renders with no entries', function(assert)
 {
@@ -16,9 +16,7 @@ test('it renders with no entries', function(assert)
 
   // Template block usage:
   this.render(hbs`
-	{{#bc-list}}
-	  template block text
-	{{/bc-list}}
+	{{#bc-list}}{{/bc-list}}
   `);
 
   assert.equal(this.$().text().trim(), 'No Entries Found');
@@ -40,8 +38,8 @@ test('it renders with header and entries', function(assert)
 
 	this.render(hbs`
 		{{#bc-list headerItems=headerArray model=model as |item|}}
-		<span>{{item.name}}</span>
-		<span>{{item.age}}</span>
+			<span>{{item.name}}</span>
+			<span>{{item.age}}</span>
 		{{/bc-list}}
 	`);
 
@@ -54,10 +52,11 @@ test('deprecation gets called', function(assert)
 
 	this.render(hbs`
 		{{#bc-list content=model as |item|}}
-		<span>{{item.name}}</span>
-		<span>{{item.age}}</span>
+			<span>{{item.name}}</span>
+			<span>{{item.age}}</span>
 		{{/bc-list}}
 	`);
+
 	assert.throws('bc-list: content is deprecated please use model');
 });
 
@@ -73,13 +72,14 @@ test('onClick action runs', function(assert)
 
 	this.render(hbs`
 		{{#bc-list headerItems=headerArray onClick=(action externalAction) model=model as |item|}}
-		<span>{{item.name}}</span>
-		<span>{{item.age}}</span>
+			<span title="Name">{{item.name}}</span>
+			<span title="Age">{{item.age}}</span>
 		{{/bc-list}}
 	`);
 
-	this.$('.bc-list-row').click();
-
+	var el = this.$('.bc-list-row').first();
+	console.log(el.length, el);
+	el.click();
 });
 
 test('select all works', function(assert)
@@ -87,12 +87,12 @@ test('select all works', function(assert)
 	this.set('model', stubModel);
 	this.render(hbs`
 		{{#bc-list headerItems=headerArray selector=true model=model as |item|}}
-		<span>{{item.name}}</span>
-		<span>{{item.age}}</span>
+			<span>{{item.name}}</span>
+			<span>{{item.age}}</span>
 		{{/bc-list}}
 	`);
 
 	this.$('.select').click();
 	assert.equal(this.$('p.selected-rows').text(), '');
-
 });
+

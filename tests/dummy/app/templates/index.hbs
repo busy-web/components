@@ -126,16 +126,20 @@
 			</ul>
 			Code:
 			<span class="code-result">headerItems array</span>
-			<code>let headerItems = [<br />
-				<span class="indent">'Name',<br />
-				'Occupation',<br />
-				'Age'</span><br />
-			]</code>
+			<code>
+				let headerItems = [<br />
+					<span class="indent">
+						'Name',<br />
+						'Occupation',<br />
+						'Age'
+					</span><br />
+				]
+			</code>
 			<span class="code-result">bc-list template code</span>
 			<code>
-				\{{#bc-list headerItems=headerItems hasImage=true selector=true onClick="runClickAction" model=model.people as |item|}}<br />
+				\{{#bc-list hasImage=true selector=true onClick="runClickAction" model=model.people as |item|}}<br />
 					<span class="indent">
-						&lt;span&gt;\{{item.name}}&lt;/span&gt;<br />
+						&lt;span title="Name"&gt;\{{item.name}}&lt;/span&gt;<br />
 						&lt;span&gt;\{{item.occupation}}&lt;/span&gt;<br />
 						&lt;span&gt;\{{item.age}}&lt;/span&gt;
 					</span><br />
@@ -143,10 +147,10 @@
 			</code>
 			Result:
 			<span class="code-result">
-				{{#bc-list headerItems=headerItems hasImage=true selector=true onClick="runClickAction" model=model.people as |item|}}
-					<span>{{item.name}}</span>
-					<span>{{item.occupation}}</span>
-					<span>{{item.age}}</span>
+				{{#bc-list hasImage=true selector=true onClick="runClickAction" model=model.people as |item|}}
+					<span title="Name">{{item.name}}</span>
+					<span title="Occupation">{{item.occupation}}</span>
+					<span title="Age">{{item.age}}</span>
 				{{/bc-list}}
 			</span>
 		</section>

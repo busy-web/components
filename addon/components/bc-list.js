@@ -39,11 +39,7 @@ export default Ember.Component.extend(
 	/** @lends BC.List.prototype */
 {
 	layout: layout,
-
-	// tagName: 'section',
-
 	classNames: ['bc-list'],
-	// classNameBindings: ['selector', 'large', 'edit', 'hasImage:image', 'clickable'],
 
 	/**
 	 * Bool for setting the type of list
@@ -113,6 +109,9 @@ export default Ember.Component.extend(
 	init()
 	{
 		this._super();
+
+		this.modelSetObserver();
+
 		this.setModel();
 	},
 
@@ -145,7 +144,7 @@ export default Ember.Component.extend(
 	modelSetObserver: Ember.observer('model', 'model.length', 'isLoading', function()
 	{
 		this.renderTemplates();
-	}).on('init'),
+	}),
 
 	hasLoadedDOM: Ember.on('didInsertElement', function()
 	{
@@ -161,7 +160,7 @@ export default Ember.Component.extend(
 			if(row.length > 0)
 			{
 				const cols = row.children();
-				const headerList = [];
+				const headerList = Ember.A([]);
 
 				Ember.$.each(cols, (key, item) => {
 					let el = Ember.$(item);

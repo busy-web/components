@@ -71,8 +71,17 @@ export default Ember.Component.extend(
 
 	large: false,
 	hasHeader: true,
-	headerItems: null,
 	minimal: false,
+	isSelectAll: false,
+
+	/**
+	 * The model array to render in the list
+	 *
+	 * @public
+	 * @property model
+	 * @type array
+	 */
+	model: null,
 
 	clickable: Ember.computed('onClick', function()
 	{
@@ -95,38 +104,6 @@ export default Ember.Component.extend(
 		return true;
 	}),
 
-	/**
-	 * The content array to render in the list
-	 *
-	 * @public
-	 * @property content
-	 * @type array
-	 */
-	content: null,
-
-	model: null,
-
-	init()
-	{
-		this._super();
-
-		this.modelSetObserver();
-
-		this.setModel();
-	},
-
-	setModel: Ember.observer('content', function()
-	{
-		if(Ember.isNone(this.get('model')) && !Ember.isNone(this.get('content')))
-		{
-			Ember.deprecate('bc-list: content is deprecated please use model');
-
-			this.set('model', this.get('content'));
-		}
-	}),
-
-	isSelectAll: false,
-
 	modelChange: Ember.observer('model.@each.id', function()
 	{
 		this.set('selectedRows', []);
@@ -141,12 +118,7 @@ export default Ember.Component.extend(
 		}
 	}),
 
-	modelSetObserver: Ember.observer('model', 'model.length', 'isLoading', function()
-	{
-		this.renderTemplates();
-	}),
-
-	hasLoadedDOM: Ember.on('didInsertElement', function()
+	hasLoadedDOM: Ember.on('didRender', function()
 	{
 		this.renderTemplates();
 	}),
@@ -160,20 +132,33 @@ export default Ember.Component.extend(
 			if(row.length > 0)
 			{
 				const cols = row.children();
-				const headerList = Ember.A([]);
+				const header = this.$('.bc-list-header.auto-list');
+
+				header.html('');
+				header.append('<span class="header-extra"></span>');
 
 				Ember.$.each(cols, (key, item) => {
 					let el = Ember.$(item);
-					if(el.attr('title') !== undefined)
+					if(!el.hasClass('list-extra'))
 					{
-						headerList.pushObject(Ember.Object.create({title: el.attr('title'), class: el.attr('class')}));
+						let span = '<span';
+						if(el.attr('class') !== undefined)
+						{
+							span += ' class="' + el.attr('class') + '"';
+						}
+
+						span += '>';
+
+						if(el.attr('title') !== undefined)
+						{
+							span += el.attr('title');
+						}
+
+						span += '</span>';
+
+						header.append(span);
 					}
 				});
-
-				if(Ember.get(headerList, "length") > 0)
-				{
-					this.set('headerItems', headerList);
-				}
 			}
 		}
 	},

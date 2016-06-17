@@ -125,32 +125,23 @@
 				<li>model - array of objects to include in the list.</li>
 			</ul>
 			Code:
-			<span class="code-result">headerItems array</span>
-			<code>
-				let headerItems = [<br />
-					<span class="indent">
-						'Name',<br />
-						'Occupation',<br />
-						'Age'
-					</span><br />
-				]
-			</code>
-			<span class="code-result">bc-list template code</span>
 			<code>
 				\{{#bc-list hasImage=true selector=true onClick="runClickAction" model=model.people as |item|}}<br />
 					<span class="indent">
-						&lt;span title="Name"&gt;\{{item.name}}&lt;/span&gt;<br />
-						&lt;span&gt;\{{item.occupation}}&lt;/span&gt;<br />
-						&lt;span&gt;\{{item.age}}&lt;/span&gt;
+						&lt;span class="name" title="Name"&gt;\{{item.name}}&lt;/span&gt;<br />
+						&lt;span title="Occupation"&gt;\{{item.occupation}}&lt;/span&gt;<br />
+						&lt;span title="Age"&gt;\{{item.age}}&lt;/span&gt;<br />
+						&lt;span class="actions"&gt;&lt;button&gt;Action&lt;/button&gt;&lt;/span&gt;<br />
 					</span><br />
 				\{{/bc-list}}
 			</code>
 			Result:
 			<span class="code-result">
-				{{#bc-list hasImage=true selector=true onClick="runClickAction" model=model.people as |item|}}
-					<span title="Name">{{item.name}}</span>
+				{{#bc-list hasImage=true selector=true onClick=(action (throw-alert "%name" "was clicked")) model=model.people as |item|}}
+					<span class="name" title="Name">{{item.name}}</span>
 					<span title="Occupation">{{item.occupation}}</span>
 					<span title="Age">{{item.age}}</span>
+					<span class="actions"><button>Action</button></span>
 				{{/bc-list}}
 			</span>
 		</section>

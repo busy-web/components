@@ -1,19 +1,7 @@
 
 <div class="bc-list-container">
 	<div class="bc-list-table">
-		<header class="bc-list-header{{if selector ' selector'}}{{if edit ' edit'}}{{if hasImage ' image'}}">
-			<span class="header-extra"></span>
-
-			{{#each headerItems as |header|}}
-				{{#if header.class}}
-					<span class="{{header.class}}">{{header.title}}</span>
-				{{else if header.title}}
-					<span>{{header.title}}</span>
-				{{else}}
-					<span>{{header}}</span>
-				{{/if}}
-			{{/each}}
-		</header>
+		<header class="bc-list-header auto-list{{if selector ' selector'}}{{if edit ' edit'}}{{if hasImage ' image'}}"></header>
 
 		{{bc-loading class=(if isLoading "show" "") fixed=false isLoading=isLoading minimal=minimal}}
 

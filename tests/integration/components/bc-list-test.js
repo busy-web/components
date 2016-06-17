@@ -25,39 +25,20 @@ test('it renders with no entries', function(assert)
 
 test('it renders with header and entries', function(assert)
 {
-	this.set('headerArray', [
-		'section1',
-		'section2',
-		'section3'
-	]);
-
 	this.set('model', [
 		{name: 'Bob Thomas', occupation: 'bullfighter', age: 32},
 		{name: 'John Smith', occupation: 'astronaut', age: 39}
 	]);
 
 	this.render(hbs`
-		{{#bc-list headerItems=headerArray model=model as |item|}}
-			<span>{{item.name}}</span>
-			<span>{{item.age}}</span>
+		{{#bc-list model=model as |item|}}
+			<span title="section1">{{item.name}}</span>
+			<span title="section2">{{item.age}}</span>
+			<span title="section3"></span>
 		{{/bc-list}}
 	`);
 
 	assert.equal(this.$().text().replace(/\s+/g, ''), 'section1section2section3BobThomas32JohnSmith39');
-});
-
-test('deprecation gets called', function(assert)
-{
-	this.set('model', stubModel);
-
-	this.render(hbs`
-		{{#bc-list content=model as |item|}}
-			<span>{{item.name}}</span>
-			<span>{{item.age}}</span>
-		{{/bc-list}}
-	`);
-
-	assert.throws('bc-list: content is deprecated please use model');
 });
 
 test('onClick action runs', function(assert)
@@ -71,24 +52,22 @@ test('onClick action runs', function(assert)
 	this.set('model', stubModel);
 
 	this.render(hbs`
-		{{#bc-list headerItems=headerArray onClick=(action externalAction) model=model as |item|}}
+		{{#bc-list onClick=(action externalAction) model=model as |item|}}
 			<span title="Name">{{item.name}}</span>
 			<span title="Age">{{item.age}}</span>
 		{{/bc-list}}
 	`);
 
-	var el = this.$('.bc-list-row').first();
-	console.log(el.length, el);
-	el.click();
+	this.$('.content-row').first().click();
 });
 
 test('select all works', function(assert)
 {
 	this.set('model', stubModel);
 	this.render(hbs`
-		{{#bc-list headerItems=headerArray selector=true model=model as |item|}}
-			<span>{{item.name}}</span>
-			<span>{{item.age}}</span>
+		{{#bc-list selector=true model=model as |item|}}
+			<span title="Name">{{item.name}}</span>
+			<span title="Age">{{item.age}}</span>
 		{{/bc-list}}
 	`);
 

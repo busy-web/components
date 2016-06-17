@@ -14,7 +14,7 @@ export default Ember.Component.extend(
 	layout: layout,
 	classNames: ['bc-loading'],
 
-	classNameBindings: ['isLoading:active', 'minimal', 'fixed'],
+	classNameBindings: ['isLoading:active', 'minimal', 'fixed', 'inline'],
 
 	isLoading: false,
 	minimal: false,

@@ -236,4 +236,28 @@
 			</span>
 		</section>
 	</div>
+	<div class="component">
+		<header>
+			BC-Loading
+		</header>
+		<section>
+			<p>Animated loading indicator</p>
+			Properties:
+			<ul>
+				<li>isLoading - toggles on and off. boolean. defaults to false.</li>
+				<li>minimal - no border, background, or shadow. boolean. defaults to false.</li>
+				<li>fixed - stay centered on the screen even if scrolled. boolean. defaults to true.</li>
+				<li>inline - don't center on the screen. boolean. defaults to false.</li>
+				<li>loadingMessage - string. default to ''.</li>
+			</ul>
+			Code:
+			<code>
+				\{{bc-loading isLoading=true inline=true loadingMessage="Loading Message..."}}
+			</code>
+			Result:
+			<span class="code-result">
+				{{bc-loading isLoading=true inline=true loadingMessage="Loading Message..."}}
+			</span>
+		</section>
+	</div>
 </div>

@@ -1,5 +1,9 @@
+# Busy Components
+[![npm version](https://badge.fury.io/js/busy-components.svg)](https://badge.fury.io/js/busy-components)
+[![Build Status](https://travis-ci.org/busybusy/webapp-busy-components.svg?branch=master)](https://travis-ci.org/busybusy/webapp-busy-components)
+[![Ember Observer Score](https://emberobserver.com/badges/busy-components.svg)](https://emberobserver.com/addons/busy-components)
+[![Ember badge][ember-badge]][embadge]
 
-# busy-components [![Build Status](https://travis-ci.org/busybusy/webapp-busy-components.svg?branch=master)](https://travis-ci.org/busybusy/webapp-busy-components)
 
 This README outlines the details of collaborating on this Ember addon.
 
@@ -88,3 +92,6 @@ For more information on using ember-cli, visit [http://ember-cli.com/](http://em
 * `git clone` this repository
 * `npm install`
 * `bower install`
+
+[embadge]: http://embadge.io/
+[ember-badge]: http://embadge.io/v1/badge.svg?start=2.6.0

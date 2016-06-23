@@ -38,10 +38,10 @@ $tablet-width: 1080px;
 // vendorize mixin
 @mixin bc-vendorize($property, $value) {
 	-webkit-#{$property}: $value;
-	   -moz-#{$property}: $value;
-	    -ms-#{$property}: $value;
-	     -o-#{$property}: $value;
-	        #{$property}: $value;
+	-moz-#{$property}: $value;
+	-ms-#{$property}: $value;
+	-o-#{$property}: $value;
+	#{$property}: $value;
 }
 
 // box-sizing
@@ -52,30 +52,3 @@ $tablet-width: 1080px;
 
 //transform
 @mixin bc-transform($value) {@include bc-vendorize(transform, $value)}
-
-@mixin bc-keyframes($animation-name) {
-	@-webkit-keyframes #{$animation-name} { @content; }
-	   @-moz-keyframes #{$animation-name} { @content; }
-	    @-ms-keyframes #{$animation-name} { @content; }
-	     @-o-keyframes #{$animation-name} { @content; }
-	        @keyframes #{$animation-name} { @content; }
-}
-
-@mixin bc-animation($str) {
-	@include bc-vendorize(animation, #{$str});
-}
-
-
-/*!
- * animations
- */
-
-@include bc-keyframes(bc-spin) {
-	0%   {@include bc-vendorize(transform, rotate(0deg));}
-	100% {@include bc-vendorize(transform, rotate(360deg));}
-}
-
-@include bc-keyframes(bc-spin-counter) {
-	0%   {@include bc-vendorize(transform, rotate(0deg));}
-	100% {@include bc-vendorize(transform, rotate(-360deg));}
-}

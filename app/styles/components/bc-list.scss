@@ -273,19 +273,43 @@ $image-size: 40px;
 
 				&.selector {
 					& > .list-row {
-						& > .list-extra {
-							@include bc-transition(width .5s ease-in);
-							display: table-cell;
+						&.select-all {
+							@include transition(width .5s ease-in);
+							display: block;
+							position: absolute;
+							top: 0;
+							width: 0;
+							height: 43px;
+							overflow: hidden;
 
 							& > .select {
-								@include bc-transition(opacity .5s ease-in);
-								display: block;
+								@include transition(opacity .5s ease-in);
+								display: inline-block;
+							}
+						}
+
+						& > .list-extra {
+							@include transition(width .5s ease-in);
+							display: inline-block;
+							height: 100%;
+
+							& > .select {
+								@include transition(opacity .5s ease-in);
+								display: inline-block;
 							}
 						}
 					}
 
 					&.edit {
 						& > .list-row {
+							&.select-all {
+								width: $image-size;
+
+								& > .select {
+									opacity: 1;
+								}
+							}
+
 							& > .list-extra {
 								width: $image-size;
 

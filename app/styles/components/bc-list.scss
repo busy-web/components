@@ -274,7 +274,7 @@ $image-size: 40px;
 				&.selector {
 					& > .list-row {
 						&.select-all {
-							@include transition(width .5s ease-in);
+							@include bc-transition(width .5s ease-in);
 							display: block;
 							position: absolute;
 							top: 0;
@@ -283,18 +283,18 @@ $image-size: 40px;
 							overflow: hidden;
 
 							& > .select {
-								@include transition(opacity .5s ease-in);
+								@include bc-transition(opacity .5s ease-in);
 								display: inline-block;
 							}
 						}
 
 						& > .list-extra {
-							@include transition(width .5s ease-in);
+							@include bc-transition(width .5s ease-in);
 							display: inline-block;
 							height: 100%;
 
 							& > .select {
-								@include transition(opacity .5s ease-in);
+								@include bc-transition(opacity .5s ease-in);
 								display: inline-block;
 							}
 						}

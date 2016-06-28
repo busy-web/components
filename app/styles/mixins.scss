@@ -52,3 +52,7 @@ $tablet-width: 1080px;
 
 //transform
 @mixin bc-transform($value) {@include bc-vendorize(transform, $value)}
+
+@mixin bc-animation($str) {
+	@include bc-vendorize(animation, #{$str});
+}

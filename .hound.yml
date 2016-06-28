@@ -1,0 +1,4 @@
+scss:
+  config_file: '.sass-lint.yml'
+javascript:
+  config_file: '.jshintrc'

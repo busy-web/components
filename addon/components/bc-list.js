@@ -36,7 +36,6 @@ import layout from '../templates/components/bc-list';
  * @extends Ember.Component
  */
 export default Ember.Component.extend(
-	/** @lends BC.List.prototype */
 {
 	layout: layout,
 	classNames: ['bc-list'],
@@ -173,12 +172,14 @@ export default Ember.Component.extend(
 	selectedRows: null,
 
 	actions: {
+
 		/**
 		 * Row clicked action handler
 		 *
 		 * @private
 		 * @method rowClick
-		 * @param model {object}
+		 * @param {Object} model The clicked rows model
+		 * @returns {void}
 		 */
 		rowClick: function(model)
 		{
@@ -251,6 +252,6 @@ export default Ember.Component.extend(
 			this.set('selectedRows', selectedRows);
 
 			this.sendAction('selectAll', isChecked, selectedRows.copy());
-		},
+		}
 	}
 });

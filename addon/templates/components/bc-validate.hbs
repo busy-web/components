@@ -15,12 +15,12 @@
 
 <div class="validate-container{{if disabled ' disabled'}}">
 	{{#if autofocus}}
-		{{bc-input type=type placeholder=placeholder tabindex=tabindex value=value
+		{{bc-input type=type placeholder=placeholder tabindex=tabindex value=value maxlength=maxlength
 			onSubmit="enterAction" onBlur="focusOutAction" disabled=disabled
 			autocomplete=autocomplete autofocus="autofocus"}}
 
 	{{else}}
-		{{bc-input type=type placeholder=placeholder tabindex=tabindex value=value
+		{{bc-input type=type placeholder=placeholder tabindex=tabindex value=value maxlength=maxlength
 			onSubmit="enterAction" onBlur="focusOutAction" disabled=disabled
 			autocomplete=autocomplete}}
 

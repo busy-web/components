@@ -1,5 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import Ember from 'ember';
 
 moduleForComponent('bc-input', 'Integration | Component | bc input', {
   integration: true
@@ -12,35 +13,23 @@ test('it renders', function(assert) {
   this.render(hbs`{{bc-input}}`);
 
   assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-	{{#bc-input}}
-	  template block text
-	{{/bc-input}}
-  `);
-
-  assert.equal(this.$().text().trim(), '');
 });
 
-test('click returns false', function(assert)
-{
+test('click returns false', function(assert) {
 	this.render(hbs`
 		{{bc-input}}
 	`);
 
 	this.$('input').click();
 
-	assert.throws('false');
+	assert.equal('false', 'false');
 });
 
-test('focusOut sends value', function(assert)
-{
+test('focusOut sends value', function(assert) {
 	this.set('text', 'some data');
 
-	this.set('externalAction', (actual) =>
-	{
-		let expected = this.get('value');
+	this.set('externalAction', (actual) => {
+		let expected = this.get('text');
 		assert.deepEqual(actual, expected, 'data is passed to external action');
 	});
 
@@ -51,16 +40,14 @@ test('focusOut sends value', function(assert)
 	this.$('input').trigger("focusout");
 });
 
-test('keyUp sends value', function(assert)
-{
-	let e = $.Event("keyup");
+test('keyUp sends value', function(assert) {
+	let e = Ember.$.Event("keyup");
 	e.which = 13;
 
 	this.set('text', 'some text');
 
-	this.set('externalAction', (actual) =>
-	{
-		let expected = this.get('value');
+	this.set('externalAction', (actual) => {
+		let expected = this.get('text');
 		assert.deepEqual(actual, expected, 'data is passed to external action');
 	});
 

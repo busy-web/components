@@ -9,23 +9,26 @@ import Ember from 'ember';
  *
  * @class Input
  * @namespace BC.Components.Input
- * @extends Ember.TextField
+ * @extends Ember.Component
  */
-export default Ember.TextField.extend({
+export default Ember.Component.extend({
 
+	tagName: 'input',
 	classNames: ['bc-input'],
-	attributeBindings: ['autofocus'],
 
-	init() {
-		this._super();
+	attributeBindings: ['autofocus', 'value', 'maxlength', 'placeholder', 'type', 'tabindex', 'autocomplete', 'disabled'],
 
-		if (!Ember.isEmpty(this.get('parentView.maxlength'))) {
-			this.set('maxlength', this.get('parentView.maxlength'));
-		}
-	},
+	autofocus: '',
+	type: 'text',
+	value: '',
+	placeholder: '',
+	tabindex: '',
+	autocomplete: '',
+	maxlength: '',
+	disabled: false,
 
 	focusOut() {
-		this.sendAction('onBlur', this.get('value'));
+		this.sendAction('onBlur', this.getVal());
 	},
 
 	click() {
@@ -34,10 +37,19 @@ export default Ember.TextField.extend({
 
 	keyUp(evt) {
 		if (evt.which === 13) {
-			this.sendAction('onSubmit', this.get('value'));
+			this.sendAction('onSubmit', this.getVal());
 		}
 
-		this.sendAction('onKeyUp', evt.which, this.get('value'));
+		this.sendAction('onKeyUp', evt.which, this.getVal());
 		return true;
+	},
+
+	getVal() {
+		const val = this.$().val();
+
+		this.set('value', val);
+
+		console.log('getVal', val);
+		return val;
 	}
 });

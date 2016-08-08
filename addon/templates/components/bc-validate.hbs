@@ -2,6 +2,7 @@
 {{#if showLabel}}
 	<div class="label-container">
 		<span class="label">{{labelString}}</span>
+
 		<span class="hint">
 			{{#if onClick}}
 				<a class="blue-hint" {{action 'hintAction'}}>{{hint}}</a>
@@ -14,9 +15,15 @@
 
 <div class="validate-container{{if disabled ' disabled'}}">
 	{{#if autofocus}}
-		{{bc-input onSubmit="enterAction" onBlur="focusOutAction" disabled=disabled autocomplete=autocomplete autofocus="autofocus"}}
+		{{bc-input type=type placeholder=placeholder tabindex=tabindex value=value
+			onSubmit="enterAction" onBlur="focusOutAction" disabled=disabled
+			autocomplete=autocomplete autofocus="autofocus"}}
+
 	{{else}}
-		{{bc-input onSubmit="enterAction" onBlur="focusOutAction" disabled=disabled autocomplete=autocomplete}}
+		{{bc-input type=type placeholder=placeholder tabindex=tabindex value=value
+			onSubmit="enterAction" onBlur="focusOutAction" disabled=disabled
+			autocomplete=autocomplete}}
+
 	{{/if}}
 </div>
 

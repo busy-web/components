@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export function throwAlert(params/*, hash*/) {
-	console.log(params);
 	return function(model) {
 		let str = '';
 		for(let i in params)

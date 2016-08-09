@@ -9,14 +9,14 @@ import Ember from 'ember';
  *
  * @class Input
  * @namespace BC.Components.Input
- * @extends Ember.Component
+ * @extends Ember.TextField
  */
-export default Ember.Component.extend({
+export default Ember.TextField.extend({
 
 	tagName: 'input',
 	classNames: ['bc-input'],
 
-	attributeBindings: ['autofocus', 'value', 'maxlength', 'placeholder', 'type', 'tabindex', 'autocomplete', 'disabled'],
+	attributeBindings: ['autofocus', 'maxlength', 'placeholder', 'type', 'tabindex', 'autocomplete', 'disabled'],
 
 	autofocus: '',
 	type: 'text',
@@ -45,11 +45,6 @@ export default Ember.Component.extend({
 	},
 
 	getVal() {
-		const val = this.$().val();
-
-		this.set('value', val);
-
-		console.log('getVal', val);
-		return val;
+		return this.get('value');
 	}
 });

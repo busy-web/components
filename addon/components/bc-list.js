@@ -87,20 +87,15 @@ export default Ember.Component.extend(
 		return !Ember.isNone(this.get('onClick')) && !Ember.isEmpty(this.get('onClick')) ? true : false;
 	}),
 
-	isLoading: Ember.computed('model', 'model.isLoaded', 'model.[]', 'model.length', function()
-	{
-		if(!Ember.isNone(this.get('model')))
-		{
-			if(this.get('model.get') && this.get('model.isLoaded'))
-			{
-				return false;
-			}
-			else if(this.get('model.length'))
-			{
-				return false;
-			}
-		}
-		return true;
+	isLoading: Ember.computed('model', 'model.isLoaded', 'model.[]', 'model.length', function() {
+		 if (!Ember.isNone(this.get('model'))) {
+				 if (this.get('model.isLoaded') === true) {
+						 return false;
+				 } else if(Ember.isNone(this.get('model.isLoaded'))) {
+						 return false;
+				 }
+		 }
+		 return true;
 	}),
 
 	modelChange: Ember.observer('model.@each.id', function()

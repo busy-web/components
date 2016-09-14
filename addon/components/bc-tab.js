@@ -13,6 +13,8 @@ export default Ember.Component.extend(
 
 	tabName: null,
 	tabIndex: 0,
+	badgeContent: null,
+	badgeColor: null,
 
 	init: function()
 	{

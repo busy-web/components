@@ -180,6 +180,8 @@
 			<ul>
 				<li>tabName - title of tab.</li>
 				<li>tabIndex - position of the tab. will default to order of tabs as written.</li>
+				<li>badgeContent - content to put in an optional badge</li>
+				<li>badgeColor - how to style the badge (default, red, blue, green)</li>
 			</ul>
 			Code:
 			<code>
@@ -189,7 +191,7 @@
 							<span class="indent">tab 1 content</span><br />
 						\{{/bc-tab}}<br /><br />
 
-						\{{#bc-tab tabName="tab 2" tabIndex=2}}<br />
+						\{{#bc-tab tabName="tab 2" tabIndex=2 badgeContent="2" badgeColor="red"}}<br />
 							<span class="indent">tab 2 content</span><br />
 						\{{/bc-tab}}
 					</span><br />
@@ -201,7 +203,7 @@
 					{{#bc-tab tabName="tab 1" tabIndex=1}}
 						tab 1 content
 					{{/bc-tab}}
-					{{#bc-tab tabName="tab 2" tabIndex=2}}
+					{{#bc-tab tabName="tab 2" tabIndex=2 badgeContent="2" badgeColor="red"}}
 						tab 2 content
 					{{/bc-tab}}
 				{{/bc-tabs}}

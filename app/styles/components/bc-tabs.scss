@@ -32,9 +32,34 @@
 			white-space: nowrap;
 			cursor: pointer;
 			overflow: hidden;
+			position: relative;
 
 			&.active {
 				border-bottom-color: $bc-color-1;
+			}
+
+			.bc-tabs-badge {
+				@include bc-vendorize(border-radius, 5px);
+				font: 9px/1 $ft-norm;
+				position: absolute;
+				top: 0;
+				right: 4px;
+				color: $bc-color-7;
+				padding: 2px 6px;
+
+				background-color: $bc-color-11;
+
+				&.bc-tabs-badge-red {
+					background-color: $bc-color-9;
+				}
+
+				&.bc-tabs-badge-blue {
+					background-color: $bc-color-14;
+				}
+
+				&.bc-tabs-badge-green {
+					background-color: $bc-color-1;
+				}
 			}
 		}
 	}

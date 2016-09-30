@@ -1,31 +1,9 @@
-
-// vendorize mixin
-@mixin bc-vendorize($property, $value) {
-	-webkit-#{$property}: $value;
-	-moz-#{$property}: $value;
-	-ms-#{$property}: $value;
-	-o-#{$property}: $value;
-	#{$property}: $value;
-}
-
-// box-sizing
-@mixin bc-box-sizing {@include bc-vendorize(box-sizing, border-box)}
-
-// transition
-@mixin bc-transition($value) {@include bc-vendorize(transition, $value)}
-
-//transform
-@mixin bc-transform($value) {@include bc-vendorize(transform, $value)}
-
-@mixin bc-animation($str) {
-	@include bc-vendorize(animation, #{$str});
-}
-
 /*!
  * main scss app file
  *
  * includes go here
  */
+@import './mixins';
 @import './components/bc-tabs';
 @import './components/bc-list';
 @import './components/bc-checkbox';

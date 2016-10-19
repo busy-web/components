@@ -189,11 +189,20 @@
 					<span class="indent">
 						\{{#bc-tab tabName="tab 1" tabIndex=1}}<br />
 							<span class="indent">tab 1 content</span><br />
-						\{{/bc-tab}}<br /><br />
-
-						\{{#bc-tab tabName="tab 2" tabIndex=2 badgeContent="2" badgeColor="red"}}<br />
+						\{{/bc-tab}}<br />
+						<br />
+						\{{#bc-tab tabName="tab 2" tabIndex=2 showBadge=true badgeColor="green"}}<br />
 							<span class="indent">tab 2 content</span><br />
-						\{{/bc-tab}}
+						\{{/bc-tab}}<br />
+						<br />
+						\{{#bc-tab tabName="tab 3" tabIndex=3 showBadge=true badgeContent="3" badgeColor="blue"}}<br />
+							<span class="indent">tab 3 content</span><br />
+						\{{/bc-tab}}<br />
+						<br />
+						\{{#bc-tab tabName="tab 4" tabIndex=4 showBadge=true badgeContent="!" badgeColor="red"}}<br />
+							<span class="indent">tab 4 content</span><br />
+						\{{/bc-tab}}<br />
+						<br />
 					</span><br />
 				\{{/bc-tabs}}
 			</code>
@@ -203,8 +212,14 @@
 					{{#bc-tab tabName="tab 1" tabIndex=1}}
 						tab 1 content
 					{{/bc-tab}}
-					{{#bc-tab tabName="tab 2" tabIndex=2 badgeContent="2" badgeColor="red"}}
+					{{#bc-tab tabName="tab 2" tabIndex=2 showBadge=true badgeColor="green"}}
 						tab 2 content
+					{{/bc-tab}}
+					{{#bc-tab tabName="tab 3" tabIndex=3 showBadge=true badgeContent="3" badgeColor="blue"}}
+						tab 3 content
+					{{/bc-tab}}
+					{{#bc-tab tabName="tab 4" tabIndex=4 showBadge=true badgeContent="!" badgeColor="red"}}
+						tab 4 content
 					{{/bc-tab}}
 				{{/bc-tabs}}
 			</span>

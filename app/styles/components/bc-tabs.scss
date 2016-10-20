@@ -40,12 +40,13 @@
 
 			.bc-tabs-badge {
 				@include bc-vendorize(border-radius, 5px);
-				font: 9px/1 $ft-norm;
+				font: 9px/13px $ft-norm;
+				height: 13px;
 				position: absolute;
 				top: 0;
 				right: 4px;
 				color: $bc-color-7;
-				padding: 2px 6px;
+				padding: 0 6px;
 
 				background-color: $bc-color-11;
 

@@ -18,10 +18,8 @@ export default Ember.Component.extend(
 	badgeContent: null,
 	badgeColor: null,
 
-	init: function()
-	{
+	init() {
 		this._super();
-
 		this.registerTab();
 	},
 
@@ -29,16 +27,11 @@ export default Ember.Component.extend(
 	 * @public
 	 * @method registerTab
 	 */
-	registerTab: function()
-	{
-		if(!Ember.isNone(this.get('tabName')) && !Ember.isNone(this.get('parentView')))
-		{
+	registerTab() {
+		if (!Ember.isNone(this.get('tabName')) && !Ember.isNone(this.get('parentView'))) {
 			this.get('parentView').addTab(this);
-		}
-		else
-		{
-			Ember.run.next(this, function()
-			{
+		} else {
+			Ember.run.next(this, function() {
 				this.registerTab();
 			});
 		}
@@ -48,16 +41,11 @@ export default Ember.Component.extend(
 	 * @public
 	 * @method triggerShowTab
 	 */
-	triggerShowTab: function()
-	{
-		if(this.get('_state') === 'inDOM')
-		{
+	triggerShowTab() {
+		if (!this.get('isDestroyed')) {
 			this.showTab();
-		}
-		else
-		{
-			Ember.run.next(this, function()
-			{
+		} else {
+			Ember.run.next(this, function() {
 				this.triggerShowTab();
 			});
 		}
@@ -67,17 +55,13 @@ export default Ember.Component.extend(
 	 * @public
 	 * @method showTab
 	 */
-	showTab: function()
-	{
-		if(!Ember.isNone(this.get('onShowTab')))
-		{
+	showTab() {
+		if (!Ember.isNone(this.get('onShowTab'))) {
 			var onShowTab = this.get('onShowTab');
 			var children = this.get('childViews');
-			Ember.$.each(children, function(k, v)
-			{
+			Ember.$.each(children, function(k, v) {
 				var actions = v.get('actions');
-				if(children.hasOwnProperty(k) && actions[onShowTab])
-				{
+				if (children.hasOwnProperty(k) && actions[onShowTab]) {
 					v.send(onShowTab);
 				}
 			});
@@ -85,13 +69,10 @@ export default Ember.Component.extend(
 	},
 
 	actions: {
-		openAccordian: function()
-		{
+		openAccordian() {
 			var isOpen = !this.get('open');
 			this.set('open', isOpen);
-
-			if(isOpen)
-			{
+			if (isOpen) {
 				this.showTab();
 			}
 		}

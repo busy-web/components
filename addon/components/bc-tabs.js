@@ -38,103 +38,76 @@ export default Ember.Component.extend(
 
 	defaultTab: '',
 
-	init: function()
-	{
+	init() {
 		this._super();
-
 		this.set('_tabs', Ember.A());
 
 		var _this = this;
-		window.onhashchange = function()
-		{
+		window.onhashchange = function() {
 			_this.handleHash();
 		};
 	},
 
-	handleHash: function()
-	{
+	handleHash() {
 		var hash = window.location.hash;
-		if(!Ember.isEmpty(hash) && hash.match(/^#tab-/))
-		{
+		if (!Ember.isEmpty(hash) && hash.match(/^#tab-/)) {
 			this.checkHash(hash.replace(/^#tab-/, '').trim());
-		}
-		else if(!Ember.isEmpty(this.get('defaultTab')))
-		{
+		} else if (!Ember.isEmpty(this.get('defaultTab'))) {
 			this.checkHash(this.get('defaultTab'));
 		}
 	},
 
-	checkHash: function(hash)
-	{
-		if(this.get('model.length') > 0)
-		{
+	checkHash(hash) {
+		if (this.get('model.length') > 0) {
 			this.openTab(hash);
-		}
-		else
-		{
-			Ember.run.next(this, function()
-			{
+		} else {
+			Ember.run.next(this, function() {
 				this.checkHash(hash);
 			});
 		}
 	},
 
-	openTab: function(tabName, isClick)
-	{
+	openTab(tabName, isClick) {
 		var _this = this;
 		var tabs = this.get('model');
 		var didShowTab = false;
-		Ember.$.each(tabs, function(key,value)
-		{
-			if(tabs.hasOwnProperty(key))
-			{
-				if(value.get('active') || value.get('open'))
-				{
+		Ember.$.each(tabs, function(key,value) {
+			if (tabs.hasOwnProperty(key)) {
+				if (value.get('active') || value.get('open')) {
 					value.set('active', false);
 					value.set('open', false);
 				}
 
-				if(tabName === Ember.String.dasherize(value.get('tabName').trim()))
-				{
-					if(tabName !== _this.get('defaultTab'))
-					{
+				if (tabName === Ember.String.dasherize(value.get('tabName').trim())) {
+					if (tabName !== _this.get('defaultTab')) {
 						window.history.replaceState('', document.title, window.location.pathname + '#tab-' + tabName);
-					}
-					else if(isClick)
-					{
+					} else if (isClick) {
 						window.history.replaceState('', document.title, window.location.pathname);
 					}
 
-					if(!value.get('active') || !value.get('open'))
-					{
+					if (!value.get('active') || !value.get('open')) {
 						value.set('active', true);
 						value.set('open', true);
 						value.triggerShowTab();
 					}
-
 					didShowTab = true;
 				}
 			}
 		});
 
-		if(!didShowTab)
-		{
+		if (!didShowTab) {
 			this.showDefault();
 		}
 	},
 
-	addTab: function(tab)
-	{
+	addTab(tab) {
 		this.get('_tabs').pushObject(tab);
 	},
 
-	renderTabs: function()
-	{
+	renderTabs() {
 		var tabArray = this.get('_tabs').sortBy('tabIndex');
-		tabArray.forEach(function(item)
-		{
-			if(item.get('active') || item.get('open'))
-			{
+		tabArray.forEach(function(item) {
+			if (item.get('active') || item.get('open')) {
 				item.set('active', false);
 				item.set('open', false);
 			}
@@ -142,8 +115,7 @@ export default Ember.Component.extend(
 
 		// set a default tab
 		var defaultTab = tabArray.objectAt(0);
-		if(!Ember.isNone(defaultTab))
-		{
+		if (!Ember.isNone(defaultTab)) {
 			this.set('defaultTab', Ember.String.dasherize(defaultTab.get('tabName').trim()));
 		}
 
@@ -171,23 +143,18 @@ export default Ember.Component.extend(
 	 * @method shouldRenderTabs
 	 * @return {void}
 	 */
-	shouldRenderTabs: Ember.observer('_tabs.[]', function()
-	{
-		if(!Ember.isNone(this.get('_tabs')) && this.get('_tabs.length') > 0)
-		{
+	shouldRenderTabs: Ember.observer('_tabs.[]', function() {
+		if (!Ember.isNone(this.get('_tabs')) && this.get('_tabs.length') > 0) {
 			// remove the current timeout before setting a new timeout
-			if(!Ember.isNone(this.get('renderTimeout')))
-			{
+			if (!Ember.isNone(this.get('renderTimeout'))) {
 				window.clearTimeout(this.get('renderTimeout'));
 			}
 
 			// create a timeout to call the renderTabs method
 			// if the shouldRenderTabs observer doesnt fire again before
 			// it gets the chance
-			var _this = this;
-			var timeout = window.setTimeout(function()
-			{
-				_this.renderTabs();
+			const timeout = window.setTimeout(() => {
+				this.renderTabs();
 			}, 10);
 
 			// save the timeout
@@ -195,11 +162,10 @@ export default Ember.Component.extend(
 		}
 	}),
 
-	showDefault: function()
-	{
+	showDefault() {
 		var tab = this.get('model').objectAt(0);
-			tab.set('active', true);
-			tab.set('open', true);
+		tab.set('active', true);
+		tab.set('open', true);
 
 		var tabName = Ember.String.dasherize(tab.get('tabName').trim());
 		this.set('defaultTab', tabName);

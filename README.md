@@ -3,6 +3,9 @@
 [![Build Status](https://travis-ci.org/busybusy/webapp-busy-components.svg?branch=master)](https://travis-ci.org/busybusy/webapp-busy-components)
 [![Ember Observer Score](https://emberobserver.com/badges/busy-components.svg)](https://emberobserver.com/addons/busy-components)
 [![Ember badge][ember-badge]][embadge]
+[![Code Climate](https://codeclimate.com/github/busybusy/webapp-busy-components/badges/gpa.svg)](https://codeclimate.com/github/busybusy/webapp-busy-components)
+[![Test Coverage](https://codeclimate.com/github/busybusy/webapp-busy-components/badges/coverage.svg)](https://codeclimate.com/github/busybusy/webapp-busy-components/coverage)
+[![Issue Count](https://codeclimate.com/github/busybusy/webapp-busy-components/badges/issue_count.svg)](https://codeclimate.com/github/busybusy/webapp-busy-components)
 
 
 This README outlines the details of collaborating on this Ember addon.

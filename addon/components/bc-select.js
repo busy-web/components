@@ -1,15 +1,17 @@
 /**
- * @module components
+ * @module Components
  *
  */
 import Ember from 'ember';
+import { Assert, loc } from 'busy-utils';
+import layout from '../templates/components/bc-select';
 
 /**
- * `Component/Select`
- *
- * @class BcSelect
- *
+ * `Component/BCSelect`
  * Component select menu for displaying a list of items to a user.
+ *
+ * @class BCSelect
+ * @namespace Components
  *
  * @property model {array} Array of key-value pair objects
  * @property itemLabel {string} The key of the key-value pair to display in the option list.
@@ -20,6 +22,7 @@ import Ember from 'ember';
  * @property targetObject {object} The View where the onSelect function can be called. `Default: controller`
  */
 export default Ember.Component.extend({
+	layout,
 	tagName: 'select-menu',
 
 	classNames: ['bc-select'],
@@ -35,10 +38,14 @@ export default Ember.Component.extend({
 	isOpen: false,
 	isTop: false,
 	small: false,
-
-	content: null,
+	openTop: false,
 
 	model: null,
+
+	init() {
+		this._super();
+		this.setModel();
+	},
 
 	/**
 	 * internal use to track the current selected item from the list
@@ -48,7 +55,7 @@ export default Ember.Component.extend({
 	 * @type object
 	 */
 	selectedItem: Ember.computed('model.@each._selected', 'model.[]', function() {
-		var selected = null;
+		let selected = null;
 		if (!Ember.isNone(this.get('model'))) {
 			selected = this.getSelected();
 		}
@@ -56,9 +63,8 @@ export default Ember.Component.extend({
 	}),
 
 	getSelected() {
-		var items = this.get('model');
-		var selected = null;
-
+		const items = this.get('model');
+		let selected = null;
 		if (typeof items === 'object' && typeof items.forEach === 'function') {
 			items.forEach(item => {
 				if (Ember.get(item, '_selected')) {
@@ -76,15 +82,14 @@ export default Ember.Component.extend({
 	},
 
 	itemLabel: '',
-	defaultLabel: 'Select',
-
+	defaultLabel: loc('Select'),
 	defaultFirstOption: false,
 
 	menuTitle: Ember.computed('selectedItem', function() {
-		var label = this.get('defaultLabel');
-		var selectedItem = this.get('selectedItem');
+		let label = this.get('defaultLabel');
+		let selectedItem = this.get('selectedItem');
 
-		Ember.assert('"itemLabel" must be set to a property of the model', !Ember.isEmpty(this.get('itemLabel')));
+		Assert.test('"itemLabel" must be set to a property of the model', !Ember.isEmpty(this.get('itemLabel')));
 
 		if (!Ember.isNone(selectedItem)) {
 			label = Ember.get(selectedItem, this.get('itemLabel'));
@@ -95,23 +100,39 @@ export default Ember.Component.extend({
 		return label;
 	}),
 
+	/**
+	 * click event handler
+	 *
+	 * @private
+	 * @method click
+	 * @returns {void}
+	 */
+	click() {
+		if (!this.get('isOpen')) {
+			this.openMenuAction();
+		} else {
+			this.closeMenuAction();
+		}
+	},
+
 	checkPosition(elem) {
-		var isBottom = false;
+		let isBottom = false;
 		if (elem === undefined || elem.get(0).tagName === 'HTML') {
 			return isBottom;
 		}
 
-		var overflow = window.getComputedStyle(elem.get(0))['overflow-y'];
-		var hasOverflow = (overflow === 'auto' || overflow === 'scroll');
+		const overflow = window.getComputedStyle(elem.get(0))['overflow-y'];
+		const hasOverflow = (overflow === 'auto' || overflow === 'scroll');
 
-		if (hasOverflow) {
-			var menuHeightTop = (elem.height() - (elem.height() - this.$().position().top)) - (elem.position().top + 20);
-			var menuHeightBot = (elem.height() - this.$().position().top);
-			var maxHeight = parseInt(window.getComputedStyle(this.$('.select-container').get(0))['max-height'], 10);
+		if (hasOverflow || elem.get(0).tagName === 'BODY') {
+			let menuHeightTop = elem.height() - (elem.height() - (this.$().offset().top - elem.offset().top)) - 20; // height of the container minus the the bottom space from the top of the button.
+			let menuHeightBot = elem.height() - ((this.$().offset().top + this.$().height()) - elem.offset().top) - 20; // height of the container minus the bottom of the select button.
+			const maxHeight = parseInt(window.getComputedStyle(this.$('.select-container').get(0))['max-height'], 10);
 
 			if (menuHeightBot < maxHeight) {
 				if (menuHeightTop > menuHeightBot) {
 					isBottom = true;
+
 					if (menuHeightTop < maxHeight) {
 						menuHeightTop = menuHeightTop > 150 ? menuHeightTop : 150;
 						this.$('.select-container').css('max-height', menuHeightTop);
@@ -136,26 +157,33 @@ export default Ember.Component.extend({
 	 * @returns {void}
 	 */
 	openMenuAction() {
-		var view = this;
+		const $body = Ember.$('body');
+
 		// trigger other select-menu's to close
-		Ember.$('body').trigger('click.bc-select');
+		$body.trigger('click.bc-select');
+
 		this.set('isOpen', true);
 
-		if (this.checkPosition(this.$())) {
+		if (this.get('openTop')) {
 			this.set('isTop', true);
 		} else {
-			this.set('isTop', false);
+			if (this.checkPosition(this.$())) {
+				this.set('isTop', true);
+			} else {
+				this.set('isTop', false);
+			}
 		}
 
 		// add event listener to close the menu
-		Ember.$('body').bind('click.bc-select', function(e) {
-			if (view.get('_state') !== 'destroying') {
-				var el = Ember.$(e.target);
-				if (view.$().attr('id') !== el.attr('id')) {
-					view.closeMenuAction();
+		$body.bind('click.bc-select', (e) => {
+			if (!this.get('isDestroyed')) {
+				const $el = Ember.$(e.target);
+
+				if (this.$().attr('id') !== $el.attr('id')) {
+					this.closeMenuAction();
 				}
 			} else {
-				Ember.$('body').unbind('click.bc-select');
+				$body.unbind('click.bc-select');
 			}
 		});
 	},
@@ -174,7 +202,7 @@ export default Ember.Component.extend({
 	},
 
 	unselectAll() {
-		var items = this.get('model');
+		const items = this.get('model');
 		if (typeof items === 'object' && typeof items.forEach === 'function') {
 			items.forEach(item => {
 				Ember.set(item, '_selected', false);
@@ -205,28 +233,13 @@ export default Ember.Component.extend({
 		this.closeMenuAction();
 	},
 
-	toggleMenu() {
-		if (!this.get('isOpen')) {
-			this.openMenuAction();
-		} else {
-			this.closeMenuAction();
-		}
-	},
-
-	/**
-	 * click event handler
-	 *
-	 * @private
-	 * @method click
-	 * @returns {void}
-	 */
-	click() {
-		this.toggleMenu();
-	},
-
 	actions: {
 		openMenu() {
-			this.toggleMenu();
+			if (!this.get('isOpen')) {
+				this.openMenuAction();
+			} else {
+				this.closeMenuAction();
+			}
 		},
 
 		closeMenu() {

@@ -71,6 +71,10 @@ $off-white: #eee;
 			z-index: 10;
 			overflow-y: auto;
 
+			&.all {
+				min-width: 300px;
+			}
+
 			& > li {
 				width: 100%;
 				height: 36px;
@@ -99,14 +103,16 @@ $off-white: #eee;
 					font: 15px/36px $ft-bold;
 					cursor: default;
 				}
+
+				&.selected {
+					color: $busy-color-1;
+				}
 			}
 		}
 	}
 
 	&.top {
-
 		& > ul {
-
 			&.select-container {
 				top: auto;
 				bottom: 42px;
@@ -118,7 +124,6 @@ $off-white: #eee;
 		float: left;
 
 		& > ul {
-
 			&.select-container {
 				right: initial;
 				left: 0;
@@ -130,12 +135,10 @@ $off-white: #eee;
 		width: 100%;
 
 		& > a {
-
 			&.d-button {
 				width: 100%;
 				text-align: left;
 			}
-
 		}
 
 		& > ul {
@@ -151,16 +154,13 @@ $off-white: #eee;
 	}
 
 	&.active {
-
 		& > a {
-
 			&.d-button {
 				background: $bc-color-16;
 			}
 		}
 
 		& > ul {
-
 			&.select-container {
 				display: block;
 			}
@@ -191,7 +191,6 @@ $off-white: #eee;
 			}
 
 			&:hover {
-
 				& > span {
 					background: $bc-color-11;
 				}
@@ -208,16 +207,13 @@ $off-white: #eee;
 		}
 
 		a {
-
 			&.d-button {
 				display: none;
 			}
 		}
 
 		&.top {
-
 			& > ul {
-
 				&.select-container {
 					top: auto;
 					bottom: 33px;
@@ -248,7 +244,6 @@ $off-white: #eee;
 		}
 
 		a {
-
 			&.d-button {
 				display: none;
 			}
@@ -261,16 +256,13 @@ $off-white: #eee;
 		width: 100%;
 
 		& > a {
-
 			&.d-button {
 				width: 100%;
 				text-align: left;
 			}
-
 		}
 
 		& > ul {
-
 			&.select-container {
 				width: 100%;
 				min-width: initial;

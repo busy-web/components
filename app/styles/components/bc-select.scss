@@ -105,7 +105,15 @@ $off-white: #eee;
 				}
 
 				&.selected {
-					color: $busy-color-1;
+					color: $bc-color-1;
+				}
+			}
+
+			&.hl-disabled {
+				& > li {
+					&.selected {
+						color: $bc-color-17;
+					}
 				}
 			}
 		}

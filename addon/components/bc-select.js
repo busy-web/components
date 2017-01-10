@@ -39,13 +39,9 @@ export default Ember.Component.extend({
 	isTop: false,
 	small: false,
 	openTop: false,
+	highlightSlected: true,
 
 	model: null,
-
-	init() {
-		this._super();
-		this.setModel();
-	},
 
 	/**
 	 * internal use to track the current selected item from the list

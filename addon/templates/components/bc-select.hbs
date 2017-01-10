@@ -9,7 +9,7 @@
 	<span class="c-icon download-icon"></span>
 </div>
 
-<ul class="select-container" {{action "closeMenu" bubbles=false}}>
+<ul class="select-container{{if highlightSlected '' ' hl-disabled'}}" {{action "closeMenu" bubbles=false}}>
 	{{#each model as |item|}}
 		<li class="{{if item._selected 'selected'}}{{if item._unselectable ' unselectable'}}" {{action 'clickItemAction' item bubbles=false}}>
 			{{get-value item itemLabel}}

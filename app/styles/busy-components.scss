@@ -21,6 +21,13 @@
 	@include bc-vendorize(animation, #{$str});
 }
 
+@mixin bc-background-image($value) {
+	background-image: -webkit-#{$value};
+	background-image: -moz-#{$value};
+	background-image: -ms-#{$value};
+	background-image: -o-#{$value};
+}
+
 /*!
  * main scss app file
  *

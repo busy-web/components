@@ -28,8 +28,8 @@
 	&.minimal {
 		& > div {
 			border: 0;
-			background: 0;
-			box-shadow: 0;
+			background: none;
+			box-shadow: none;
 		}
 	}
 

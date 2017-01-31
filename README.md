@@ -97,4 +97,4 @@ For more information on using ember-cli, visit [http://ember-cli.com/](http://em
 * `bower install`
 
 [embadge]: http://embadge.io/
-[ember-badge]: http://embadge.io/v1/badge.svg?start=2.6.0
+[ember-badge]: http://embadge.io/v1/badge.svg?start=2.11.0

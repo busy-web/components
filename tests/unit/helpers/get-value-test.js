@@ -6,7 +6,7 @@ module('Unit | Helper | get value');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  let result = getValue([42]);
-  assert.ok(result);
+  let result = getValue([{test:"test"}, "test"]);
+  assert.ok(result === "test");
 });
 

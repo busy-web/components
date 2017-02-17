@@ -111,7 +111,7 @@ export default Ember.Component.extend(
 	},
 
 	renderTabs() {
-		var tabArray = this.get('_tabs').sortBy('tabIndex');
+		var tabArray = (this.get('_tabs') || []).sortBy('tabIndex');
 		tabArray.forEach(function(item) {
 			if (item.get('active') || item.get('open')) {
 				item.set('active', false);

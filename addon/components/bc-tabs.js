@@ -101,7 +101,13 @@ export default Ember.Component.extend(
 	},
 
 	addTab(tab) {
-		this.get('_tabs').pushObject(tab);
+		if (this.get('_tabs').indexOf(tab) === -1) {
+			this.get('_tabs').pushObject(tab);
+		}
+	},
+
+	removeTab(tab) {
+		this.get('_tabs').removeObject(tab);
 	},
 
 	renderTabs() {
@@ -174,9 +180,8 @@ export default Ember.Component.extend(
 	},
 
 	actions: {
-		changeTab: function (tab)
-		{
-			var tabName = Ember.String.dasherize(tab.get('tabName').trim());
+		changeTab(tab) {
+			const tabName = Ember.String.dasherize(tab.get('tabName').trim());
 			this.openTab(tabName, true);
 		}
 	}

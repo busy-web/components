@@ -18,11 +18,6 @@ export default Ember.Component.extend(
 	badgeContent: null,
 	badgeColor: null,
 
-	init() {
-		this._super();
-		this.registerTab();
-	},
-
 	/**
 	 * @public
 	 * @method registerTab
@@ -34,6 +29,12 @@ export default Ember.Component.extend(
 			Ember.run.next(this, function() {
 				this.registerTab();
 			});
+		}
+	},
+
+	unregisterTab() {
+		if (!Ember.isNone(this.get('tabName')) && !Ember.isNone(this.get('parentView'))) {
+			this.get('parentView').removeTab(this);
 		}
 	},
 
@@ -67,6 +68,14 @@ export default Ember.Component.extend(
 			});
 		}
 	},
+
+	didRender: Ember.on('willInsertElement', function() {
+		this.registerTab();
+	}),
+
+	didDestroy: Ember.on('willDestroyElement', function() {
+		this.unregisterTab();
+	}),
 
 	actions: {
 		openAccordian() {

@@ -290,7 +290,7 @@ $image-size: 40px;
 
 						& > .list-extra {
 							@include bc-transition(width .5s ease-in);
-							display: inline-block;
+							display: table-cell;
 							height: 100%;
 
 							& > .select {

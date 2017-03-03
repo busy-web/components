@@ -101,26 +101,34 @@ export default Ember.Component.extend(
 	},
 
 	addTab(tab) {
-		this.get('_tabs').pushObject(tab);
+		if (this.get('_tabs').indexOf(tab) === -1) {
+			this.get('_tabs').pushObject(tab);
+		}
+	},
+
+	removeTab(tab) {
+		this.get('_tabs').removeObject(tab);
 	},
 
 	renderTabs() {
-		var tabArray = this.get('_tabs').sortBy('tabIndex');
-		tabArray.forEach(function(item) {
-			if (item.get('active') || item.get('open')) {
-				item.set('active', false);
-				item.set('open', false);
+		if (!this.get('isDestroyed')) {
+			var tabArray = (this.get('_tabs') || []).sortBy('tabIndex');
+			tabArray.forEach(function(item) {
+				if (item.get('active') || item.get('open')) {
+					item.set('active', false);
+					item.set('open', false);
+				}
+			});
+
+			// set a default tab
+			var defaultTab = tabArray.objectAt(0);
+			if (!Ember.isNone(defaultTab)) {
+				this.set('defaultTab', Ember.String.dasherize(defaultTab.get('tabName').trim()));
 			}
-		});
 
-		// set a default tab
-		var defaultTab = tabArray.objectAt(0);
-		if (!Ember.isNone(defaultTab)) {
-			this.set('defaultTab', Ember.String.dasherize(defaultTab.get('tabName').trim()));
+			this.set('model', tabArray);
+			this.handleHash();
 		}
-
-		this.set('model', tabArray);
-		this.handleHash();
 	},
 
 	/**
@@ -157,8 +165,10 @@ export default Ember.Component.extend(
 				this.renderTabs();
 			}, 10);
 
-			// save the timeout
-			this.set('renderTimeout', timeout);
+			if (!this.get('isDestroyed')) {
+				// save the timeout
+				this.set('renderTimeout', timeout);
+			}
 		}
 	}),
 
@@ -174,9 +184,8 @@ export default Ember.Component.extend(
 	},
 
 	actions: {
-		changeTab: function (tab)
-		{
-			var tabName = Ember.String.dasherize(tab.get('tabName').trim());
+		changeTab(tab) {
+			const tabName = Ember.String.dasherize(tab.get('tabName').trim());
 			this.openTab(tabName, true);
 		}
 	}

@@ -88,14 +88,14 @@ export default Ember.Component.extend(
 	}),
 
 	isLoading: Ember.computed('model', 'model.isLoaded', 'model.[]', 'model.length', function() {
-		 if (!Ember.isNone(this.get('model'))) {
-				 if (this.get('model.isLoaded') === true) {
-						 return false;
-				 } else if(Ember.isNone(this.get('model.isLoaded'))) {
-						 return false;
-				 }
-		 }
-		 return true;
+		if (!Ember.isNone(this.get('model'))) {
+			if (this.get('model.isLoaded') === true) {
+				return false;
+			} else if(Ember.isNone(this.get('model.isLoaded'))) {
+				return false;
+			}
+		}
+		return true;
 	}),
 
 	modelChange: Ember.observer('model.@each.id', function()

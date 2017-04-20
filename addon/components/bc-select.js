@@ -23,7 +23,6 @@ import layout from '../templates/components/bc-select';
  */
 export default Ember.Component.extend({
 	layout,
-	tagName: 'select-menu',
 
 	classNames: ['bc-select'],
 	classNameBindings: ['isOpen:active', 'isTop:top', 'small'],

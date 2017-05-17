@@ -21,6 +21,13 @@
 	@include bc-vendorize(animation, #{$str});
 }
 
+@mixin bc-background-image($value) {
+	background-image: -webkit-#{$value};
+	background-image: -moz-#{$value};
+	background-image: -ms-#{$value};
+	background-image: -o-#{$value};
+}
+
 /*!
  * main scss app file
  *
@@ -33,5 +40,6 @@
 @import './components/bc-input';
 @import './components/bc-validate';
 @import './components/bc-section-half';
+@import './components/bc-select';
 @import './components/bc-title';
 @import './components/bc-loading';

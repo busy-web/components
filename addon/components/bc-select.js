@@ -1,15 +1,17 @@
 /**
- * @module components
+ * @module Components
  *
  */
 import Ember from 'ember';
+import { Assert, loc } from 'busy-utils';
+import layout from '../templates/components/bc-select';
 
 /**
- * `Component/Select`
- *
- * @class BcSelect
- *
+ * `Component/BCSelect`
  * Component select menu for displaying a list of items to a user.
+ *
+ * @class BCSelect
+ * @namespace Components
  *
  * @property model {array} Array of key-value pair objects
  * @property itemLabel {string} The key of the key-value pair to display in the option list.
@@ -19,9 +21,8 @@ import Ember from 'ember';
  * @property onSelect {string} The function name to call when an item is selected. onSelect will pass the selected item to the listener.
  * @property targetObject {object} The View where the onSelect function can be called. `Default: controller`
  */
-export default Ember.Component.extend(
-{
-	tagName: 'select-menu',
+export default Ember.Component.extend({
+	layout,
 
 	classNames: ['bc-select'],
 	classNameBindings: ['isOpen:active', 'isTop:top', 'small'],
@@ -36,8 +37,8 @@ export default Ember.Component.extend(
 	isOpen: false,
 	isTop: false,
 	small: false,
-
-	content: null,
+	openTop: false,
+	highlightSlected: true,
 
 	model: null,
 
@@ -48,67 +49,49 @@ export default Ember.Component.extend(
 	 * @property selectedItem
 	 * @type object
 	 */
-	selectedItem: Ember.computed('model.@each._selected', 'model.[]', function()
-	{
-		var selected = null;
-		if(!Ember.isNone(this.get('model')))
-		{
+	selectedItem: Ember.computed('model.@each._selected', 'model.[]', function() {
+		let selected = null;
+		if (!Ember.isNone(this.get('model'))) {
 			selected = this.getSelected();
 		}
 		return selected;
 	}),
 
-	getSelected: function()
-	{
-		var items = this.get('model');
-		var selected = null;
-
-		if(typeof items === 'object' && typeof items.forEach === 'function')
-		{
-			items.forEach(function(item)
-			{
-				if(Ember.get(item, '_selected'))
-				{
+	getSelected() {
+		const items = this.get('model');
+		let selected = null;
+		if (typeof items === 'object' && typeof items.forEach === 'function') {
+			items.forEach(item => {
+				if (Ember.get(item, '_selected')) {
 					selected = item;
 				}
 			});
-		}
-		else
-		{
-			Object.keys(items).forEach(function(key)
-			{
-				if(Ember.get(items[key], '_selected'))
-				{
+		} else {
+			Object.keys(items).forEach(key => {
+				if (Ember.get(items[key], '_selected')) {
 					selected = items[key];
 				}
 			});
 		}
-
 		return selected;
 	},
 
 	itemLabel: '',
-	defaultLabel: 'Select',
-
+	defaultLabel: loc('Select'),
 	defaultFirstOption: false,
 
-	menuTitle: Ember.computed('selectedItem', function()
-	{
-		var label = this.get('defaultLabel');
-		var selectedItem = this.get('selectedItem');
+	menuTitle: Ember.computed('selectedItem', function() {
+		let label = this.get('defaultLabel');
+		let selectedItem = this.get('selectedItem');
 
-		Ember.assert('"itemLabel" must be set to a property of the model', !Ember.isEmpty(this.get('itemLabel')));
+		Assert.test('"itemLabel" must be set to a property of the model', !Ember.isEmpty(this.get('itemLabel')));
 
-		if(!Ember.isNone(selectedItem))
-		{
+		if (!Ember.isNone(selectedItem)) {
 			label = Ember.get(selectedItem, this.get('itemLabel'));
-		}
-		else if(this.get('defaultFirstOption'))
-		{
+		} else if (this.get('defaultFirstOption')) {
 			selectedItem = this.get('model').objectAt(0);
 			label = Ember.get(selectedItem, this.get('itemLabel'));
 		}
-
 		return label;
 	}),
 
@@ -119,57 +102,43 @@ export default Ember.Component.extend(
 	 * @method click
 	 * @returns {void}
 	 */
-	click: function()
-	{
-		if(!this.get('isOpen'))
-		{
+	click() {
+		if (!this.get('isOpen')) {
 			this.openMenuAction();
-		}
-		else
-		{
+		} else {
 			this.closeMenuAction();
 		}
 	},
 
-	checkPosition: function(elem)
-	{
-		var isBottom = false;
-		if(elem === undefined || elem.get(0).tagName === 'HTML')
-		{
+	checkPosition(elem) {
+		let isBottom = false;
+		if (elem === undefined || elem.get(0).tagName === 'HTML') {
 			return isBottom;
 		}
 
-		var overflow = window.getComputedStyle(elem.get(0))['overflow-y'];
-		var hasOverflow = (overflow === 'auto' || overflow === 'scroll');
+		const overflow = window.getComputedStyle(elem.get(0))['overflow-y'];
+		const hasOverflow = (overflow === 'auto' || overflow === 'scroll');
 
-		if(hasOverflow)
-		{
-			var menuHeightTop = (elem.height() - (elem.height() - this.$().position().top)) - (elem.position().top + 20);
-			var menuHeightBot = (elem.height() - this.$().position().top);
-			var maxHeight = parseInt(window.getComputedStyle(this.$('.select-container').get(0))['max-height'], 10);
+		if (hasOverflow || elem.get(0).tagName === 'BODY') {
+			let menuHeightTop = elem.height() - (elem.height() - (this.$().offset().top - elem.offset().top)) - 20; // height of the container minus the the bottom space from the top of the button.
+			let menuHeightBot = elem.height() - ((this.$().offset().top + this.$().height()) - elem.offset().top) - 20; // height of the container minus the bottom of the select button.
+			const maxHeight = parseInt(window.getComputedStyle(this.$('.select-container').get(0))['max-height'], 10);
 
-			if(menuHeightBot < maxHeight)
-			{
-				if(menuHeightTop > menuHeightBot)
-				{
+			if (menuHeightBot < maxHeight) {
+				if (menuHeightTop > menuHeightBot) {
 					isBottom = true;
-					if(menuHeightTop < maxHeight)
-					{
+
+					if (menuHeightTop < maxHeight) {
 						menuHeightTop = menuHeightTop > 150 ? menuHeightTop : 150;
 						this.$('.select-container').css('max-height', menuHeightTop);
 					}
-				}
-				else
-				{
+				} else {
 					menuHeightBot = menuHeightBot > 150 ? menuHeightBot : 150;
 					this.$('.select-container').css('max-height', menuHeightBot);
 				}
 			}
-
 			return isBottom;
-		}
-		else
-		{
+		} else {
 			return this.checkPosition(elem.parent());
 		}
 	},
@@ -182,39 +151,34 @@ export default Ember.Component.extend(
 	 * @method openMenuAction
 	 * @returns {void}
 	 */
-	openMenuAction: function()
-	{
-		var view = this;
+	openMenuAction() {
+		const $body = Ember.$('body');
 
 		// trigger other select-menu's to close
-		Ember.$('body').trigger('click.bc-select');
+		$body.trigger('click.bc-select');
 
 		this.set('isOpen', true);
 
-		if(this.checkPosition(this.$()))
-		{
+		if (this.get('openTop')) {
 			this.set('isTop', true);
-		}
-		else
-		{
-			this.set('isTop', false);
+		} else {
+			if (this.checkPosition(this.$())) {
+				this.set('isTop', true);
+			} else {
+				this.set('isTop', false);
+			}
 		}
 
 		// add event listener to close the menu
-		Ember.$('body').bind('click.bc-select', function(e)
-		{
-			if(view.get('_state') !== 'destroying')
-			{
-				var el = Ember.$(e.target);
+		$body.bind('click.bc-select', (e) => {
+			if (!this.get('isDestroyed')) {
+				const $el = Ember.$(e.target);
 
-				if(view.$().attr('id') !== el.attr('id'))
-				{
-					view.closeMenuAction();
+				if (this.$().attr('id') !== $el.attr('id')) {
+					this.closeMenuAction();
 				}
-			}
-			else
-			{
-				Ember.$('body').unbind('click.bc-select');
+			} else {
+				$body.unbind('click.bc-select');
 			}
 		});
 	},
@@ -227,26 +191,19 @@ export default Ember.Component.extend(
 	 * @method closeMenuAction
 	 * @returns {void}
 	 */
-	closeMenuAction: function()
-	{
+	closeMenuAction() {
 		this.set('isOpen', false);
 		Ember.$('body').unbind('click.bc-select');
 	},
 
-	unselectAll: function()
-	{
-		var items = this.get('model');
-		if(typeof items === 'object' && typeof items.forEach === 'function')
-		{
-			items.forEach(function(item)
-			{
+	unselectAll() {
+		const items = this.get('model');
+		if (typeof items === 'object' && typeof items.forEach === 'function') {
+			items.forEach(item => {
 				Ember.set(item, '_selected', false);
 			});
-		}
-		else
-		{
-			Object.keys(items).forEach(function(key)
-			{
+		} else {
+			Object.keys(items).forEach(key => {
 				Ember.set(items[key], '_selected', false);
 			});
 		}
@@ -261,8 +218,7 @@ export default Ember.Component.extend(
 	 * @param item {object} The list item that was clicked
 	 * @returns {void}
 	 */
-	itemClicked: function(item)
-	{
+	itemClicked(item) {
 		this.unselectAll();
 
 		Ember.set(item, '_selected', true);
@@ -273,29 +229,22 @@ export default Ember.Component.extend(
 	},
 
 	actions: {
-		openMenu: function()
-		{
-			if(!this.get('isOpen'))
-			{
+		openMenu() {
+			if (!this.get('isOpen')) {
 				this.openMenuAction();
-			}
-			else
-			{
+			} else {
 				this.closeMenuAction();
 			}
 		},
 
-		closeMenu: function()
-		{
+		closeMenu() {
 			this.closeMenuAction();
 		},
 
-		clickItemAction: function(item)
-		{
-			if (!Ember.get(item, '_unselectable'))
-			{
+		clickItemAction(item) {
+			if (!Ember.get(item, '_unselectable')) {
 				this.itemClicked(item);
 			}
-		},
+		}
 	}
 });

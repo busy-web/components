@@ -23,6 +23,7 @@
 		& > span {
 			@include bc-transition(all .5s ease-in-out);
 			@include bc-box-sizing;
+			position: relative;
 			padding: 15px 16px;
 			float: left;
 			border-bottom: 2px solid transparent;
@@ -35,6 +36,31 @@
 
 			&.active {
 				border-bottom-color: $bc-color-1;
+			}
+
+			.bc-tabs-badge {
+				position: absolute;
+				top: 10px;
+				right: 4px;
+				width: 10px;
+				height: 10px;
+				padding: 0;
+				border-radius: 5px;
+				background-color: $bc-color-11;
+				color: $bc-color-7;
+				font: 9px/13px $ft-norm;
+
+				&.bc-tabs-badge-red {
+					background-color: $bc-color-9;
+				}
+
+				&.bc-tabs-badge-blue {
+					background-color: $bc-color-14;
+				}
+
+				&.bc-tabs-badge-green {
+					background-color: $bc-color-1;
+				}
 			}
 		}
 	}

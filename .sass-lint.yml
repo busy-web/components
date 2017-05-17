@@ -65,14 +65,11 @@ rules:
 
   # enforce the use of hexadecimal color values rather than literals
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/no-color-keywords.md
-  no-color-keywords: 1
+  no-color-keywords: 0
 
   # disallow the use of color literals and basic color functions in any declarations other than variables or maps/lists
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/no-color-literals.md
-  no-color-literals:
-    - 2
-    -
-      allow-rgba: true
+  no-color-literals: 0
 
   # enforce the use of Sass single-line comments and disallow CSS comments.
   # Bang comments (/*! */, will be printed even in minified mode) are still allowed
@@ -232,9 +229,8 @@ rules:
   # enforce an indentation size (in spaces) and ensure that tabs and spaces are not mixed
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/indentation.md
   indentation:
-    - 1
-    -
-      size: 1
+    - 2
+    - size: tab
 
   # enforce whether or not decimal numbers should include a leading zero
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/leading-zero.md
@@ -248,12 +244,13 @@ rules:
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/property-sort-order.md
   property-sort-order:
     - 2
-    -
-      order: smacss
+    - order: smacss
 
   # enforce whether single quotes ('') or double quotes ("") should be used for all strings (defaults single)
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/quotes.md
-  quotes: 2
+  quotes:
+    - 2
+    - style: single
 
   # enforce that values in their shorthand form are as concise as specified
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/shorthand-values.md

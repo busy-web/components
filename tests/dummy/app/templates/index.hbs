@@ -22,7 +22,7 @@
 	</div>
 
 
-	<div class="component">
+	<div class="component" id="bc-checkbox">
 		<header>BC-Checkbox</header>
 
 		<section>
@@ -44,7 +44,7 @@
 			</span>
 		</section>
 	</div>
-	<div class="component">
+	<div class="component" id="bc-radio-button">
 		<header>
 			BC-Radio-Button
 		</header>
@@ -80,7 +80,7 @@
 		</section>
 	</div>
 
-	<div class="component">
+	<div class="component" id="bc-validate">
 		<header>
 			BC-Validate
 		</header>
@@ -109,7 +109,7 @@
 		</section>
 	</div>
 
-	<div class="component">
+	<div class="component" id="bc-list">
 		<header>
 			BC-List
 		</header>
@@ -146,7 +146,7 @@
 			</span>
 		</section>
 	</div>
-	<div class="component">
+	<div class="component" id="bc-title">
 		<header>
 			BC-Title
 		</header>
@@ -170,7 +170,7 @@
 			</span>
 		</section>
 	</div>
-	<div class="component">
+	<div class="component" id="bc-tabs">
 		<header>
 			BC-Tabs
 		</header>
@@ -180,6 +180,8 @@
 			<ul>
 				<li>tabName - title of tab.</li>
 				<li>tabIndex - position of the tab. will default to order of tabs as written.</li>
+				<li>badgeContent - content to put in an optional badge</li>
+				<li>badgeColor - how to style the badge (default, red, blue, green)</li>
 			</ul>
 			Code:
 			<code>
@@ -187,11 +189,20 @@
 					<span class="indent">
 						\{{#bc-tab tabName="tab 1" tabIndex=1}}<br />
 							<span class="indent">tab 1 content</span><br />
-						\{{/bc-tab}}<br /><br />
-
-						\{{#bc-tab tabName="tab 2" tabIndex=2}}<br />
+						\{{/bc-tab}}<br />
+						<br />
+						\{{#bc-tab tabName="tab 2" tabIndex=2 showBadge=true badgeColor="green"}}<br />
 							<span class="indent">tab 2 content</span><br />
-						\{{/bc-tab}}
+						\{{/bc-tab}}<br />
+						<br />
+						\{{#bc-tab tabName="tab 3" tabIndex=3 showBadge=true badgeContent="3" badgeColor="blue"}}<br />
+							<span class="indent">tab 3 content</span><br />
+						\{{/bc-tab}}<br />
+						<br />
+						\{{#bc-tab tabName="tab 4" tabIndex=4 showBadge=true badgeContent="!" badgeColor="red"}}<br />
+							<span class="indent">tab 4 content</span><br />
+						\{{/bc-tab}}<br />
+						<br />
 					</span><br />
 				\{{/bc-tabs}}
 			</code>
@@ -201,14 +212,20 @@
 					{{#bc-tab tabName="tab 1" tabIndex=1}}
 						tab 1 content
 					{{/bc-tab}}
-					{{#bc-tab tabName="tab 2" tabIndex=2}}
+					{{#bc-tab tabName="tab 2" tabIndex=2 showBadge=true badgeColor="green"}}
 						tab 2 content
+					{{/bc-tab}}
+					{{#bc-tab tabName="tab 3" tabIndex=3 showBadge=true badgeContent="3" badgeColor="blue"}}
+						tab 3 content
+					{{/bc-tab}}
+					{{#bc-tab tabName="tab 4" tabIndex=4 showBadge=true badgeContent="!" badgeColor="red"}}
+						tab 4 content
 					{{/bc-tab}}
 				{{/bc-tabs}}
 			</span>
 		</section>
 	</div>
-	<div class="component">
+	<div class="component" id="bc-section-half">
 		<header>
 			BC-Section-Half
 		</header>
@@ -236,7 +253,7 @@
 			</span>
 		</section>
 	</div>
-	<div class="component">
+	<div class="component" id="bc-loading">
 		<header>
 			BC-Loading
 		</header>

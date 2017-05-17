@@ -1,7 +1,12 @@
 
 <div class="tabs">
 	{{#each model as |tab|}}
-		<span class={{if tab.active 'active'}} {{action 'changeTab' tab bubbles=false}}>{{tab.tabName}}</span>
+		<span class={{if tab.active 'active'}} {{action 'changeTab' tab bubbles=false}}>
+			{{tab.tabName}}
+			{{#if tab.showBadge}}
+				<span class="bc-tabs-badge bc-tabs-badge-{{if tab.badgeColor tab.badgeColor 'default'}}">{{tab.badgeContent}}</span>
+			{{/if}}
+		</span>
 	{{/each}}
 </div>
 

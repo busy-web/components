@@ -1,0 +1,18 @@
+
+<select class="hidden-select" name="{{label}}">
+	{{#if label}}
+		<option disabled selected hidden>{{label}}</option>
+	{{/if}}
+
+	{{yield}}
+</select>
+
+<div {{action 'toggleMenu'}}>{{selectedText}}</div>
+
+<ul>
+	{{#if listItem}}
+		{{#each listItem as |item|}}
+			<li class="item{{if item.selected ' selected'}}{{if item.disabled ' disabled'}}" onclick={{action 'selectAction' item bubbles=false}}>{{item.label}}</li>
+		{{/each}}
+	{{/if}}
+</ul>

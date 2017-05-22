@@ -1,0 +1,42 @@
+table {
+	&.bc-sortable-list {
+		width: 100%;
+		border-collapse: collapse;
+		border-spacing: 0;
+
+		& .bc-sortable-list-header {
+			& > th {
+				border-bottom: 1px solid $bc-color-5;
+				text-align: left;
+
+				&.sortable {
+					cursor: pointer;
+
+					&.desc {
+						&::after {
+							padding-left: 5px;
+							content: '\2193';
+						}
+					}
+
+					&.asc {
+						&::after {
+							padding-left: 5px;
+							content: '\2191';
+						}
+				}
+				}
+			}
+		}
+
+		& .bc-sortable-list-body {
+			& > tr {
+				& > td {
+					padding: 16px 10px 15px 0;
+					border-top: 1px solid $bc-color-5;
+					border-bottom: 1px solid $bc-color-5;
+				}
+			}
+		}
+	}
+}

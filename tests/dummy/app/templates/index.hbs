@@ -277,4 +277,34 @@
 			</span>
 		</section>
 	</div>
+	<div class="component" id="bc-sortable-list">
+		<header>
+			BC-Sortable-List
+		</header>
+		<section>
+			<p>List view of an array of objects with column sorting feature</p>
+			Properties:
+			<ul>
+				<li>model - array of objects to include in the list. required.</li>
+				<li>meta - array of objects that define header and sortable data. required. can be included as part of the model if set to <code>model.meta</code></li>
+			</ul>
+			Code:
+			<code>
+				\{{bc-sortable-list model=model.people meta=model.meta}}
+				</code>
+			Meta Example:
+			<code>
+				meta: Ember.A([<br />
+					Ember.Object.create({header: "Name", sortable: true}),<br />
+					Ember.Object.create({header: "Occupation", sortable: true}),<br />
+					Ember.Object.create({header: "Age", sortable: false})<br />
+				])<br />
+			</code>
+
+			Result:
+			<span class="code-result">
+				{{bc-sortable-list model=model.people meta=model.meta}}
+			</span>
+		</section>
+	</div>
 </div>

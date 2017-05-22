@@ -6,6 +6,13 @@ import Ember from 'ember';
 import layout from '../templates/components/bc-select-menu';
 import BindOutsideClick from '../mixins/bind-outside-click';
 
+/**
+ * `Component/BcSelectMenu`
+ *
+ * @class BcSelectMenu
+ * @namespace Components
+ * @extends Ember.Component
+ */
 export default Ember.Component.extend(BindOutsideClick, {
   layout,
 

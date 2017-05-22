@@ -6,7 +6,7 @@ node_js:
 sudo: false
 
 cache:
-  yarn: true
+  yarn: false
 
 env:
   # we recommend testing LTS's and latest stable release (bonus points to beta/canary)

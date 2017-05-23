@@ -15,7 +15,6 @@ import BindOutsideClick from '../mixins/bind-outside-click';
  */
 export default Ember.Component.extend(BindOutsideClick, {
   layout,
-
 	classNames: ['bc-select-menu'],
 	classNameBindings: ['right', 'isMenuOpen:open'],
 
@@ -29,7 +28,7 @@ export default Ember.Component.extend(BindOutsideClick, {
 	isMenuOpen: false,
 
 	/**
-	 * sets the class `right` so the dialog is
+	 * Sets the class `right` so the dialog is
 	 * formatted for the right side of the screen
 	 *
 	 * @public
@@ -39,7 +38,7 @@ export default Ember.Component.extend(BindOutsideClick, {
 	right: false,
 
 	/**
-	 * forces the drop down to keep the same label
+	 * Forces the drop down to keep the same label
 	 * after an option is selected
 	 *
 	 * @public
@@ -49,7 +48,7 @@ export default Ember.Component.extend(BindOutsideClick, {
 	disableChange: false,
 
 	/**
-	 * forces the drop down to remain open after
+	 * Forces the drop down to remain open after
 	 * an option is selected
 	 *
 	 * @public
@@ -58,10 +57,54 @@ export default Ember.Component.extend(BindOutsideClick, {
 	 */
 	keepOpen: false,
 
-	listItem: null,
-	selected: null,
+	/**
+	 * Default label for an unselected drop down initial state
+	 *
+	 * If this option is not set then the first item in the options list will
+	 * be used.
+	 *
+	 * @public
+	 * @property label
+	 * @type {string}
+	 * @default null
+	 */
 	label: null,
 
+	/**
+		* action event triggered when a list option is clicked
+		*
+		* @public
+		* @property onSelect
+		* @type {event}
+		*/
+	onSelect: null,
+
+	/**
+	 * Array of options after parsed
+	 *
+	 * @private
+	 * @property listItem
+	 * @type {object[]}
+	 */
+	listItem: null,
+
+	/**
+	 * The current selected item from the list. This will be null
+	 * until an item is first selected.
+	 *
+	 * @private
+	 * @property selected
+	 * @type {object}
+	 */
+	selected: null,
+
+	/**
+	 * The text to display in the select menu button
+	 *
+	 * @private
+	 * @property selectedText
+	 * @type {string}
+	 */
 	selectedText: Ember.computed('selected', 'label', 'listItem.[]', function() {
 		if (!Ember.isNone(this.get('selected'))) { // look for a selected option first
 			return this.get('selected.label');
@@ -74,6 +117,13 @@ export default Ember.Component.extend(BindOutsideClick, {
 		}
 	}),
 
+	/**
+	 * Initializes the listItem array
+	 *
+	 * @private
+	 * @method setup
+	 * @returns {void}
+	 */
 	setup: Ember.on('willRender', function() {
 		if (this.$()) {
 			// call bindClick on the ClickedOffComponent mixin
@@ -126,19 +176,41 @@ export default Ember.Component.extend(BindOutsideClick, {
 	},
 
 	actions: {
+		/**
+		 * Toggles the menu open or close
+		 *
+		 * Action method
+		 *
+		 * @private
+		 * @method toggleMenu
+		 * @returns {void}
+		 */
 		toggleMenu() {
 			this.set('isMenuOpen', !this.get('isMenuOpen'));
 		},
 
+		/**
+		 * Closes the menu
+		 *
+		 * Action method
+		 *
+		 * @private
+		 * @method closeMenu
+		 * @returns {void}
+		 */
 		closeMenu() {
 			this.set('isMenuOpen', false);
 		},
 
 		/**
-		 * action event triggered when a list option is clicked
+		 * Sends the onSelect event action
 		 *
-		 * @property onSelect
-		 * @type {event}
+		 * Action Method
+		 *
+		 * @private
+		 * @method selectAction
+		 * @params option {object} An option html object
+		 * @returns {void}
 		 */
 		selectAction(option) {
 			// do nothing if disabled is set to

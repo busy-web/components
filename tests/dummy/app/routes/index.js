@@ -18,6 +18,12 @@ export default Ember.Route.extend(
 				Ember.Object.create({label: "test 1", key: 0}),
 				Ember.Object.create({label: "test 2", key: 1}),
 				Ember.Object.create({label: "test 3", key: 0}),
+			]),
+
+			meta: Ember.A([
+				Ember.Object.create({header: "Name", sortable: true}),
+				Ember.Object.create({header: "Occupation", sortable: true}),
+				Ember.Object.create({header: "Age", sortable: false})
 			])
 		});
 	}

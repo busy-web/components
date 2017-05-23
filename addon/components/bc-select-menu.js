@@ -6,6 +6,17 @@ import Ember from 'ember';
 import layout from '../templates/components/bc-select-menu';
 import BindOutsideClick from '../mixins/bind-outside-click';
 
+/***/
+
+function forEachOption(data, callback, target=null) {
+	if (data.each) {
+		data.each((idx, element) => {
+			const el = Ember.$(element);
+			callback.call(target, el, idx);
+		});
+	}
+}
+
 /**
  * `Component/BcSelectMenu`
  *
@@ -16,7 +27,16 @@ import BindOutsideClick from '../mixins/bind-outside-click';
 export default Ember.Component.extend(BindOutsideClick, {
   layout,
 	classNames: ['bc-select-menu'],
-	classNameBindings: ['right', 'isMenuOpen:open'],
+	classNameBindings: ['right', 'isMenuOpen:open', 'fullwidth', 'large'],
+
+	/**
+	 * Flag for a larger drop down button
+	 *
+	 * @public
+	 * @property large
+	 * @type {boolean}
+	 */
+	large: false,
 
 	/**
 	 * Flag for open and close of the drop down
@@ -36,6 +56,16 @@ export default Ember.Component.extend(BindOutsideClick, {
 	 * @type {boolean} default: false
 	 */
 	right: false,
+
+	/**
+	 * sets the class fullwidth to force the
+	 * select menu to use 100% of its container
+	 *
+	 * @public
+	 * @property fullwidth
+	 * @type {boolean}
+	 */
+	fullwidth: false,
 
 	/**
 	 * Forces the drop down to keep the same label
@@ -124,37 +154,135 @@ export default Ember.Component.extend(BindOutsideClick, {
 	 * @method setup
 	 * @returns {void}
 	 */
-	setup: Ember.on('willRender', function() {
+	setup: Ember.on('didRender', function() {
 		if (this.$()) {
 			// call bindClick on the ClickedOffComponent mixin
 			// to bind a click event to close the dialog
 			this.bindClick('closeMenu');
 
 			// get options list
-			const data = this.$('select.hidden-select').children();
-
-			// create data array for option data
-			const dataArray = [];
-
-			// loop through option data
-			data.each((idx, option) => {
-				option = Ember.$(option);
-
-				// dont add option that are set to hidden
-				if (Ember.isNone(option.attr('hidden'))) {
-					// create the option object
-					const obj = Ember.Object.create({
-						label: option.text(),
-						value: option.val(),
-						selected: option.is(':selected'),
-						disabled: option.is(':disabled')
-					});
-					dataArray.pushObject(obj);
-				}
-			});
-			this.set('listItem', dataArray);
+			const data = this.$('.hidden-template').children();
+			if (this.hasChanges(data)) {
+				this.createOptionsList(data);
+			}
 		}
 	}),
+
+	/**
+	 * Override method that gets called to
+	 * validate the input and check if this item should
+	 * be added to the options list
+	 *
+	 * @private
+	 * @method shouldCreateOption
+	 * @param el {object} jquery element object
+	 * @returns {boolean}
+	 */
+	shouldCreateOption(el) {
+		// check if the element is set to hidden
+		return Ember.isNone(el.attr('hidden'))
+	},
+
+	/**
+	 * Override method for creating a option item
+	 * object. for classes that need additional functionality
+	 * this can be overridden to create a more advanced object.
+	 *
+	 * @private
+	 * @method createOption
+	 * @param el {object} jquery element object
+	 * @returns {object}
+	 */
+	createOption(el) {
+		// create the option object
+		const opt = Ember.Object.create({
+			label: el.text(),
+			value: el.val(),
+			selected: el.is(':selected'),
+			disabled: el.is(':disabled')
+		});
+		return opt;
+	},
+
+	/**
+	 * Creates a new options item list.
+	 *
+	 * This method gets called by didRender setup callback each time
+	 * the template is rerendered and changes have been detected to
+	 * the options item list
+	 *
+	 * @private
+	 * @method createOptionsList
+	 * @params data {object} jquery child array from the `hidden-template` container element
+	 * @returns {void}
+	 */
+	createOptionsList(data) {
+		// create data array for option data
+		const dataArray = [];
+
+		// loop through option data
+		forEachOption(data, el => {
+			// dont add option that are set to hidden
+			if (this.shouldCreateOption(el)) {
+				// create the option item
+				const opt = this.createOption(el);
+
+				if (opt.get('selected')) {
+					this.setSelected(opt);
+				}
+
+				// add option to list
+				dataArray.pushObject(opt);
+			}
+		});
+
+		// set new list items
+		this.set('listItem', dataArray);
+	},
+
+	/**
+	 * Checks the array for any addition changes to items in the array.
+	 *
+	 * returns true if a new item is found or any properties on a
+	 * option item have changed
+	 *
+	 * @private
+	 * @method hasChanges
+	 * @param data {object} jquery child array from the `hidden-template` container element
+	 * @returns {boolean}
+	 */
+	hasChanges(data) {
+		let hasChanges = false;
+		forEachOption(data, el => {
+			// if no changes detected yet
+			if (!hasChanges) {
+				// the list is empty so all items have changed
+				if (Ember.isEmpty(this.get('listItem'))) {
+					hasChanges = true;
+				} else {
+					// create option obj from element
+					const option = this.createOption(el);
+
+					// get old option item
+					const oldOpt = this.get('listItem').findBy('value', option.get('value'));
+
+					// item not found in list items
+					if (Ember.isNone(oldOpt)) {
+						hasChanges = true;
+					} else {
+						// check all keys in old opt for changes
+						Object.keys(option).forEach((key) => {
+							// item property does not mathc old property
+							if (oldOpt.get(key) !== option.get(key)) {
+								hasChanges = true;
+							}
+						});
+					}
+				}
+			}
+		});
+		return hasChanges;
+	},
 
 	/**
 	 * Sets the selected option and unsets all other options
@@ -166,13 +294,9 @@ export default Ember.Component.extend(BindOutsideClick, {
 	 * @return {void}
 	 */
 	setSelected(option) {
-		// unselect all listItem options
-		this.get('listItem').forEach(item => item.set('selected', false));
-
-		// set selected on the selected option
-		option.set('selected', true);
-
-		this.set('selectedText', option.get('label'));
+		if (!this.get('disableChange')) {
+			this.set('selected', option);
+		}
 	},
 
 	actions: {
@@ -216,12 +340,6 @@ export default Ember.Component.extend(BindOutsideClick, {
 			// do nothing if disabled is set to
 			// true for the item selected
 			if (!option.get('disabled')) {
-				// set selected unless disableChange
-				// is set to true
-				if (!this.get('disableChange')) {
-					this.setSelected(option);
-				}
-
 				// close menu unless keep open
 				// is set to true
 				if (!this.get('keepOpen')) {

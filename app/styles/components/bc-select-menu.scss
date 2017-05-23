@@ -2,24 +2,25 @@
 .bc-select-menu {
 	position: relative;
 
-	& > select {
+	& > .hidden-template {
 		display: none;
 	}
 
 	& > div {
+		@include box-sizing;
 		position: relative;
-		padding: 12px 50px 12px 10px;
+		padding: 11px 50px 11px 10px;
 		border: 1px solid #ccc;
 		border-radius: 3px;
 		background-color: #fff;
 		color: #8e8e8e;
-		font: 16px/1 proxima;
+		font: 14px/1 proxima;
 		text-align: left;
 		cursor: pointer;
 
 		&:after {
 			position: absolute;
-			top: 17px;
+			top: 16px;
 			right: 10px;
 			width: 0;
 			height: 0;
@@ -61,9 +62,18 @@
 		}
 	}
 
-	&.open {
+	&.large {
+		& > div {
+			padding: 14px 50px 14px 10px;
+			font-size: 16px;
+
+			&:after {
+				top: 20px;
+			}
+		}
+
 		& > ul {
-			display: block;
+			top: 55px;
 		}
 	}
 
@@ -73,6 +83,20 @@
 		& > ul {
 			right: 0;
 			left: initial;
+		}
+	}
+
+	&.fullwidth {
+		width: 100%;
+
+		& > ul {
+			width: 100%;
+		}
+	}
+
+	&.open {
+		& > ul {
+			display: block;
 		}
 	}
 }

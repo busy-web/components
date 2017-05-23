@@ -14,8 +14,7 @@ import layout from '../templates/components/bc-sortable-list';
  *
  * @extends Ember.Component
  */
-export default Ember.Component.extend(
-{
+export default Ember.Component.extend({
 	layout: layout,
 	classNames: ['bc-sortable-list'],
 	model: null,
@@ -78,7 +77,6 @@ export default Ember.Component.extend(
 
 	actions: {
 		sortAction(item) {
-
 			const sortBy = item.machineName || Ember.String.camelize(item.header);
 
 			this.get('meta').forEach(header => {
@@ -101,7 +99,6 @@ export default Ember.Component.extend(
 				item.set('asc', true);
 				this.set('reportData', this.get('reportData').sortBy(sortBy).reverse());
 			}
-
-		},
+		}
 	}
 });

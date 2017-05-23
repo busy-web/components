@@ -1,0 +1,102 @@
+
+.bc-select-menu {
+	position: relative;
+
+	& > .hidden-template {
+		display: none;
+	}
+
+	& > div {
+		@include box-sizing;
+		position: relative;
+		padding: 11px 50px 11px 10px;
+		border: 1px solid #ccc;
+		border-radius: 3px;
+		background-color: #fff;
+		color: #8e8e8e;
+		font: 14px/1 proxima;
+		text-align: left;
+		cursor: pointer;
+
+		&:after {
+			position: absolute;
+			top: 16px;
+			right: 10px;
+			width: 0;
+			height: 0;
+			border: 5px solid transparent;
+			border-top-color: #8e8e8e;
+			content: '\00a0';
+		}
+	}
+
+	& > ul {
+		display: none;
+		position: absolute;
+		top: 48px;
+		left: 0;
+		padding: 20px 0;
+		border: 1px solid #ccc;
+		border-radius: 3px;
+		background-color: #fff;
+
+		& > li {
+			display: block;
+			min-width: 120px;
+			padding: 9px 20px;
+			font: 14px/1 proxima;
+			cursor: pointer;
+
+			&.selected {
+				color: #30aeef;
+			}
+
+			&.disabled {
+				color: #aaa;
+				cursor: default;
+			}
+
+			&:hover {
+				background-color: #fafafa;
+			}
+		}
+	}
+
+	&.large {
+		& > div {
+			padding: 14px 50px 14px 10px;
+			font-size: 16px;
+
+			&:after {
+				top: 20px;
+			}
+		}
+
+		& > ul {
+			top: 55px;
+		}
+	}
+
+	&.right {
+		float: right;
+
+		& > ul {
+			right: 0;
+			left: initial;
+		}
+	}
+
+	&.fullwidth {
+		width: 100%;
+
+		& > ul {
+			width: 100%;
+		}
+	}
+
+	&.open {
+		& > ul {
+			display: block;
+		}
+	}
+}

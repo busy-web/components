@@ -7,11 +7,12 @@ table {
 		& .bc-sortable-list-header {
 			& > th {
 				border-bottom: 1px solid $bc-color-5;
-				text-align: left;
 				font: 16px/1 $ft-bold;
+				text-align: left;
 
 				&.sortable {
 					cursor: pointer;
+
 					& > .material-icons {
 						font-size: 16px;
 					}

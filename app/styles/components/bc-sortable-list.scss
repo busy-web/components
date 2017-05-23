@@ -8,23 +8,13 @@ table {
 			& > th {
 				border-bottom: 1px solid $bc-color-5;
 				text-align: left;
+				font: 16px/1 $ft-bold;
 
 				&.sortable {
 					cursor: pointer;
-
-					&.desc {
-						&::after {
-							padding-left: 5px;
-							content: '\2193';
-						}
+					& > .material-icons {
+						font-size: 16px;
 					}
-
-					&.asc {
-						&::after {
-							padding-left: 5px;
-							content: '\2191';
-						}
-				}
 				}
 			}
 		}

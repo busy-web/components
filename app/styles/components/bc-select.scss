@@ -68,7 +68,7 @@ $off-white: #eee;
 			background: $bc-color-7;
 			box-shadow: 0 2px 7px -2px $bc-color-13;
 			overflow: hidden;
-			z-index: 10;
+			z-index: 1000;
 			overflow-y: auto;
 
 			&.all {
@@ -156,7 +156,7 @@ $off-white: #eee;
 
 			&.select-container {
 				width: 100%;
-				z-index: 2;
+				z-index: 1000;
 			}
 		}
 	}

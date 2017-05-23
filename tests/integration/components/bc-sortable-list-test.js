@@ -9,17 +9,19 @@ test('it renders', function(assert) {
 
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
+	this.set('model', [
+		{name: 'Bob Thomas', occupation: 'bullfighter', age: 32},
+		{name: 'John Smith', occupation: 'astronaut', age: 39}
+	]);
 
-  this.render(hbs`{{bc-sortable-list}}`);
+	this.set('meta', [
+		{header: 'name', sortable: false},
+		{header: 'occupation', sortable: false},
+		{header: 'age', sortable: false}
+	]);
 
-  assert.equal(this.$().text().trim(), '');
+  this.render(hbs`{{bc-sortable-list model=model meta=meta}}`);
 
-  // Template block usage:
-  this.render(hbs`
-    {{#bc-sortable-list}}
-      template block text
-    {{/bc-sortable-list}}
-  `);
+  assert.equal(this.$().text().replace(/\s+/g, ''), 'nameoccupationageBobThomasbullfighter32JohnSmithastronaut39');
 
-  assert.equal(this.$().text().trim(), 'template block text');
 });

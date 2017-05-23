@@ -42,7 +42,9 @@ export default Ember.Component.extend(
 	addSortClasses() {
 		const headers = this.get('meta');
 		headers.forEach(item => {
-			item.set('sortClass', 'not-sorted');
+			if (item.sortable) {
+				item.set('sortClass', 'not-sorted');
+			}
 		});
 	},
 

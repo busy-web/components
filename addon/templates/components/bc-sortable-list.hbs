@@ -1,0 +1,16 @@
+<table class="bc-sortable-list">
+	<thead class="bc-sortable-list-header">
+		{{#each meta as |header|}}
+			<th class="{{if header.sortable 'sortable'}} {{header.sortClass}}" cellspacing="0" onclick={{if header.sortable (action "sortAction" header)}}>{{header.header}} {{log header}}</th>
+		{{/each}}
+	</thead>
+	<tbody class="bc-sortable-list-body">
+		{{#each model as |row|}}
+			<tr>
+				{{#each-in row as |key value|}}
+					<td>{{value}}</td>
+				{{/each-in}}
+			</tr>
+		{{/each}}
+	</tbody>
+</table>

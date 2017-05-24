@@ -1998,7 +1998,7 @@ ember-cli-babel@^5.1.5, ember-cli-babel@^5.1.6, ember-cli-babel@^5.1.7:
     ember-cli-version-checker "^1.0.2"
     resolve "^1.1.2"
 
-ember-cli-babel@^6.0.0, ember-cli-babel@^6.0.0-beta.7:
+ember-cli-babel@^6.0.0, ember-cli-babel@^6.0.0-beta.7, ember-cli-babel@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-6.1.0.tgz#d9c83a7d0c67cc8a3ccb9bd082971c3593e54fad"
   dependencies:
@@ -2354,6 +2354,12 @@ ember-macro-helpers@^0.14.1:
     ember-cli-string-utils "^1.1.0"
     ember-cli-test-info "^1.0.0"
     ember-weakmap "^2.0.0"
+
+ember-material-design-icons-shim@^0.1.11:
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/ember-material-design-icons-shim/-/ember-material-design-icons-shim-0.1.11.tgz#94dde10a88922239560818a834bdfd061355b420"
+  dependencies:
+    ember-cli-babel "^6.1.0"
 
 ember-moment@^7.3.0:
   version "7.3.1"

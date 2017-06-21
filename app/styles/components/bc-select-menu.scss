@@ -7,7 +7,7 @@
 	}
 
 	& > div {
-		@include box-sizing;
+		@include bc-box-sizing;
 		position: relative;
 		padding: 11px 50px 11px 10px;
 		border: 1px solid #ccc;

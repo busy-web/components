@@ -52,7 +52,12 @@ export default Ember.Component.extend({
 				const header = metaItem.machineName || Ember.String.camelize(metaItem.header);
 
 				if (!Ember.isNone(item.get(header))) {
-					newModel.set(header, item.get(header));
+					if (metaItem.isImage) {
+						newModel.set(header, {imageUrl: item.get(header), 'isImage': true});
+					} else {
+						newModel.set(header, item.get(header));
+					}
+
 				} else {
 					newModel.set(header, '-');
 				}

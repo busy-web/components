@@ -19,7 +19,13 @@
 		{{#each reportData as |row|}}
 			<tr>
 				{{#each-in row as |key value|}}
-					<td>{{value}}</td>
+					{{#if value.isImage}}
+						<td class="image-cell"><div style={{bg-image value.imageUrl}}></div></td>
+					{{else}}
+						<td>{{value}}</td>
+					{{/if}}
+
+
 				{{/each-in}}
 			</tr>
 		{{/each}}

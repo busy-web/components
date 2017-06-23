@@ -7,24 +7,15 @@ table {
 		& .bc-sortable-list-header {
 			& > th {
 				border-bottom: 1px solid $bc-color-5;
+				font: 16px/1 $ft-bold;
 				text-align: left;
 
 				&.sortable {
 					cursor: pointer;
 
-					&.desc {
-						&::after {
-							padding-left: 5px;
-							content: '\2193';
-						}
+					& > .material-icons {
+						font-size: 16px;
 					}
-
-					&.asc {
-						&::after {
-							padding-left: 5px;
-							content: '\2191';
-						}
-				}
 				}
 			}
 		}
@@ -32,9 +23,25 @@ table {
 		& .bc-sortable-list-body {
 			& > tr {
 				& > td {
+					max-width: 100px;
 					padding: 16px 10px 15px 0;
 					border-top: 1px solid $bc-color-5;
 					border-bottom: 1px solid $bc-color-5;
+					vertical-align: middle;
+
+
+					&.image-cell {
+						width: 40px;
+						height: 40px;
+
+						& > div {
+							width: 100%;
+							height: 100%;
+							background-repeat: no-repeat;
+							background-position: center;
+							background-size: cover;
+						}
+					}
 				}
 			}
 		}

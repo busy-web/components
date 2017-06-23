@@ -1,14 +1,31 @@
 <table class="bc-sortable-list">
 	<thead class="bc-sortable-list-header">
 		{{#each meta as |header|}}
-			<th class="{{if header.sortable 'sortable'}} {{header.sortClass}}" cellspacing="0" onclick={{if header.sortable (action "sortAction" header)}}>{{header.header}}</th>
+			<th class="{{if header.sortable 'sortable'}} {{if header.desc 'desc'}} {{if header.asc 'asc'}} {{if header.notSorted 'not-sorted'}}" cellspacing="0" onclick={{if header.sortable (action "sortAction" header)}}>
+				{{header.header}}
+				{{#if header.notSorted}}
+					<i class="material-icons"></i>
+				{{/if}}
+				{{#if header.desc}}
+					<i class="material-icons">arrow_drop_down</i>
+				{{/if}}
+				{{#if header.asc}}
+					<i class="material-icons">arrow_drop_up</i>
+				{{/if}}
+			</th>
 		{{/each}}
 	</thead>
 	<tbody class="bc-sortable-list-body">
-		{{#each model as |row|}}
+		{{#each reportData as |row|}}
 			<tr>
 				{{#each-in row as |key value|}}
-					<td>{{value}}</td>
+					{{#if value.isImage}}
+						<td class="image-cell"><div style={{bg-image value.imageUrl}}></div></td>
+					{{else}}
+						<td>{{value}}</td>
+					{{/if}}
+
+
 				{{/each-in}}
 			</tr>
 		{{/each}}

@@ -6,6 +6,7 @@ table {
 
 		& .bc-sortable-list-header {
 			& > th {
+				padding: 10px;
 				border-bottom: 1px solid $bc-color-5;
 				font: 16px/1 $ft-bold;
 				text-align: left;

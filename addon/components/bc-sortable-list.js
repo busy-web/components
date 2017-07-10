@@ -49,14 +49,22 @@ export default Ember.Component.extend({
 		model.forEach(item => {
 			let newModel = Ember.Object.create({});
 			meta.forEach(metaItem => {
-				const header = metaItem.machineName || Ember.String.camelize(metaItem.header);
+				const  header = metaItem.machineName || Ember.String.camelize(metaItem.header);
+				const machineHeader = header.replace('-', '.');
 
-				if (!Ember.isNone(item.get(header))) {
+				if (!Ember.isNone(item.get(machineHeader))) {
+
+					let newObject = Ember.Object.create({data: item.get(machineHeader)});
+
 					if (metaItem.isImage) {
-						newModel.set(header, {imageUrl: item.get(header), 'isImage': true});
-					} else {
-						newModel.set(header, item.get(header));
+						newObject.set('isImage', true);
+					} if (metaItem.formatCurrency) {
+						newObject.set('formatCurrency', true);
+					} if (metaItem.formatTime) {
+						newObject.set('formatTime', true);
 					}
+
+					newModel.set(header, newObject);
 
 				} else {
 					newModel.set(header, '-');
@@ -82,6 +90,7 @@ export default Ember.Component.extend({
 
 	actions: {
 		sortAction(item) {
+
 			const sortBy = item.machineName || Ember.String.camelize(item.header);
 
 			this.get('meta').forEach(header => {
@@ -98,6 +107,7 @@ export default Ember.Component.extend({
 				item.set('asc', false);
 
 				this.set('reportData', this.get('reportData').sortBy(sortBy));
+				console.log(this.get('reportData').firstObject());
 			} else if (item.get('desc')) {
 				item.set('notSorted', false);
 				item.set('desc', false);

@@ -107,7 +107,6 @@ export default Ember.Component.extend({
 				item.set('asc', false);
 
 				this.set('reportData', this.get('reportData').sortBy(sortBy));
-				console.log(this.get('reportData').firstObject());
 			} else if (item.get('desc')) {
 				item.set('notSorted', false);
 				item.set('desc', false);

@@ -1517,11 +1517,11 @@ builtins@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/builtins/-/builtins-1.0.3.tgz#cb94faeb61c8696451db36534e1422f94f0aee88"
 
-busy-utils@^2.5.2:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/busy-utils/-/busy-utils-2.5.2.tgz#7f731e4943b361cc8f73460087053c86fa3701f9"
+busy-utils@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/busy-utils/-/busy-utils-2.6.0.tgz#7f66a6c4f3997e2dd856a8937a415eb0890fa109"
   dependencies:
-    ember-cli-babel "^6.0.0"
+    ember-cli-babel "^6.3.0"
 
 bytes@1:
   version "1.0.0"

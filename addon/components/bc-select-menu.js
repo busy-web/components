@@ -196,6 +196,7 @@ export default Ember.Component.extend(BindOutsideClick, {
 	createOption(el) {
 		// create the option object
 		const opt = Ember.Object.create({
+			class: el.attr('class'),
 			label: el.text(),
 			value: el.val(),
 			selected: el.is(':selected'),
@@ -218,7 +219,7 @@ export default Ember.Component.extend(BindOutsideClick, {
 	 */
 	createOptionsList(data) {
 		// create data array for option data
-		const dataArray = [];
+		const dataArray = Ember.A([]);
 
 		// loop through option data
 		forEachOption(data, el => {
@@ -263,20 +264,23 @@ export default Ember.Component.extend(BindOutsideClick, {
 					// create option obj from element
 					const option = this.createOption(el);
 
-					// get old option item
-					const oldOpt = this.get('listItem').findBy('value', option.get('value'));
+					// dont include default labels in the changes
+					if (!option.get('class') === 'default-label') {
+						// get old option item
+						const oldOpt = this.get('listItem').findBy('value', option.get('value'));
 
-					// item not found in list items
-					if (Ember.isNone(oldOpt)) {
-						hasChanges = true;
-					} else {
-						// check all keys in old opt for changes
-						Object.keys(option).forEach((key) => {
-							// item property does not mathc old property
-							if (oldOpt.get(key) !== option.get(key)) {
-								hasChanges = true;
-							}
-						});
+						// item not found in list items
+						if (Ember.isNone(oldOpt)) {
+							hasChanges = true;
+						} else {
+							// check all keys in old opt for changes
+							Object.keys(option).forEach((key) => {
+								// item property does not mathc old property
+								if (oldOpt.get(key) !== option.get(key)) {
+									hasChanges = true;
+								}
+							});
+						}
 					}
 				}
 			}

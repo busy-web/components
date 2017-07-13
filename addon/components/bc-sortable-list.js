@@ -54,7 +54,7 @@ export default Ember.Component.extend({
 
 				if (!Ember.isNone(item.get(machineHeader))) {
 
-					let newObject = Ember.Object.create({data: item.get(machineHeader)});
+					let newObject = Ember.Object.create({content: item.get(machineHeader)});
 
 					if (metaItem.isImage) {
 						newObject.set('isImage', true);
@@ -64,10 +64,10 @@ export default Ember.Component.extend({
 						newObject.set('formatTime', true);
 					}
 
-					newModel.set(header, newObject);
-
+					newModel.set(Ember.String.camelize(header), newObject);
+					// newModel.set(header + 'Sort', item.get(machineHeader));
 				} else {
-					newModel.set(header, '-');
+					newModel.set(Ember.String.camelize(header), '-');
 				}
 			});
 
@@ -105,14 +105,14 @@ export default Ember.Component.extend({
 				item.set('notSorted', false);
 				item.set('desc', true);
 				item.set('asc', false);
-
-				this.set('reportData', this.get('reportData').sortBy(sortBy));
+				this.set('reportData', this.get('reportData').sortBy(sortBy.get('content')));
 			} else if (item.get('desc')) {
 				item.set('notSorted', false);
 				item.set('desc', false);
 				item.set('asc', true);
 				this.set('reportData', this.get('reportData').sortBy(sortBy).reverse());
 			}
+			console.log(this.get('reportData')[0].memberFullName.get('content'));
 		}
 	}
 });

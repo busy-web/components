@@ -20,13 +20,13 @@
 			<tr>
 				{{#each-in row as |key value|}}
 					{{#if value.isImage}}
-						<td class="image-cell"><div style={{bg-image value.data}}></div></td>
+						<td class="image-cell"><div style={{bg-image value.content}}></div></td>
 					{{else if value.formatTime}}
-						<td>{{format-hours value.data longFormat=true}}</td>
+						<td>{{format-hours value.content longFormat=true}}</td>
 					{{else if value.formatCurrency}}
-						<td>{{format-currency value.data}}</td>
+						<td>{{format-currency value.content}}</td>
 					{{else}}
-						<td>{{value.data}}</td>
+						<td>{{value.content}}</td>
 					{{/if}}
 
 

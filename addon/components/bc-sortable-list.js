@@ -91,7 +91,8 @@ export default Ember.Component.extend({
 	actions: {
 		sortAction(item) {
 
-			const sortBy = item.machineName || Ember.String.camelize(item.header);
+			const sort = Ember.String.camelize(item.machineName) || Ember.String.camelize(item.header);
+			const sortBy = `${sort}.content`;
 
 			this.get('meta').forEach(header => {
 
@@ -105,14 +106,17 @@ export default Ember.Component.extend({
 				item.set('notSorted', false);
 				item.set('desc', true);
 				item.set('asc', false);
-				this.set('reportData', this.get('reportData').sortBy(sortBy.get('content')));
+				this.set('reportData', this.get('reportData').sortBy(sortBy));
 			} else if (item.get('desc')) {
 				item.set('notSorted', false);
 				item.set('desc', false);
 				item.set('asc', true);
 				this.set('reportData', this.get('reportData').sortBy(sortBy).reverse());
 			}
-			console.log(this.get('reportData')[0].memberFullName.get('content'));
+		},
+
+		rowClickAction(item) {
+			this.sendAction('rowAction', item);
 		}
 	}
 });

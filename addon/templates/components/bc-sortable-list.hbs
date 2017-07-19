@@ -18,9 +18,12 @@
 	<tbody class="bc-sortable-list-body">
 		{{#each reportData as |row|}}
 			<tr {{action 'rowClickAction' row}} class="{{if rowAction 'clickable'}}">
+				{{#if row.children}}
+					<td>expand</td>
+				{{/if}}
 				{{#each-in row as |key value|}}
 					{{#if value.isImage}}
-						<td class="image-cell"><div style={{bg-image value.content}}></div></td>
+						<td class="image-cell"><div style={{bg-image value.content}} class="img"></div></td>
 					{{else if value.formatTime}}
 						<td>{{format-hours value.content longFormat=true}}</td>
 					{{else if value.formatCurrency}}

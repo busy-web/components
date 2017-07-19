@@ -20,6 +20,8 @@ export default Ember.Component.extend({
 	model: null,
 	reportData: null,
 	meta: null,
+	withChildren: false,
+	childrenArray: 'none',
 
 	init() {
 		this._super();
@@ -29,7 +31,7 @@ export default Ember.Component.extend({
 	},
 
 	setMeta() {
-		let meta = this.get('meta');
+		const meta = this.get('meta');
 		const model = this.get('model');
 		if (Ember.isNone(meta)) {
 			if (Ember.isNone(model.get('meta'))) {
@@ -41,40 +43,57 @@ export default Ember.Component.extend({
 	},
 
 	setReportData() {
-		let model = this.get('model');
-		const meta = this.get('meta');
-		let reportData = Ember.A([]);
+		const model = this.get('model');
 
+		const reportData = Ember.A([]);
 
 		model.forEach(item => {
-			let newModel = Ember.Object.create({});
-			meta.forEach(metaItem => {
-				const  header = metaItem.machineName || Ember.String.camelize(metaItem.header);
-				const machineHeader = header.replace('-', '.');
 
-				if (!Ember.isNone(item.get(machineHeader))) {
-
-					let newObject = Ember.Object.create({content: item.get(machineHeader)});
-
-					if (metaItem.isImage) {
-						newObject.set('isImage', true);
-					} if (metaItem.formatCurrency) {
-						newObject.set('formatCurrency', true);
-					} if (metaItem.formatTime) {
-						newObject.set('formatTime', true);
-					}
-
-					newModel.set(Ember.String.camelize(header), newObject);
-					// newModel.set(header + 'Sort', item.get(machineHeader));
-				} else {
-					newModel.set(Ember.String.camelize(header), '-');
-				}
-			});
-
+			const newModel = this.createSortableObject(item);
 			reportData.push(newModel);
 
 		});
 		this.set('reportData', reportData);
+	},
+
+	createSortableObject(item, childArray) {
+		const newModel = Ember.Object.create({});
+		const meta = this.get('meta');
+		const childrenArray = childArray || this.get('childrenArray');
+
+		meta.forEach(metaItem => {
+			const  header = metaItem.machineName || Ember.String.camelize(metaItem.header);
+			const machineHeader = header.replace('-', '.');
+
+			if (!Ember.isNone(item.get(machineHeader))) {
+
+				const newObject = Ember.Object.create({content: item.get(machineHeader)});
+
+				if (metaItem.isImage) {
+					newObject.set('isImage', true);
+				} if (metaItem.formatCurrency) {
+					newObject.set('formatCurrency', true);
+				} if (metaItem.formatTime) {
+					newObject.set('formatTime', true);
+				} if (this.get('withChildren') && !Ember.isNone(item.get(childrenArray))) {
+
+					const children = [];
+
+					item.get(childrenArray).forEach(child => {
+						const itemChild = this.createSortableObject(child)
+						children.push(itemChild);
+					});
+					item.set('children', children);
+				}
+
+				newModel.set(Ember.String.camelize(header), newObject);
+				// newModel.set(header + 'Sort', item.get(machineHeader));
+			} else {
+				newModel.set(Ember.String.camelize(header), '-');
+			}
+		});
+
+		return newModel;
 	},
 
 	addSortClasses() {

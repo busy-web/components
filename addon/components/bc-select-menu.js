@@ -265,7 +265,7 @@ export default Ember.Component.extend(BindOutsideClick, {
 					const option = this.createOption(el);
 
 					// dont include default labels in the changes
-					if (!option.get('class') === 'default-label') {
+					if (option.get('class') !== 'default-label') {
 						// get old option item
 						const oldOpt = this.get('listItem').findBy('value', option.get('value'));
 

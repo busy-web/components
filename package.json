@@ -1,6 +1,6 @@
 {
   "name": "busy-components",
-  "version": "2.13.2",
+  "version": "2.13.3",
   "description": "busybusy component addon library for ember-cli.",
   "keywords": [
     "ember-addon",

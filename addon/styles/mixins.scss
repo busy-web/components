@@ -1,0 +1,91 @@
+
+/*!
+ * color codes
+ */
+$bc-color-1: false !default;
+$bc-color-2: false !default;
+$bc-color-3: false !default;
+$bc-color-4: false !default;
+$bc-color-5: false !default;
+$bc-color-6: false !default;
+$bc-color-7: false !default;
+$bc-color-8: false !default;
+$bc-color-9: false !default;
+$bc-color-10: false !default;
+$bc-color-11: false !default;
+$bc-color-12: false !default;
+$bc-color-13: false !default;
+$bc-color-14: false !default;
+$bc-color-15: false !default;
+$bc-color-16: false !default;
+$bc-color-17: false !default;
+$bc-color-18: false !default;
+$bc-color-19: false !default;
+$bc-color-20: false !default;
+
+@if $bc-color-1 == false { $bc-color-1: #008000; }		// bright blue
+@if $bc-color-2 == false { $bc-color-2: #000; }				// dark blue
+@if $bc-color-3 == false { $bc-color-3: #8e8e8e; }		// grey
+@if $bc-color-4 == false { $bc-color-4: #f0f4f7; }		// glacier blue
+@if $bc-color-5 == false { $bc-color-5: #ccc; }				// grey lighter than C3
+@if $bc-color-6 == false { $bc-color-6: #fcfcfc; }		// off white
+@if $bc-color-7 == false { $bc-color-7: #fff; }				// white
+@if $bc-color-8 == false { $bc-color-8: #68a3b5; }		// teal
+@if $bc-color-9 == false { $bc-color-9: #d65151; }		// red
+@if $bc-color-10 == false { $bc-color-10: #384d60; }	// dark blue lighter than C2
+@if $bc-color-11 == false { $bc-color-11: #a9b5bf; }	// blue grey
+@if $bc-color-12 == false { $bc-color-12: #c9cfd3; }	// grey lighter than C5
+@if $bc-color-13 == false { $bc-color-13: #243442; }	// black
+@if $bc-color-14 == false { $bc-color-14: #0277bd; }	// bright blue darker than C1
+@if $bc-color-15 == false { $bc-color-15: #d32f2f; }	// dark red
+@if $bc-color-16 == false { $bc-color-16: #f3f3f3; }	// grey white
+@if $bc-color-17 == false { $bc-color-17: #5e5e5e; }	// dark grey
+@if $bc-color-18 == false { $bc-color-18: #aaa; }			// grey lighter than C3 darker than C5 / neutral gray
+@if $bc-color-19 == false { $bc-color-19: #58bd7f; }	// green
+@if $bc-color-20 == false { $bc-color-20: #eee; }			// another grey
+
+$ft-thin: false !default;
+$ft-norm: false !default;
+$ft-bold: false !default;
+
+@if $ft-thin == false { $ft-thin: Verdana; }
+@if $ft-norm == false { $ft-norm: Verdana; }
+@if $ft-bold == false { $ft-bold: Verdana; }
+
+$mobile-width: false !default;
+$tablet-width: false !default;
+@if $mobile-width == false { $mobile-width: 830px; }
+@if $tablet-width == false { $tablet-width: 830px; }
+
+/*!
+ * mixins
+ */
+// vendorize mixin
+@mixin bc-vendorize($property, $value) {
+	-webkit-#{$property}: $value;
+	-moz-#{$property}: $value;
+	-ms-#{$property}: $value;
+	-o-#{$property}: $value;
+	#{$property}: $value;
+}
+
+// box-sizing
+@mixin bc-box-sizing {@include bc-vendorize(box-sizing, border-box)}
+
+// transition
+@mixin bc-transition($value) {@include bc-vendorize(transition, $value)}
+
+//transform
+@mixin bc-transform($value) {@include bc-vendorize(transform, $value)}
+
+@mixin bc-animation($str) {
+	@include bc-vendorize(animation, #{$str});
+}
+
+@mixin bc-background-image($value) {
+	background-image: -webkit-#{$value};
+	background-image: -moz-#{$value};
+	background-image: -ms-#{$value};
+	background-image: -o-#{$value};
+}
+

@@ -3,7 +3,6 @@
  *
  */
 import Ember from 'ember';
-import { Assert } from 'busy-utils';
 
 /**
  * `Mixin/ClickedOffComponent`
@@ -31,7 +30,7 @@ export default Ember.Mixin.create({
 	 * @param actionName {string} name of the action to call on the component
 	 */
 	bindClick(actionName) {
-		Assert.isString(actionName);
+		Ember.assert('actionName must be a string', typeof actionName === 'string');
 
 		// save this for later
 		const _this = this;

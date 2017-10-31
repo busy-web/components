@@ -3,7 +3,6 @@
  *
  */
 import Ember from 'ember';
-import { Assert, loc } from 'busy-utils';
 import layout from '../templates/components/bc-select';
 
 /**
@@ -77,14 +76,14 @@ export default Ember.Component.extend({
 	},
 
 	itemLabel: '',
-	defaultLabel: loc('Select'),
+	defaultLabel: Ember.String.loc('Select'),
 	defaultFirstOption: false,
 
 	menuTitle: Ember.computed('selectedItem', function() {
 		let label = this.get('defaultLabel');
 		let selectedItem = this.get('selectedItem');
 
-		Assert.test('"itemLabel" must be set to a property of the model', !Ember.isEmpty(this.get('itemLabel')));
+		Ember.assert('"itemLabel" must be set to a property of the model', !Ember.isEmpty(this.get('itemLabel')));
 
 		if (!Ember.isNone(selectedItem)) {
 			label = Ember.get(selectedItem, this.get('itemLabel'));

@@ -1,1 +1,1 @@
-export { default } from 'busy-components/components/bc-tab';
+export { default } from '@busybusy/components/components/bc-tab';

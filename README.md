@@ -66,7 +66,7 @@ For more information on using ember-cli, visit [http://ember-cli.com/](http://em
 
 ## Installing Addon
 
-* `ember install busy-components`
+* `ember install @busybusy/components`
 
 ## Usage
 

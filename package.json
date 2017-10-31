@@ -1,5 +1,5 @@
 {
-  "name": "busy-components",
+  "name": "@busybusy/components",
   "version": "2.14.0",
   "description": "busybusy component addon library for ember-cli.",
   "keywords": [
@@ -9,10 +9,12 @@
   "license": "MIT",
   "author": "busy inc.",
   "directories": {
-    "doc": "doc",
     "test": "tests"
   },
-  "repository": "git@github.com:busybusy/webapp-busy-components.git",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/busybusy/webapp-busy-components.git"
+  },
   "scripts": {
     "build": "ember build",
     "start": "ember server",
@@ -49,5 +51,10 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/busybusy/webapp-busy-components/issues"
+  },
+  "homepage": "https://github.com/busybusy/webapp-busy-components#readme",
+  "main": "index.js"
 }

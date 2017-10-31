@@ -1,3 +1,3 @@
-import checkboxInput from 'torpid-js/components/checkbox-input';
+import checkboxInput from '@busybusy/components/components/checkbox-input';
 
 export default checkboxInput;

@@ -1,1 +1,1 @@
-export { default } from 'busy-components/components/bc-checkbox-input';
+export { default } from '@busybusy/components/components/bc-checkbox-input';

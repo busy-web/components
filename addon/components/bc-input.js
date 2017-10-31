@@ -2,7 +2,7 @@
  * @module Components
  *
  */
-import Ember from 'ember';
+import TextField from '@ember/component/text-field';
 
 /**
  * `BC/Component/Input`
@@ -11,7 +11,7 @@ import Ember from 'ember';
  * @namespace BC.Components.Input
  * @extends Ember.TextField
  */
-export default Ember.TextField.extend({
+export default TextField.extend({
 
 	tagName: 'input',
 	classNames: ['bc-input'],

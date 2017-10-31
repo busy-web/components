@@ -2,17 +2,15 @@
  * @module components
  *
  */
-import Ember from 'ember';
+import Component from '@ember/component';
 import layout from '../templates/components/bc-radio-button';
 
 /**
  * `Component/RadioButton`
  *
  */
-export default Ember.Component.extend(
-{
+export default Component.extend({
 	layout: layout,
-
 	classNames: ['bc-radio-button', 'bc-radio-button'],
 
 	tagName: null,
@@ -23,13 +21,11 @@ export default Ember.Component.extend(
 	disabled: false,
 	checked: false,
 
-	change: function()
-	{
+	change() {
 		this.sendAction('onSelect', this.get('value'));
 	},
 
-	click: function(evt)
-	{
+	click(evt) {
 		evt.stopPropagation();
 		return true;
 	}

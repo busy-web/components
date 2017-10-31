@@ -1,8 +1,7 @@
-import Ember from 'ember';
+import TextField from '@ember/component/text-field';
 import layout from '../templates/components/bc-checkbox-input';
 
-export default Ember.TextField.extend(
-{
+export default TextField.extend({
 	layout: layout,
 
 	classNameBindings: ['checked'],
@@ -15,8 +14,7 @@ export default Ember.TextField.extend(
 	checked: false,
 	_value: false,
 
-	click: function()
-	{
+	click() {
 		this.sendAction('onChange', !this.get('_value'));
 	},
 });

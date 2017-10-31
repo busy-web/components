@@ -19,7 +19,7 @@
     "test": "COVERAGE=true ember try:each"
   },
   "dependencies": {
-    "ember-cli-babel": "^6.6.0"
+    "ember-cli-babel": "^6.6.0",
     "ember-cli-htmlbars": "^2.0.1",
     "ember-material-design-icons-shim": "^0.1.11",
     "ember-cli-sass": "^7.0.0"

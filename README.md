@@ -1,4 +1,4 @@
-# Busy Components
+# @busybusy/components
 [![npm version](https://badge.fury.io/js/busy-components.svg)](https://badge.fury.io/js/busy-components)
 [![Build Status](https://travis-ci.org/busybusy/webapp-busy-components.svg?branch=master)](https://travis-ci.org/busybusy/webapp-busy-components)
 [![Ember Observer Score](https://emberobserver.com/badges/busy-components.svg)](https://emberobserver.com/addons/busy-components)
@@ -17,7 +17,7 @@ This is an ember addon and requires ember-cli.
 Note: This component does not support Ember 1.13
 
 ```
-ember install busy-components
+ember install @busybusy/components
 ```
 
 ## Setup
@@ -97,4 +97,4 @@ For more information on using ember-cli, visit [http://ember-cli.com/](http://em
 * `bower install`
 
 [embadge]: http://embadge.io/
-[ember-badge]: http://embadge.io/v1/badge.svg?start=2.14.0
+[ember-badge]: http://embadge.io/v1/badge.svg?start=2.16.2

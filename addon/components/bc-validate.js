@@ -2,17 +2,18 @@
  * @module components
  *
  */
-import Ember from 'ember';
+import { assert } from '@ember/debug';
+import { isNone, isEmpty } from '@ember/utils';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import layout from '../templates/components/bc-validate';
 
 /**
  * `Component/Validate`
  *
  */
-export default Ember.Component.extend(
-{
+export default Component.extend({
 	layout: layout,
-
 	classNames: ['bc-validate', 'bc-validate'],
 	classNameBindings: ['invalid:invalid', 'isValid:valid'],
 
@@ -30,109 +31,81 @@ export default Ember.Component.extend(
 	maxlength: "",
 
 	required: false,
-
 	disabled: false,
-
 	isInvalid: false,
 	isValid: false,
 	isRequired: false,
-
 	autofocus : false,
 	showLabel: true,
 
 	validateExpression: /.*/,
 
-	labelString: Ember.computed('placeholder', 'label', 'required', function()
-	{
-		var label = this.get('label');
-		if(Ember.isNone(label) || Ember.isEmpty(label))
-		{
+	labelString: computed('placeholder', 'label', 'required', function() {
+		let label = this.get('label');
+		if (isNone(label) || isEmpty(label)) {
 			label = this.get('placeholder');
 		}
 
-		if(this.get('required'))
-		{
+		if (this.get('required')) {
 			label = label + '*';
 		}
-
 		return label;
 	}),
 
-	init: function()
-	{
+	init() {
 		this._super();
-
-		Ember.assert('error is a private variable use invalidError or requiredError for error messages - ' + this.get('error'), Ember.isEmpty(this.get('error')));
+		assert('error is a private variable use invalidError or requiredError for error messages - ' + this.get('error'), isEmpty(this.get('error')));
 	},
 
-	invalid: Ember.computed('isInvalid', 'isRequired', 'invalidError', 'requiredError', function()
-	{
-		var invalid = false;
-		if(this.get('isInvalid'))
-		{
+	invalid: computed('isInvalid', 'isRequired', 'invalidError', 'requiredError', function() {
+		let invalid = false;
+		if (this.get('isInvalid')) {
 			invalid = true;
 			this.set('error', this.get('invalidError'));
-		}
-		else if(this.get('isRequired'))
-		{
+		} else if (this.get('isRequired')) {
 			invalid = true;
 			this.set('error', this.get('requiredError'));
-		}
-		else
-		{
+		} else {
 			this.set('error', '');
 		}
-
 		return invalid;
 	}),
 
-	validate: function(value) //jshint ignore:line
-	{
-		if(Ember.isEmpty(value) && this.get('required'))
-		{
+	validate(value) {
+		if (isEmpty(value) && this.get('required')) {
 			this.set('isRequired', true);
-		}
-		else
-		{
+		} else {
 			this.set('isRequired', false);
 		}
 
-		var exp = this.get('validateExpression');
-			exp = typeof exp === 'string' ? new RegExp(exp) : exp;
-
+		let exp = this.get('validateExpression');
+		exp = typeof exp === 'string' ? new RegExp(exp) : exp;
 		return exp.test(value);
 	},
 
-	checkIfValid: function(value)
-	{
-		var valid = this.validate(value);
-
+	checkIfValid(value) {
+		const valid = this.validate(value);
 		this.set('isValid', valid);
 		this.set('isInvalid', !valid);
 	},
 
-	reset: function()
-	{
+	reset() {
 		this.set('isValid', false);
 		this.set('isInvalid', false);
 		this.set('isRequired', false);
 	},
 
 	actions: {
-		hintAction: function()
-		{
+		hintAction() {
 			this.sendAction('onClick');
 		},
 
-		focusOutAction: function(value)
-		{
+		focusOutAction(value) {
 			this.checkIfValid(value);
-
 			this.sendAction('onBlur', value);
 		},
 
-		enterAction: function(value)
-		{
+		enterAction(value) {
 			this.sendAction('onSubmit', value);
 		}
 	}

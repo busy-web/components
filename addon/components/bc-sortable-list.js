@@ -2,7 +2,12 @@
  * @module component
  *
  */
-import Ember from 'ember';
+import { camelize } from '@ember/string';
+import EmberObject from '@ember/object';
+import { A } from '@ember/array';
+import { assert } from '@ember/debug';
+import { isNone } from '@ember/utils';
+import Component from '@ember/component';
 import layout from '../templates/components/bc-sortable-list';
 
 /**
@@ -14,7 +19,7 @@ import layout from '../templates/components/bc-sortable-list';
  *
  * @extends Ember.Component
  */
-export default Ember.Component.extend({
+export default Component.extend({
 	layout: layout,
 	classNames: ['bc-sortable-list'],
 	model: null,
@@ -31,9 +36,9 @@ export default Ember.Component.extend({
 	setMeta() {
 		let meta = this.get('meta');
 		const model = this.get('model');
-		if (Ember.isNone(meta)) {
-			if (Ember.isNone(model.get('meta'))) {
-				Ember.assert('meta data not present');
+		if (isNone(meta)) {
+			if (isNone(model.get('meta'))) {
+				assert('meta data not present');
 			} else {
 				this.set('meta', model.get('meta'));
 			}
@@ -43,15 +48,15 @@ export default Ember.Component.extend({
 	setReportData() {
 		let model = this.get('model');
 		const meta = this.get('meta');
-		let reportData = Ember.A([]);
+		let reportData = A([]);
 
 
 		model.forEach(item => {
-			let newModel = Ember.Object.create({});
+			let newModel = EmberObject.create({});
 			meta.forEach(metaItem => {
-				const header = metaItem.machineName || Ember.String.camelize(metaItem.header);
+				const header = metaItem.machineName || camelize(metaItem.header);
 
-				if (!Ember.isNone(item.get(header))) {
+				if (!isNone(item.get(header))) {
 					if (metaItem.isImage) {
 						newModel.set(header, {imageUrl: item.get(header), 'isImage': true});
 					} else {
@@ -82,7 +87,7 @@ export default Ember.Component.extend({
 
 	actions: {
 		sortAction(item) {
-			const sortBy = item.machineName || Ember.String.camelize(item.header);
+			const sortBy = item.machineName || camelize(item.header);
 
 			this.get('meta').forEach(header => {
 

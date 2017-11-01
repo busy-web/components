@@ -57,35 +57,3 @@ $tablet-width: false !default;
 @if $mobile-width == false { $mobile-width: 830px; }
 @if $tablet-width == false { $tablet-width: 830px; }
 
-/*!
- * mixins
- */
-// vendorize mixin
-@mixin bc-vendorize($property, $value) {
-	-webkit-#{$property}: $value;
-	-moz-#{$property}: $value;
-	-ms-#{$property}: $value;
-	-o-#{$property}: $value;
-	#{$property}: $value;
-}
-
-// box-sizing
-@mixin bc-box-sizing {@include bc-vendorize(box-sizing, border-box)}
-
-// transition
-@mixin bc-transition($value) {@include bc-vendorize(transition, $value)}
-
-//transform
-@mixin bc-transform($value) {@include bc-vendorize(transform, $value)}
-
-@mixin bc-animation($str) {
-	@include bc-vendorize(animation, #{$str});
-}
-
-@mixin bc-background-image($value) {
-	background-image: -webkit-#{$value};
-	background-image: -moz-#{$value};
-	background-image: -ms-#{$value};
-	background-image: -o-#{$value};
-}
-

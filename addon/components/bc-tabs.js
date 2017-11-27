@@ -2,7 +2,13 @@
  * @module components
  *
  */
-import Ember from 'ember';
+import { observer } from '@ember/object';
+import { dasherize } from '@ember/string';
+import $ from 'jquery';
+import { next } from '@ember/runloop';
+import { isEmpty, isNone } from '@ember/utils';
+import { A } from '@ember/array';
+import Component from '@ember/component';
 import layout from '../templates/components/bc-tabs';
 
 /**
@@ -12,8 +18,7 @@ import layout from '../templates/components/bc-tabs';
  *
  * @extends Ember.Component
  */
-export default Ember.Component.extend(
-{
+export default Component.extend({
 	layout: layout,
 
 	classNames: ['bc-tabs'],
@@ -35,24 +40,19 @@ export default Ember.Component.extend(
 	 */
 	model: null,
 	_tabs: null,
-
 	defaultTab: '',
 
 	init() {
 		this._super();
-		this.set('_tabs', Ember.A());
-
-		var _this = this;
-		window.onhashchange = function() {
-			_this.handleHash();
-		};
+		this.set('_tabs', A());
+		window.onhashchange = (() => this.handleHash());
 	},
 
 	handleHash() {
-		var hash = window.location.hash;
-		if (!Ember.isEmpty(hash) && hash.match(/^#tab-/)) {
+		const hash = window.location.hash;
+		if (!isEmpty(hash) && hash.match(/^#tab-/)) {
 			this.checkHash(hash.replace(/^#tab-/, '').trim());
-		} else if (!Ember.isEmpty(this.get('defaultTab'))) {
+		} else if (!isEmpty(this.get('defaultTab'))) {
 			this.checkHash(this.get('defaultTab'));
 		}
 	},
@@ -61,25 +61,22 @@ export default Ember.Component.extend(
 		if (this.get('model.length') > 0) {
 			this.openTab(hash);
 		} else {
-			Ember.run.next(this, function() {
-				this.checkHash(hash);
-			});
+			next(() => this.checkHash(hash));
 		}
 	},
 
 	openTab(tabName, isClick) {
-		var _this = this;
-		var tabs = this.get('model');
-		var didShowTab = false;
-		Ember.$.each(tabs, function(key,value) {
+		const tabs = this.get('model');
+		let didShowTab = false;
+		$.each(tabs, (key, value) => {
 			if (tabs.hasOwnProperty(key)) {
 				if (value.get('active') || value.get('open')) {
 					value.set('active', false);
 					value.set('open', false);
 				}
 
-				if (tabName === Ember.String.dasherize(value.get('tabName').trim())) {
-					if (tabName !== _this.get('defaultTab')) {
+				if (tabName === dasherize(value.get('tabName').trim())) {
+					if (tabName !== this.get('defaultTab')) {
 						window.history.replaceState('', document.title, window.location.pathname + '#tab-' + tabName);
 					} else if (isClick) {
 						window.history.replaceState('', document.title, window.location.pathname);
@@ -112,8 +109,8 @@ export default Ember.Component.extend(
 
 	renderTabs() {
 		if (!this.get('isDestroyed')) {
-			var tabArray = (this.get('_tabs') || []).sortBy('tabIndex');
-			tabArray.forEach(function(item) {
+			const tabArray = (this.get('_tabs') || []).sortBy('tabIndex');
+			tabArray.forEach(item => {
 				if (item.get('active') || item.get('open')) {
 					item.set('active', false);
 					item.set('open', false);
@@ -121,9 +118,9 @@ export default Ember.Component.extend(
 			});
 
 			// set a default tab
-			var defaultTab = tabArray.objectAt(0);
-			if (!Ember.isNone(defaultTab)) {
-				this.set('defaultTab', Ember.String.dasherize(defaultTab.get('tabName').trim()));
+			const defaultTab = tabArray.objectAt(0);
+			if (!isNone(defaultTab)) {
+				this.set('defaultTab', dasherize(defaultTab.get('tabName').trim()));
 			}
 
 			this.set('model', tabArray);
@@ -151,10 +148,10 @@ export default Ember.Component.extend(
 	 * @method shouldRenderTabs
 	 * @return {void}
 	 */
-	shouldRenderTabs: Ember.observer('_tabs.[]', function() {
-		if (!Ember.isNone(this.get('_tabs')) && this.get('_tabs.length') > 0) {
+	shouldRenderTabs: observer('_tabs.[]', function() {
+		if (!isNone(this.get('_tabs')) && this.get('_tabs.length') > 0) {
 			// remove the current timeout before setting a new timeout
-			if (!Ember.isNone(this.get('renderTimeout'))) {
+			if (!isNone(this.get('renderTimeout'))) {
 				window.clearTimeout(this.get('renderTimeout'));
 			}
 
@@ -173,11 +170,11 @@ export default Ember.Component.extend(
 	}),
 
 	showDefault() {
-		var tab = this.get('model').objectAt(0);
+		const tab = this.get('model').objectAt(0);
 		tab.set('active', true);
 		tab.set('open', true);
 
-		var tabName = Ember.String.dasherize(tab.get('tabName').trim());
+		const tabName = dasherize(tab.get('tabName').trim());
 		this.set('defaultTab', tabName);
 
 		tab.triggerShowTab();
@@ -185,7 +182,7 @@ export default Ember.Component.extend(
 
 	actions: {
 		changeTab(tab) {
-			const tabName = Ember.String.dasherize(tab.get('tabName').trim());
+			const tabName = dasherize(tab.get('tabName').trim());
 			this.openTab(tabName, true);
 		}
 	}

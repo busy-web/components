@@ -1,1 +1,1 @@
-export { default } from 'busy-components/components/bc-select';
+export { default } from '@busybusy/components/components/bc-select';

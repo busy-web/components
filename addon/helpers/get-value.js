@@ -2,21 +2,23 @@
  * @module Helpers
  *
  */
-import Ember from 'ember';
-import { Assert } from 'busy-utils';
+import { helper } from '@ember/component/helper';
+import { get } from '@ember/object';
+import { isNone } from '@ember/utils';
+import { assert } from '@ember/debug';
 
 /**
  * `BusyComponent\Helper\GetValue`
  *
  */
 export function getValue(params/*, hash*/) {
-	var model = params[0];
-	var key = params[1];
+	const model = params[0];
+	const key = params[1];
 
-	Assert.test("You must provide a model of type object for the first param in get-val", !Ember.isNone(model) && typeof model === 'object');
-	Assert.test("You must provide a key of type String for the second param in get-val", !Ember.isNone(key) && typeof key === 'string');
+	assert("You must provide a model of type object for the first param in get-val", !isNone(model) && typeof model === 'object');
+	assert("You must provide a key of type String for the second param in get-val", !isNone(key) && typeof key === 'string');
 
-	return Ember.get(model, key);
+	return get(model, key);
 }
 
-export default Ember.Helper.helper(getValue);
+export default helper(getValue);

@@ -1,1 +1,1 @@
-export { default } from 'busy-components/components/bc-list';
+export { default } from '@busybusy/components/components/bc-list';

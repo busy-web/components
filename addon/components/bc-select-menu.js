@@ -2,7 +2,12 @@
  * @module Components
  *
  */
-import Ember from 'ember';
+import { A } from '@ember/array';
+import { on } from '@ember/object/evented';
+import { isNone, isEmpty } from '@ember/utils';
+import EmberObject, { computed } from '@ember/object';
+import Component from '@ember/component';
+import $ from 'jquery';
 import layout from '../templates/components/bc-select-menu';
 import BindOutsideClick from '../mixins/bind-outside-click';
 
@@ -11,7 +16,7 @@ import BindOutsideClick from '../mixins/bind-outside-click';
 function forEachOption(data, callback, target=null) {
 	if (data.each) {
 		data.each((idx, element) => {
-			const el = Ember.$(element);
+			const el = $(element);
 			callback.call(target, el, idx);
 		});
 	}
@@ -24,7 +29,7 @@ function forEachOption(data, callback, target=null) {
  * @namespace Components
  * @extends Ember.Component
  */
-export default Ember.Component.extend(BindOutsideClick, {
+export default Component.extend(BindOutsideClick, {
   layout,
 	classNames: ['bc-select-menu'],
 	classNameBindings: ['right', 'isMenuOpen:open', 'fullwidth', 'large'],
@@ -135,12 +140,12 @@ export default Ember.Component.extend(BindOutsideClick, {
 	 * @property selectedText
 	 * @type {string}
 	 */
-	selectedText: Ember.computed('selected', 'label', 'listItem.[]', function() {
-		if (!Ember.isNone(this.get('selected'))) { // look for a selected option first
+	selectedText: computed('selected', 'label', 'listItem.[]', function() {
+		if (!isNone(this.get('selected'))) { // look for a selected option first
 			return this.get('selected.label');
-		} else if (!Ember.isEmpty(this.get('label'))) { // if no selected option then look for a provided label
+		} else if (!isEmpty(this.get('label'))) { // if no selected option then look for a provided label
 			return this.get('label');
-		} else if (!Ember.isNone(this.get('listItem'))) { // no option or label then set it to the first option label
+		} else if (!isNone(this.get('listItem'))) { // no option or label then set it to the first option label
 			return this.get('listItem.firstObject.label');
 		} else { // otherwise just return an empty string
 			return '';
@@ -154,7 +159,7 @@ export default Ember.Component.extend(BindOutsideClick, {
 	 * @method setup
 	 * @returns {void}
 	 */
-	setup: Ember.on('didRender', function() {
+	setup: on('didRender', function() {
 		if (this.$()) {
 			// call bindClick on the ClickedOffComponent mixin
 			// to bind a click event to close the dialog
@@ -180,7 +185,7 @@ export default Ember.Component.extend(BindOutsideClick, {
 	 */
 	shouldCreateOption(el) {
 		// check if the element is set to hidden
-		return Ember.isNone(el.attr('hidden'))
+		return isNone(el.attr('hidden'));
 	},
 
 	/**
@@ -195,7 +200,7 @@ export default Ember.Component.extend(BindOutsideClick, {
 	 */
 	createOption(el) {
 		// create the option object
-		const opt = Ember.Object.create({
+		const opt = EmberObject.create({
 			class: el.attr('class'),
 			label: el.text(),
 			value: el.val(),
@@ -219,7 +224,7 @@ export default Ember.Component.extend(BindOutsideClick, {
 	 */
 	createOptionsList(data) {
 		// create data array for option data
-		const dataArray = Ember.A([]);
+		const dataArray = A([]);
 
 		// loop through option data
 		forEachOption(data, el => {
@@ -258,19 +263,19 @@ export default Ember.Component.extend(BindOutsideClick, {
 			// if no changes detected yet
 			if (!hasChanges) {
 				// the list is empty so all items have changed
-				if (Ember.isEmpty(this.get('listItem'))) {
+				if (isEmpty(this.get('listItem'))) {
 					hasChanges = true;
 				} else {
 					// create option obj from element
 					const option = this.createOption(el);
 
 					// dont include default labels in the changes
-					if (!option.get('class') === 'default-label') {
+					if (option.get('class') !== 'default-label') {
 						// get old option item
 						const oldOpt = this.get('listItem').findBy('value', option.get('value'));
 
 						// item not found in list items
-						if (Ember.isNone(oldOpt)) {
+						if (isNone(oldOpt)) {
 							hasChanges = true;
 						} else {
 							// check all keys in old opt for changes

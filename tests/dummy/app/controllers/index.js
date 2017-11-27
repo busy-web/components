@@ -2,31 +2,24 @@
  * @module controllers
  *
  */
-import Ember from 'ember';
+import Controller from '@ember/controller';
 
 /**
  * `Controller/Index`
  *
  */
-export default Ember.Controller.extend(
-{
+export default Controller.extend({
 	isChecked: false,
 	result: null,
 	headerItems: null,
 
-	init()
-	{
+	init() {
 		this._super();
-		this.set('headerItems',[
-			'Name',
-			'Occupation',
-			'Age'
-		]);
+		this.set('headerItems', ['Name', 'Occupation', 'Age']);
 	},
 
 	actions: {
-		runAction(value)
-		{
+		runAction(value) {
 			this.set('result', 'You selected ' + value +'!');
 		}
 	}

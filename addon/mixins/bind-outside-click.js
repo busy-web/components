@@ -2,8 +2,11 @@
  * @module Mixins
  *
  */
-import Ember from 'ember';
-import { Assert } from 'busy-utils';
+import { on } from '@ember/object/evented';
+import $ from 'jquery';
+import { isEmpty } from '@ember/utils';
+import { assert } from '@ember/debug';
+import Mixin from '@ember/object/mixin';
 
 /**
  * `Mixin/ClickedOffComponent`
@@ -16,7 +19,7 @@ import { Assert } from 'busy-utils';
  * @namespace Mixins
  * @extends Ember.Mixin
  */
-export default Ember.Mixin.create({
+export default Mixin.create({
 	/**
 	 * binds a click event that will call the provided
 	 * action anytime a click occurs not within the component
@@ -31,7 +34,7 @@ export default Ember.Mixin.create({
 	 * @param actionName {string} name of the action to call on the component
 	 */
 	bindClick(actionName) {
-		Assert.isString(actionName);
+		assert('actionName must be a string', typeof actionName === 'string');
 
 		// save this for later
 		const _this = this;
@@ -41,14 +44,14 @@ export default Ember.Mixin.create({
 
 		// make sure an elementId exists on the class
 		// using this mixin
-		if (!Ember.isEmpty(elementId)) {
+		if (!isEmpty(elementId)) {
 			// unbind any previous click listeners
-			Ember.$(document).off(`click.${elementId}`);
+			$(document).off(`click.${elementId}`);
 
 			// bind the click listener
-			Ember.$(document).on(`click.${elementId}`, function(evt) {
+			$(document).on(`click.${elementId}`, function(evt) {
 				// get the element that was clicked on
-				const el = Ember.$(evt.target);
+				const el = $(evt.target);
 
 				// if the clicked element id does not match the components id and the clicked
 				// elements parents dont have an id that matches then call the action provided
@@ -73,9 +76,9 @@ export default Ember.Mixin.create({
 
 		// make sure an elementId exists on the class
 		// using this mixin
-		if (!Ember.isEmpty(elementId)) {
+		if (!isEmpty(elementId)) {
 			// unbind any previous click listeners
-			Ember.$(document).off(`click.${elementId}`);
+			$(document).off(`click.${elementId}`);
 		}
 	},
 
@@ -85,7 +88,7 @@ export default Ember.Mixin.create({
 	 * @private
 	 * @method destroy
 	 */
-	destroy: Ember.on('willDestroyElement', function() {
+	destroy: on('willDestroyElement', function() {
 		// unbind clicks
 		this.unbindClick();
 	})

@@ -2,7 +2,12 @@
  * @module component
  *
  */
-import Ember from 'ember';
+import { camelize } from '@ember/string';
+import EmberObject from '@ember/object';
+import { A } from '@ember/array';
+import { assert } from '@ember/debug';
+import { isNone } from '@ember/utils';
+import Component from '@ember/component';
 import layout from '../templates/components/bc-sortable-list';
 
 /**
@@ -14,7 +19,7 @@ import layout from '../templates/components/bc-sortable-list';
  *
  * @extends Ember.Component
  */
-export default Ember.Component.extend({
+export default Component.extend({
 	layout: layout,
 	classNames: ['bc-sortable-list'],
 	model: null,
@@ -33,9 +38,9 @@ export default Ember.Component.extend({
 	setMeta() {
 		const meta = this.get('meta');
 		const model = this.get('model');
-		if (Ember.isNone(meta)) {
-			if (Ember.isNone(model.get('meta'))) {
-				Ember.assert('meta data not present');
+		if (isNone(meta)) {
+			if (isNone(model.get('meta'))) {
+				assert('meta data not present');
 			} else {
 				this.set('meta', model.get('meta'));
 			}
@@ -43,11 +48,28 @@ export default Ember.Component.extend({
 	},
 
 	setReportData() {
-		const model = this.get('model');
+		let model = this.get('model');
+		const meta = this.get('meta');
+		let reportData = A([]);
 
 		const reportData = Ember.A([]);
 
 		model.forEach(item => {
+			let newModel = EmberObject.create({});
+			meta.forEach(metaItem => {
+				const header = metaItem.machineName || camelize(metaItem.header);
+
+				if (!isNone(item.get(header))) {
+					if (metaItem.isImage) {
+						newModel.set(header, {imageUrl: item.get(header), 'isImage': true});
+					} else {
+						newModel.set(header, item.get(header));
+					}
+
+				} else {
+					newModel.set(header, '-');
+				}
+			});
 
 			const newModel = this.createSortableObject(item);
 			reportData.push(newModel);
@@ -109,9 +131,13 @@ export default Ember.Component.extend({
 
 	actions: {
 		sortAction(item) {
+<<<<<<< HEAD
 
 			const sort = Ember.String.camelize(item.machineName) || Ember.String.camelize(item.header);
 			const sortBy = `${sort}.content`;
+=======
+			const sortBy = item.machineName || camelize(item.header);
+>>>>>>> busybusy/master
 
 			this.get('meta').forEach(header => {
 

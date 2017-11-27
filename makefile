@@ -11,7 +11,6 @@ YARN_VERSION := $(shell yarn --version 2>/dev/null)
 
 # folder info
 NODE_FILES := $(shell stat -f %N ./node_modules 2>/dev/null)
-BOWER_FILES := $(shell stat -f %N ./bower_components 2>/dev/null)
 DIST_FILES := $(shell stat -f %N ./dist 2>/dev/null)
 TMP_FILES := $(shell stat -f %N ./tmp 2>/dev/null)
 
@@ -23,34 +22,23 @@ all: clean install
 
 # Install project packages
 install:
-ifdef YARN_VERSION
 	yarn install
-else
-	npm install
-endif
-	bower install
 
 build:
-	npm install
-	bower install
+	yarn
 
-rebuild:
-	npm prune
-	bower prune
-	npm install
-	bower install
+patch:
+	npm version patch
+	npm publish --access=public
 
-# regenerate the lockfile
-lockfile:
-	yarn install
+minor:
+	npm version minor
+	npm publish --access=public
 
 # cleanup files and clear caches
 clean:
 ifdef NODE_FILES # remove node files
 	rm -r ./node_modules
-endif
-ifdef BOWER_FILES # remove bower files
-	rm -r ./bower_components
 endif
 ifdef DIST_FILES # remove dist files
 	rm -r ./dist
@@ -58,10 +46,6 @@ endif
 ifdef TMP_FILES # remove tmp files
 	rm -r ./tmp
 endif
-ifndef YARN_VERSION # clear cache for npm and bower if not using yarn
-	npm cache clean
-endif
-	bower cache clean
 
 # Change node file permission so sudo is not required for
 # global installs.
@@ -95,11 +79,6 @@ help:
 	@echo "  build: "
 	@echo "    * Update packes to current available packages according to package.json"
 	@echo "     * Use this to update packages when ember-cli reports out of date packes"
-	@echo ""
-	@echo "  rebuild: "
-	@echo "    * Removes unused packages and install required packages"
-	@echo "    * Use this when switching between branches with different dependencies"
-	@echo "    * Note this may not work in all cases and an fresh install will be requied by running just 'make'"
 	@echo ""
 	@echo "  lockfile: "
 	@echo "    * Updates the lock file for yarn"

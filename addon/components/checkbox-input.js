@@ -1,10 +1,12 @@
-import Ember from 'ember';
+/**
+ * @module Components
+ *
+ */
+import TextField from '@ember/component/text-field';
 import layout from '../templates/components/checkbox-input';
 
-export default Ember.TextField.extend(
-{
+export default TextField.extend({
 	layout: layout,
-
 	classNameBindings: ['checked'],
 	attributeBindings: ['checked', 'group', 'disabled'],
 
@@ -15,8 +17,7 @@ export default Ember.TextField.extend(
 	checked: false,
 	_value: false,
 
-	click: function()
-	{
+	click() {
 		this.sendAction('onChange', !this.get('_value'));
-	},
+	}
 });

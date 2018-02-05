@@ -53,22 +53,6 @@ export default Component.extend({
 		const reportData = Ember.A([]);
 
 		model.forEach(item => {
-			let newModel = EmberObject.create({});
-			meta.forEach(metaItem => {
-				const header = metaItem.machineName || camelize(metaItem.header);
-
-				if (!isNone(item.get(header))) {
-					if (metaItem.isImage) {
-						newModel.set(header, {imageUrl: item.get(header), 'isImage': true});
-					} else {
-						newModel.set(header, item.get(header));
-					}
-
-				} else {
-					newModel.set(header, '-');
-				}
-			});
-
 			const newModel = this.createSortableObject(item);
 			reportData.push(newModel);
 

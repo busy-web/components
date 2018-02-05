@@ -131,13 +131,7 @@ export default Component.extend({
 
 	actions: {
 		sortAction(item) {
-<<<<<<< HEAD
-
-			const sort = Ember.String.camelize(item.machineName) || Ember.String.camelize(item.header);
-			const sortBy = `${sort}.content`;
-=======
 			const sortBy = item.machineName || camelize(item.header);
->>>>>>> busybusy/master
 
 			this.get('meta').forEach(header => {
 

@@ -50,8 +50,6 @@ export default Component.extend({
 	setReportData() {
 		let model = this.get('model');
 		const meta = this.get('meta');
-		let reportData = A([]);
-
 		const reportData = Ember.A([]);
 
 		model.forEach(item => {

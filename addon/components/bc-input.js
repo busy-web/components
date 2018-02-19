@@ -16,7 +16,7 @@ export default TextField.extend({
 	tagName: 'input',
 	classNames: ['bc-input'],
 
-	attributeBindings: ['autofocus', 'maxlength', 'placeholder', 'type', 'tabindex', 'autocomplete', 'disabled'],
+	attributeBindings: ['autofocus', 'maxlength', 'placeholder', 'type', 'tabindex', 'autocomplete', 'disabled', 'min'],
 
 	autofocus: '',
 	type: 'text',
@@ -26,6 +26,7 @@ export default TextField.extend({
 	autocomplete: '',
 	maxlength: '',
 	disabled: false,
+	min: '',
 
 	focusOut() {
 		this.sendAction('onBlur', this.getVal());

@@ -6,6 +6,7 @@ table {
 
 		& .bc-sortable-list-header {
 			& > th {
+				padding: 10px;
 				border-bottom: 1px solid $bc-color-5;
 				font: 16px/1 $ft-bold;
 				text-align: left;
@@ -24,7 +25,7 @@ table {
 			& > tr {
 				& > td {
 					max-width: 100px;
-					padding: 16px 10px 15px 0;
+					padding: 16px 10px 15px;
 					border-top: 1px solid $bc-color-5;
 					border-bottom: 1px solid $bc-color-5;
 					vertical-align: middle;
@@ -40,8 +41,17 @@ table {
 							background-repeat: no-repeat;
 							background-position: center;
 							background-size: cover;
+
+							&.img {
+								border: 1px solid $bc-color-5;
+								border-radius: 20px;
+							}
 						}
 					}
+				}
+
+				&.clickable {
+					cursor: pointer;
 				}
 			}
 		}

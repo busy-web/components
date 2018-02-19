@@ -25,6 +25,8 @@ export default Component.extend({
 	model: null,
 	reportData: null,
 	meta: null,
+	withChildren: false,
+	childrenArray: 'none',
 
 	init() {
 		this._super();
@@ -34,7 +36,7 @@ export default Component.extend({
 	},
 
 	setMeta() {
-		let meta = this.get('meta');
+		const meta = this.get('meta');
 		const model = this.get('model');
 		if (isNone(meta)) {
 			if (isNone(model.get('meta'))) {
@@ -48,30 +50,54 @@ export default Component.extend({
 	setReportData() {
 		let model = this.get('model');
 		const meta = this.get('meta');
-		let reportData = A([]);
-
+		const reportData = Ember.A([]);
 
 		model.forEach(item => {
-			let newModel = EmberObject.create({});
-			meta.forEach(metaItem => {
-				const header = metaItem.machineName || camelize(metaItem.header);
-
-				if (!isNone(item.get(header))) {
-					if (metaItem.isImage) {
-						newModel.set(header, {imageUrl: item.get(header), 'isImage': true});
-					} else {
-						newModel.set(header, item.get(header));
-					}
-
-				} else {
-					newModel.set(header, '-');
-				}
-			});
-
+			const newModel = this.createSortableObject(item);
 			reportData.push(newModel);
 
 		});
 		this.set('reportData', reportData);
+	},
+
+	createSortableObject(item, childArray) {
+		const newModel = Ember.Object.create({});
+		const meta = this.get('meta');
+		const childrenArray = childArray || this.get('childrenArray');
+
+		meta.forEach(metaItem => {
+			const  header = metaItem.machineName || Ember.String.camelize(metaItem.header);
+			const machineHeader = header.replace('-', '.');
+
+			if (!Ember.isNone(item.get(machineHeader))) {
+
+				const newObject = Ember.Object.create({content: item.get(machineHeader)});
+
+				if (metaItem.isImage) {
+					newObject.set('isImage', true);
+				} if (metaItem.formatCurrency) {
+					newObject.set('formatCurrency', true);
+				} if (metaItem.formatTime) {
+					newObject.set('formatTime', true);
+				} if (this.get('withChildren') && !Ember.isNone(item.get(childrenArray))) {
+
+					const children = [];
+
+					item.get(childrenArray).forEach(child => {
+						const itemChild = this.createSortableObject(child)
+						children.push(itemChild);
+					});
+					item.set('children', children);
+				}
+
+				newModel.set(Ember.String.camelize(header), newObject);
+				// newModel.set(header + 'Sort', item.get(machineHeader));
+			} else {
+				newModel.set(Ember.String.camelize(header), '-');
+			}
+		});
+
+		return newModel;
 	},
 
 	addSortClasses() {
@@ -101,7 +127,6 @@ export default Component.extend({
 				item.set('notSorted', false);
 				item.set('desc', true);
 				item.set('asc', false);
-
 				this.set('reportData', this.get('reportData').sortBy(sortBy));
 			} else if (item.get('desc')) {
 				item.set('notSorted', false);
@@ -109,6 +134,10 @@ export default Component.extend({
 				item.set('asc', true);
 				this.set('reportData', this.get('reportData').sortBy(sortBy).reverse());
 			}
+		},
+
+		rowClickAction(item) {
+			this.sendAction('rowAction', item);
 		}
 	}
 });

@@ -3,10 +3,9 @@
  *
  */
 import { camelize } from '@ember/string';
-import EmberObject from '@ember/object';
-import { A } from '@ember/array';
+import EmberObject, { get, set } from '@ember/object';
 import { assert } from '@ember/debug';
-import { isNone } from '@ember/utils';
+import { isNone, isEmpty } from '@ember/utils';
 import Component from '@ember/component';
 import layout from '../templates/components/bc-sortable-list';
 
@@ -31,109 +30,114 @@ export default Component.extend({
 	init() {
 		this._super();
 		this.setMeta();
-		this.addSortClasses();
+		this.resetSortClasses();
 		this.setReportData();
 	},
 
 	setMeta() {
-		const meta = this.get('meta');
-		const model = this.get('model');
+		const meta = get(this, 'meta');
+		const model = get(this, 'model');
+
 		if (isNone(meta)) {
-			if (isNone(model.get('meta'))) {
-				assert('meta data not present');
-			} else {
-				this.set('meta', model.get('meta'));
-			}
+			assert('meta data not present', !isNone(get(model, 'meta')));
+
+			set(this, 'meta', get(model, 'meta'));
 		}
 	},
 
 	setReportData() {
-		let model = this.get('model');
-		const meta = this.get('meta');
-		const reportData = Ember.A([]);
+		const model = get(this, 'model');
+		const reportData = model.map(item => this.createSortableObject(item));
 
-		model.forEach(item => {
-			const newModel = this.createSortableObject(item);
-			reportData.push(newModel);
-
-		});
-		this.set('reportData', reportData);
+		const meta = get(this, 'meta');
+		const first = Array.isArray(meta) && meta[0];
+		this.sort(first, reportData);
 	},
 
 	createSortableObject(item, childArray) {
-		const newModel = Ember.Object.create({});
-		const meta = this.get('meta');
-		const childrenArray = childArray || this.get('childrenArray');
+		const newModel = EmberObject.create({});
+		const meta = get(this, 'meta');
+		const childrenArray = childArray || get(this, 'childrenArray');
 
 		meta.forEach(metaItem => {
-			const  header = metaItem.machineName || Ember.String.camelize(metaItem.header);
+			const  header = get(metaItem, 'machineName') || camelize(get(metaItem, 'header'));
 			const machineHeader = header.replace('-', '.');
 
-			if (!Ember.isNone(item.get(machineHeader))) {
+			if (!isNone(get(item, machineHeader))) {
+				const newObject = EmberObject.create({
+					content: get(item, machineHeader),
+					isImage: get(metaItem, 'isImage') ? true : false,
+					formatCurrency: get(metaItem, 'formatCurrency') ? true : false,
+					formatTime: get(metaItem, 'formatTime') ? true : false
+				});
 
-				const newObject = Ember.Object.create({content: item.get(machineHeader)});
-
-				if (metaItem.isImage) {
-					newObject.set('isImage', true);
-				} if (metaItem.formatCurrency) {
-					newObject.set('formatCurrency', true);
-				} if (metaItem.formatTime) {
-					newObject.set('formatTime', true);
-				} if (this.get('withChildren') && !Ember.isNone(item.get(childrenArray))) {
-
-					const children = [];
-
-					item.get(childrenArray).forEach(child => {
-						const itemChild = this.createSortableObject(child)
-						children.push(itemChild);
-					});
-					item.set('children', children);
+				if (get(this, 'withChildren') && !isEmpty(get(item, childrenArray))) {
+					set(item, 'children', get(item, childrenArray).map(child => this.createSortableObject(child)));
 				}
 
-				newModel.set(Ember.String.camelize(header), newObject);
-				// newModel.set(header + 'Sort', item.get(machineHeader));
+				set(newModel, camelize(header), newObject);
 			} else {
-				newModel.set(Ember.String.camelize(header), '-');
+				set(newModel, camelize(header), '-');
 			}
 		});
-
 		return newModel;
 	},
 
-	addSortClasses() {
-		const headers = this.get('meta');
+	resetSortClasses() {
+		const headers = get(this, 'meta');
 		headers.forEach(item => {
-			if (item.sortable) {
-				item.set('notSorted', true);
-				item.set('desc', false);
-				item.set('asc', false);
+			if (get(item, 'sortable')) {
+				set(item, 'notSorted', true);
+				set(item, 'desc', false);
+				set(item, 'asc', false);
 			}
 		});
+	},
+
+	sort(item, reportData=null) {
+		reportData = reportData || get(this, 'reportData');
+
+		// set data to empty array incase report is empty and
+		// setting it to empty will force ember to rerender the data
+		// after data is sorted.
+		set(this, 'reportData', []);
+
+		// is there is no report data then skip the sort
+		if (!isEmpty(reportData)) {
+			// if there is no item data then skip the sort
+			if (!isNone(item)) {
+				// get sort direction
+				let dir = 'asc';
+				if (get(item, 'asc')) {
+					dir = 'desc';
+				}
+
+				// reset all sort classes
+				this.resetSortClasses();
+
+				// unset not sorted
+				set(item, 'notSorted', false);
+
+				// set sort direction to true
+				set(item, dir, true);
+
+				// get sortBy name
+				const sortBy = get(item, 'machineName') || camelize(get(item, 'header'));
+
+				// sort data
+				reportData = sortData(reportData, sortBy, dir);
+			}
+
+			// set reportData even if the data is not sorted
+			// so data is not still the empty array set above
+			set(this, 'reportData', reportData);
+		}
 	},
 
 	actions: {
 		sortAction(item) {
-			const sortBy = item.machineName || camelize(item.header);
-
-			this.get('meta').forEach(header => {
-
-				if (header.get('header') !== item.get('header')) {
-					header.set('notSorted', true);
-					header.set('desc', false);
-					header.set('asc', false);
-				}
-			});
-			if (item.get('notSorted') || item.get('asc')) {
-				item.set('notSorted', false);
-				item.set('desc', true);
-				item.set('asc', false);
-				this.set('reportData', this.get('reportData').sortBy(sortBy));
-			} else if (item.get('desc')) {
-				item.set('notSorted', false);
-				item.set('desc', false);
-				item.set('asc', true);
-				this.set('reportData', this.get('reportData').sortBy(sortBy).reverse());
-			}
+			// call sort method
+			this.sort(item);
 		},
 
 		rowClickAction(item) {
@@ -141,3 +145,58 @@ export default Component.extend({
 		}
 	}
 });
+
+
+/**
+ * normalize the input for better sorting results
+ *
+ * @private
+ * @method normalize
+ * @param value {mixed}
+ * @return {mixed}
+ */
+function normalize(value) {
+	if (isNone(value)) {
+		return '';
+	}
+
+	if (typeof value === 'string') {
+		return value.trim().toLowerCase();
+	} else {
+		return value.toString();
+	}
+}
+
+/**
+ * sort method that will sort empty strings to the bottom
+ * instead of the top of an 'asc' list
+ *
+ * @private
+ * @method sortData
+ * @param data {object[]} array of objects
+ * @param prop {string} the key to the data in the object array
+ * @param dir {string} sort direction `asc` or `desc`
+ * @return {object[]}
+ */
+function sortData(data, prop, dir='asc') {
+	assert("dir must be either `asc` or `desc`", dir === 'asc' || dir === 'desc');
+
+	const sortBy = `${prop}.content`;
+	const gt = dir === 'asc' ? -1 : 1;
+	const lt = dir === 'asc' ? 1 : -1;
+
+	return data.sort((a, b) => {
+		let aVal = normalize(get(a, sortBy));
+		let bVal = normalize(get(b, sortBy));
+
+		if (isEmpty(aVal) && isEmpty(bVal)) {
+			return 0;
+		} else if (isEmpty(aVal)) {
+			return lt;
+		} else if (isEmpty(bVal)) {
+			return gt;
+		}
+
+		return (aVal < bVal ? gt : (bVal < aVal ? lt : 0));
+	});
+}

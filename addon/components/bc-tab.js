@@ -2,92 +2,66 @@
  * @module Components
  *
  */
-import { on } from '@ember/object/evented';
-import $ from 'jquery';
-import { next } from '@ember/runloop';
-import { isNone } from '@ember/utils';
+import { dasherize } from '@ember/string';
+import { set, get, computed, observer } from '@ember/object';
+import Evented from '@ember/object/evented';
 import Component from '@ember/component';
 import layout from '../templates/components/bc-tab';
 
-export default Component.extend({
+export default Component.extend(Evented, {
 	layout: layout,
-	classNames: ['bc-tab'],
-	classNameBindings: ['active:active', 'open:open'],
+	classNames: ['-bc-tab'],
+	classNameBindings: ['classId', 'active:active'], // 'open:open'],
+
+	classId: computed('tabName', function() {
+		return dasherize(get(this, 'tabName'));
+	}),
 
 	active: false,
-	open: false,
+	//open: false,
 	tabName: null,
 	tabIndex: 0,
+
 	showBadge: false,
 	badgeContent: null,
 	badgeColor: null,
 
-	/**
-	 * @public
-	 * @method registerTab
-	 */
-	registerTab() {
-		if (!isNone(this.get('tabName')) && !isNone(this.get('parentView'))) {
-			this.get('parentView').addTab(this);
-		} else {
-			next(this, function() {
-				this.registerTab();
-			});
-		}
+	isViewable: true,
+
+	didInsertElement() {
+		this._super();
+
+		this.$().data({
+			id: get(this, 'classId'),
+			active: get(this, 'active'),
+			tabName: get(this, 'tabName'),
+			tabIndex: get(this, 'tabIndex'),
+			isViewable: get(this, 'isViewable'),
+			showBadge: get(this, 'showBadge'),
+			badgeContent: get(this, 'badgeContent'),
+			badgeColor: get(this, 'badgeColor'),
+			showTab: ((...args) => this.showTab(...args)),
+			hideTab: ((...args) => this.hideTab(...args)),
+			on: this.on,
+		});
 	},
 
-	unregisterTab() {
-		if (!isNone(this.get('tabName')) && !isNone(this.get('parentView'))) {
-			this.get('parentView').removeTab(this);
+	viewableState: observer('isViewable', function() {
+		if (this.$().length && !get(this, 'isDestroyed')) {
+			this.$().data('isViewable', get(this, 'isViewable'));
+			this.trigger('change');
 		}
-	},
-
-	/**
-	 * @public
-	 * @method triggerShowTab
-	 */
-	triggerShowTab() {
-		if (!this.get('isDestroyed')) {
-			this.showTab();
-		} else {
-			next(this, function() {
-				this.triggerShowTab();
-			});
-		}
-	},
+	}),
 
 	/**
 	 * @public
 	 * @method showTab
 	 */
 	showTab() {
-		if (!isNone(this.get('onShowTab'))) {
-			const onShowTab = this.get('onShowTab');
-			const children = this.get('childViews');
-			$.each(children, function(k, v) {
-				const actions = v.get('actions');
-				if (children.hasOwnProperty(k) && actions[onShowTab]) {
-					v.send(onShowTab);
-				}
-			});
-		}
+		set(this, 'active', true);
 	},
 
-	didRender: on('willInsertElement', function() {
-		this.registerTab();
-	}),
-
-	didDestroy: on('willDestroyElement', function() {
-		this.unregisterTab();
-	}),
-
-	actions: {
-		openAccordian() {
-			const isOpen = !this.get('open');
-			this.set('open', isOpen);
-			if (isOpen) {
-				this.showTab();
-			}
-		}
+	hideTab() {
+		set(this, 'active', false);
 	}
 });

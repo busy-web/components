@@ -1,5 +1,9 @@
 # @busy-web/components
 
+[![Build Status](https://travis-ci.org/busy-web/components.svg?branch=master)](https://travis-ci.org/busy-web/components)
+[![Maintainability](https://api.codeclimate.com/v1/badges/bf77bd7b8ce6cd621f2d/maintainability)](https://codeclimate.com/github/busy-web/components/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/bf77bd7b8ce6cd621f2d/test_coverage)](https://codeclimate.com/github/busy-web/components/test_coverage)
+
 This README outlines the details of collaborating on this Ember addon.
 
 ## Installation

@@ -9,10 +9,12 @@
 
 <div {{action 'toggleMenu'}}>{{selectedText}}</div>
 
-<ul>
-	{{#if listItem}}
-		{{#each listItem as |item|}}
-			<li class="item{{if item.selected ' selected'}}{{if item.disabled ' disabled'}}" onclick={{action 'selectAction' item bubbles=false}}>{{item.label}}</li>
-		{{/each}}
-	{{/if}}
-</ul>
+<span class="list-container">
+	<ul>
+		{{#if listItem}}
+			{{#each listItem as |item|}}
+				<li class="item{{if item.selected ' selected'}}{{if item.disabled ' disabled'}}" onclick={{action 'selectAction' item bubbles=false}}>{{item.label}}</li>
+			{{/each}}
+		{{/if}}
+	</ul>
+</span>

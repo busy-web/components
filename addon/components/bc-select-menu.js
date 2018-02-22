@@ -3,7 +3,6 @@
  *
  */
 import { A } from '@ember/array';
-import { on } from '@ember/object/evented';
 import { isNone, isEmpty } from '@ember/utils';
 import EmberObject, { computed } from '@ember/object';
 import Component from '@ember/component';
@@ -159,7 +158,9 @@ export default Component.extend(BindOutsideClick, {
 	 * @method setup
 	 * @returns {void}
 	 */
-	setup: on('didRender', function() {
+	didRender() {
+		this._super();
+
 		if (this.$()) {
 			// call bindClick on the ClickedOffComponent mixin
 			// to bind a click event to close the dialog
@@ -171,7 +172,7 @@ export default Component.extend(BindOutsideClick, {
 				this.createOptionsList(data);
 			}
 		}
-	}),
+	},
 
 	/**
 	 * Override method that gets called to

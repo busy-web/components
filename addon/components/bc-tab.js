@@ -10,7 +10,7 @@ import layout from '../templates/components/bc-tab';
 
 export default Component.extend(Evented, {
 	layout: layout,
-	classNames: ['-bc-tab'],
+	classNames: ['--bc-tab'],
 	classNameBindings: ['classId', 'active:active'], // 'open:open'],
 
 	classId: computed('tabName', function() {
@@ -18,7 +18,7 @@ export default Component.extend(Evented, {
 	}),
 
 	active: false,
-	//open: false,
+
 	tabName: null,
 	tabIndex: 0,
 
@@ -27,6 +27,7 @@ export default Component.extend(Evented, {
 	badgeColor: null,
 
 	isViewable: true,
+	loadOnOpen: true,
 
 	didInsertElement() {
 		this._super();

@@ -2,13 +2,13 @@
  * @module Components
  *
  */
-import $ from 'jquery';
 import { assert } from '@ember/debug';
 import { loc } from '@ember/string';
 import { isNone, isEmpty } from '@ember/utils';
 import { computed, get, set } from '@ember/object';
 import Component from '@ember/component';
 import layout from '../templates/components/bc-select';
+import BindOutsideClick from '../mixins/bind-outside-click';
 
 /**
  * `Component/BCSelect`
@@ -25,7 +25,7 @@ import layout from '../templates/components/bc-select';
  * @property onSelect {string} The function name to call when an item is selected. onSelect will pass the selected item to the listener.
  * @property targetObject {object} The View where the onSelect function can be called. `Default: controller`
  */
-export default Component.extend({
+export default Component.extend(BindOutsideClick, {
 	layout,
 
 	classNames: ['bc-select'],
@@ -60,6 +60,23 @@ export default Component.extend({
 		}
 		return selected;
 	}),
+
+	/**
+	 * Initializes the listItem array
+	 *
+	 * @private
+	 * @method setup
+	 * @returns {void}
+	 */
+	didRender() {
+		this._super();
+
+		if (this.$()) {
+			// call bindClick on the ClickedOffComponent mixin
+			// to bind a click event to close the dialog
+			this.bindClick('closeMenu');
+		}
+	},
 
 	getSelected() {
 		const items = this.get('model');
@@ -107,11 +124,7 @@ export default Component.extend({
 	 * @returns {void}
 	 */
 	click() {
-		if (!this.get('isOpen')) {
-			this.openMenuAction();
-		} else {
-			this.closeMenuAction();
-		}
+		this.send('openMenu');
 	},
 
 	checkPosition(elem) {
@@ -147,59 +160,6 @@ export default Component.extend({
 		}
 	},
 
-	/**
-	 * Opens the list menu and sets up a global click event to
-	 * watch for clicks not in the menu to close the menu
-	 *
-	 * @private
-	 * @method openMenuAction
-	 * @returns {void}
-	 */
-	openMenuAction() {
-		const $body = $('body');
-
-		// trigger other select-menu's to close
-		$body.trigger('click.bc-select');
-
-		this.set('isOpen', true);
-
-		if (this.get('openTop')) {
-			this.set('isTop', true);
-		} else {
-			if (this.checkPosition(this.$())) {
-				this.set('isTop', true);
-			} else {
-				this.set('isTop', false);
-			}
-		}
-
-		// add event listener to close the menu
-		$body.bind('click.bc-select', (e) => {
-			if (!this.get('isDestroyed')) {
-				const $el = $(e.target);
-
-				if (this.$().attr('id') !== $el.attr('id')) {
-					this.closeMenuAction();
-				}
-			} else {
-				$body.unbind('click.bc-select');
-			}
-		});
-	},
-
-	/**
-	 * Closes the list menu and destroys the global
-	 * click watcher
-	 *
-	 * @private
-	 * @method closeMenuAction
-	 * @returns {void}
-	 */
-	closeMenuAction() {
-		this.set('isOpen', false);
-		$('body').unbind('click.bc-select');
-	},
-
 	unselectAll() {
 		const items = this.get('model');
 		if (typeof items === 'object' && typeof items.forEach === 'function') {
@@ -229,20 +189,31 @@ export default Component.extend({
 
 		//this.set('selectedItem', item);
 		this.sendAction('onSelect', item);
-		this.closeMenuAction();
+		this.send('closeMenu');
 	},
 
 	actions: {
 		openMenu() {
 			if (!this.get('isOpen')) {
-				this.openMenuAction();
+				this.set('isOpen', true);
+				if (this.get('openTop')) {
+					this.set('isTop', true);
+				} else {
+					if (this.checkPosition(this.$())) {
+						this.set('isTop', true);
+					} else {
+						this.set('isTop', false);
+					}
+				}
 			} else {
-				this.closeMenuAction();
+				this.set('isOpen', false);
 			}
 		},
 
 		closeMenu() {
-			this.closeMenuAction();
+			if (!this.get('isDestroyed')) {
+				this.set('isOpen', false);
+			}
 		},
 
 		clickItemAction(item) {

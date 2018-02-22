@@ -1,4 +1,12 @@
 
-<div class="-bc-tab-container">
-	{{yield active}}
-</div>
+{{#if isViewable}}
+	<div class="--bc-tab-container">
+		{{#if loadOnOpen}}
+			{{#if active}}
+				{{yield active}}
+			{{/if}}
+		{{else}}
+			{{yield active}}
+		{{/if}}
+	</div>
+{{/if}}

@@ -5,10 +5,13 @@
 import $ from 'jquery';
 import { assert } from '@ember/debug';
 import { dasherize } from '@ember/string';
-import EmberObject, { get, set, computed } from '@ember/object';
-import { isEmpty } from '@ember/utils';
+import EmberObject, { get, set } from '@ember/object';
+import { isNone, isEmpty } from '@ember/utils';
 import Component from '@ember/component';
 import layout from '../templates/components/bc-tabs';
+
+/***/
+const TAB_CONTENT = '.--bc-tabs-content';
 
 /**
  * `Component/BCTabs`
@@ -19,7 +22,7 @@ import layout from '../templates/components/bc-tabs';
 export default Component.extend({
 	layout: layout,
 
-	classNames: ['bc-tabs'],
+	classNames: ['--bc-tabs'],
 
 	/**
 	 * variable for tracking tabNames, is an array
@@ -30,22 +33,14 @@ export default Component.extend({
 	model: null,
 
 	defaultTab: '',
+	currentTab: '',
+	hashName: '',
 
 	firstRender: false,
-
-	children: computed(function() {
-		let content = this.$(`.tab-content`);
-		if (content.length) {
-			return content.children();
-		}
-		return [];
-	}).volatile(),
 
 	init() {
 		this._super();
 		this.handleHash();
-
-		//window.onhashchange = (() => this.handleHash());
 	},
 
 	didRender() {
@@ -54,15 +49,21 @@ export default Component.extend({
 			set(this, 'firstRender', true);
 
 			let model = this.buildTabData();
-			let activeTab;
-			if (!isEmpty(get(this, 'defaultTab'))) {
-				activeTab = model.findBy('id', get(this, 'defaultTab'));
-			} else {
-				activeTab = model[0];
-				set(this, 'defaultTab', get(activeTab, 'id'));
-			}
+			if (!isEmpty(model)) {
+				let activeTab;
+				if (!isEmpty(get(this, 'defaultTab'))) {
+					activeTab = model.findBy('id', get(this, 'defaultTab'));
+				} else if (!isEmpty(get(this, 'hashName'))) {
+					activeTab = model.findBy('id', get(this, 'hashName'));
+				}
 
-			this.openTab(activeTab);
+				if (isNone(activeTab)) {
+					activeTab = model[0];
+					set(this, 'defaultTab', get(activeTab, 'id'));
+				}
+
+				this.openTab(activeTab);
+			}
 		}
 	},
 
@@ -70,7 +71,7 @@ export default Component.extend({
 		assert('buildTabData must be called after render', this.$().length > 0);
 
 		let model = [];
-		this.$(`.tab-content`).children().each((index, el) => {
+		this.$(TAB_CONTENT).children().each((index, el) => {
 			let elData = $(el).data();
 			let data = EmberObject.create({
 				el, id: elData.id,
@@ -110,7 +111,7 @@ export default Component.extend({
 	handleHash() {
 		const hash = window.location.hash;
 		if (!isEmpty(hash) && hash.match(/^#tab-/)) {
-			set(this, 'defaultTab', dasherize(hash.replace(/^#tab-/, '').trim()));
+			set(this, 'hashName', dasherize(hash.replace(/^#tab-/, '').trim()));
 		}
 	},
 
@@ -123,9 +124,12 @@ export default Component.extend({
 			tab.showTab();
 
 			// set the history hash
-			if (get(tab, 'id') !== get(this, 'defaultTab')) {
+			if (get(tab, 'id') !== get(this, 'currentTab.id') && get(tab, 'id') !== get(this, 'defaultTab')) {
+				set(this, 'hashName', get(tab, 'id'));
 				window.history.replaceState('', document.title, `${window.location.pathname}#tab-${get(tab, 'id')}`);
 			}
+
+			set(this, 'currentTab', tab);
 		}
 	},
 

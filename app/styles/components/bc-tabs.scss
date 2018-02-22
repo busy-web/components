@@ -1,6 +1,6 @@
 
 /*! topdoc
-  name: bc-tabs
+  name: --bc-tabs
   description: Viewing tabs.
   useage: Use when displaying multiple tabs on a single page/view.
   html:
@@ -8,19 +8,25 @@
   dependencies: [_components/bc-tabs]
  */
 
-.bc-tabs {
-	@include bc-box-sizing;
+.--bc-tabs {
 	width: 100%;
 	height: 100%;
-	padding: 89px 0 0;
+	padding: 50px 0 0;
 
-	.tabs {
+	@media screen and (max-width: 1080px) {
+		padding: 30px 0 0;
+	}
+
+	@media screen and (max-width: 500px) {
+		padding: 20px 0 0;
+	}
+
+	& > .--bc-tabs-header {
+		display: flex;
 		width: 100%;
-		height: 48px;
-		margin: -49px 0 0;
 		border-bottom: 1px solid $bc-color-5;
 
-		& > span {
+		& > .--bc-tabs-name {
 			@include bc-transition(all .5s ease-in-out);
 			@include bc-box-sizing;
 			position: relative;
@@ -34,11 +40,31 @@
 			cursor: pointer;
 			overflow: hidden;
 
+			@media screen and (max-width: 700px) {
+				font: 15px/1 $ft-norm;
+				padding: 15px 14px;
+			}
+
+			@media screen and (max-width: 600px) {
+				font: 14px/1 $ft-norm;
+				padding: 15px 12px;
+			}
+
+			@media screen and (max-width: 500px) {
+				font: 13px/1 $ft-norm;
+				padding: 15px 10px;
+			}
+
+			@media screen and (max-width: 400px) {
+				font: 12px/1 $ft-norm;
+				padding: 15px 8px;
+			}
+
 			&.active {
 				border-bottom-color: $bc-color-1;
 			}
 
-			.bc-tabs-badge {
+			& > .--bc-tabs-badge {
 				position: absolute;
 				top: 10px;
 				right: 4px;
@@ -50,73 +76,35 @@
 				color: $bc-color-7;
 				font: 9px/13px $ft-norm;
 
-				&.bc-tabs-badge-red {
+				&.badge-red {
 					background-color: $bc-color-9;
 				}
 
-				&.bc-tabs-badge-blue {
+				&.badge-blue {
 					background-color: $bc-color-14;
 				}
 
-				&.bc-tabs-badge-green {
+				&.badge-green {
 					background-color: $bc-color-1;
 				}
 			}
 		}
 	}
 
-	.accordian-tab {
-		width: 45%;
-		height: 48px;
-		background: $bc-color-7;
-		text-align: left;
-		overflow: hidden;
-	}
-
-	.open-content {
-		display: none;
-	}
-
-	.tab-content {
+	& > .--bc-tabs-content {
 		@include bc-box-sizing;
 		width: 100%;
 		height: 100%;
 		padding: 30px 0 0;
 
-		.-bc-tab {
+		& > .--bc-tab {
 			display: none;
 			width: 100%;
 			height: 100%;
 			margin: 0;
 			padding: 0;
 
-			//& > .accordian-tab {
-			//	@include bc-box-sizing;
-			//	display: none;
-			//	width: 100%;
-			//	height: 42px;
-			//	padding: 5px 0 0 44px;
-			//	border-top: 1px solid ;
-			//	color: $bc-color-17;
-			//	font: 16px/35px $ft-norm;
-			//	cursor: pointer;
-			//}
-
-			//& > .open-content {
-			//	display: none;
-			//	width: 20px;
-			//	height: 20px;
-			//	margin: -30px 8px 0;
-			//	float: left;
-			//	border-radius: 20px;
-			//	background-color: $bc-color-11;
-			//	color: $bc-color-7;
-			//	font: 21px/21px $ft-norm;
-			//	text-align: center;
-			//	cursor: pointer;
-			//}
-
-			& > .-bc-tab-content {
+			& > .--bc-tab-content {
 				width: 100%;
 				height: 100%;
 				margin: 0;
@@ -126,127 +114,6 @@
 
 			&.active {
 				display: inline-block;
-			}
-		}
-	}
-
-	&.accordian {
-		padding: 0;
-
-		.tabs {
-			display: none;
-		}
-
-		.tab-content {
-			padding: 24px 0 0;
-
-			.bc-tab {
-				display: inline-block;
-				height: 42px;
-
-				& > .accordian-tab {
-					display: block;
-				}
-
-				& > .content {
-					display: none;
-				}
-
-				& > .open-content {
-					display: block;
-				}
-
-				&:last-of-type {
-
-					& > .accordian-tab {
-						border-bottom: 1px solid $bc-color-5;
-					}
-				}
-
-				&.open {
-					height: auto;
-
-					& > .accordian-tab {
-						margin-right: 10px;
-						background-color: $bc-color-8;
-						color: $bc-color-7;
-					}
-
-					& > .open-content {
-						display: block;
-						background-color: $bc-color-7;
-						color: $bc-color-8;
-						font: 21px/19px $ft-norm;
-					}
-
-					& > .content {
-						@include bc-box-sizing;
-						display: block;
-						padding: 30px 0;
-					}
-				}
-			}
-		}
-	}
-}
-
-@media screen and (max-width: $mobile-width) {
-
-	.bc-tabs {
-		padding: 0;
-
-		.tabs {
-			display: none;
-		}
-
-		.tab-content {
-			padding: 24px 0 0;
-
-			.bc-tab {
-				display: inline-block;
-				height: 42px;
-
-				& > .accordian-tab {
-					display: block;
-				}
-
-				& > .content {
-					display: none;
-				}
-
-				& > .open-content {
-					display: block;
-				}
-
-				&:last-of-type {
-
-					& > .accordian-tab {
-						border-bottom: 1px solid $bc-color-5;
-					}
-				}
-
-				&.open {
-					height: auto;
-
-					& > .accordian-tab {
-						margin-right: 10px;
-						background-color: $bc-color-8;
-						color: $bc-color-7;
-					}
-
-					& > .open-content {
-						display: block;
-						background-color: $bc-color-7;
-						color: $bc-color-8;
-						font: 21px/19px $ft-norm;
-					}
-
-					& > .content {
-						@include bc-box-sizing;
-						display: block;
-						padding: 30px 0;
-					}
-				}
 			}
 		}
 	}

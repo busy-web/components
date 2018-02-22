@@ -3,8 +3,8 @@ $white: #fff;
 $off-white: #eee;
 
 .bc-select {
-	display: inline-block;
-	position: relative;
+	display: inline-block !important;
+	//position: relative;
 	height: 36px;
 	margin: 0;
 	padding: 0;
@@ -15,9 +15,10 @@ $off-white: #eee;
 	line-height: 1;
 
 	& > a {
-
 		&.d-button {
 			@include bc-background-image(linear-gradient(top, $white, $off-white));
+			position: relative;
+			display: inline-block;
 			padding: 9px 28px 9px 16px;
 			border-radius: 3px;
 			color: $bc-color-3;
@@ -49,70 +50,79 @@ $off-white: #eee;
 		display: none;
 	}
 
-	& > ul {
+	& > .list-container {
+		display: inline-block;
+		position: relative;
+		width: 100%;
+		height: 1px;
+		float: left;
+		clear: both;
+		z-index: 1000;
 
-		&.select-container {
-			@include bc-box-sizing;
-			display: none;
-			position: absolute;
-			top: 42px;
-			right: 0;
-			//width: 200%;
-			min-width: 200%;
-			max-width: 400%;
-			height: auto;
-			max-height: 400px;
-			padding: 8px 16px;
-			border: 1px solid $bc-color-5;
-			border-radius: 3px;
-			background: $bc-color-7;
-			box-shadow: 0 2px 7px -2px $bc-color-13;
-			overflow: hidden;
-			z-index: 1000;
-			overflow-y: auto;
+		& > ul {
 
-			&.all {
-				min-width: 300px;
-			}
-
-			& > li {
-				width: 100%;
-				height: 36px;
-				color: $bc-color-17;
-				font: 15px/36px $ft-norm;
-				text-align: left;
-				text-overflow: ellipsis;
-				white-space: nowrap;
-				cursor: pointer;
+			&.select-container {
+				@include bc-box-sizing;
+				display: none;
+				position: absolute;
+				top: 5px;
+				right: 3px;
+				min-width: 200%;
+				max-width: 400%;
+				height: auto;
+				max-height: 400px;
+				padding: 8px 16px;
+				border: 1px solid $bc-color-5;
+				border-radius: 3px;
+				background: $bc-color-7;
+				box-shadow: 0 2px 7px -2px $bc-color-13;
 				overflow: hidden;
+				z-index: 1000;
+				overflow-y: auto;
 
-				& > div {
-					display: inline-block;
+				&.all {
+					min-width: 300px;
+				}
+
+				& > li {
 					width: 100%;
+					height: 36px;
+					color: $bc-color-17;
+					font: 15px/36px $ft-norm;
+					text-align: left;
 					text-overflow: ellipsis;
 					white-space: nowrap;
+					cursor: pointer;
 					overflow: hidden;
-				}
 
-				&:hover {
-					color: $bc-color-1;
-				}
+					& > div {
+						display: inline-block;
+						width: 100%;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						overflow: hidden;
+					}
 
-				&.unselectable {
-					color: $bc-color-8;
-					font: 15px/36px $ft-bold;
-					cursor: default;
-				}
+					&:hover {
+						color: $bc-color-1;
+					}
 
-				&.selected {
-					color: $bc-color-1;
-				}
-			}
+					&.unselectable {
+						color: $bc-color-8;
+						font: 15px/36px $ft-bold;
+						cursor: default;
+					}
 
-			&.hl-disabled {
-				& > li {
 					&.selected {
-						color: $bc-color-17;
+						color: $bc-color-1;
+					}
+				}
+
+				&.hl-disabled {
+					& > li {
+						&.selected {
+							color: $bc-color-17;
+						}
 					}
 				}
 			}
@@ -120,10 +130,12 @@ $off-white: #eee;
 	}
 
 	&.top {
-		& > ul {
-			&.select-container {
-				top: auto;
-				bottom: 42px;
+		& > .list-container {
+			& > ul {
+				&.select-container {
+					top: auto;
+					bottom: 50px;
+				}
 			}
 		}
 	}
@@ -131,10 +143,12 @@ $off-white: #eee;
 	&.left {
 		float: left;
 
-		& > ul {
-			&.select-container {
-				right: initial;
-				left: 0;
+		& > .list-container {
+			& > ul {
+				&.select-container {
+					right: initial;
+					left: 0;
+				}
 			}
 		}
 	}
@@ -149,14 +163,18 @@ $off-white: #eee;
 			}
 		}
 
-		& > ul {
-			width: 100%;
-			min-width: initial;
-			max-width: initial;
-
-			&.select-container {
+		& > .list-container {
+			& > ul {
 				width: 100%;
-				z-index: 1000;
+				right: 0;
+				left: 0;
+				min-width: initial;
+				max-width: initial;
+
+				&.select-container {
+					width: 100%;
+					z-index: 1000;
+				}
 			}
 		}
 	}
@@ -168,63 +186,65 @@ $off-white: #eee;
 			}
 		}
 
-		& > ul {
-			&.select-container {
-				display: block;
+		& > .list-container {
+			& > ul {
+				&.select-container {
+					display: block;
+				}
 			}
 		}
 	}
 
 	&.small {
-		width: 36px;
-		height: 32px;
+		width: 44px;
+		height: 42px;
 		margin: 0;
 		cursor: pointer;
 
 		& > .dots {
-			display: block;
-			width: 36px;
-			height: 32px;
-			cursor: pointer;
+			display: inline-block;
+			width: 42px;
+			height: 42px;
 
-			& > span {
-				display: block;
-				width: 5px;
-				height: 5px;
-				margin: 5px auto;
-				padding: 0;
-				clear: both;
-				border-radius: 5px;
-				background: $bc-color-12;
+			& > i {
+				color: $bc-color-12;
+				font-size: 42px;
+				line-height: 42px;
 			}
 
 			&:hover {
-				& > span {
-					background: $bc-color-11;
+				background-color: transparent;
+
+				& > i {
+					color: $bc-color-11;
 				}
 			}
 		}
 
-		ul {
-			&.select-container {
-				top: 33px;
-				right: 10px;
-				width: 300px;
-				max-width: none;
+		& > .list-container {
+			& > ul {
+				&.select-container {
+					top: 10px;
+					right: 5px;
+					width: 300px;
+					max-width: none;
+				}
 			}
 		}
 
-		a {
+		& > a {
 			&.d-button {
 				display: none;
 			}
 		}
 
 		&.top {
-			& > ul {
-				&.select-container {
-					top: auto;
-					bottom: 33px;
+			& > .list-container {
+				& > ul {
+					&.select-container {
+						top: auto;
+						bottom: 50px;
+					}
 				}
 			}
 		}
@@ -243,11 +263,13 @@ $off-white: #eee;
 			cursor: pointer;
 		}
 
-		ul {
-			&.select-container {
-				top: 33px;
-				right: 10px;
-				width: 300px;
+		.list-container {
+			ul {
+				&.select-container {
+					top: 33px;
+					right: 10px;
+					width: 300px;
+				}
 			}
 		}
 
@@ -270,11 +292,15 @@ $off-white: #eee;
 			}
 		}
 
-		& > ul {
-			&.select-container {
-				width: 100%;
-				min-width: initial;
-				max-width: initial;
+		& > .list-container {
+			& > ul {
+				&.select-container {
+					width: 100%;
+					left: 0;
+					right: 0;
+					min-width: initial;
+					max-width: initial;
+				}
 			}
 		}
 	}

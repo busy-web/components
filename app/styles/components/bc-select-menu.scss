@@ -1,7 +1,5 @@
 
 .bc-select-menu {
-	position: relative;
-
 	& > .hidden-template {
 		display: none;
 	}
@@ -30,34 +28,42 @@
 		}
 	}
 
-	& > ul {
-		display: none;
-		position: absolute;
-		top: 48px;
-		left: 0;
-		padding: 20px 0;
-		border: 1px solid #ccc;
-		border-radius: 3px;
-		background-color: #fff;
+	& > .list-container {
+		position: relative;
+		display: inline-block;
+		width: 100%;
+		height: 0;
+		z-index: 1000;
 
-		& > li {
-			display: block;
-			min-width: 120px;
-			padding: 9px 20px;
-			font: 14px/1 proxima;
-			cursor: pointer;
+		& > ul {
+			display: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			padding: 20px 0;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			background-color: #fff;
 
-			&.selected {
-				color: #30aeef;
-			}
+			& > li {
+				display: block;
+				min-width: 120px;
+				padding: 9px 20px;
+				font: 14px/1 proxima;
+				cursor: pointer;
 
-			&.disabled {
-				color: #aaa;
-				cursor: default;
-			}
+				&.selected {
+					color: #30aeef;
+				}
 
-			&:hover {
-				background-color: #fafafa;
+				&.disabled {
+					color: #aaa;
+					cursor: default;
+				}
+
+				&:hover {
+					background-color: #fafafa;
+				}
 			}
 		}
 	}
@@ -71,32 +77,34 @@
 				top: 20px;
 			}
 		}
-
-		& > ul {
-			top: 55px;
-		}
 	}
 
 	&.right {
 		float: right;
 
-		& > ul {
-			right: 0;
-			left: initial;
+		& > .list-container {
+			& > ul {
+				right: 0;
+				left: initial;
+			}
 		}
 	}
 
 	&.fullwidth {
 		width: 100%;
 
-		& > ul {
-			width: 100%;
+		& > .list-container {
+			& > ul {
+				width: 100%;
+			}
 		}
 	}
 
 	&.open {
-		& > ul {
-			display: block;
+		& > .list-container {
+			& > ul {
+				display: block;
+			}
 		}
 	}
 }

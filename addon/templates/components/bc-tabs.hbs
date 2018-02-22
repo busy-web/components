@@ -1,13 +1,13 @@
 
-<div class="tabs">
+<div class="--bc-tabs-header">
 	{{#if model}}
 		{{#each model as |tab|}}
 			{{#if tab.isViewable}}
-				<span class="tab-name{{if tab.active ' active'}}" {{action 'changeTab' tab bubbles=false}}>
+				<span class="--bc-tabs-name{{if tab.active ' active'}}" {{action 'changeTab' tab bubbles=false}}>
 					{{tab.tabName}}
 
 					{{#if tab.showBadge}}
-						<span class="bc-tabs-badge bc-tabs-badge-{{if tab.badgeColor tab.badgeColor 'default'}}">{{tab.badgeContent}}</span>
+						<span class="--bc-tabs-badge badge-{{if tab.badgeColor tab.badgeColor 'default'}}">{{tab.badgeContent}}</span>
 					{{/if}}
 				</span>
 			{{/if}}
@@ -15,6 +15,6 @@
 	{{/if}}
 </div>
 
-<div class="tab-content">
+<div class="--bc-tabs-content">
 	{{yield}}
 </div>

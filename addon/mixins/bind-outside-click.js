@@ -2,7 +2,6 @@
  * @module Mixins
  *
  */
-import { on } from '@ember/object/evented';
 import $ from 'jquery';
 import { isEmpty } from '@ember/utils';
 import { assert } from '@ember/debug';
@@ -88,9 +87,11 @@ export default Mixin.create({
 	 * @private
 	 * @method destroy
 	 */
-	destroy: on('willDestroyElement', function() {
+	willDestroyElement() {
+		this._super();
+
 		// unbind clicks
 		this.unbindClick();
-	})
+	}
 });
 

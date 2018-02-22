@@ -23,8 +23,8 @@
   "dependencies": {
     "ember-cli-babel": "^6.6.0",
     "ember-cli-htmlbars": "^2.0.1",
-    "ember-material-design-icons-shim": "^0.1.11",
-    "ember-cli-sass": "^7.0.0"
+    "ember-cli-sass": "^7.0.0",
+    "ember-material-design-icons-shim": "^0.1.12"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",

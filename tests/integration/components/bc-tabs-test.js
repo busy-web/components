@@ -12,13 +12,4 @@ test('it renders', function(assert) {
   this.render(hbs`{{bc-tabs}}`);
 
   assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#bc-tabs}}
-      template block text
-    {{/bc-tabs}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });

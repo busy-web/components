@@ -95,15 +95,18 @@ export default Component.extend({
 
 			// register for child events
 			data.on('change', () => {
-				console.log('child change', get(data, 'id'));
+				window.console.log('child change', get(data, 'id'));
 				this.buildTabData();
 			});
 
 			model.push(data);
 		});
 
-		// sort models by tabIndex
-		model = model.sortBy('tabIndex');
+		if (get(model, 'length') > 0) {
+			// sort models by tabIndex
+			model = model.sortBy('tabIndex');
+		}
+
 		set(this, 'model', model);
 		return model;
 	},

@@ -3,7 +3,7 @@ language: node_js
 node_js:
   - "6"
 
-sudo: false
+sudo: required
 dist: trusty
 
 addons:
@@ -16,6 +16,7 @@ env:
   global:
     # See https://git.io/vdao3 for details.
     - JOBS=1
+    - CC_TEST_REPORTER_ID=6df1d72f0ea27fb191ccf349105b999fd185cff424c8330c7412f0a8b596b00b
   matrix:
     # we recommend new addons test the current and previous LTS
     # as well as latest stable release (bonus points to beta/canary)
@@ -38,15 +39,17 @@ before_install:
 install:
   - yarn install --no-lockfile --non-interactive
 
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
 script:
   # Usually, it's ok to finish the test scenario without reverting
   #  to the addon's original dependency state, skipping "cleanup".
   - COVERAGE=true node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO test --skip-cleanup
 
-addons:
-  code_climate:
-    repo_token: 816606987549c1d473cace8af086a14f4e653bc67f3dd8c46d208980ab906b66
-
-after_success:
-  - npm install -g codeclimate-test-reporter
-  - codeclimate-test-reporter < coverage/lcov.info
+after_script:
+  #- ./cc-test-reporter format-coverage --input-type lcov coverage/lcov.info
+  - ./lib/helpers/coverage-parser.js
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

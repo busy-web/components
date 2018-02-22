@@ -1,5 +1,5 @@
 import EmberObject from '@ember/object';
-import BindOutsideClickMixin from '@busybusy/components/mixins/bind-outside-click';
+import BindOutsideClickMixin from '@busy-web/components/mixins/bind-outside-click';
 import { module, test } from 'qunit';
 
 module('Unit | Mixin | bind outside click');

@@ -1,3 +1,3 @@
-import checkboxInput from '@busybusy/components/components/checkbox-input';
+import checkboxInput from '@busy-web/components/components/checkbox-input';
 
 export default checkboxInput;

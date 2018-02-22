@@ -1,1 +1,1 @@
-export { default, throwAlert } from '@busybusy/components/helpers/throw-alert';
+export { default, throwAlert } from '@busy-web/components/helpers/throw-alert';

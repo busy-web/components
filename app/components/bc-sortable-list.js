@@ -1,1 +1,1 @@
-export { default } from '@busybusy/components/components/bc-sortable-list';
+export { default } from '@busy-web/components/components/bc-sortable-list';

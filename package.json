@@ -1,9 +1,11 @@
 {
-  "name": "@busybusy/components",
+  "name": "@busy-web/components",
   "version": "2.16.0",
-  "description": "busybusy component addon library for ember-cli.",
+  "description": "Ember addon library for usefull components.",
   "keywords": [
     "ember-addon",
+    "busy-web",
+    "busyweb",
     "busybusy"
   ],
   "license": "MIT",
@@ -11,10 +13,7 @@
   "directories": {
     "test": "tests"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/busybusy/webapp-busy-components.git"
-  },
+  "repository": "git@github.com:busy-web/components.git",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
@@ -53,8 +52,8 @@
     "configPath": "tests/dummy/config"
   },
   "bugs": {
-    "url": "https://github.com/busybusy/webapp-busy-components/issues"
+    "url": "https://github.com/busy-web/components/issues"
   },
-  "homepage": "https://github.com/busybusy/webapp-busy-components#readme",
+  "homepage": "https://github.com/busy-web/components#readme",
   "main": "index.js"
 }

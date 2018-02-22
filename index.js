@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  name: '@busybusy/components'
+  name: '@busy-web/components'
 };

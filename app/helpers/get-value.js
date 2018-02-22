@@ -1,1 +1,1 @@
-export { default, getValue } from '@busybusy/components/helpers/get-value';
+export { default, getValue } from '@busy-web/components/helpers/get-value';

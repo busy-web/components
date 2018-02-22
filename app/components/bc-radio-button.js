@@ -1,1 +1,1 @@
-export { default } from '@busybusy/components/components/bc-radio-button';
+export { default } from '@busy-web/components/components/bc-radio-button';

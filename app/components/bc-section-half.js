@@ -1,1 +1,1 @@
-export { default } from '@busybusy/components/components/bc-section-half';
+export { default } from '@busy-web/components/components/bc-section-half';

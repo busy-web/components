@@ -1,1 +1,1 @@
-export { default } from '@busybusy/components/components/bc-validate-password';
+export { default } from '@busy-web/components/components/bc-validate-password';

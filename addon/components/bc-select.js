@@ -123,8 +123,11 @@ export default Component.extend(BindOutsideClick, {
 	 * @method click
 	 * @returns {void}
 	 */
-	click() {
+	click(evt) {
+		evt.stopPropagation();
 		this.send('openMenu');
+
+		return false;
 	},
 
 	checkPosition(elem) {

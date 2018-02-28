@@ -1,0 +1,90 @@
+
+.md-button {
+	@include box-sizing;
+	display: inline-block;
+	width: 46px;
+	height: 46px;
+	float: left;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	text-align: center;
+	cursor: pointer;
+
+	& > i {
+		color: $busy-color-11;
+		font-size: 30px;
+		line-height: 46px;
+	}
+
+	&:hover,
+	&:active {
+		background-color: #d9dfe2;
+	}
+
+	&.right {
+		float: right;
+	}
+
+	&.small {
+		width: 36px;
+		height: 36px;
+
+		& > i {
+			font-size: 24px;
+			line-height: 36px;
+		}
+	}
+
+	&.disabled {
+		cursor: initial;
+
+		& > i {
+			color: $busy-color-20;
+		}
+
+		&:hover,
+		&:active {
+			background-color: transparent;
+		}
+	}
+
+	&.close {
+		& > i {
+			font-size: 36px;
+		}
+
+		&.small {
+			& > i {
+				font-size: 30px;
+			}
+		}
+
+		&:hover,
+		&:active {
+			background-color: transparent;
+
+			& > i {
+				color: $busy-color-3;
+			}
+		}
+	}
+
+	&.view-column {
+		& > i {
+			font-size: 36px;
+		}
+
+		&.small {
+			& > i {
+				font-size: 30px;
+			}
+		}
+	}
+
+	&.no-hover {
+		&:hover,
+		&:active {
+			background-color: transparent;
+		}
+	}
+}

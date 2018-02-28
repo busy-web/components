@@ -4,7 +4,6 @@ $off-white: #eee;
 
 .bc-select {
 	display: inline-block !important;
-	//position: relative;
 	height: 36px;
 	margin: 0;
 	padding: 0;
@@ -42,11 +41,7 @@ $off-white: #eee;
 		}
 	}
 
-	& > .dots {
-		display: none;
-	}
-
-	& > .download {
+	& > .icon {
 		display: none;
 	}
 
@@ -58,6 +53,18 @@ $off-white: #eee;
 		float: left;
 		clear: both;
 		z-index: 1000;
+
+		& > .list-container-cover {
+			position: fixed;
+			top: 0;
+			left: 0;
+			display: none;
+			width: 100vw;
+			height: 100vh;
+			cursor: initial;
+			z-index: 1;
+		}
+
 
 		& > ul {
 
@@ -180,6 +187,9 @@ $off-white: #eee;
 	}
 
 	&.active {
+		position: relative;
+		z-index: 1000;
+
 		& > a {
 			&.d-button {
 				background: $bc-color-16;
@@ -187,6 +197,10 @@ $off-white: #eee;
 		}
 
 		& > .list-container {
+			& > .list-container-cover {
+				display: block;
+			}
+
 			& > ul {
 				&.select-container {
 					display: block;
@@ -201,7 +215,7 @@ $off-white: #eee;
 		margin: 0;
 		cursor: pointer;
 
-		& > .dots {
+		& > .icon {
 			display: inline-block;
 			width: 42px;
 			height: 42px;
@@ -246,36 +260,6 @@ $off-white: #eee;
 						bottom: 50px;
 					}
 				}
-			}
-		}
-	}
-
-	&.download {
-		width: 32px;
-		height: 32px;
-		margin: 0;
-		cursor: pointer;
-
-		& > .download {
-			display: block;
-			width: 32px;
-			height: 32px;
-			cursor: pointer;
-		}
-
-		.list-container {
-			ul {
-				&.select-container {
-					top: 33px;
-					right: 10px;
-					width: 300px;
-				}
-			}
-		}
-
-		a {
-			&.d-button {
-				display: none;
 			}
 		}
 	}

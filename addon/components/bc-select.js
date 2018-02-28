@@ -7,8 +7,8 @@ import { loc } from '@ember/string';
 import { isNone, isEmpty } from '@ember/utils';
 import { computed, get, set } from '@ember/object';
 import Component from '@ember/component';
+import CloseOnEscape from '../mixins/close-on-escape';
 import layout from '../templates/components/bc-select';
-import BindOutsideClick from '../mixins/bind-outside-click';
 
 /**
  * `Component/BCSelect`
@@ -25,11 +25,13 @@ import BindOutsideClick from '../mixins/bind-outside-click';
  * @property onSelect {string} The function name to call when an item is selected. onSelect will pass the selected item to the listener.
  * @property targetObject {object} The View where the onSelect function can be called. `Default: controller`
  */
-export default Component.extend(BindOutsideClick, {
+export default Component.extend(CloseOnEscape, {
 	layout,
 
 	classNames: ['bc-select'],
 	classNameBindings: ['isOpen:active', 'isTop:top', 'small'],
+
+	__closeActionName: 'closeMenu',
 
 	/**
 	 * isOpen tracks the menu open state
@@ -55,31 +57,14 @@ export default Component.extend(BindOutsideClick, {
 	 */
 	selectedItem: computed('model.@each._selected', 'model.[]', function() {
 		let selected = null;
-		if (!isNone(this.get('model'))) {
+		if (!isNone(get(this, 'model'))) {
 			selected = this.getSelected();
 		}
 		return selected;
 	}),
 
-	/**
-	 * Initializes the listItem array
-	 *
-	 * @private
-	 * @method setup
-	 * @returns {void}
-	 */
-	didRender() {
-		this._super();
-
-		if (this.$()) {
-			// call bindClick on the ClickedOffComponent mixin
-			// to bind a click event to close the dialog
-			this.bindClick('closeMenu');
-		}
-	},
-
 	getSelected() {
-		const items = this.get('model');
+		const items = get(this, 'model');
 		let selected = null;
 		if (typeof items === 'object' && typeof items.forEach === 'function') {
 			items.forEach(item => {
@@ -102,33 +87,19 @@ export default Component.extend(BindOutsideClick, {
 	defaultFirstOption: false,
 
 	menuTitle: computed('selectedItem', function() {
-		let label = this.get('defaultLabel');
-		let selectedItem = this.get('selectedItem');
+		let label = get(this, 'defaultLabel');
+		let selectedItem = get(this, 'selectedItem');
 
-		assert('"itemLabel" must be set to a property of the model', !isEmpty(this.get('itemLabel')));
+		assert('"itemLabel" must be set to a property of the model', !isEmpty(get(this, 'itemLabel')));
 
 		if (!isNone(selectedItem)) {
-			label = get(selectedItem, this.get('itemLabel'));
-		} else if (this.get('defaultFirstOption')) {
-			selectedItem = this.get('model').objectAt(0);
-			label = get(selectedItem, this.get('itemLabel'));
+			label = get(selectedItem, get(this, 'itemLabel'));
+		} else if (get(this, 'defaultFirstOption')) {
+			selectedItem = get(this, 'model').objectAt(0);
+			label = get(selectedItem, get(this, 'itemLabel'));
 		}
 		return label;
 	}),
-
-	/**
-	 * click event handler
-	 *
-	 * @private
-	 * @method click
-	 * @returns {void}
-	 */
-	click(evt) {
-		evt.stopPropagation();
-		this.send('openMenu');
-
-		return false;
-	},
 
 	checkPosition(elem) {
 		let isBottom = false;
@@ -164,7 +135,7 @@ export default Component.extend(BindOutsideClick, {
 	},
 
 	unselectAll() {
-		const items = this.get('model');
+		const items = get(this, 'model');
 		if (typeof items === 'object' && typeof items.forEach === 'function') {
 			items.forEach(item => {
 				set(item, '_selected', false);
@@ -190,32 +161,41 @@ export default Component.extend(BindOutsideClick, {
 
 		set(item, '_selected', true);
 
-		//this.set('selectedItem', item);
+		//set(this, 'selectedItem', item);
 		this.sendAction('onSelect', item);
 		this.send('closeMenu');
 	},
 
+	onEscape() {
+		this.send('closeMenu');
+		return false;
+	},
+
 	actions: {
 		openMenu() {
-			if (!this.get('isOpen')) {
-				this.set('isOpen', true);
-				if (this.get('openTop')) {
-					this.set('isTop', true);
+			if (!get(this, 'isOpen')) {
+				this.addEventListener();
+				set(this, 'isOpen', true);
+
+				if (get(this, 'openTop')) {
+					set(this, 'isTop', true);
 				} else {
 					if (this.checkPosition(this.$())) {
-						this.set('isTop', true);
+						set(this, 'isTop', true);
 					} else {
-						this.set('isTop', false);
+						set(this, 'isTop', false);
 					}
 				}
 			} else {
-				this.set('isOpen', false);
+				this.removeEventListener();
+				set(this, 'isOpen', false);
 			}
 		},
 
 		closeMenu() {
-			if (!this.get('isDestroyed')) {
-				this.set('isOpen', false);
+			if (!get(this, 'isDestroyed')) {
+				this.removeEventListener();
+				set(this, 'isOpen', false);
 			}
 		},
 
@@ -223,6 +203,11 @@ export default Component.extend(BindOutsideClick, {
 			if (!get(item, '_unselectable')) {
 				this.itemClicked(item);
 			}
+			return false;
+		},
+
+		stopPropagation() {
+			return false;
 		}
 	}
 });

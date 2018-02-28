@@ -10,7 +10,9 @@
 <div {{action 'toggleMenu'}}>{{selectedText}}</div>
 
 <span class="list-container">
-	<ul>
+	<div class="list-container-cover" {{action "closeMenu" bubbles=false}}></div>
+
+	<ul {{action "stopPropagation" bubbles=false}}>
 		{{#if listItem}}
 			{{#each listItem as |item|}}
 				<li class="item{{if item.selected ' selected'}}{{if item.disabled ' disabled'}}" onclick={{action 'selectAction' item bubbles=false}}>{{item.label}}</li>

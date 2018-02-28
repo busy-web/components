@@ -45,18 +45,22 @@ export default Mixin.create({
 		// using this mixin
 		if (!isEmpty(elementId)) {
 			// unbind any previous click listeners
-			$(document).off(`click.${elementId}`);
+			$('body').off(`click.${elementId}`);
 
 			// bind the click listener
-			$(document).on(`click.${elementId}`, function(evt) {
+			$('body').on(`click.${elementId}`, function(evt) {
 				// get the element that was clicked on
 				const el = $(evt.target);
+				console.log('outside-click', elementId, el.attr('id'), el.parents('#' + elementId).length);
 
 				// if the clicked element id does not match the components id and the clicked
 				// elements parents dont have an id that matches then call the action provided
 				if (el.attr('id') !== elementId && el.parents(`#${elementId}`).length === 0) {
 					// send a call to the actionName
 					_this.send(actionName);
+					evt.stopPropagation();
+					evt.preventDefault();
+					return false;
 				}
 			});
 		}
@@ -77,7 +81,7 @@ export default Mixin.create({
 		// using this mixin
 		if (!isEmpty(elementId)) {
 			// unbind any previous click listeners
-			$(document).off(`click.${elementId}`);
+			$('body').off(`click.${elementId}`);
 		}
 	},
 

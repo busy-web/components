@@ -35,6 +35,17 @@
 		height: 0;
 		z-index: 1000;
 
+		& > .list-container-cover {
+			position: fixed;
+			top: 0;
+			left: 0;
+			display: none;
+			width: 100vw;
+			height: 100vh;
+			cursor: initial;
+			z-index: 1;
+		}
+
 		& > ul {
 			display: none;
 			position: absolute;
@@ -44,6 +55,7 @@
 			border: 1px solid #ccc;
 			border-radius: 3px;
 			background-color: #fff;
+			z-index: 1000;
 
 			& > li {
 				display: block;
@@ -102,6 +114,11 @@
 
 	&.open {
 		& > .list-container {
+			& > .list-container-cover {
+				display: block;
+				background-color: red;
+			}
+
 			& > ul {
 				display: block;
 			}

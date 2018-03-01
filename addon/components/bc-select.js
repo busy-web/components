@@ -8,6 +8,7 @@ import { isNone, isEmpty } from '@ember/utils';
 import { computed, get, set } from '@ember/object';
 import Component from '@ember/component';
 import CloseOnEscape from '../mixins/close-on-escape';
+import BindOutsideClick from '../mixins/bind-outside-click';
 import layout from '../templates/components/bc-select';
 
 /**
@@ -25,7 +26,7 @@ import layout from '../templates/components/bc-select';
  * @property onSelect {string} The function name to call when an item is selected. onSelect will pass the selected item to the listener.
  * @property targetObject {object} The View where the onSelect function can be called. `Default: controller`
  */
-export default Component.extend(CloseOnEscape, {
+export default Component.extend(CloseOnEscape, BindOutsideClick, {
 	layout,
 
 	classNames: ['bc-select'],
@@ -101,37 +102,28 @@ export default Component.extend(CloseOnEscape, {
 		return label;
 	}),
 
-	checkPosition(elem) {
-		let isBottom = false;
-		if (elem === undefined || elem.get(0).tagName === 'HTML') {
-			return isBottom;
-		}
+	checkPosition() {
+		const elem = this.$().offsetParent();
 
-		const overflow = window.getComputedStyle(elem.get(0))['overflow-y'];
-		const hasOverflow = (overflow === 'auto' || overflow === 'scroll');
+		let menuHeightTop = elem.height() - (elem.height() - (this.$().offset().top - elem.offset().top)) - 20; // height of the container minus the the bottom space from the top of the button.
+		let menuHeightBot = elem.height() - ((this.$().offset().top + this.$().height()) - elem.offset().top) - 20; // height of the container minus the bottom of the select button.
+		const maxHeight = parseInt(window.getComputedStyle(this.$('.select-container').get(0))['max-height'], 10);
 
-		if (hasOverflow || elem.get(0).tagName === 'BODY') {
-			let menuHeightTop = elem.height() - (elem.height() - (this.$().offset().top - elem.offset().top)) - 20; // height of the container minus the the bottom space from the top of the button.
-			let menuHeightBot = elem.height() - ((this.$().offset().top + this.$().height()) - elem.offset().top) - 20; // height of the container minus the bottom of the select button.
-			const maxHeight = parseInt(window.getComputedStyle(this.$('.select-container').get(0))['max-height'], 10);
-
+		if (menuHeightTop > 200) {
 			if (menuHeightBot < maxHeight) {
 				if (menuHeightTop > menuHeightBot) {
-					isBottom = true;
-
 					if (menuHeightTop < maxHeight) {
 						menuHeightTop = menuHeightTop > 150 ? menuHeightTop : 150;
 						this.$('.select-container').css('max-height', menuHeightTop);
 					}
+					return true;
 				} else {
 					menuHeightBot = menuHeightBot > 150 ? menuHeightBot : 150;
 					this.$('.select-container').css('max-height', menuHeightBot);
 				}
 			}
-			return isBottom;
-		} else {
-			return this.checkPosition(elem.parent());
 		}
+		return false;
 	},
 
 	unselectAll() {
@@ -160,43 +152,54 @@ export default Component.extend(CloseOnEscape, {
 		this.unselectAll();
 
 		set(item, '_selected', true);
+		this.close();
 
-		//set(this, 'selectedItem', item);
 		this.sendAction('onSelect', item);
-		this.send('closeMenu');
 	},
 
+	onOutsideClick() { this.close(); },
 	onEscape() {
-		this.send('closeMenu');
+		this.close();
 		return false;
+	},
+
+	open() {
+		if (!get(this, 'isDestroyed')) {
+			this.bindEscape();
+			this.bindClick();
+
+			set(this, 'isOpen', true);
+			if (get(this, 'openTop')) {
+				set(this, 'isTop', true);
+			} else {
+				if (this.checkPosition()) {
+					set(this, 'isTop', true);
+				} else {
+					set(this, 'isTop', false);
+				}
+			}
+		}
+	},
+
+	close() {
+		if (!get(this, 'isDestroyed')) {
+			this.unbindEscape();
+			this.unbindClick();
+			set(this, 'isOpen', false);
+		}
 	},
 
 	actions: {
 		openMenu() {
 			if (!get(this, 'isOpen')) {
-				this.addEventListener();
-				set(this, 'isOpen', true);
-
-				if (get(this, 'openTop')) {
-					set(this, 'isTop', true);
-				} else {
-					if (this.checkPosition(this.$())) {
-						set(this, 'isTop', true);
-					} else {
-						set(this, 'isTop', false);
-					}
-				}
+				this.open();
 			} else {
-				this.removeEventListener();
-				set(this, 'isOpen', false);
+				this.close();
 			}
 		},
 
 		closeMenu() {
-			if (!get(this, 'isDestroyed')) {
-				this.removeEventListener();
-				set(this, 'isOpen', false);
-			}
+			this.close();
 		},
 
 		clickItemAction(item) {

@@ -1,6 +1,6 @@
 
 .md-button {
-	@include box-sizing;
+	@include bc-box-sizing;
 	display: inline-block;
 	width: 46px;
 	height: 46px;
@@ -11,7 +11,7 @@
 	cursor: pointer;
 
 	& > i {
-		color: $busy-color-11;
+		color: $bc-color-11;
 		font-size: 30px;
 		line-height: 46px;
 	}
@@ -39,7 +39,7 @@
 		cursor: initial;
 
 		& > i {
-			color: $busy-color-20;
+			color: $bc-color-20;
 		}
 
 		&:hover,
@@ -64,7 +64,7 @@
 			background-color: transparent;
 
 			& > i {
-				color: $busy-color-3;
+				color: $bc-color-3;
 			}
 		}
 	}

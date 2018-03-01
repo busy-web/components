@@ -5,15 +5,8 @@ $image-size: 40px;
 	width: 100%;
 
 	& > .bc-list-container {
-		@include bc-box-sizing;
-		display: inline-block;
-		//position: relative;
 		width: 100%;
-		height: auto;
-		min-height: 400px;
 		padding: 0;
-		overflow: visible;
-		overflow-x: auto;
 
 		& > .bc-list-table {
 			display: table;
@@ -31,7 +24,6 @@ $image-size: 40px;
 					border-bottom: 1px solid $bc-color-12;
 					color: $bc-color-3;
 					font: 16px/1 $ft-bold;
-					// text-align: center;
 					text-overflow: ellipsis;
 					white-space: nowrap;
 					border-spacing: 0;

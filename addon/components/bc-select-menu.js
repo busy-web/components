@@ -8,6 +8,7 @@ import { isNone, isEmpty } from '@ember/utils';
 import EmberObject, { get, set, computed } from '@ember/object';
 import Component from '@ember/component';
 import CloseOnEscape from '../mixins/close-on-escape';
+import BindOutsideClick from '../mixins/bind-outside-click';
 import layout from '../templates/components/bc-select-menu';
 
 /***/
@@ -28,7 +29,7 @@ function forEachOption(data, callback, target=null) {
  * @namespace Components
  * @extends Ember.Component
  */
-export default Component.extend(CloseOnEscape, {
+export default Component.extend(CloseOnEscape, BindOutsideClick, {
   layout,
 	classNames: ['bc-select-menu'],
 	classNameBindings: ['right', 'isMenuOpen:open', 'fullwidth', 'large'],
@@ -307,6 +308,7 @@ export default Component.extend(CloseOnEscape, {
 		}
 	},
 
+	onOutsideClick() { this.send('closeMenu'); },
 	onEscape() {
 		this.send('closeMenu');
 		return false;
@@ -324,11 +326,11 @@ export default Component.extend(CloseOnEscape, {
 		 */
 		toggleMenu() {
 			if (!get(this, 'isMenuOpen')) {
-				this.addEventListener();
+				this.bindEscape();
+				this.bindClick();
 				set(this, 'isMenuOpen', true);
 			} else {
-				this.removeEventListener();
-				set(this, 'isMenuOpen', false);
+				this.send('closeMenu');
 			}
 		},
 
@@ -342,7 +344,8 @@ export default Component.extend(CloseOnEscape, {
 		 * @returns {void}
 		 */
 		closeMenu() {
-			this.removeEventListener();
+			this.unbindEscape();
+			this.unbindClick();
 			set(this, 'isMenuOpen', false);
 		},
 

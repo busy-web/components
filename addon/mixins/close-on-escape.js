@@ -5,10 +5,11 @@
 import $ from 'jquery';
 import Mixin from '@ember/object/mixin';
 import EmberObject, { get, computed } from '@ember/object';
+import { A } from '@ember/array';
 import { isNone } from '@ember/utils';
 import { assert } from '@ember/debug';
 
-const __propagation = [];
+const __propagation = A();
 
 const EventClass = EmberObject.extend({
 	id: null,
@@ -38,7 +39,7 @@ function dispatchEvent(evt, index) {
 		return false;
 	}
 
-	return dispatchEvent(index-1);
+	return dispatchEvent(evt, index-1);
 }
 
 $(document).on(`keyup.close-on-escape`, function(evt) {
@@ -55,7 +56,7 @@ $(document).on(`keyup.close-on-escape`, function(evt) {
 });
 
 export default Mixin.create({
-	addEventListener() {
+	bindEscape() {
 		let id = this.get('elementId');
 
 		let eventClass = __propagation.findBy('id', id);
@@ -65,7 +66,7 @@ export default Mixin.create({
 		__propagation.push(eventClass);
 	},
 
-	removeEventListener() {
+	unbindEscape() {
 		let id = this.get('elementId');
 		let eventClass = __propagation.findBy('id', id);
 		if (!isNone(eventClass)) {
@@ -74,12 +75,10 @@ export default Mixin.create({
 		}
 	},
 
-	onEscape() {
-		return true;
-	},
+	onEscape() { },
 
 	willDestroyElement() {
 		this._super();
-		this.removeEventListener();
+		this.unbindEscape();
 	}
 });

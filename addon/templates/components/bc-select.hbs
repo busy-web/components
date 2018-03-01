@@ -5,11 +5,10 @@
 {{else if small}}
 	{{md-button class="icon" name="more_vert" onClick=(action "openMenu") bubbles=false}}
 {{else}}
-	<a class="d-button grey" {{action "openMenu" bubbles=false}}>{{menuTitle}}</a>
+	<button class="menu-button" {{action 'openMenu' bubbles=false}}>{{menuTitle}}</button>
 {{/if}}
 
 <div class="list-container">
-	<div class="list-container-cover" {{action "closeMenu" bubbles=false}}></div>
 	<ul class="select-container{{if highlightSlected '' ' hl-disabled'}}" {{action "stopPropagation" bubbles=false}}>
 		{{#each model as |item|}}
 			<li class="{{if item._selected 'selected'}}{{if item._unselectable ' unselectable'}}" {{action 'clickItemAction' item bubbles=false}}>

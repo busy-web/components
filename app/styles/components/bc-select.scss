@@ -1,6 +1,6 @@
 
 $white: #fff;
-$off-white: #eee;
+$off-white: #f5f5f5;
 
 .bc-select {
 	display: inline-block !important;
@@ -13,31 +13,28 @@ $off-white: #eee;
 	font-weight: inherit;
 	line-height: 1;
 
-	& > a {
-		&.d-button {
-			@include bc-background-image(linear-gradient(top, $white, $off-white));
-			position: relative;
-			display: inline-block;
-			padding: 9px 28px 9px 16px;
-			border-radius: 3px;
-			color: $bc-color-3;
-			font: 16px/1 proxima;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			overflow: hidden;
+	& > .menu-button {
+		@include bc-box-sizing;
+		@include bc-background-image(linear-gradient(top, $white, $off-white));
+		position: relative;
+		padding: 11px 50px 11px 10px;
+		border: 1px solid #ccc;
+		border-radius: 3px;
+		background-color: #fafafa;
+		color: #8e8e8e;
+		font: 14px/1 proxima;
+		text-align: left;
+		cursor: pointer;
 
-			&:after {
-				position: absolute;
-				top: 16px;
-				right: 16px;
-				width: 0;
-				height: 0;
-				border-top: 4px solid $bc-color-3;
-				border-right: 4px solid transparent;
-				border-bottom: 4px solid transparent;
-				border-left: 4px solid transparent;
-				content: '\00a0';
-			}
+		&:after {
+			position: absolute;
+			top: 16px;
+			right: 10px;
+			width: 0;
+			height: 0;
+			border: 5px solid transparent;
+			border-top-color: #8e8e8e;
+			content: '\00a0';
 		}
 	}
 
@@ -54,82 +51,76 @@ $off-white: #eee;
 		clear: both;
 		z-index: 1000;
 
-		& > .list-container-cover {
-			position: fixed;
-			top: 0;
-			left: 0;
+
+		& > .select-container {
 			display: none;
-			width: 100vw;
-			height: 100vh;
-			cursor: initial;
-			z-index: 1;
-		}
+			position: absolute;
+			top: 7px;
+			left: 0;
+			width: auto;
+			min-width: 100%;
+			height: auto;
+			max-height: 450px;
+			padding: 0;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			background-color: #fafafa;
+			box-shadow: -1px 1px 7px -4px #111;
+			overflow: hidden;
+			overflow-y: auto;
+			z-index: 1000;
 
-
-		& > ul {
-
-			&.select-container {
-				@include bc-box-sizing;
-				display: none;
-				position: absolute;
-				top: 5px;
-				right: 3px;
-				min-width: 200%;
-				max-width: 400%;
-				height: auto;
-				max-height: 400px;
-				padding: 8px 16px;
-				border: 1px solid $bc-color-5;
-				border-radius: 3px;
-				background: $bc-color-7;
-				box-shadow: 0 2px 7px -2px $bc-color-13;
+			& > li {
+				display: block;
+				width: auto;
+				min-width: 120px;
+				padding: 9px 20px 9px 10px;
+				color: $bc-color-17;
+				font: 14px/1 proxima;
+				text-align: left;
+				white-space: nowrap;
+				text-overflow: ellipsis;
 				overflow: hidden;
-				z-index: 1000;
-				overflow-y: auto;
+				cursor: pointer;
 
-				&.all {
-					min-width: 300px;
+				&.unselectable {
+					color: $bc-color-8;
+					font: 15px/36px $ft-bold;
+					cursor: default;
 				}
 
-				& > li {
-					width: 100%;
-					height: 36px;
-					color: $bc-color-17;
-					font: 15px/36px $ft-norm;
-					text-align: left;
-					text-overflow: ellipsis;
-					white-space: nowrap;
-					cursor: pointer;
-					overflow: hidden;
+				&.selected {
+					color: $bc-color-1;
+				}
 
-					& > div {
-						display: inline-block;
-						width: 100%;
-						text-overflow: ellipsis;
-						white-space: nowrap;
-						overflow: hidden;
+				&.disabled {
+					color: #aaa;
+					cursor: default;
+				}
+
+				&:hover {
+					background-color: #f6f6f6;
+					color: $bc-color-1;
+				}
+
+				&:first-of-type {
+					padding-top: 19px;
+				}
+
+				&:last-of-type {
+					padding-bottom: 19px;
+				}
+			}
+
+			&.hl-disabled {
+				& > li {
+					&.selected {
+						color: $bc-color-17;
 					}
 
 					&:hover {
+						background-color: #f6f6f6;
 						color: $bc-color-1;
-					}
-
-					&.unselectable {
-						color: $bc-color-8;
-						font: 15px/36px $ft-bold;
-						cursor: default;
-					}
-
-					&.selected {
-						color: $bc-color-1;
-					}
-				}
-
-				&.hl-disabled {
-					& > li {
-						&.selected {
-							color: $bc-color-17;
-						}
 					}
 				}
 			}
@@ -138,11 +129,9 @@ $off-white: #eee;
 
 	&.top {
 		& > .list-container {
-			& > ul {
-				&.select-container {
-					top: auto;
-					bottom: 50px;
-				}
+			& > .select-container {
+				top: auto;
+				bottom: 47px;
 			}
 		}
 	}
@@ -151,11 +140,9 @@ $off-white: #eee;
 		float: left;
 
 		& > .list-container {
-			& > ul {
-				&.select-container {
-					right: initial;
-					left: 0;
-				}
+			& > .select-container {
+				right: initial;
+				left: 0;
 			}
 		}
 	}
@@ -163,25 +150,17 @@ $off-white: #eee;
 	&.full {
 		width: 100%;
 
-		& > a {
-			&.d-button {
-				width: 100%;
-				text-align: left;
-			}
+		& > .menu-button {
+			width: 100%;
+			text-align: left;
 		}
 
 		& > .list-container {
-			& > ul {
+			& > .select-container {
 				width: 100%;
 				right: 0;
-				left: 0;
-				min-width: initial;
-				max-width: initial;
-
-				&.select-container {
-					width: 100%;
-					z-index: 1000;
-				}
+				left: -1px;
+				z-index: 1000;
 			}
 		}
 	}
@@ -197,14 +176,8 @@ $off-white: #eee;
 		}
 
 		& > .list-container {
-			& > .list-container-cover {
+			& > .select-container {
 				display: block;
-			}
-
-			& > ul {
-				&.select-container {
-					display: block;
-				}
 			}
 		}
 	}
@@ -219,10 +192,11 @@ $off-white: #eee;
 			display: inline-block;
 			width: 42px;
 			height: 42px;
+			text-align: center;
 
 			& > i {
 				color: $bc-color-12;
-				font-size: 42px;
+				font-size: 36px;
 				line-height: 42px;
 			}
 
@@ -236,29 +210,21 @@ $off-white: #eee;
 		}
 
 		& > .list-container {
-			& > ul {
-				&.select-container {
-					top: 10px;
-					right: 5px;
-					width: 300px;
-					max-width: none;
-				}
+			& > .select-container {
+				right: 5px;
+				left: initial;
 			}
 		}
 
-		& > a {
-			&.d-button {
-				display: none;
-			}
+		& > .menu-button {
+			display: none;
 		}
 
 		&.top {
 			& > .list-container {
-				& > ul {
-					&.select-container {
-						top: auto;
-						bottom: 50px;
-					}
+				& > .select-container {
+					top: auto;
+					bottom: 50px;
 				}
 			}
 		}
@@ -269,21 +235,25 @@ $off-white: #eee;
 	.bc-select {
 		width: 100%;
 
-		& > a {
-			&.d-button {
-				width: 100%;
-				text-align: left;
-			}
+		& > .menu-button {
+			width: 100%;
+			text-align: left;
 		}
 
 		& > .list-container {
-			& > ul {
-				&.select-container {
-					width: 100%;
-					left: 0;
+			& > .select-container {
+				width: 100%;
+				left: 0;
+				right: initial;
+			}
+		}
+
+		&.small {
+			& > .list-container {
+				& > .select-container {
+					width: calc(100vw - 20px);
+					left: initial;
 					right: 0;
-					min-width: initial;
-					max-width: initial;
 				}
 			}
 		}

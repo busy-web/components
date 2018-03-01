@@ -7,11 +7,9 @@
 	{{yield}}
 </select>
 
-<div {{action 'toggleMenu'}}>{{selectedText}}</div>
+<div {{action 'toggleMenu' bubbles=false}}>{{selectedText}}</div>
 
 <span class="list-container">
-	<div class="list-container-cover" {{action "closeMenu" bubbles=false}}></div>
-
 	<ul {{action "stopPropagation" bubbles=false}}>
 		{{#if listItem}}
 			{{#each listItem as |item|}}

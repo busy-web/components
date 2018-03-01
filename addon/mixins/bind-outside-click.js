@@ -4,8 +4,9 @@
  */
 import $ from 'jquery';
 import { isEmpty } from '@ember/utils';
-import { assert } from '@ember/debug';
+import { get } from '@ember/object';
 import Mixin from '@ember/object/mixin';
+import { bind, unbind } from '../utils/event';
 
 /**
  * `Mixin/ClickedOffComponent`
@@ -30,39 +31,40 @@ export default Mixin.create({
 	 *
 	 * @public
 	 * @method bindClick
-	 * @param actionName {string} name of the action to call on the component
+	 * @return {void}
 	 */
-	bindClick(actionName) {
-		assert('actionName must be a string', typeof actionName === 'string');
+	bindClick() {
+		//assert('actionName must be a string', typeof actionName === 'string');
 
 		// save this for later
 		const _this = this;
 
 		// get the components elementId
-		const elementId = this.get('elementId');
+		let elementId = get(this, 'elementId');
+		if (!isEmpty(get(this, '__debugContainerKey'))) {
+			elementId += '-' + get(this, '__debugContainerKey');
+		}
 
 		// make sure an elementId exists on the class
 		// using this mixin
 		if (!isEmpty(elementId)) {
-			// unbind any previous click listeners
-			$('body').off(`click.${elementId}`);
-
 			// bind the click listener
-			$('body').on(`click.${elementId}`, function(evt) {
+			bind(document, 'click', elementId, function(evt) {
 				// get the element that was clicked on
 				const el = $(evt.target);
-				console.log('outside-click', elementId, el.attr('id'), el.parents('#' + elementId).length);
 
 				// if the clicked element id does not match the components id and the clicked
 				// elements parents dont have an id that matches then call the action provided
 				if (el.attr('id') !== elementId && el.parents(`#${elementId}`).length === 0) {
 					// send a call to the actionName
-					_this.send(actionName);
 					evt.stopPropagation();
 					evt.preventDefault();
+
+					// call handler
+					_this.onOutsideClick(evt);
 					return false;
 				}
-			});
+			}, { capture: true, rebind: true });
 		}
 	},
 
@@ -75,15 +77,20 @@ export default Mixin.create({
 	 */
 	unbindClick() {
 		// get the components elementId
-		const elementId = this.get('elementId');
+		let elementId = get(this, 'elementId');
+		if (!isEmpty(get(this, '__debugContainerKey'))) {
+			elementId += '-' + get(this, '__debugContainerKey');
+		}
 
 		// make sure an elementId exists on the class
 		// using this mixin
 		if (!isEmpty(elementId)) {
 			// unbind any previous click listeners
-			$('body').off(`click.${elementId}`);
+			unbind(document, 'click', elementId);
 		}
 	},
+
+	onOutsideClick() { },
 
 	/**
 	 * cleanup any click events registerd by this component

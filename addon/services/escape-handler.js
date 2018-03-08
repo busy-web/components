@@ -18,12 +18,10 @@ export default Service.extend({
 		this._super();
 
 		bind(document, `keyup`, `service-escape-handler`, function(evt) {
-			if (evt.keyCode === 27) { // && !evt.isPropagationStopped()) {
+			if (evt.keyCode === 27) {
 				let res = dispatchEvent.call(this, evt);
-				if (res === false) { // || evt.isPropagationStopped()) {
-					//if (!evt.isPropagationStopped()) {
-						evt.stopPropagation();
-					//}
+				if (res === false) {
+					evt.stopPropagation();
 					return false;
 				}
 				return true;

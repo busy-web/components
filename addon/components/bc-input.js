@@ -38,7 +38,9 @@ export default TextField.extend({
 
 	keyUp(evt) {
 		if (evt.which === 13) {
+			evt.stopPropagation();
 			this.sendAction('onSubmit', this.getVal());
+			return false;
 		}
 
 		this.sendAction('onKeyUp', evt.which, this.getVal());

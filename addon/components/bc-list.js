@@ -126,6 +126,8 @@ export default Component.extend({
 				header.html('');
 				header.append('<span class="header-extra"></span>');
 
+				this.$('.list-no-results > td').attr('colspan', cols.length);
+
 				$.each(cols, (key, item) => {
 					let el = $(item);
 					if (!el.hasClass('list-extra')) {

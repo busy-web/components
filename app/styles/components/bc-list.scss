@@ -115,15 +115,11 @@ $image-size: 40px;
 
 				& > .list-no-results {
 					@include bc-box-sizing;
-					display: block;
-					position: absolute;
-					width: 100%;
+					display: table-row;
 					padding: 0;
 
-					& > span {
-						width: 100%;
+					& > td {
 						padding: 50px 0 0;
-						float: left;
 						color: $bc-color-11;
 						font: 22px/1 $ft-norm;
 						text-align: center;

@@ -15,14 +15,14 @@
 	padding: 98px 0 0;
 
 	@media screen and (max-width: $mobile-width) {
-		padding: 48px 0 0 0;
+		padding: 68px 0 0 0;
 	}
 
 	& > .--bc-tabs-header {
 		display: flex;
 		width: 100%;
 		border-bottom: 1px solid $bc-color-5;
-		margin: -48px 0 0;
+		margin: -49px 0 0;
 
 		& > .--bc-tabs-name {
 			@include bc-transition(all .5s ease-in-out);
@@ -37,26 +37,6 @@
 			white-space: nowrap;
 			cursor: pointer;
 			overflow: hidden;
-
-			@media screen and (max-width: 700px) {
-				font: 15px/1 $ft-norm;
-				padding: 15px 14px;
-			}
-
-			@media screen and (max-width: 600px) {
-				font: 14px/1 $ft-norm;
-				padding: 10px 12px;
-			}
-
-			@media screen and (max-width: 500px) {
-				font: 12px/1 $ft-norm;
-				padding: 10px 10px;
-			}
-
-			@media screen and (max-width: 400px) {
-				font: 10px/1 $ft-norm;
-				padding: 5px 5px;
-			}
 
 			&.active {
 				border-bottom-color: $bc-color-1;
@@ -84,6 +64,42 @@
 
 				&.badge-green {
 					background-color: $bc-color-1;
+				}
+			}
+
+			@media screen and (max-width: 700px) {
+				font: 15px/1 $ft-norm;
+				padding: 15px 14px;
+			}
+
+			@media screen and (max-width: 600px) {
+				font: 14px/1 $ft-norm;
+				padding: 10px 12px;
+
+				& > .--bc-tabs-badge {
+					top: 5px;
+				}
+			}
+
+			@media screen and (max-width: 500px) {
+				font: 12px/1 $ft-norm;
+				padding: 10px 10px;
+
+				& > .--bc-tabs-badge {
+					top: 2.5px;
+					right: 2.5px;
+				}
+			}
+
+			@media screen and (max-width: 400px) {
+				font: 10px/1 $ft-norm;
+				padding: 5px 5px;
+
+				& > .--bc-tabs-badge {
+					top: 0;
+					right: 0;
+					width: 7px;
+					height: 7px;
 				}
 			}
 		}

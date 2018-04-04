@@ -58,7 +58,7 @@ export default Component.extend({
 				}
 
 				if (isNone(activeTab)) {
-					activeTab = model[0];
+					activeTab = model.filterBy('isViewable', true).get('firstObject');
 					set(this, 'defaultTab', get(activeTab, 'id'));
 				}
 

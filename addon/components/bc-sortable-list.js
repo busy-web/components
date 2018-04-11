@@ -138,6 +138,7 @@ export default Component.extend({
 		sortAction(item) {
 			// call sort method
 			this.sort(item);
+			this.sendAction('onSort', item);
 		},
 
 		rowClickAction(item) {

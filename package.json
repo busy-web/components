@@ -1,6 +1,6 @@
 {
   "name": "@busy-web/components",
-  "version": "2.18.1",
+  "version": "2.19.0",
   "description": "Ember addon library for usefull components.",
   "keywords": [
     "ember-addon",

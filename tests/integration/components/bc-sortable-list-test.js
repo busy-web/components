@@ -1,4 +1,5 @@
 import EmberObject from '@ember/object';
+import { getOwner } from '@ember/application';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -7,12 +8,13 @@ moduleForComponent('bc-sortable-list', 'Integration | Component | bc sortable li
 });
 
 test('it renders', function(assert) {
+	let owner = getOwner(this);
 
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 	this.set('model', [
-		EmberObject.create({name: 'Bob Thomas', occupation: 'bullfighter', age: 32}),
-		EmberObject.create({name: 'John Smith', occupation: 'astronaut', age: 39})
+		EmberObject.create(owner.ownerInjection(), {name: 'Bob Thomas', occupation: 'bullfighter', age: 32}),
+		EmberObject.create(owner.ownerInjection(), {name: 'John Smith', occupation: 'astronaut', age: 39})
 	]);
 
 	this.set('meta', [

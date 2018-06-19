@@ -79,6 +79,7 @@ export default Component.extend({
 
 	didRender() {
 		this._super();
+
 		if (!get(this, 'firstRender')) {
 			set(this, 'firstRender', true);
 
@@ -178,9 +179,9 @@ export default Component.extend({
 			if (curTab !== tabname) {
 				set(this, 'hashName', tabname);
 
-				if (this.get('useRouter') && !isNone(this.get('router'))) {
+				if (get(this, 'useRouter') && !isNone(get(this, 'router'))) {
 					set(params, 'bc_tab', tabname);
-					this.get('router').replaceWith(this.get('router.currentRoutename'), { queryParams: params });
+					get(this, 'router').replaceWith(get(this, 'router.currentRouteName'), { queryParams: params });
 				} else {
 					if (!isNone(tabname)) {
 						window.history.replaceState('', document.title, `${window.location.pathname}#tab-${tabname}`);
@@ -191,6 +192,34 @@ export default Component.extend({
 			}
 
 			set(this, 'currentTab', tab);
+		}
+	},
+
+	triggerTabChange() {
+		this.handleHash();
+		let id = get(this, 'hashName') || get(this, 'defaultTab');
+		let tab = get(this, 'model').findBy('id', id);
+		if (tab && tab.id !== get(this, 'currentTab.id')) {
+			this.openTab(tab);
+		}
+	},
+
+	didInsertElement() {
+		this._super(...arguments);
+
+		// setup router didTransition
+		const router = get(this, 'router._router');
+		if (router.on) {
+			router.on('didTransition', this, this.triggerTabChange);
+		}
+	},
+
+	willDestroyElement() {
+		this._super(...arguments);
+
+		const router = get(this, 'router._router');
+		if (router.off) {
+			router.off('didTransition', this, this.triggerTabChange);
 		}
 	},
 

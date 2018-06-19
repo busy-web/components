@@ -209,7 +209,7 @@ export default Component.extend({
 
 		// setup router didTransition
 		const router = get(this, 'router._router');
-		if (router.on) {
+		if (router && router.on) {
 			router.on('didTransition', this, this.triggerTabChange);
 		}
 	},
@@ -218,7 +218,7 @@ export default Component.extend({
 		this._super(...arguments);
 
 		const router = get(this, 'router._router');
-		if (router.off) {
+		if (router && router.off) {
 			router.off('didTransition', this, this.triggerTabChange);
 		}
 	},

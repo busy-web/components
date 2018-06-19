@@ -9,7 +9,7 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{bc-tabs}}`);
+  this.render(hbs`{{bc-tabs router=null}}`);
 
   assert.equal(this.$().text().trim(), '');
 });
